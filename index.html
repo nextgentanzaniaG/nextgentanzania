@@ -1,0 +1,1210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NEXT-GEN Auctioneer + Realtor | Tanzania's Premier Property Platform</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--navy:#0D1240;--navy-dark:#080C2E;--navy-light:#1A2060;--magenta:#E91E8C;--magenta-dark:#C0176F;--gold:#C9A84C;--gold-light:#E4C068;--white:#fff;--off-white:#F8F7FF;--gray-light:#E8E8F0;--text-dark:#1A1A2E;--text-muted:#6B6B8A}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',sans-serif;background:#fff;color:var(--text-dark);overflow-x:hidden}
+nav{position:fixed;top:0;left:0;right:0;z-index:900;transition:background .3s}
+nav.scrolled{background:rgba(8,12,46,0.98);backdrop-filter:blur(16px);box-shadow:0 2px 30px rgba(0,0,0,.3);border-bottom:1px solid rgba(233,30,140,.15)}
+.nav-inner{display:flex;align-items:center;justify-content:space-between;height:76px;padding:0 5%;max-width:1400px;margin:0 auto}
+.nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none}
+.nav-logo img{height:44px}
+.logo-text .l1{font-family:'Playfair Display',serif;font-size:18px;font-weight:700;color:#fff;line-height:1}
+.logo-text .l2{font-size:8.5px;color:var(--magenta);letter-spacing:2px;text-transform:uppercase;margin-top:2px}
+.nav-links{display:flex;align-items:center;gap:6px;list-style:none}
+.nav-links a{color:rgba(255,255,255,.82);text-decoration:none;font-size:12.5px;font-weight:500;padding:7px 12px;border-radius:6px;transition:all .2s}
+.nav-links a:hover{color:#fff;background:rgba(255,255,255,.08)}
+.nav-right{display:flex;align-items:center;gap:10px}
+.lang-toggle{display:flex;gap:2px;background:rgba(255,255,255,.07);border-radius:20px;padding:3px}
+.lang-btn{background:none;border:none;color:rgba(255,255,255,.5);font-size:11px;font-weight:700;padding:4px 10px;border-radius:16px;cursor:pointer;transition:all .2s;font-family:'Inter',sans-serif}
+.lang-btn.active{background:var(--magenta);color:#fff}
+.nav-nova-btn{background:linear-gradient(135deg,var(--magenta),#7B2FF7);color:#fff;border:none;padding:9px 18px;border-radius:8px;font-size:12.5px;font-weight:600;cursor:pointer;font-family:'Inter',sans-serif;display:flex;align-items:center;gap:6px}
+.nav-cta{background:var(--magenta);color:#fff;border:none;padding:9px 20px;border-radius:8px;font-size:12.5px;font-weight:600;cursor:pointer;font-family:'Inter',sans-serif;transition:background .2s}
+.nav-cta:hover{background:var(--magenta-dark)}
+.menu-toggle{display:none;background:none;border:none;cursor:pointer;flex-direction:column;gap:5px;padding:4px}
+.menu-toggle span{display:block;width:22px;height:2px;background:#fff;border-radius:2px}
+.mobile-menu{display:none;position:fixed;top:76px;left:0;right:0;background:rgba(8,12,46,.99);backdrop-filter:blur(20px);z-index:899;padding:20px 5% 28px;border-bottom:1px solid rgba(233,30,140,.2)}
+.mobile-menu.open{display:block}
+.mobile-menu a{display:block;color:rgba(255,255,255,.8);text-decoration:none;font-size:15px;font-weight:500;padding:14px 0;border-bottom:1px solid rgba(255,255,255,.06)}
+/* HERO */
+.hero{height:100vh;min-height:680px;position:relative;display:flex;align-items:center;overflow:hidden}
+.hero-slide{position:absolute;inset:0;background-size:cover;background-position:center;transition:opacity 1.5s;opacity:0}
+.hero-slide.active{opacity:1}
+.hero-slide::after{content:'';position:absolute;inset:0;background:linear-gradient(to right,rgba(8,12,46,.85) 0%,rgba(8,12,46,.5) 60%,rgba(8,12,46,.25) 100%)}
+.hero-content{position:relative;z-index:2;padding:76px 5% 0;max-width:1400px;margin:0 auto;width:100%}
+.hero-eyebrow{display:inline-flex;align-items:center;gap:8px;background:rgba(233,30,140,.14);border:1px solid rgba(233,30,140,.3);border-radius:20px;padding:5px 14px;margin-bottom:24px}
+.eyebrow-dot{width:6px;height:6px;background:var(--magenta);border-radius:50%;animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(.8)}}
+.hero-eyebrow span{font-size:11px;font-weight:700;color:var(--magenta);letter-spacing:1.5px;text-transform:uppercase}
+.hero h1{font-family:'Playfair Display',serif;font-size:clamp(38px,5vw,70px);font-weight:700;color:#fff;line-height:1.08;margin-bottom:20px;max-width:700px}
+.hero h1 em{font-style:italic;color:var(--gold)}
+.hero-sub{font-size:17px;color:rgba(255,255,255,.7);line-height:1.75;margin-bottom:36px;max-width:560px}
+.hero-actions{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:52px}
+.btn-primary{background:var(--magenta);color:#fff;border:none;padding:14px 30px;border-radius:8px;font-size:14px;font-weight:600;cursor:pointer;font-family:'Inter',sans-serif;text-decoration:none;display:inline-flex;align-items:center;gap:8px;transition:all .2s}
+.btn-primary:hover{background:var(--magenta-dark);transform:translateY(-1px)}
+.btn-gold{background:var(--gold);color:var(--navy-dark);border:none;padding:14px 30px;border-radius:8px;font-size:14px;font-weight:700;cursor:pointer;font-family:'Inter',sans-serif;text-decoration:none;display:inline-block;transition:all .2s}
+.btn-gold:hover{background:var(--gold-light);transform:translateY(-1px)}
+.btn-outline{background:transparent;color:#fff;border:1.5px solid rgba(255,255,255,.38);padding:14px 30px;border-radius:8px;font-size:14px;font-weight:600;cursor:pointer;font-family:'Inter',sans-serif;text-decoration:none;display:inline-block;transition:all .2s}
+.btn-outline:hover{border-color:#fff;background:rgba(255,255,255,.07)}
+.hero-stats{display:flex;gap:40px;flex-wrap:wrap}
+.stat{border-left:2px solid var(--magenta);padding-left:14px}
+.stat-num{font-family:'Playfair Display',serif;font-size:30px;font-weight:700;color:#fff;line-height:1}
+.stat-label{font-size:11px;color:rgba(255,255,255,.5);margin-top:3px;text-transform:uppercase;letter-spacing:.5px}
+.hero-dots{position:absolute;bottom:36px;left:50%;transform:translateX(-50%);display:flex;gap:8px;z-index:3}
+.hdot{width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,.3);cursor:pointer;transition:all .3s;border:none}
+.hdot.active{background:var(--magenta);width:24px;border-radius:4px}
+/* SEARCH */
+.search-wrap{background:var(--off-white);padding:0 5%}
+.search-card{background:#fff;border-radius:18px;box-shadow:0 10px 60px rgba(13,18,64,.12);margin-top:-56px;position:relative;z-index:10;border:1px solid var(--gray-light);overflow:hidden}
+.search-tabs-row{display:flex;border-bottom:1px solid var(--gray-light);padding:0 28px;overflow-x:auto;scrollbar-width:none}
+.search-tabs-row::-webkit-scrollbar{display:none}
+.stab{background:none;border:none;padding:15px 18px;font-size:13px;font-weight:600;cursor:pointer;font-family:'Inter',sans-serif;color:var(--text-muted);border-bottom:2px solid transparent;margin-bottom:-1px;white-space:nowrap;transition:all .2s}
+.stab.active{color:var(--navy);border-bottom-color:var(--magenta)}
+.search-body{padding:22px 28px}
+.search-fields{display:grid;grid-template-columns:1fr 1fr 1fr 1fr auto;gap:10px;align-items:end}
+.sf label{display:block;font-size:10px;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:6px}
+.sf select,.sf input{width:100%;border:1.5px solid var(--gray-light);border-radius:9px;padding:10px 13px;font-size:13.5px;font-family:'Inter',sans-serif;color:var(--text-dark);background:#fff;outline:none;transition:border-color .2s}
+.sf select:focus,.sf input:focus{border-color:var(--magenta)}
+.search-go{background:var(--navy);color:#fff;border:none;padding:10px 24px;border-radius:9px;font-size:13.5px;font-weight:600;cursor:pointer;font-family:'Inter',sans-serif;display:flex;align-items:center;gap:7px;transition:background .2s;height:42px;white-space:nowrap}
+.search-go:hover{background:var(--magenta)}
+.ai-search-row{padding:0 28px 20px;display:flex;align-items:center;gap:10px}
+.ai-inp-wrap{flex:1;background:var(--off-white);border:1.5px solid var(--gray-light);border-radius:9px;display:flex;align-items:center;gap:10px;padding:0 13px;transition:border-color .2s}
+.ai-inp-wrap:focus-within{border-color:var(--magenta)}
+.ai-tag{font-size:10px;font-weight:700;background:linear-gradient(135deg,var(--magenta),#7B2FF7);color:#fff;padding:3px 8px;border-radius:5px;letter-spacing:.5px;flex-shrink:0}
+.ai-inp-wrap input{flex:1;border:none;background:transparent;padding:10px 0;font-size:13.5px;font-family:'Inter',sans-serif;color:var(--text-dark);outline:none}
+.ai-inp-wrap input::placeholder{color:var(--text-muted)}
+.ai-search-btn{background:linear-gradient(135deg,var(--magenta),#7B2FF7);color:#fff;border:none;padding:10px 20px;border-radius:9px;font-size:13px;font-weight:600;cursor:pointer;font-family:'Inter',sans-serif;white-space:nowrap}
+/* STRIP */
+.strip{background:var(--navy);padding:16px 5%;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:14px}
+.strip p{color:rgba(255,255,255,.82);font-size:14px}.strip strong{color:var(--magenta)}
+.strip-btn{background:transparent;border:1.5px solid var(--magenta);color:var(--magenta);padding:8px 20px;border-radius:6px;font-size:13px;font-weight:600;cursor:pointer;font-family:'Inter',sans-serif;transition:all .2s}
+.strip-btn:hover{background:var(--magenta);color:#fff}
+/* SECTIONS */
+section{padding:92px 5%}
+.section-inner{max-width:1400px;margin:0 auto}
+.eyebrow{font-size:11px;font-weight:700;color:var(--magenta);letter-spacing:2.5px;text-transform:uppercase;margin-bottom:12px}
+.sec-title{font-family:'Playfair Display',serif;font-size:clamp(28px,3.2vw,44px);font-weight:700;color:var(--navy);line-height:1.12;margin-bottom:14px}
+.sec-sub{font-size:16px;color:var(--text-muted);line-height:1.72;max-width:560px}
+.sec-hdr{margin-bottom:50px}
+.sec-hdr.center{text-align:center}.sec-hdr.center .sec-sub{margin:0 auto}
+.sec-hdr.split{display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:20px}
+/* PROPERTY CARDS */
+.listings-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(310px,1fr));gap:24px}
+.prop-card{background:#fff;border-radius:18px;overflow:hidden;border:1px solid var(--gray-light);transition:all .28s;cursor:pointer}
+.prop-card:hover{transform:translateY(-6px);box-shadow:0 24px 64px rgba(13,18,64,.12)}
+.prop-img{height:220px;overflow:hidden;position:relative}
+.prop-img img{width:100%;height:100%;object-fit:cover;transition:transform .5s}
+.prop-card:hover .prop-img img{transform:scale(1.06)}
+.prop-badge{position:absolute;top:14px;left:14px;font-size:10.5px;font-weight:700;padding:4px 11px;border-radius:5px;letter-spacing:.8px;text-transform:uppercase}
+.prop-badge.sale{background:var(--magenta);color:#fff}
+.prop-badge.auction{background:var(--gold);color:var(--navy)}
+.prop-badge.lease{background:#0891B2;color:#fff}
+.prop-badge.rent{background:#7B2FF7;color:#fff}
+.prop-save{position:absolute;top:12px;right:12px;background:rgba(255,255,255,.9);width:33px;height:33px;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .2s;border:none}
+.prop-save:hover{background:#fff;transform:scale(1.1)}
+.prop-save svg{width:15px;height:15px;stroke:var(--navy);fill:none;stroke-width:2}
+.prop-save.saved svg{stroke:var(--magenta);fill:var(--magenta)}
+.prop-info{padding:18px}
+.prop-price{font-family:'Playfair Display',serif;font-size:21px;font-weight:700;color:var(--navy);margin-bottom:3px}
+.prop-price span{font-size:12px;font-weight:400;font-family:'Inter',sans-serif;color:var(--text-muted)}
+.prop-title{font-size:14.5px;font-weight:600;color:var(--text-dark);margin-bottom:6px}
+.prop-loc{display:flex;align-items:center;gap:4px;font-size:12.5px;color:var(--text-muted);margin-bottom:13px}
+.prop-loc svg{width:12px;height:12px;stroke:var(--magenta);fill:none;stroke-width:2.5;flex-shrink:0}
+.prop-meta{display:flex;gap:12px;border-top:1px solid var(--gray-light);padding-top:12px;margin-bottom:11px}
+.meta-item{display:flex;align-items:center;gap:4px;font-size:11.5px;color:var(--text-muted)}
+.prop-actions{display:flex;gap:7px}
+.pa-btn{flex:1;padding:8px;border-radius:7px;border:1.5px solid var(--gray-light);background:#fff;font-size:11.5px;font-weight:600;color:var(--text-muted);cursor:pointer;font-family:'Inter',sans-serif;transition:all .2s;display:flex;align-items:center;justify-content:center;gap:4px}
+.pa-btn:hover{border-color:var(--magenta);color:var(--magenta)}
+.pa-btn.prim{background:var(--navy);border-color:var(--navy);color:#fff;flex:2}
+.pa-btn.prim:hover{background:var(--magenta);border-color:var(--magenta)}
+/* CATEGORIES */
+.cats-bg{background:var(--navy)}
+.cats-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:14px}
+.cat-card{border-radius:14px;overflow:hidden;position:relative;height:190px;cursor:pointer;transition:transform .3s}
+.cat-card:hover{transform:scale(1.03)}
+.cat-card img{width:100%;height:100%;object-fit:cover;transition:transform .5s}
+.cat-card:hover img{transform:scale(1.08)}
+.cat-card::after{content:'';position:absolute;inset:0;background:linear-gradient(to top,rgba(8,12,46,.85) 0%,rgba(8,12,46,.2) 60%,transparent 100%)}
+.cat-label{position:absolute;bottom:0;left:0;right:0;padding:15px;z-index:2}
+.cat-name{font-family:'Playfair Display',serif;font-size:16px;font-weight:600;color:#fff;margin-bottom:2px}
+.cat-count{font-size:11px;color:rgba(255,255,255,.6)}
+.cat-card.featured{grid-column:span 2;height:250px}
+/* LEASING */
+.lease-sec{background:linear-gradient(135deg,var(--navy-dark) 0%,#1A0A60 100%);position:relative;overflow:hidden}
+.lease-bg{position:absolute;inset:0;background-image:radial-gradient(circle at 20% 50%,rgba(233,30,140,.1) 0%,transparent 50%),radial-gradient(circle at 80% 30%,rgba(201,168,76,.08) 0%,transparent 40%);pointer-events:none}
+.lease-grid{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center;position:relative;z-index:2}
+.lease-features{display:flex;flex-direction:column;gap:16px;margin-bottom:32px}
+.lease-feat{display:flex;align-items:center;gap:13px}
+.lf-icon{width:38px;height:38px;background:rgba(201,168,76,.14);border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.lf-icon svg{width:19px;height:19px;stroke:var(--gold);fill:none;stroke-width:2}
+.lf-text h4{font-size:13.5px;font-weight:600;color:#fff;margin-bottom:2px}
+.lf-text p{font-size:12px;color:rgba(255,255,255,.5)}
+.lease-right{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.lease-pc{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:13px;overflow:hidden;cursor:pointer;transition:border-color .25s}
+.lease-pc:hover{border-color:rgba(233,30,140,.35)}
+.lease-pc img{width:100%;height:120px;object-fit:cover}
+.lpc-info{padding:11px}
+.lpc-type{font-size:9px;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:.8px;margin-bottom:3px}
+.lpc-title{font-size:12.5px;font-weight:600;color:#fff;margin-bottom:2px}
+.lpc-price{font-size:13px;font-weight:700;color:#fff;font-family:'Playfair Display',serif}
+/* SERVICES */
+.svc-bg{background:var(--off-white)}
+.svc-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:20px}
+.svc-card{background:#fff;border-radius:16px;padding:32px;border:1px solid var(--gray-light);transition:all .25s;position:relative;overflow:hidden}
+.svc-card::before{content:'';position:absolute;top:0;left:0;width:3px;height:100%;background:var(--magenta);transform:scaleY(0);transition:transform .25s;transform-origin:bottom}
+.svc-card:hover{transform:translateY(-4px);box-shadow:0 16px 48px rgba(13,18,64,.09);border-color:rgba(233,30,140,.2)}
+.svc-card:hover::before{transform:scaleY(1)}
+.svc-icon{width:48px;height:48px;background:rgba(233,30,140,.08);border-radius:11px;display:flex;align-items:center;justify-content:center;margin-bottom:16px}
+.svc-icon svg{width:23px;height:23px;stroke:var(--magenta);fill:none;stroke-width:2}
+.svc-card h3{font-family:'Playfair Display',serif;font-size:18px;font-weight:600;color:var(--navy);margin-bottom:8px}
+.svc-card p{font-size:13px;color:var(--text-muted);line-height:1.65}
+.svc-link{display:inline-flex;align-items:center;gap:5px;margin-top:14px;font-size:12px;font-weight:600;color:var(--magenta);cursor:pointer}
+.svc-link svg{width:12px;height:12px;stroke:currentColor;fill:none;stroke-width:2.5;transition:transform .2s}
+.svc-card:hover .svc-link svg{transform:translateX(3px)}
+/* AUCTION */
+.auc-bg{background:var(--off-white)}
+.auc-card{background:#fff;border:1px solid var(--gray-light);border-radius:18px;display:flex;gap:0;overflow:hidden;margin-bottom:18px;transition:box-shadow .25s;max-width:1400px;margin-left:auto;margin-right:auto}
+.auc-card:hover{box-shadow:0 10px 40px rgba(13,18,64,.1)}
+.auc-img{width:200px;flex-shrink:0;position:relative}
+.auc-img img{width:100%;height:100%;object-fit:cover}
+.auc-body{flex:1;padding:22px 26px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px}
+.auc-bank{display:inline-block;background:rgba(201,168,76,.1);color:#8A6A00;font-size:10px;font-weight:700;padding:3px 9px;border-radius:4px;letter-spacing:.8px;text-transform:uppercase;margin-bottom:7px}
+.auc-card h4{font-family:'Playfair Display',serif;font-size:17px;font-weight:600;color:var(--navy);margin-bottom:3px}
+.auc-sub{font-size:12px;color:var(--text-muted)}
+.timer-lbl{font-size:10px;text-transform:uppercase;letter-spacing:1px;color:var(--text-muted);margin-bottom:6px}
+.timer-row{display:flex;gap:8px;align-items:center}
+.t-blk{background:var(--navy);color:#fff;width:48px;height:48px;border-radius:8px;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.t-blk .tn{font-size:18px;font-weight:700;font-family:'Playfair Display',serif;line-height:1}
+.t-blk .tu{font-size:8px;color:rgba(255,255,255,.5);text-transform:uppercase;letter-spacing:.5px;margin-top:1px}
+.t-sep{font-size:16px;font-weight:700;color:var(--navy);opacity:.2}
+.auc-right-info{display:flex;flex-direction:column;gap:5px;align-items:flex-end}
+.res-lbl{font-size:11px;color:var(--text-muted);text-align:right}
+.res-price{font-size:21px;font-weight:700;font-family:'Playfair Display',serif;color:var(--navy)}
+.bid-btn{background:var(--magenta);color:#fff;border:none;padding:10px 20px;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;font-family:'Inter',sans-serif;transition:background .2s}
+.bid-btn:hover{background:var(--magenta-dark)}
+/* WHY */
+.why-grid{display:grid;grid-template-columns:1fr 1fr;gap:0;align-items:center;max-width:1400px;margin:0 auto}
+.why-visual{background:linear-gradient(135deg,var(--navy),var(--navy-light));border-radius:22px;padding:48px;display:flex;flex-direction:column;gap:18px}
+.wsr{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.wsb{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:13px;padding:22px}
+.wsb .wn{font-family:'Playfair Display',serif;font-size:32px;font-weight:700;color:#fff;line-height:1}
+.wsb .wn span{font-size:18px;color:var(--magenta)}
+.wsb .wl{font-size:11px;color:rgba(255,255,255,.5);margin-top:4px;text-transform:uppercase;letter-spacing:.5px}
+.why-bdgs{display:flex;gap:8px;flex-wrap:wrap}
+.why-bdg{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:6px;padding:5px 12px;font-size:11px;color:rgba(255,255,255,.55);font-weight:600}
+.why-content{padding-left:64px}
+.why-list{display:flex;flex-direction:column;gap:20px;margin-top:30px}
+.why-item{display:flex;gap:13px;align-items:flex-start}
+.why-chk{width:33px;height:33px;background:rgba(233,30,140,.09);border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.why-chk svg{width:16px;height:16px;stroke:var(--magenta);fill:none;stroke-width:2.5}
+.why-item h4{font-size:14px;font-weight:600;color:var(--navy);margin-bottom:3px}
+.why-item p{font-size:13px;color:var(--text-muted);line-height:1.6}
+/* INVESTMENT HEATMAP */
+.hm-sec{background:var(--navy-dark);position:relative;overflow:hidden}
+.hm-grid{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center;max-width:1400px;margin:0 auto;position:relative;z-index:2}
+.hm-zones{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:28px}
+.hm-zone{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);border-radius:11px;padding:16px;cursor:pointer;transition:border-color .25s}
+.hm-zone:hover{border-color:rgba(233,30,140,.3)}
+.hm-zone-name{font-size:12.5px;font-weight:600;color:#fff;margin-bottom:3px}
+.hm-zone-stat{font-size:20px;font-weight:700;color:var(--magenta);font-family:'Playfair Display',serif}
+.hm-zone-lbl{font-size:10px;color:rgba(255,255,255,.35);text-transform:uppercase;letter-spacing:.5px;margin-top:2px}
+.hm-visual{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:18px;padding:28px;display:flex;flex-direction:column;gap:14px}
+.hm-bar-row{display:flex;align-items:center;gap:10px}
+.hm-bar-label{font-size:12px;color:rgba(255,255,255,.6);width:92px;flex-shrink:0}
+.hm-bar-track{flex:1;height:7px;background:rgba(255,255,255,.08);border-radius:4px;overflow:hidden}
+.hm-bar-fill{height:100%;border-radius:4px;background:linear-gradient(to right,var(--magenta),#7B2FF7)}
+.hm-bar-val{font-size:12px;font-weight:600;color:var(--magenta);width:40px;text-align:right}
+/* SELL SECTION */
+.sell-sec{background:var(--off-white)}
+.sell-grid{display:grid;grid-template-columns:1fr 1fr;gap:0;align-items:stretch;border-radius:22px;overflow:hidden;box-shadow:0 20px 80px rgba(13,18,64,.12);max-width:1200px;margin:0 auto}
+.sell-img{position:relative;min-height:460px}
+.sell-img img{width:100%;height:100%;object-fit:cover}
+.sell-content{background:var(--navy);padding:52px 48px;display:flex;flex-direction:column;justify-content:center}
+.sell-content .eyebrow{color:var(--gold)}
+.sell-content .sec-title{color:#fff;font-size:clamp(24px,2.8vw,38px);margin-bottom:14px}
+.sell-content .sec-sub{color:rgba(255,255,255,.62);margin-bottom:28px}
+.sell-steps{display:flex;flex-direction:column;gap:14px;margin-bottom:28px}
+.sell-step{display:flex;align-items:center;gap:13px}
+.ss-num{width:30px;height:30px;background:rgba(233,30,140,.15);border:1px solid rgba(233,30,140,.3);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:var(--magenta);flex-shrink:0}
+.ss-text{font-size:13px;color:rgba(255,255,255,.72)}
+.ss-text strong{color:#fff}
+/* TESTIMONIALS */
+.testi-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:20px}
+.testi-card{background:#fff;border:1px solid var(--gray-light);border-radius:17px;padding:30px;transition:box-shadow .25s}
+.testi-card:hover{box-shadow:0 12px 44px rgba(13,18,64,.08)}
+.tq{font-size:34px;font-family:'Playfair Display',serif;color:var(--magenta);line-height:1;margin-bottom:12px}
+.testi-card p{font-size:13px;color:var(--text-muted);line-height:1.75;font-style:italic;margin-bottom:20px}
+.tauthor{display:flex;align-items:center;gap:10px}
+.tav{width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,var(--navy),var(--magenta));display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700;color:#fff}
+.tan{font-size:13.5px;font-weight:600;color:var(--navy)}
+.tar{font-size:11px;color:var(--text-muted)}
+.stars{color:var(--gold);font-size:13px;margin-bottom:9px;letter-spacing:2px}
+/* PARTNERS */
+.partners-bg{background:var(--navy);padding:50px 5%}
+.ptitle{text-align:center;font-size:10.5px;font-weight:600;color:rgba(255,255,255,.32);letter-spacing:2px;text-transform:uppercase;margin-bottom:30px}
+.prow{display:flex;align-items:center;justify-content:center;gap:38px;flex-wrap:wrap;max-width:1000px;margin:0 auto}
+.pname{font-family:'Playfair Display',serif;font-size:18px;font-weight:600;color:rgba(255,255,255,.26);transition:color .2s;cursor:default}
+.pname:hover{color:rgba(255,255,255,.62)}
+/* CTA */
+.cta-sec{background:linear-gradient(135deg,var(--navy-dark) 0%,#1A0A54 100%);position:relative;overflow:hidden}
+.cta-bg{position:absolute;inset:0;background-image:radial-gradient(circle at 10% 50%,rgba(233,30,140,.14) 0%,transparent 50%),radial-gradient(circle at 90% 50%,rgba(201,168,76,.07) 0%,transparent 40%);pointer-events:none}
+.cta-inner{position:relative;z-index:2;text-align:center;max-width:660px;margin:0 auto}
+.cta-inner h2{font-family:'Playfair Display',serif;font-size:clamp(28px,3.8vw,50px);font-weight:700;color:#fff;margin-bottom:16px;line-height:1.1}
+.cta-inner h2 em{font-style:italic;color:var(--gold)}
+.cta-inner p{font-size:16px;color:rgba(255,255,255,.6);margin-bottom:36px;line-height:1.7}
+.cta-btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+/* FOOTER */
+footer{background:var(--navy-dark);padding:68px 5% 34px}
+.footer-inner{max-width:1400px;margin:0 auto}
+.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1.2fr;gap:44px;margin-bottom:52px}
+.footer-logo-row{display:flex;align-items:center;gap:10px;margin-bottom:14px}
+.footer-logo-row img{height:42px}
+.fb-name{font-family:'Playfair Display',serif;font-size:19px;font-weight:700;color:#fff}
+.fb-sub{font-size:8px;color:var(--magenta);letter-spacing:2px;text-transform:uppercase;margin-top:2px}
+.footer-brand p{font-size:13px;color:rgba(255,255,255,.43);line-height:1.7;margin-bottom:16px}
+.socials{display:flex;gap:7px}
+.social{width:33px;height:33px;background:rgba(255,255,255,.06);border-radius:8px;display:flex;align-items:center;justify-content:center;transition:background .2s;cursor:pointer;border:none}
+.social:hover{background:var(--magenta)}
+.social svg{width:15px;height:15px;stroke:#fff;fill:none;stroke-width:2}
+.fcol h4{font-size:10px;font-weight:700;color:rgba(255,255,255,.3);letter-spacing:1.8px;text-transform:uppercase;margin-bottom:16px}
+.fcol ul{list-style:none;display:flex;flex-direction:column;gap:8px}
+.fcol ul li a{font-size:13px;color:rgba(255,255,255,.48);text-decoration:none;transition:color .2s}
+.fcol ul li a:hover{color:#fff}
+.fcontact{display:flex;align-items:flex-start;gap:9px;margin-bottom:10px}
+.fcontact svg{width:14px;height:14px;stroke:var(--magenta);fill:none;stroke-width:2;flex-shrink:0;margin-top:2px}
+.fcontact span{font-size:12px;color:rgba(255,255,255,.48);line-height:1.5}
+.footer-bottom{border-top:1px solid rgba(255,255,255,.07);padding-top:24px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px}
+.footer-bottom p{font-size:11.5px;color:rgba(255,255,255,.24)}
+.fbadges{display:flex;gap:8px}
+.fbadge{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:4px;padding:3px 9px;font-size:10px;color:rgba(255,255,255,.3);font-weight:600}
+/* NEXTGEN AI FLOATING */
+#nova-fab{position:fixed;bottom:28px;right:28px;z-index:9999;display:flex;flex-direction:column;align-items:flex-end;gap:10px}
+#nova-bubble{background:var(--navy-dark);color:#fff;border:1px solid rgba(255,255,255,.12);padding:9px 15px;border-radius:13px 13px 3px 13px;font-size:12.5px;font-weight:500;white-space:nowrap;box-shadow:0 6px 24px rgba(0,0,0,.3);cursor:pointer;display:none}
+#nova-bubble strong{color:var(--magenta)}
+#nova-btn{width:58px;height:58px;background:linear-gradient(135deg,var(--magenta),#7B2FF7);border:none;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 8px 32px rgba(233,30,140,.45);transition:all .3s;position:relative;font-size:24px}
+#nova-btn:hover{transform:scale(1.1);box-shadow:0 12px 40px rgba(233,30,140,.6)}
+#nova-btn .notif{position:absolute;top:-2px;right:-2px;width:16px;height:16px;background:#22C55E;border-radius:50%;border:2.5px solid var(--navy-dark);animation:pulse 2s infinite}
+#nova-panel{position:fixed;bottom:98px;right:28px;width:380px;height:570px;background:#fff;border-radius:22px;box-shadow:0 28px 90px rgba(13,18,64,.22);border:1px solid var(--gray-light);z-index:9998;display:none;flex-direction:column;overflow:hidden}
+#nova-panel.open{display:flex}
+.nova-hdr{background:linear-gradient(135deg,var(--navy-dark),var(--navy-light));padding:13px 15px;display:flex;align-items:center;gap:10px;flex-shrink:0}
+.nova-av{width:37px;height:37px;border-radius:50%;background:linear-gradient(135deg,var(--magenta),#7B2FF7);display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0;position:relative}
+.nova-av .on{position:absolute;bottom:1px;right:1px;width:9px;height:9px;background:#22C55E;border-radius:50%;border:1.5px solid var(--navy-dark)}
+.nova-hdr-info{flex:1}
+.nova-hdr-info .hn{font-size:14px;font-weight:600;color:#fff;font-family:'Playfair Display',serif}
+.nova-hdr-info .hs{font-size:10px;color:rgba(255,255,255,.52);margin-top:1px}
+.nova-hdr-right{display:flex;align-items:center;gap:8px}
+.nova-lang-pills{display:flex;gap:3px}
+.nlp{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.14);border-radius:10px;padding:3px 8px;font-size:10px;font-weight:700;color:rgba(255,255,255,.6);cursor:pointer;transition:all .2s;font-family:'Inter',sans-serif}
+.nlp.active{background:var(--magenta);border-color:var(--magenta);color:#fff}
+.nova-close{background:rgba(255,255,255,.1);border:none;color:#fff;width:27px;height:27px;border-radius:50%;cursor:pointer;font-size:16px;display:flex;align-items:center;justify-content:center;transition:background .2s}
+.nova-close:hover{background:rgba(255,255,255,.2)}
+.nova-chips{padding:8px 11px;border-bottom:1px solid var(--gray-light);display:flex;gap:5px;overflow-x:auto;flex-shrink:0;scrollbar-width:none}
+.nova-chips::-webkit-scrollbar{display:none}
+.nchip{background:var(--off-white);border:1.5px solid var(--gray-light);border-radius:13px;padding:5px 11px;font-size:11px;font-weight:500;color:var(--navy);cursor:pointer;white-space:nowrap;transition:all .2s;flex-shrink:0}
+.nchip:hover{border-color:var(--magenta);color:var(--magenta)}
+.nova-msgs{flex:1;overflow-y:auto;padding:15px 13px;display:flex;flex-direction:column;gap:11px;scroll-behavior:smooth}
+.nova-msgs::-webkit-scrollbar{width:3px}
+.nova-msgs::-webkit-scrollbar-thumb{background:var(--gray-light);border-radius:2px}
+.nmsg{display:flex;gap:8px;align-items:flex-end;max-width:90%}
+.nmsg.user{flex-direction:row-reverse;align-self:flex-end}
+.nmsg.bot{align-self:flex-start}
+.nmsg-av{width:26px;height:26px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:12px}
+.nmsg.bot .nmsg-av{background:linear-gradient(135deg,var(--magenta),#7B2FF7)}
+.nmsg.user .nmsg-av{background:linear-gradient(135deg,var(--navy),var(--navy-light));color:#fff;font-size:9px;font-weight:700}
+.nbubble{padding:9px 12px;border-radius:13px;font-size:12.5px;line-height:1.65;max-width:100%}
+.nmsg.bot .nbubble{background:var(--off-white);color:var(--text-dark);border-bottom-left-radius:3px;border:1px solid var(--gray-light)}
+.nmsg.user .nbubble{background:var(--navy);color:#fff;border-bottom-right-radius:3px}
+.typing-ind{display:flex;align-items:center;gap:4px;padding:9px 12px;background:var(--off-white);border-radius:13px;border-bottom-left-radius:3px;border:1px solid var(--gray-light)}
+.td{width:6px;height:6px;background:var(--magenta);border-radius:50%;animation:bounce .9s infinite}
+.td:nth-child(2){animation-delay:.15s}.td:nth-child(3){animation-delay:.3s}
+@keyframes bounce{0%,80%,100%{transform:translateY(0)}40%{transform:translateY(-5px)}}
+.nova-pc{background:#fff;border:1px solid var(--gray-light);border-radius:9px;padding:9px 11px;cursor:pointer;transition:all .2s;border-left:3px solid var(--magenta);margin-top:5px}
+.nova-pc:hover{box-shadow:0 4px 14px rgba(13,18,64,.08)}
+.npc-badge{font-size:9px;font-weight:700;color:var(--magenta);text-transform:uppercase;letter-spacing:.7px;margin-bottom:2px}
+.npc-badge.auc{color:#8A6A00}.npc-badge.lease{color:#0891B2}
+.npc-title{font-size:12px;font-weight:600;color:var(--navy)}
+.npc-price{font-size:13px;font-weight:700;color:var(--navy);font-family:'Playfair Display',serif}
+.npc-loc{font-size:10px;color:var(--text-muted);margin-top:1px}
+.npc-tags{display:flex;gap:3px;margin-top:4px;flex-wrap:wrap}
+.npc-tag{background:rgba(13,18,64,.05);border-radius:3px;padding:2px 5px;font-size:9px;font-weight:500;color:var(--navy)}
+.nova-inp-area{border-top:1px solid var(--gray-light);padding:9px 11px;display:flex;gap:7px;align-items:flex-end;flex-shrink:0;background:#fff}
+.nova-inp-wrap{flex:1;background:var(--off-white);border:1.5px solid var(--gray-light);border-radius:10px;display:flex;align-items:center;padding:0 10px;transition:border-color .2s}
+.nova-inp-wrap:focus-within{border-color:var(--magenta)}
+#novaTxt{flex:1;border:none;background:transparent;padding:9px 0;font-size:12.5px;font-family:inherit;color:var(--text-dark);outline:none;resize:none;max-height:80px;min-height:20px}
+#novaTxt::placeholder{color:var(--text-muted)}
+#novaSend{width:36px;height:36px;background:var(--navy);border:none;border-radius:8px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .2s;flex-shrink:0}
+#novaSend:hover{background:var(--magenta)}
+#novaSend:disabled{opacity:.4;cursor:not-allowed}
+#novaSend svg{width:15px;height:15px;stroke:#fff;fill:none;stroke-width:2.2}
+.nova-powered{text-align:center;padding:5px;font-size:10px;color:var(--text-muted);border-top:1px solid var(--gray-light);flex-shrink:0}
+.nova-powered span{color:var(--magenta);font-weight:600}
+/* WA */
+#wa-btn{position:fixed;bottom:28px;left:28px;z-index:9999;width:50px;height:50px;background:#25D366;border-radius:50%;display:flex;align-items:center;justify-content:center;text-decoration:none;box-shadow:0 6px 24px rgba(37,211,102,.4);transition:all .3s}
+#wa-btn:hover{transform:scale(1.1)}
+#wa-btn svg{width:25px;height:25px;fill:#fff}
+/* MODAL */
+.modal-ov{display:none;position:fixed;inset:0;background:rgba(8,12,46,.85);z-index:2000;align-items:center;justify-content:center;padding:20px}
+.modal-ov.open{display:flex}
+.modal-box{background:#fff;border-radius:22px;padding:36px;max-width:550px;width:100%;max-height:92vh;overflow-y:auto;position:relative}
+.modal-x{position:absolute;top:13px;right:13px;background:var(--gray-light);border:none;width:30px;height:30px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:17px;color:var(--navy)}
+.m-title{font-family:'Playfair Display',serif;font-size:23px;font-weight:700;color:var(--navy);margin-bottom:5px}
+.m-sub{font-size:13px;color:var(--text-muted);margin-bottom:22px}
+.fg{margin-bottom:14px}
+.fg label{display:block;font-size:10.5px;font-weight:700;color:var(--text-muted);letter-spacing:.5px;text-transform:uppercase;margin-bottom:5px}
+.fg input,.fg select,.fg textarea{width:100%;border:1.5px solid var(--gray-light);border-radius:9px;padding:10px 13px;font-size:13.5px;font-family:'Inter',sans-serif;color:var(--text-dark);outline:none;transition:border-color .2s;resize:vertical}
+.fg input:focus,.fg select:focus,.fg textarea:focus{border-color:var(--magenta)}
+.fg2{display:grid;grid-template-columns:1fr 1fr;gap:11px}
+.nt-wrap{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}
+.nt{background:var(--off-white);border:1.5px solid var(--gray-light);border-radius:6px;padding:5px 12px;font-size:12px;font-weight:500;cursor:pointer;font-family:'Inter',sans-serif;color:var(--text-dark);transition:all .2s}
+.nt.sel{background:rgba(233,30,140,.07);border-color:var(--magenta);color:var(--magenta)}
+.sub-btn{width:100%;background:var(--navy);color:#fff;border:none;padding:13px;border-radius:9px;font-size:14px;font-weight:600;cursor:pointer;font-family:'Inter',sans-serif;margin-top:7px;transition:background .2s}
+.sub-btn:hover{background:var(--magenta)}
+@media(max-width:1060px){
+.why-grid,.lease-grid,.sell-grid,.hm-grid{grid-template-columns:1fr}
+.why-content{padding-left:0;padding-top:36px}
+.auc-img{width:150px}
+}
+@media(max-width:960px){
+.nav-links,.nav-nova-btn,.nav-cta{display:none}
+.menu-toggle{display:flex}
+.search-fields{grid-template-columns:1fr 1fr}
+.search-go{width:100%}
+.footer-grid{grid-template-columns:1fr 1fr;gap:28px}
+.cats-grid{grid-template-columns:repeat(2,1fr)}
+.cat-card.featured{grid-column:span 1}
+}
+@media(max-width:600px){
+.footer-grid{grid-template-columns:1fr}
+.listings-grid{grid-template-columns:1fr}
+.search-fields{grid-template-columns:1fr}
+.auc-card{flex-direction:column}.auc-img{width:100%;height:180px}
+#nova-panel{width:calc(100vw - 32px);right:16px;bottom:90px}
+#nova-fab{bottom:16px;right:16px}
+#wa-btn{bottom:16px;left:16px}
+}
+</style>
+</head>
+<body>
+<!-- NAV -->
+<nav id="mainNav">
+  <div class="nav-inner">
+    <a class="nav-logo" href="#home">
+      <img src="Next-Gen_Auctioneer_LOGO.jpg" alt="NEXT-GEN" onerror="this.style.display='none'">
+      <div class="logo-text"><div class="l1">NEXT-GEN</div><div class="l2">Auctioneer + Realtor</div></div>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#home" data-t="nav_home">Home</a></li>
+      <li><a href="#listings" data-t="nav_list">Listings</a></li>
+      <li><a href="#lease" data-t="nav_lease">Leasing</a></li>
+      <li><a href="#auctions" data-t="nav_auc">Auctions</a></li>
+      <li><a href="#services" data-t="nav_svc">Services</a></li>
+      <li><a href="#sell" data-t="nav_sell">Sell</a></li>
+      <li><a href="#contact" data-t="nav_contact">Contact</a></li>
+    </ul>
+    <div class="nav-right">
+      <div class="lang-toggle"><button class="lang-btn active" onclick="setLang('en',this)">EN</button><button class="lang-btn" onclick="setLang('sw',this)">SW</button></div>
+      <button class="nav-nova-btn" onclick="openNova()">🤖 Ask NextGen AI</button>
+      <button class="nav-cta" onclick="openModal('general')" data-t="nav_cta">Browse Properties</button>
+    </div>
+    <button class="menu-toggle" onclick="toggleMobile()"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#home" onclick="toggleMobile()">Home</a><a href="#listings" onclick="toggleMobile()">Listings</a>
+  <a href="#lease" onclick="toggleMobile()">Leasing</a><a href="#auctions" onclick="toggleMobile()">Auctions</a>
+  <a href="#services" onclick="toggleMobile()">Services</a><a href="#sell" onclick="toggleMobile()">Sell Property</a>
+  <a href="#contact" onclick="toggleMobile()">Contact</a>
+</div>
+
+<!-- HERO with Real Photos Slideshow -->
+<section id="home" class="hero">
+  <div class="hero-slide active" style="background-image:url('1.jfif')"></div>
+  <div class="hero-slide" style="background-image:url('2.jfif')"></div>
+  <div class="hero-slide" style="background-image:url('3.jfif')"></div>
+  <div class="hero-slide" style="background-image:url('12.jfif')"></div>
+  <div class="hero-content">
+    <div class="hero-eyebrow"><div class="eyebrow-dot"></div><span data-t="hero_tag">Tanzania's Premier Property Platform</span></div>
+    <h1 data-t="hero_h1" data-html="1">Find Extraordinary Property<br>Across <em>Tanzania & Zanzibar</em></h1>
+    <p class="hero-sub" data-t="hero_sub">AI-powered property intelligence for buyers, sellers, investors, and tenants. From beachfront villas to bank auction assets.</p>
+    <div class="hero-actions">
+      <a href="#listings" class="btn-primary">🏠 <span data-t="hero_cta1">Browse Properties</span></a>
+      <a href="#auctions" class="btn-gold" data-t="hero_cta2">Bank Auctions</a>
+      <a href="#lease" class="btn-outline" data-t="hero_cta3">Leasing</a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat"><div class="stat-num">500+</div><div class="stat-label" data-t="s_prop">Properties Listed</div></div>
+      <div class="stat"><div class="stat-num">TZS 50B+</div><div class="stat-label" data-t="s_assets">Assets Managed</div></div>
+      <div class="stat"><div class="stat-num">12+</div><div class="stat-label" data-t="s_banks">Partner Banks</div></div>
+      <div class="stat"><div class="stat-num">98%</div><div class="stat-label" data-t="s_sat">Client Satisfaction</div></div>
+    </div>
+  </div>
+  <div class="hero-dots">
+    <button class="hdot active" onclick="goSlide(0,this)"></button>
+    <button class="hdot" onclick="goSlide(1,this)"></button>
+    <button class="hdot" onclick="goSlide(2,this)"></button>
+    <button class="hdot" onclick="goSlide(3,this)"></button>
+  </div>
+</section>
+
+<!-- SEARCH -->
+<div class="search-wrap">
+  <div class="search-card">
+    <div class="search-tabs-row">
+      <button class="stab active" onclick="setTab(this)" data-t="tab_buy">🏠 Buy</button>
+      <button class="stab" onclick="setTab(this)" data-t="tab_rent">🔑 Rent</button>
+      <button class="stab" onclick="setTab(this)" data-t="tab_lease">📋 Lease</button>
+      <button class="stab" onclick="setTab(this)" data-t="tab_inv">📈 Investment</button>
+      <button class="stab" onclick="setTab(this)" data-t="tab_hos">🏨 Hospitality</button>
+      <button class="stab" onclick="setTab(this)" data-t="tab_com">🏢 Commercial</button>
+      <button class="stab" onclick="setTab(this)" data-t="tab_land">🌿 Land & Agri</button>
+      <button class="stab" onclick="setTab(this)" data-t="tab_ind">🏭 Industrial</button>
+      <button class="stab" onclick="setTab(this)" data-t="tab_auc">🔨 Auction</button>
+    </div>
+    <div class="search-body">
+      <div class="search-fields">
+        <div class="sf"><label data-t="sf_type">Property Type</label><select><option>All Types</option><option>Villa / House</option><option>Apartment</option><option>Plot / Land</option><option>Commercial Office</option><option>Hotel / Resort</option><option>Factory / Industrial</option><option>Farm / Agriculture</option><option>Warehouse</option><option>Retail Space</option></select></div>
+        <div class="sf"><label data-t="sf_loc">Location</label><select><option>All Regions</option><option>Dar es Salaam</option><option>Zanzibar</option><option>Arusha</option><option>Mwanza</option><option>Dodoma</option><option>Mbeya</option><option>Morogoro</option></select></div>
+        <div class="sf"><label data-t="sf_price">Budget</label><select><option>Any Price</option><option>Under TZS 50M</option><option>TZS 50M–200M</option><option>TZS 200M–500M</option><option>TZS 500M–1B</option><option>TZS 1B–5B</option><option>Above TZS 5B</option></select></div>
+        <div class="sf"><label data-t="sf_beds">Bedrooms</label><select><option>Any</option><option>1+</option><option>2+</option><option>3+</option><option>4+</option><option>5+</option></select></div>
+        <button class="search-go" onclick="openModal('general')"><svg viewBox="0 0 24 24" width="15" height="15" stroke="#fff" fill="none" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg><span data-t="sf_btn">Search</span></button>
+      </div>
+    </div>
+    <div class="ai-search-row">
+      <div class="ai-inp-wrap"><span class="ai-tag">NextGen AI</span><input type="text" id="aiTxt" placeholder="Try: Beachfront villa Zanzibar under $500K with pool..." onkeydown="if(event.key==='Enter'){aiSearch()}"></div>
+      <button class="ai-search-btn" onclick="aiSearch()">🤖 Ask AI</button>
+    </div>
+  </div>
+</div>
+<div class="strip"><p data-t="inv_strip" data-html="1">Have <strong>special requirements?</strong> Land clearing, bulk investment, demolition, or corporate leasing?</p><button class="strip-btn" onclick="openModal('special')" data-t="inv_btn">Submit Special Request</button></div>
+
+<!-- FEATURED LISTINGS with Real Photos -->
+<section id="listings" style="background:#fff">
+  <div class="section-inner">
+    <div class="sec-hdr split">
+      <div><div class="eyebrow" data-t="feat_ey">Featured Listings</div><h2 class="sec-title" data-t="feat_title">Prime Properties in Tanzania</h2></div>
+      <button class="btn-primary" onclick="openModal('general')" data-t="view_all">View All Properties</button>
+    </div>
+    <div class="listings-grid">
+      <div class="prop-card">
+        <div class="prop-img"><img src="6.jfif" alt="Luxury Villa Masaki" loading="lazy"><span class="prop-badge sale">For Sale</span><button class="prop-save" onclick="event.stopPropagation();this.classList.toggle('saved')"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg></button></div>
+        <div class="prop-info"><div class="prop-price">TZS 1.8B <span>/ Negotiable</span></div><div class="prop-title">Luxury Villa — Masaki</div><div class="prop-loc"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>Masaki, Dar es Salaam</div><div class="prop-meta"><div class="meta-item">🛏 5 Bed</div><div class="meta-item">🚿 4 Bath</div><div class="meta-item">📐 650 sqm</div></div><div class="prop-actions"><a class="pa-btn prim" href="property/1" style="text-decoration:none">📋 View Details</a><button class="pa-btn" onclick="window.open('https://wa.me/255767109763?text=Hello!%20Interested%20in%20Luxury%20Villa%20Masaki%20TZS%201.8B')">💬 WA</button></div></div>
+      </div>
+      <div class="prop-card">
+        <div class="prop-img"><img src="8.jfif" alt="Zanzibar Plot" loading="lazy"><span class="prop-badge sale">For Sale</span><button class="prop-save" onclick="event.stopPropagation();this.classList.toggle('saved')"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg></button></div>
+        <div class="prop-info"><div class="prop-price">USD 850K <span>/ Negotiable</span></div><div class="prop-title">Beachfront Plot — Nungwi</div><div class="prop-loc"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>Nungwi, Zanzibar</div><div class="prop-meta"><div class="meta-item">📐 3,200 sqm</div><div class="meta-item">✅ Title Deed</div><div class="meta-item">🌊 Beachfront</div></div><div class="prop-actions"><a class="pa-btn prim" href="property/11" style="text-decoration:none">📋 View Details</a><button class="pa-btn" onclick="window.open('https://wa.me/255767109763?text=Interested%20in%20Zanzibar%20beachfront%20plot%20USD%20850K')">💬 WA</button></div></div>
+      </div>
+      <div class="prop-card">
+        <div class="prop-img"><img src="18.jfif" alt="Factory Dodoma" loading="lazy"><span class="prop-badge auction">Bank Auction</span><button class="prop-save" onclick="event.stopPropagation();this.classList.toggle('saved')"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg></button></div>
+        <div class="prop-info"><div class="prop-price">TZS 14B <span>/ Reserve</span></div><div class="prop-title">Edible Oil Factory — Dodoma</div><div class="prop-loc"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>Dodoma Industrial Zone</div><div class="prop-meta"><div class="meta-item">📐 5.2 Acres</div><div class="meta-item" style="color:var(--magenta)">⏱ 14 Days Left</div></div><div class="prop-actions"><a class="pa-btn prim" href="property/7" style="text-decoration:none">📋 View Details</a><button class="pa-btn" onclick="window.open('https://wa.me/255767109763?text=Dodoma%20Factory%20Auction%20TZS%2014B')">💬 WA</button></div></div>
+      </div>
+      <div class="prop-card">
+        <div class="prop-img"><img src="17.jfif" alt="Office Lease" loading="lazy"><span class="prop-badge lease">For Lease</span><button class="prop-save" onclick="event.stopPropagation();this.classList.toggle('saved')"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg></button></div>
+        <div class="prop-info"><div class="prop-price">TZS 12M <span>/ month</span></div><div class="prop-title">Corporate Office Complex</div><div class="prop-loc"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>Upanga, Dar es Salaam</div><div class="prop-meta"><div class="meta-item">📐 1,200 sqm</div><div class="meta-item">🅿️ Parking</div><div class="meta-item">3 Floors</div></div><div class="prop-actions"><a class="pa-btn prim" href="property/12" style="text-decoration:none">📋 View Details</a><button class="pa-btn" onclick="window.open('https://wa.me/255767109763?text=Office%20lease%20Upanga%20TZS%2012M%2Fmo')">💬 WA</button></div></div>
+      </div>
+      <div class="prop-card">
+        <div class="prop-img"><img src="13.jfif" alt="Zanzibar Hotel" loading="lazy"><span class="prop-badge sale">For Sale</span><button class="prop-save" onclick="event.stopPropagation();this.classList.toggle('saved')"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg></button></div>
+        <div class="prop-info"><div class="prop-price">USD 1.2M <span>/ Negotiable</span></div><div class="prop-title">Boutique Hotel — Zanzibar</div><div class="prop-loc"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>Nungwi, Zanzibar</div><div class="prop-meta"><div class="meta-item">🏨 20 Rooms</div><div class="meta-item">🌊 Beachfront</div><div class="meta-item">✅ Licensed</div></div><div class="prop-actions"><a class="pa-btn prim" href="property/10" style="text-decoration:none">📋 View Details</a><button class="pa-btn" onclick="window.open('https://wa.me/255767109763?text=Zanzibar%20hotel%20USD%201.2M')">💬 WA</button></div></div>
+      </div>
+      <div class="prop-card">
+        <div class="prop-img"><img src="15.jfif" alt="Farm Land" loading="lazy"><span class="prop-badge sale">For Sale</span><button class="prop-save" onclick="event.stopPropagation();this.classList.toggle('saved')"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg></button></div>
+        <div class="prop-info"><div class="prop-price">TZS 180M <span>/ Negotiable</span></div><div class="prop-title">Agricultural Farm Land</div><div class="prop-loc"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>Morogoro Region</div><div class="prop-meta"><div class="meta-item">🌿 30 Acres</div><div class="meta-item">💧 Water Source</div><div class="meta-item">✅ Title Deed</div></div><div class="prop-actions"><a class="pa-btn prim" href="property/9" style="text-decoration:none">📋 View Details</a><button class="pa-btn" onclick="window.open('https://wa.me/255767109763?text=Morogoro%20farm%20TZS%20180M')">💬 WA</button></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CATEGORIES with Real Photos -->
+<section class="cats-bg" style="padding:80px 5%">
+  <div class="section-inner">
+    <div class="sec-hdr center"><div class="eyebrow" style="color:rgba(233,30,140,.8)" data-t="cat_ey">Browse by Category</div><h2 class="sec-title" style="color:#fff" data-t="cat_title">Every Type of Property</h2></div>
+    <div class="cats-grid">
+      <div class="cat-card featured" onclick="openNova('Show me beachfront properties in Tanzania and Zanzibar')"><img src="1.jfif" alt="Beachfront" loading="lazy"><div class="cat-label"><div class="cat-name">🌊 Beachfront</div><div class="cat-count">14 Properties</div></div></div>
+      <div class="cat-card" onclick="openNova('Show me luxury homes and villas available')"><img src="10.jfif" alt="Luxury Homes" loading="lazy"><div class="cat-label"><div class="cat-name">🏡 Luxury Homes</div><div class="cat-count">28 Properties</div></div></div>
+      <div class="cat-card" onclick="openNova('Show me hotels and resorts for sale in Tanzania and Zanzibar')"><img src="14.jfif" alt="Hotels" loading="lazy"><div class="cat-label"><div class="cat-name">🏨 Hotels & Resorts</div><div class="cat-count">9 Properties</div></div></div>
+      <div class="cat-card" onclick="openNova('Show me commercial office properties for sale or lease')"><img src="18.jfif" alt="Commercial" loading="lazy"><div class="cat-label"><div class="cat-name">🏢 Commercial</div><div class="cat-count">22 Properties</div></div></div>
+      <div class="cat-card" onclick="openNova('Show me agricultural and farm land available for sale')"><img src="16.jfif" alt="Farms" loading="lazy"><div class="cat-label"><div class="cat-name">🌾 Farms & Land</div><div class="cat-count">18 Properties</div></div></div>
+      <div class="cat-card" onclick="openNova('Show me luxury penthouses and high-rise apartments available')"><img src="5.jfif" alt="Penthouses" loading="lazy"><div class="cat-label"><div class="cat-name">🏙️ Penthouses</div><div class="cat-count">7 Properties</div></div></div>
+      <div class="cat-card" onclick="openNova('Show me properties available for rent or lease in Tanzania')"><img src="11.jfif" alt="Leasing" loading="lazy"><div class="cat-label"><div class="cat-name">📋 For Lease/Rent</div><div class="cat-count">35 Properties</div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- LEASING SECTION -->
+<section class="lease-sec" id="lease">
+  <div class="lease-bg"></div>
+  <div class="section-inner">
+    <div class="lease-grid">
+      <div>
+        <div class="eyebrow" style="color:var(--gold)" data-t="lease_ey">Property Leasing</div>
+        <h2 class="sec-title" style="color:#fff" data-t="lease_title">Premium Properties for Lease Across Tanzania</h2>
+        <p class="sec-sub" style="color:rgba(255,255,255,.62);margin-bottom:28px" data-t="lease_sub">From corporate offices in Dar es Salaam to beachfront commercial spaces in Zanzibar — NEXT-GEN matches you with the right lease.</p>
+        <div class="lease-features">
+          <div class="lease-feat"><div class="lf-icon"><svg viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg></div><div class="lf-text"><h4 data-t="lf1t">Verified Landlords Only</h4><p data-t="lf1p">Every property and landlord verified before listing</p></div></div>
+          <div class="lease-feat"><div class="lf-icon"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div><div class="lf-text"><h4 data-t="lf2t">Legal Lease Agreements</h4><p data-t="lf2p">We prepare and review all lease documentation</p></div></div>
+          <div class="lease-feat"><div class="lf-icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div><div class="lf-text"><h4 data-t="lf3t">Fully Managed Options</h4><p data-t="lf3p">Optional full property management throughout lease</p></div></div>
+          <div class="lease-feat"><div class="lf-icon"><svg viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div><div class="lf-text"><h4 data-t="lf4t">Commercial & Residential</h4><p data-t="lf4p">Offices, warehouses, retail, homes, industrial</p></div></div>
+        </div>
+        <div style="display:flex;gap:12px;flex-wrap:wrap">
+          <button class="btn-gold" onclick="openModal('lease')" data-t="lease_btn1">Browse Lease Listings</button>
+          <button class="btn-outline" onclick="openNova('I am looking for a property to lease. Can you help me find the right option?')" data-t="lease_btn2">Ask NextGen</button>
+        </div>
+      </div>
+      <div class="lease-right">
+        <div class="lease-pc" onclick="openNova('Tell me about commercial office space for lease in Oyster Bay')"><img src="17.jfif" alt="Office" loading="lazy"><div class="lpc-info"><div class="lpc-type">Commercial Lease</div><div class="lpc-title">Premium Office — Oyster Bay</div><div class="lpc-price">TZS 18M/mo</div></div></div>
+        <div class="lease-pc" onclick="openNova('Tell me about retail space for lease in Masaki')"><img src="4.jfif" alt="Retail" loading="lazy"><div class="lpc-info"><div class="lpc-type">Retail Lease</div><div class="lpc-title">Luxury Retail — Masaki</div><div class="lpc-price">TZS 8M/mo</div></div></div>
+        <div class="lease-pc" onclick="openNova('Show me residential houses for rent in Dar es Salaam')"><img src="11.jfif" alt="Villa Rent" loading="lazy"><div class="lpc-info"><div class="lpc-type">Residential Rental</div><div class="lpc-title">Executive Villa — Mbezi</div><div class="lpc-price">TZS 5M/mo</div></div></div>
+        <div class="lease-pc" onclick="openNova('Tell me about warehouse or industrial space for lease in Dar es Salaam')"><img src="18.jfif" alt="Warehouse" loading="lazy"><div class="lpc-info"><div class="lpc-type">Industrial Lease</div><div class="lpc-title">Warehouse — Ubungo</div><div class="lpc-price">TZS 22M/mo</div></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="svc-bg" id="services">
+  <div class="section-inner">
+    <div class="sec-hdr center"><div class="eyebrow" data-t="svc_ey">Our Services</div><h2 class="sec-title" data-t="svc_title">Complete Property Solutions</h2><p class="sec-sub" data-t="svc_sub">From private sales to bank auctions — end-to-end services across Tanzania.</p></div>
+    <div class="svc-grid">
+      <div class="svc-card"><div class="svc-icon"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg></div><h3 data-t="s1t">Property Sales</h3><p data-t="s1p">Buy and sell residential, commercial, and agricultural land with verified documentation.</p><span class="svc-link" data-t="learn_more">Learn more <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span></div>
+      <div class="svc-card"><div class="svc-icon"><svg viewBox="0 0 24 24"><path d="M21 10H3M21 6H3M21 14H3M21 18H3"/></svg></div><h3 data-t="s7t">Property Leasing</h3><p data-t="s7p">Long-term and short-term leasing for offices, warehouses, retail, residences and industrial facilities.</p><span class="svc-link" onclick="openModal('lease')" data-t="learn_more">Learn more <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span></div>
+      <div class="svc-card"><div class="svc-icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div><h3 data-t="s2t">Bank Auctions</h3><p data-t="s2p">Access repossessed properties from CRDB, NMB, NCBA, NBC and partner banks at competitive prices.</p><span class="svc-link" data-t="learn_more">Learn more <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span></div>
+      <div class="svc-card"><div class="svc-icon"><svg viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg></div><h3 data-t="s3t">Property Valuation</h3><p data-t="s3p">Certified valuation reports for mortgage, insurance, taxation, and investment decisions.</p><span class="svc-link" data-t="learn_more">Learn more <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span></div>
+      <div class="svc-card"><div class="svc-icon"><svg viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div><h3 data-t="s5t">Investment Advisory</h3><p data-t="s5p">Portfolio analysis, ROI projections, market reports, and strategic investment advice.</p><span class="svc-link" data-t="learn_more">Learn more <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span></div>
+      <div class="svc-card"><div class="svc-icon"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg></div><h3 data-t="s6t">Property Management</h3><p data-t="s6p">Full management: tenant sourcing, rent collection, maintenance coordination, and monthly reporting.</p><span class="svc-link" data-t="learn_more">Learn more <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span></div>
+      <div class="svc-card"><div class="svc-icon"><svg viewBox="0 0 24 24"><path d="M18 8h1a4 4 0 010 8h-1"/><path d="M2 8h16v9a4 4 0 01-4 4H6a4 4 0 01-4-4V8z"/></svg></div><h3 data-t="s4t">Auctioneering</h3><p data-t="s4p">Licensed auctioneer services for estates, courts, government, and corporate asset liquidations.</p><span class="svc-link" data-t="learn_more">Learn more <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span></div>
+      <div class="svc-card"><div class="svc-icon"><svg viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg></div><h3 data-t="s8t">Land Clearance</h3><p data-t="s8p">Coordinating demolition, land clearance, site preparation, and development readiness.</p><span class="svc-link" onclick="openModal('clearance')" data-t="learn_more">Request Now <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span></div>
+    </div>
+  </div>
+</section>
+
+<!-- AUCTIONS with Real Photos -->
+<section class="auc-bg" id="auctions">
+  <div class="section-inner">
+    <div class="sec-hdr split"><div><div class="eyebrow" data-t="auc_ey">Live Auctions</div><h2 class="sec-title" data-t="auc_title">Bank Repossessed Properties</h2><p class="sec-sub" data-t="auc_sub">Verified properties from partner banks. Register to bid and download official tender documents.</p></div><button class="btn-primary" onclick="openModal('auction')">Register to Bid</button></div>
+    <div class="auc-card"><div class="auc-img"><img src="18.jfif" alt="Factory" loading="lazy"></div><div class="auc-body"><div><span class="auc-bank">CRDB Bank</span><h4>Edible Oil Factory — Dodoma Industrial Zone</h4><div class="auc-sub">5.2 Acres · Fully Equipped · Ready to Operate</div></div><div><div class="timer-lbl" data-t="closes_in">Closes in</div><div class="timer-row"><div class="t-blk"><span class="tn" id="d1">14</span><span class="tu">Days</span></div><span class="t-sep">:</span><div class="t-blk"><span class="tn" id="h1">06</span><span class="tu">Hrs</span></div><span class="t-sep">:</span><div class="t-blk"><span class="tn" id="m1">32</span><span class="tu">Min</span></div></div></div><div class="auc-right-info"><div class="res-lbl">Reserve Price</div><div class="res-price">TZS 14B</div><button class="bid-btn" onclick="openModal('auction')">Register to Bid</button></div></div></div>
+    <div class="auc-card"><div class="auc-img"><img src="2.jfif" alt="Resort" loading="lazy"></div><div class="auc-body"><div><span class="auc-bank">NMB Bank</span><h4>Beachfront Resort Complex — Dar es Salaam</h4><div class="auc-sub">0.8 Acres · 12 Units · Premium Location</div></div><div><div class="timer-lbl" data-t="closes_in">Closes in</div><div class="timer-row"><div class="t-blk"><span class="tn" id="d2">07</span><span class="tu">Days</span></div><span class="t-sep">:</span><div class="t-blk"><span class="tn" id="h2">14</span><span class="tu">Hrs</span></div><span class="t-sep">:</span><div class="t-blk"><span class="tn" id="m2">18</span><span class="tu">Min</span></div></div></div><div class="auc-right-info"><div class="res-lbl">Reserve Price</div><div class="res-price">TZS 3.2B</div><button class="bid-btn" onclick="openModal('auction')">Register to Bid</button></div></div></div>
+  </div>
+</section>
+
+<!-- WHY NEXT-GEN -->
+<section id="why">
+  <div class="why-grid">
+    <div class="why-visual">
+      <div class="wsr"><div class="wsb"><div class="wn">500<span>+</span></div><div class="wl" data-t="w_prop">Properties Sold</div></div><div class="wsb"><div class="wn">12<span>+</span></div><div class="wl" data-t="w_banks">Bank Partners</div></div></div>
+      <div class="wsr"><div class="wsb"><div class="wn">98<span>%</span></div><div class="wl" data-t="w_sat">Client Satisfaction</div></div><div class="wsb"><div class="wn">TZS 50<span>B+</span></div><div class="wl" data-t="w_deals">Deals Closed</div></div></div>
+      <div><div style="font-size:10px;color:rgba(255,255,255,.3);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:10px" data-t="licensed_by">Licensed & Regulated by</div><div class="why-bdgs"><span class="why-bdg">BRELA</span><span class="why-bdg">TRA</span><span class="why-bdg">Ministry of Lands</span><span class="why-bdg">Judiciary</span></div></div>
+    </div>
+    <div class="why-content">
+      <div class="eyebrow" data-t="why_ey">Why NEXT-GEN</div>
+      <h2 class="sec-title" data-t="why_title">Tanzania's Most Trusted Property Partner</h2>
+      <div class="why-list">
+        <div class="why-item"><div class="why-chk"><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg></div><div><h4 data-t="w1t">Licensed & Regulated</h4><p data-t="w1p">Fully licensed auctioneers and real estate brokers under Tanzania's regulatory framework.</p></div></div>
+        <div class="why-item"><div class="why-chk"><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg></div><div><h4 data-t="w2t">Verified Properties Only</h4><p data-t="w2p">Every listing undergoes title deed verification, survey checks, and ownership confirmation.</p></div></div>
+        <div class="why-item"><div class="why-chk"><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg></div><div><h4 data-t="w3t">NextGen AI — 24/7 Advisor</h4><p data-t="w3p">Our AI property advisor matches buyers and tenants with the perfect property instantly, day or night.</p></div></div>
+        <div class="why-item"><div class="why-chk"><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg></div><div><h4 data-t="w4t">End-to-End Support</h4><p data-t="w4p">Legal documentation, payment facilitation, and post-sale or post-lease transfer by our team.</p></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- INVESTMENT HEATMAP -->
+<section class="hm-sec" id="invest">
+  <div class="hm-grid">
+    <div>
+      <div class="eyebrow" style="color:var(--gold)">Investment Intelligence</div>
+      <h2 class="sec-title" style="color:#fff" data-t="hm_title">Tanzania Hot Zones 2025–2026</h2>
+      <p class="sec-sub" style="color:rgba(255,255,255,.6);margin-bottom:28px" data-t="hm_sub">AI-analyzed investment hotspots with highest ROI potential across Tanzania.</p>
+      <div class="hm-zones">
+        <div class="hm-zone" onclick="openNova('Tell me about investment opportunities in Kigamboni, what is the appreciation rate and what type of properties are available?')"><div class="hm-zone-name">Kigamboni, DSM</div><div class="hm-zone-stat">+42%</div><div class="hm-zone-lbl">Appreciation</div></div>
+        <div class="hm-zone" onclick="openNova('Tell me about Bagamoyo real estate investment opportunities')"><div class="hm-zone-name">Bagamoyo</div><div class="hm-zone-stat">+38%</div><div class="hm-zone-lbl">Appreciation</div></div>
+        <div class="hm-zone" onclick="openNova('Tell me about Paje Zanzibar investment — what properties are available and what is the ROI?')"><div class="hm-zone-name">Paje, Zanzibar</div><div class="hm-zone-stat">+55%</div><div class="hm-zone-lbl">Appreciation</div></div>
+        <div class="hm-zone" onclick="openNova('Tell me about Dodoma CBD investment opportunities as the capital city')"><div class="hm-zone-name">Dodoma CBD</div><div class="hm-zone-stat">+31%</div><div class="hm-zone-lbl">Appreciation</div></div>
+      </div>
+      <div style="margin-top:24px"><button class="btn-gold" onclick="openNova('What are the best investment areas in Tanzania in 2025? Give me a full market analysis with ROI expectations')">Get Full Investment Report</button></div>
+    </div>
+    <div class="hm-visual">
+      <div style="font-size:10.5px;color:rgba(255,255,255,.38);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:16px">Market Demand Index 2025</div>
+      <div class="hm-bar-row"><div class="hm-bar-label">Zanzibar</div><div class="hm-bar-track"><div class="hm-bar-fill" style="width:92%"></div></div><div class="hm-bar-val">9.2</div></div>
+      <div class="hm-bar-row"><div class="hm-bar-label">Masaki/OB</div><div class="hm-bar-track"><div class="hm-bar-fill" style="width:88%"></div></div><div class="hm-bar-val">8.8</div></div>
+      <div class="hm-bar-row"><div class="hm-bar-label">Kigamboni</div><div class="hm-bar-track"><div class="hm-bar-fill" style="width:79%"></div></div><div class="hm-bar-val">7.9</div></div>
+      <div class="hm-bar-row"><div class="hm-bar-label">Mbezi Beach</div><div class="hm-bar-track"><div class="hm-bar-fill" style="width:75%"></div></div><div class="hm-bar-val">7.5</div></div>
+      <div class="hm-bar-row"><div class="hm-bar-label">Dodoma</div><div class="hm-bar-track"><div class="hm-bar-fill" style="width:72%"></div></div><div class="hm-bar-val">7.2</div></div>
+      <div class="hm-bar-row"><div class="hm-bar-label">Arusha</div><div class="hm-bar-track"><div class="hm-bar-fill" style="width:68%"></div></div><div class="hm-bar-val">6.8</div></div>
+      <div style="margin-top:18px;padding-top:18px;border-top:1px solid rgba(255,255,255,.08)">
+        <div style="font-size:10px;color:rgba(255,255,255,.32);letter-spacing:1px;text-transform:uppercase;margin-bottom:10px">Average Rental Yield</div>
+        <div style="display:flex;gap:14px;flex-wrap:wrap">
+          <div style="background:rgba(255,255,255,.05);border-radius:8px;padding:10px 14px;text-align:center"><div style="font-size:18px;font-weight:700;color:var(--gold);font-family:'Playfair Display',serif">8.4%</div><div style="font-size:10px;color:rgba(255,255,255,.38);margin-top:2px">Residential</div></div>
+          <div style="background:rgba(255,255,255,.05);border-radius:8px;padding:10px 14px;text-align:center"><div style="font-size:18px;font-weight:700;color:var(--gold);font-family:'Playfair Display',serif">11.2%</div><div style="font-size:10px;color:rgba(255,255,255,.38);margin-top:2px">Commercial</div></div>
+          <div style="background:rgba(255,255,255,.05);border-radius:8px;padding:10px 14px;text-align:center"><div style="font-size:18px;font-weight:700;color:var(--gold);font-family:'Playfair Display',serif">14.8%</div><div style="font-size:10px;color:rgba(255,255,255,.38);margin-top:2px">Tourism</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SELL WITH US -->
+<section class="sell-sec" id="sell">
+  <div class="section-inner">
+    <div class="sell-grid">
+      <div class="sell-img"><img src="9.jfif" alt="Sell Property" loading="lazy"></div>
+      <div class="sell-content">
+        <div class="eyebrow" data-t="sell_ey">Sell With Us</div>
+        <h2 class="sec-title" data-t="sell_title">Reach Serious Buyers Using AI-Powered Marketing</h2>
+        <p class="sec-sub" data-t="sell_sub">List your property with Tanzania's most trusted platform. We handle everything from valuation to closing.</p>
+        <div class="sell-steps">
+          <div class="sell-step"><div class="ss-num">1</div><div class="ss-text" data-t="ss1" data-html="1"><strong>AI Valuation</strong> — Get an instant market value estimate</div></div>
+          <div class="sell-step"><div class="ss-num">2</div><div class="ss-text" data-t="ss2" data-html="1"><strong>Professional Listing</strong> — Premium listing with photos and brochure</div></div>
+          <div class="sell-step"><div class="ss-num">3</div><div class="ss-text" data-t="ss3" data-html="1"><strong>NextGen AI Markets It</strong> — AI matches your property to buyers 24/7</div></div>
+          <div class="sell-step"><div class="ss-num">4</div><div class="ss-text" data-t="ss4" data-html="1"><strong>Close the Deal</strong> — We handle negotiations, legal docs and transfer</div></div>
+        </div>
+        <div style="display:flex;gap:12px;flex-wrap:wrap">
+          <button class="btn-gold" onclick="openModal('sell')" data-t="sell_btn1">List My Property</button>
+          <button class="btn-outline" onclick="openNova('I want to sell my property. How does NEXT-GEN help me find buyers and get the best price?')" data-t="sell_btn2">Ask NextGen</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PARTNERS -->
+<div class="partners-bg"><div class="ptitle" data-t="partners_title">Trusted by Tanzania's Leading Financial Institutions</div><div class="prow"><span class="pname">CRDB Bank</span><span class="pname">NMB Bank</span><span class="pname">NCBA Bank</span><span class="pname">NBC</span><span class="pname">Stanbic Bank</span><span class="pname">Equity Bank</span><span class="pname">DTB</span></div></div>
+
+<!-- TESTIMONIALS -->
+<section style="background:var(--off-white)">
+  <div class="section-inner">
+    <div class="sec-hdr center"><div class="eyebrow" data-t="testi_ey">Client Stories</div><h2 class="sec-title" data-t="testi_title">What Our Clients Say</h2></div>
+    <div class="testi-grid">
+      <div class="testi-card"><div class="stars">★★★★★</div><div class="tq">"</div><p data-t="t1">NEXT-GEN helped me acquire a prime plot in Masaki through a bank auction. The process was completely transparent and the team was professional throughout.</p><div class="tauthor"><div class="tav">DM</div><div><div class="tan" data-t="t1a">David Mwangi</div><div class="tar" data-t="t1r">Property Investor, Nairobi</div></div></div></div>
+      <div class="testi-card"><div class="stars">★★★★★</div><div class="tq">"</div><p data-t="t2">We leased our commercial building through NEXT-GEN and found a premium tenant in 2 weeks. Their lease documentation and NextGen AI were exceptional.</p><div class="tauthor"><div class="tav">FH</div><div><div class="tan" data-t="t2a">Fatuma Hassan</div><div class="tar" data-t="t2r">Property Owner, Dar es Salaam</div></div></div></div>
+      <div class="testi-card"><div class="stars">★★★★★</div><div class="tq">"</div><p data-t="t3">The NextGen AI is remarkable. I described what I wanted in Kiswahili and it found me exactly the right property in Zanzibar within minutes.</p><div class="tauthor"><div class="tav">JK</div><div><div class="tan" data-t="t3a">John Kimaro</div><div class="tar" data-t="t3r">Developer, Arusha</div></div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-sec" id="contact"><div class="cta-bg"></div><div class="cta-inner"><h2 data-t="cta_title" data-html="1">Ready to Find Your Next <em>Property?</em></h2><p data-t="cta_sub">Join thousands of buyers, sellers, tenants, and investors who trust NEXT-GEN for their property needs in Tanzania.</p><div class="cta-btns"><button class="btn-primary" onclick="openModal('general')" data-t="cta_btn1">Browse Properties</button><button class="btn-gold" onclick="toggleNova()" data-t="cta_nova">Ask NextGen AI</button><button class="btn-outline" onclick="openModal('contact')" data-t="cta_btn2">Contact Us</button></div></div></section>
+
+<!-- RECENTLY LISTED -->
+<section id="recent" style="background:#fff">
+  <div class="section-inner">
+    <div class="sec-hdr split">
+      <div><div class="eyebrow">Recently Listed</div><h2 class="sec-title">New to Market</h2><p class="sec-sub">Fresh listings added to our portfolio — be the first to enquire.</p></div>
+      <button class="btn-primary" onclick="openModal('general')">View All</button>
+    </div>
+    <div class="listings-grid">
+      <div class="prop-card">
+        <div class="prop-img"><img src="3.jfif" alt="Mbezi Beach Plot" loading="lazy"><span class="prop-badge sale">For Sale</span><span style="position:absolute;bottom:12px;right:12px;background:#22C55E;color:#fff;font-size:9px;font-weight:700;padding:3px 8px;border-radius:4px;letter-spacing:.5px">NEW</span></div>
+        <div class="prop-info"><div class="prop-price">TZS 620M</div><div class="prop-title">Beachfront Plot — Mbezi Beach</div><div class="prop-loc"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>Mbezi Beach, Dar es Salaam</div><div class="prop-meta"><div class="meta-item">📐 800 sqm</div><div class="meta-item">🌊 Ocean Access</div><div class="meta-item">✅ Title Deed</div></div><div class="prop-actions"><a class="pa-btn prim" href="property/5" style="text-decoration:none">📋 View Details</a><button class="pa-btn" onclick="window.open('https://wa.me/255767109763?text=Mbezi%20Beach%20Plot%20TZS%20620M')">💬 WA</button></div></div>
+      </div>
+      <div class="prop-card">
+        <div class="prop-img"><img src="7.jfif" alt="Executive Villa" loading="lazy"><span class="prop-badge sale">For Sale</span><span style="position:absolute;bottom:12px;right:12px;background:#22C55E;color:#fff;font-size:9px;font-weight:700;padding:3px 8px;border-radius:4px;letter-spacing:.5px">NEW</span></div>
+        <div class="prop-info"><div class="prop-price">TZS 2.4B</div><div class="prop-title">Executive Villa — Oyster Bay</div><div class="prop-loc"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>Oyster Bay, Dar es Salaam</div><div class="prop-meta"><div class="meta-item">🛏 6 Bed</div><div class="meta-item">🌊 Ocean View</div><div class="meta-item">🏊 Pool</div></div><div class="prop-actions"><a class="pa-btn prim" href="property/2" style="text-decoration:none">📋 View Details</a><button class="pa-btn" onclick="window.open('https://wa.me/255767109763?text=Oyster%20Bay%20Villa%20TZS%202.4B')">💬 WA</button></div></div>
+      </div>
+      <div class="prop-card">
+        <div class="prop-img"><img src="4.jfif" alt="Farm Iringa" loading="lazy"><span class="prop-badge sale">For Sale</span><span style="position:absolute;bottom:12px;right:12px;background:#22C55E;color:#fff;font-size:9px;font-weight:700;padding:3px 8px;border-radius:4px;letter-spacing:.5px">NEW</span></div>
+        <div class="prop-info"><div class="prop-price">TZS 350M</div><div class="prop-title">Large Farm — Iringa Highlands</div><div class="prop-loc"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>Iringa Region</div><div class="prop-meta"><div class="meta-item">🌿 50 Acres</div><div class="meta-item">💧 Water Source</div><div class="meta-item">🚗 Road Access</div></div><div class="prop-actions"><a class="pa-btn prim" href="property/16" style="text-decoration:none">📋 View Details</a><button class="pa-btn" onclick="window.open('https://wa.me/255767109763?text=Iringa%20Farm%20TZS%20350M')">💬 WA</button></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SELL YOUR PROPERTY — ENHANCED -->
+<section id="list-property" style="background:var(--navy-dark);padding:92px 5%;position:relative;overflow:hidden">
+  <div style="position:absolute;inset:0;background-image:radial-gradient(circle at 5% 50%,rgba(233,30,140,.12) 0%,transparent 40%),radial-gradient(circle at 95% 20%,rgba(201,168,76,.08) 0%,transparent 40%);pointer-events:none"></div>
+  <div class="section-inner" style="position:relative;z-index:2">
+    <div class="sec-hdr center">
+      <div class="eyebrow" style="color:var(--gold)">List Your Property</div>
+      <h2 class="sec-title" style="color:#fff;max-width:700px;margin:0 auto 14px">Own Property? Let Tanzania's #1 Platform Sell It For You</h2>
+      <p class="sec-sub" style="color:rgba(255,255,255,.6);margin:0 auto 40px">Whether you want to sell, rent, or lease your property — NEXT-GEN gives it maximum visibility through AI-powered marketing, bank networks, and a qualified buyer database.</p>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:20px;margin-bottom:40px">
+      <div style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:16px;padding:28px;text-align:center;cursor:pointer;transition:border-color .25s" onmouseover="this.style.borderColor='rgba(233,30,140,.4)'" onmouseout="this.style.borderColor='rgba(255,255,255,.1)'" onclick="openModal('sell')">
+        <div style="font-size:36px;margin-bottom:12px">🏡</div>
+        <div style="font-size:15px;font-weight:700;color:#fff;margin-bottom:6px">Sell My Property</div>
+        <div style="font-size:12.5px;color:rgba(255,255,255,.5);line-height:1.6">List for outright sale. We handle valuation, marketing, and legal transfer.</div>
+      </div>
+      <div style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:16px;padding:28px;text-align:center;cursor:pointer;transition:border-color .25s" onmouseover="this.style.borderColor='rgba(233,30,140,.4)'" onmouseout="this.style.borderColor='rgba(255,255,255,.1)'" onclick="openModal('sell')">
+        <div style="font-size:36px;margin-bottom:12px">🔑</div>
+        <div style="font-size:15px;font-weight:700;color:#fff;margin-bottom:6px">Rent / Lease My Property</div>
+        <div style="font-size:12.5px;color:rgba(255,255,255,.5);line-height:1.6">Find qualified tenants. We screen tenants, prepare lease agreements, collect rent.</div>
+      </div>
+      <div style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:16px;padding:28px;text-align:center;cursor:pointer;transition:border-color .25s" onmouseover="this.style.borderColor='rgba(233,30,140,.4)'" onmouseout="this.style.borderColor='rgba(255,255,255,.1)'" onclick="openModal('sell')">
+        <div style="font-size:36px;margin-bottom:12px">🔨</div>
+        <div style="font-size:15px;font-weight:700;color:#fff;margin-bottom:6px">Submit for Auction</div>
+        <div style="font-size:12.5px;color:rgba(255,255,255,.5);line-height:1.6">Fast sale through our licensed auction network. Bank-backed bidder pool.</div>
+      </div>
+      <div style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:16px;padding:28px;text-align:center;cursor:pointer;transition:border-color .25s" onmouseover="this.style.borderColor='rgba(201,168,76,.4)'" onmouseout="this.style.borderColor='rgba(255,255,255,.1)'" onclick="openModal('general')">
+        <div style="font-size:36px;margin-bottom:12px">📊</div>
+        <div style="font-size:15px;font-weight:700;color:#fff;margin-bottom:6px">Get a Free Valuation</div>
+        <div style="font-size:12.5px;color:rgba(255,255,255,.5);line-height:1.6">Not sure what your property is worth? Get a certified market valuation from our team.</div>
+      </div>
+    </div>
+    <div style="text-align:center;display:flex;gap:14px;justify-content:center;flex-wrap:wrap">
+      <button class="btn-gold" onclick="openModal('sell')" style="font-size:15px;padding:15px 36px">List My Property Now →</button>
+      <button class="btn-outline" onclick="openModal('consultation')" style="color:#fff;border-color:rgba(255,255,255,.35);font-size:15px;padding:15px 36px">📅 Book a Free Consultation</button>
+    </div>
+  </div>
+</section>
+
+<!-- BLOG / INSIGHTS -->
+<section id="blog" style="background:var(--off-white);padding:92px 5%">
+  <div class="section-inner">
+    <div class="sec-hdr split">
+      <div>
+        <div class="eyebrow">Blog & Market Insights</div>
+        <h2 class="sec-title">Tanzania Real Estate Intelligence</h2>
+        <p class="sec-sub">Expert guides for investors, buyers, and developers targeting Tanzania and Zanzibar.</p>
+      </div>
+      <button class="btn-primary" onclick="openNova('What are the latest real estate trends and investment opportunities in Tanzania and Zanzibar in 2026?')">Ask NextGen AI for Insights</button>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:24px">
+      <div style="background:#fff;border-radius:18px;overflow:hidden;border:1px solid var(--gray-light);transition:all .28s;cursor:pointer" onmouseover="this.style.transform='translateY(-5px)';this.style.boxShadow='0 20px 60px rgba(13,18,64,.1)'" onmouseout="this.style.transform='translateY(0)';this.style.boxShadow='none'" onclick="openNova('Tell me about the best areas to invest in Zanzibar in 2026, which areas have the highest ROI?')">
+        <div style="height:200px;overflow:hidden"><img src="1.jfif" alt="Zanzibar Investment" style="width:100%;height:100%;object-fit:cover" loading="lazy"></div>
+        <div style="padding:24px">
+          <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px"><span style="background:rgba(233,30,140,.08);color:var(--magenta);font-size:10px;font-weight:700;padding:3px 9px;border-radius:4px;text-transform:uppercase;letter-spacing:.5px">Investment</span><span style="font-size:11px;color:var(--text-muted)">June 2026</span></div>
+          <h3 style="font-family:'Playfair Display',serif;font-size:19px;font-weight:700;color:var(--navy);margin-bottom:8px;line-height:1.25">Best Areas to Invest in Zanzibar 2026</h3>
+          <p style="font-size:13px;color:var(--text-muted);line-height:1.7;margin-bottom:16px">From Nungwi to Paje — which beachfront zones offer the highest capital appreciation and rental yield for international investors?</p>
+          <div style="display:flex;align-items:center;justify-content:space-between"><span style="font-size:12px;color:var(--text-muted)">✍️ NEXT-GEN Research</span><span style="color:var(--magenta);font-size:12.5px;font-weight:600">Read More →</span></div>
+        </div>
+      </div>
+      <div style="background:#fff;border-radius:18px;overflow:hidden;border:1px solid var(--gray-light);transition:all .28s;cursor:pointer" onmouseover="this.style.transform='translateY(-5px)';this.style.boxShadow='0 20px 60px rgba(13,18,64,.1)'" onmouseout="this.style.transform='translateY(0)';this.style.boxShadow='none'" onclick="openNova('How can a foreigner buy property in Tanzania? What are the legal steps, restrictions, and best practices?')">
+        <div style="height:200px;overflow:hidden"><img src="10.jfif" alt="Foreign Buyers" style="width:100%;height:100%;object-fit:cover" loading="lazy"></div>
+        <div style="padding:24px">
+          <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px"><span style="background:rgba(59,130,246,.08);color:#3B82F6;font-size:10px;font-weight:700;padding:3px 9px;border-radius:4px;text-transform:uppercase;letter-spacing:.5px">Legal Guide</span><span style="font-size:11px;color:var(--text-muted)">May 2026</span></div>
+          <h3 style="font-family:'Playfair Display',serif;font-size:19px;font-weight:700;color:var(--navy);margin-bottom:8px;line-height:1.25">How Foreigners Buy Property in Tanzania</h3>
+          <p style="font-size:13px;color:var(--text-muted);line-height:1.7;margin-bottom:16px">Step-by-step guide to land rights for non-citizens, derivative right of occupancy, TIC registration, and ownership structures.</p>
+          <div style="display:flex;align-items:center;justify-content:space-between"><span style="font-size:12px;color:var(--text-muted)">✍️ NEXT-GEN Legal Team</span><span style="color:var(--magenta);font-size:12.5px;font-weight:600">Read More →</span></div>
+        </div>
+      </div>
+      <div style="background:#fff;border-radius:18px;overflow:hidden;border:1px solid var(--gray-light);transition:all .28s;cursor:pointer" onmouseover="this.style.transform='translateY(-5px)';this.style.boxShadow='0 20px 60px rgba(13,18,64,.1)'" onmouseout="this.style.transform='translateY(0)';this.style.boxShadow='none'" onclick="openNova('What is the hotel investment opportunity in Zanzibar and East Africa? What are the ROI expectations and risks?')">
+        <div style="height:200px;overflow:hidden"><img src="14.jfif" alt="Hotel Investment" style="width:100%;height:100%;object-fit:cover" loading="lazy"></div>
+        <div style="padding:24px">
+          <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px"><span style="background:rgba(201,168,76,.1);color:#8A6A00;font-size:10px;font-weight:700;padding:3px 9px;border-radius:4px;text-transform:uppercase;letter-spacing:.5px">Hospitality</span><span style="font-size:11px;color:var(--text-muted)">April 2026</span></div>
+          <h3 style="font-family:'Playfair Display',serif;font-size:19px;font-weight:700;color:var(--navy);margin-bottom:8px;line-height:1.25">Hotel Investment Guide: East Africa 2026</h3>
+          <p style="font-size:13px;color:var(--text-muted);line-height:1.7;margin-bottom:16px">Why savvy investors are targeting Zanzibar and Dar es Salaam for hospitality assets — yields of 14–22% and growing Chinese & European tourism.</p>
+          <div style="display:flex;align-items:center;justify-content:space-between"><span style="font-size:12px;color:var(--text-muted)">✍️ NEXT-GEN Investments</span><span style="color:var(--magenta);font-size:12.5px;font-weight:600">Read More →</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer><div class="footer-inner">
+  <div class="footer-grid">
+    <div class="footer-brand"><div class="footer-logo-row"><img src="Next-Gen_Auctioneer_LOGO.jpg" alt="NEXT-GEN" onerror="this.style.display='none'"><div><div class="fb-name">NEXT-GEN</div><div class="fb-sub">Auctioneer + Realtor</div></div></div><p data-t="footer_about">Tanzania's premier auctioneer and real estate platform. Connecting buyers, sellers, tenants, and investors with verified properties across Tanzania and Zanzibar.</p><div class="socials"><button class="social"><svg viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg></button><button class="social"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></button><button class="social" onclick="window.open('https://wa.me/255767109763')"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg></button></div></div>
+    <div class="fcol"><h4 data-t="f_quick">Quick Links</h4><ul><li><a href="#home">Home</a></li><li><a href="#listings">Listings</a></li><li><a href="#lease">Leasing</a></li><li><a href="#auctions">Auctions</a></li><li><a href="#invest">Investment</a></li><li><a href="#sell">Sell Property</a></li></ul></div>
+    <div class="fcol"><h4 data-t="f_svc">Services</h4><ul><li><a href="#services">Property Sales</a></li><li><a href="#lease">Leasing</a></li><li><a href="#services">Valuation</a></li><li><a href="#services">Management</a></li><li><a href="#auctions">Bank Auctions</a></li><li><a href="#services">Land Clearance</a></li></ul></div>
+    <div class="fcol"><h4 data-t="f_contact">Contact</h4>
+      <div class="fcontact"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg><span>Ali Hassan Mwinyi Rd, Kisutu, 3rd Floor, Haidary Plaza, P.O. Box 77139, Dar es Salaam</span></div>
+      <div class="fcontact"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 012 2.18 2 2 0 014 0h3a2 2 0 012 1.72c.127.96.361 1.9.7 2.81a2 2 0 01-.45 2.11L8.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.9.339 1.85.573 2.81.7A2 2 0 0122 15z"/></svg><span>+255 659 166 440 | +255 767 109 763</span></div>
+      <div class="fcontact"><svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg><span>nextgentanzania@gmail.com</span></div>
+      <div class="fcontact"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg><span>WhatsApp: +255 767 109 763</span></div>
+    </div>
+  </div>
+  <div class="footer-bottom"><p data-t="f_copy">© 2025 NEXT-GEN Auctioneer + Realtor. All rights reserved.</p><div class="fbadges"><span class="fbadge" data-t="f_lic">Licensed Auctioneer</span><span class="fbadge">BRELA Registered</span><span class="fbadge">PWA Ready</span></div></div>
+</div></footer>
+
+<!-- NEXTGEN AI FLOATING BOT -->
+<div id="nova-fab">
+  <div id="nova-bubble" onclick="toggleNova()">🏡 <strong>NextGen AI</strong> — How can I help you?</div>
+  <button id="nova-btn" onclick="toggleNova()">🤖<div class="notif"></div></button>
+</div>
+<div id="nova-panel">
+  <div class="nova-hdr">
+    <div class="nova-av">🏠<div class="on"></div></div>
+    <div class="nova-hdr-info"><div class="hn">NextGen AI</div><div class="hs">NextGen AI · Online now</div></div>
+    <div class="nova-hdr-right">
+      <div class="nova-lang-pills"><div class="nlp active" onclick="setNovaLang('en',this)">EN</div><div class="nlp" onclick="setNovaLang('sw',this)">SW</div></div>
+      <button class="nova-close" onclick="toggleNova()">×</button>
+    </div>
+  </div>
+  <div class="nova-chips" id="novaChips">
+    <div class="nchip" onclick="novaChip(this)">🏡 Luxury villas</div>
+    <div class="nchip" onclick="novaChip(this)">🏦 Bank auctions</div>
+    <div class="nchip" onclick="novaChip(this)">📋 Lease office</div>
+    <div class="nchip" onclick="novaChip(this)">🏖️ Zanzibar</div>
+    <div class="nchip" onclick="novaChip(this)">💰 Under 500M</div>
+    <div class="nchip" onclick="novaChip(this)">📊 Investment</div>
+    <div class="nchip" onclick="novaChip(this)">🌾 Farm land</div>
+  </div>
+  <div class="nova-msgs" id="novaMsgs"></div>
+  <div class="nova-inp-area">
+    <div class="nova-inp-wrap"><textarea id="novaTxt" rows="1" placeholder="Ask about properties, leasing, auctions..." onkeydown="novaKey(event)" oninput="novaResize(this)"></textarea></div>
+    <button id="novaSend" onclick="novaSend()"><svg viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg></button>
+  </div>
+  <div class="nova-powered">Powered by NextGen AI × Claude</div>
+</div>
+
+<!-- WhatsApp -->
+<a id="wa-btn" href="https://wa.me/255767109763?text=Hello NEXT-GEN, I am interested in your properties." target="_blank"><svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></a>
+
+<!-- MODAL -->
+<div class="modal-ov" id="modalOv" onclick="closeModal(event)"><div class="modal-box"><button class="modal-x" onclick="closeModal()">×</button><div id="modalContent"></div></div></div>
+<script>
+// ── TRANSLATIONS ──
+var T={
+en:{nav_home:'Home',nav_list:'Listings',nav_lease:'Leasing',nav_auc:'Auctions',nav_svc:'Services',nav_sell:'Sell',nav_contact:'Contact',nav_cta:'Browse Properties',
+hero_tag:"Tanzania's Premier Property Platform",hero_h1:'Find Extraordinary Property<br>Across <em>Tanzania & Zanzibar</em>',hero_sub:'AI-powered property intelligence for buyers, sellers, investors, and tenants. From beachfront villas to bank auction assets.',hero_cta1:'Browse Properties',hero_cta2:'Bank Auctions',hero_cta3:'Leasing',
+s_prop:'Properties Listed',s_assets:'Assets Managed',s_banks:'Partner Banks',s_sat:'Client Satisfaction',
+tab_buy:'🏠 Buy',tab_rent:'🔑 Rent',tab_lease:'📋 Lease',tab_auc:'🔨 Auction',tab_inv:'📈 Invest',tab_com:'🏢 Commercial',
+sf_type:'Property Type',sf_loc:'Location',sf_price:'Budget',sf_beds:'Bedrooms',sf_btn:'Search',
+inv_strip:'Have <strong>special requirements?</strong> Land clearing, bulk investment, demolition, or corporate leasing?',inv_btn:'Submit Special Request',
+feat_ey:'Featured Listings',feat_title:'Prime Properties in Tanzania',view_all:'View All Properties',
+cat_ey:'Browse by Category',cat_title:'Every Type of Property',
+lease_ey:'Property Leasing',lease_title:'Premium Properties for Lease Across Tanzania',lease_sub:'From corporate offices in Dar es Salaam to beachfront spaces in Zanzibar — we match you with the right lease.',
+lf1t:'Verified Landlords Only',lf1p:'Every property and landlord verified before listing',lf2t:'Legal Lease Agreements',lf2p:'We prepare and review all lease documentation',lf3t:'Fully Managed Options',lf3p:'Optional full property management throughout lease',lf4t:'Commercial & Residential',lf4p:'Offices, warehouses, retail, homes, industrial',
+lease_btn1:'Browse Lease Listings',lease_btn2:'Ask NextGen',
+svc_ey:'Our Services',svc_title:'Complete Property Solutions',svc_sub:'From private sales to bank auctions — end-to-end services across Tanzania.',
+s1t:'Property Sales',s1p:'Buy and sell residential, commercial, and agricultural land with verified documentation.',s2t:'Bank Auctions',s2p:'Access repossessed properties from CRDB, NMB, NCBA, NBC and partner banks.',s3t:'Property Valuation',s3p:'Certified valuation reports for mortgage, insurance, taxation, and investment.',s4t:'Auctioneering',s4p:'Licensed auctioneer services for estates, courts, government, and corporate assets.',s5t:'Investment Advisory',s5p:'Portfolio analysis, ROI projections, and strategic advice for investors.',s6t:'Property Management',s6p:'Full management: tenant sourcing, rent collection, maintenance, and monthly reporting.',s7t:'Property Leasing',s7p:'Long-term and short-term leasing for offices, warehouses, retail, residences and industrial.',s8t:'Land Clearance',s8p:'Coordinating demolition, land clearance, site preparation, and development readiness.',learn_more:'Learn more',
+auc_ey:'Live Auctions',auc_title:'Bank Repossessed Properties',auc_sub:'Verified properties from partner banks. Register to bid and download official tender documents.',closes_in:'Closes in',
+hm_title:'Tanzania Hot Zones 2025–2026',hm_sub:'AI-analyzed investment hotspots with highest ROI potential across Tanzania.',
+w_prop:'Properties Sold',w_banks:'Bank Partners',w_sat:'Client Satisfaction',w_deals:'Deals Closed',licensed_by:'Licensed & Regulated by',why_ey:'Why NEXT-GEN',why_title:"Tanzania's Most Trusted Property Partner",w1t:'Licensed & Regulated',w1p:"Fully licensed auctioneers and real estate brokers under Tanzania's regulatory framework.",w2t:'Verified Properties Only',w2p:'Every listing undergoes title deed verification, survey checks, and ownership confirmation.',w3t:'NextGen AI — 24/7 Advisor',w3p:'Our AI property advisor matches buyers and tenants with the perfect property instantly, day or night.',w4t:'End-to-End Support',w4p:'Legal documentation, payment facilitation, and post-sale or post-lease transfer by our team.',
+sell_ey:'Sell With Us',sell_title:'Reach Serious Buyers Using AI-Powered Marketing',sell_sub:"List your property with Tanzania's most trusted platform. We handle everything from valuation to closing.",ss1:'<strong>AI Valuation</strong> — Get an instant market value estimate',ss2:'<strong>Professional Listing</strong> — Premium listing with photos and brochure',ss3:'<strong>NextGen AI Markets It</strong> — AI matches your property to buyers 24/7',ss4:'<strong>Close the Deal</strong> — We handle negotiations, legal docs and transfer',sell_btn1:'List My Property',sell_btn2:'Ask NextGen',
+partners_title:"Trusted by Tanzania's Leading Financial Institutions",
+testi_ey:'Client Stories',testi_title:'What Our Clients Say',
+t1:'NEXT-GEN helped me acquire a prime plot in Masaki through a bank auction. The process was completely transparent and the team was professional throughout.',t1a:'David Mwangi',t1r:'Property Investor, Nairobi',
+t2:'We leased our commercial building through NEXT-GEN and found a premium tenant in 2 weeks. Their lease documentation and NextGen AI were exceptional.',t2a:'Fatuma Hassan',t2r:'Property Owner, Dar es Salaam',
+t3:'The NextGen AI is remarkable. I described what I wanted in Kiswahili and it found me exactly the right property in Zanzibar within minutes.',t3a:'John Kimaro',t3r:'Developer, Arusha',
+cta_title:'Ready to Find Your Next <em>Property?</em>',cta_sub:'Join thousands of buyers, sellers, tenants, and investors who trust NEXT-GEN for their property needs in Tanzania.',cta_btn1:'Browse Properties',cta_nova:'Ask NextGen AI',cta_btn2:'Contact Us',
+footer_about:"Tanzania's premier auctioneer and real estate platform. Connecting buyers, sellers, tenants, and investors across Tanzania and Zanzibar.",f_quick:'Quick Links',f_svc:'Services',f_contact:'Contact',f_copy:'© 2025 NEXT-GEN Auctioneer + Realtor. All rights reserved.',f_lic:'Licensed Auctioneer'},
+sw:{nav_home:'Nyumbani',nav_list:'Orodha',nav_lease:'Kukodisha',nav_auc:'Mnada',nav_svc:'Huduma',nav_sell:'Uza',nav_contact:'Wasiliana',nav_cta:'Tazama Mali',
+hero_tag:'Jukwaa Bora la Mali Isiyohamia Tanzania',hero_h1:'Pata Mali ya Kipekee<br>Tanzania na <em>Zanzibar</em>',hero_sub:'Akili ya AI kwa wanunuzi, wauzaji, wawekezaji, na wapangaji. Kuanzia villa za pwani hadi mali za mnada wa benki.',hero_cta1:'Tazama Mali',hero_cta2:'Mnada wa Benki',hero_cta3:'Kukodisha',
+s_prop:'Mali Zilizoorodheshwa',s_assets:'Mali Zilizosimamiwa',s_banks:'Benki Washirika',s_sat:'Ridhaa ya Wateja',
+tab_buy:'🏠 Nunua',tab_rent:'🔑 Panga',tab_lease:'📋 Kodisha',tab_auc:'🔨 Mnada',tab_inv:'📈 Wekeza',tab_com:'🏢 Biashara',
+sf_type:'Aina ya Mali',sf_loc:'Eneo',sf_price:'Bajeti',sf_beds:'Vyumba',sf_btn:'Tafuta',
+inv_strip:'Una <strong>mahitaji maalum?</strong> Uvunjaji wa ardhi, uwekezaji mkubwa, au kukodisha kwa biashara?',inv_btn:'Wasilisha Ombi Maalum',
+feat_ey:'Orodha Maarufu',feat_title:'Mali Bora Tanzania',view_all:'Tazama Mali Zote',
+cat_ey:'Tazama kwa Aina',cat_title:'Kila Aina ya Mali',
+lease_ey:'Kukodisha Mali',lease_title:'Mali Bora za Kukodisha Tanzania Yote',lease_sub:'Kuanzia ofisi Dar es Salaam hadi nafasi za pwani Zanzibar — NEXT-GEN inakupata kukodisha sahihi.',
+lf1t:'Wamiliki Waliohakikishwa',lf1p:'Kila mali na mmiliki wanakaguliwa kabla ya kuorodheshwa',lf2t:'Mikataba ya Kisheria',lf2p:'Tunaandaa na kukagua nyaraka zote za kukodisha',lf3t:'Usimamizi Kamili',lf3p:'Chaguo la usimamizi kamili wa mali wakati wa kukodisha',lf4t:'Biashara na Makazi',lf4p:'Ofisi, ghala, maduka, nyumba, na viwanda',
+lease_btn1:'Tazama Orodha za Kukodisha',lease_btn2:'Uliza NextGen',
+svc_ey:'Huduma Zetu',svc_title:'Suluhisho Kamili za Mali',svc_sub:'Kuanzia mauzo ya kibinafsi hadi mnada wa benki — huduma kamili Tanzania.',
+s1t:'Mauzo ya Mali',s1p:'Nunua na uuze mali kwa nyaraka zilizothibitishwa.',s2t:'Mnada wa Benki',s2p:'Pata mali kutoka CRDB, NMB, NCBA, NBC na benki nyingine.',s3t:'Tathmini ya Mali',s3p:'Ripoti za tathmini zilizoidhinishwa kwa mikopo, bima, na kodi.',s4t:'Uuzaji wa Mnada',s4p:'Huduma za mzabuni kwa mali za familia, mahakama na serikali.',s5t:'Ushauri wa Uwekezaji',s5p:'Uchambuzi wa portfolio na ushauri wa kimkakati.',s6t:'Usimamizi wa Mali',s6p:'Usimamizi kamili ikiwemo kupata wapangaji na matengenezo.',s7t:'Kukodisha Mali',s7p:'Kukodisha muda mfupi na mrefu kwa ofisi, ghala, maduka na nyumba.',s8t:'Uvunjaji wa Ardhi',s8p:'Uratibu wa uvunjaji, uandaaji wa eneo, na utayarishaji wa ujenzi.',learn_more:'Jifunze zaidi',
+auc_ey:'Mnada wa Sasa',auc_title:'Mali Zilizorudishwa na Benki',auc_sub:'Mali zilizothibitishwa kutoka benki washirika. Jiandikishe kupiga mnada.',closes_in:'Mnada unafungwa',
+hm_title:'Maeneo Bora ya Uwekezaji 2025–2026',hm_sub:'Maeneo yaliyochambuliwa na AI yenye uwezo mkubwa wa faida Tanzania.',
+w_prop:'Mali Zilizouzwa',w_banks:'Benki Washirika',w_sat:'Ridhaa ya Wateja',w_deals:'Miamala Iliyofungwa',licensed_by:'Imeidhinishwa na',why_ey:'Kwa Nini NEXT-GEN',why_title:'Mshirika wa Kuaminika Zaidi Tanzania',w1t:'Imeidhinishwa',w1p:'Wazabuni na mawakala wa mali waliopata leseni chini ya mfumo wa udhibiti wa Tanzania.',w2t:'Mali Zilizothibitishwa Tu',w2p:'Kila orodha inapitia uthibitisho wa hati ya umiliki na ukaguzi wa nyaraka.',w3t:'NextGen AI — Mshauri Saa 24/7',w3p:'AI yetu inaunganisha wanunuzi na wapangaji na mali sahihi mara moja, usiku na mchana.',w4t:'Msaada Kamili',w4p:'Nyaraka za kisheria, malipo, na uhamishaji baada ya mauzo au kukodisha.',
+sell_ey:'Uza Nawe',sell_title:'Fikia Wanunuzi kwa Masoko ya AI',sell_sub:'Orodhesha mali yako kwenye jukwaa linaloaminika zaidi Tanzania. Tunashughulikia kila kitu.',ss1:'<strong>Tathmini ya AI</strong> — Pata thamani ya soko ya mali yako mara moja',ss2:'<strong>Orodha ya Kitaalamu</strong> — Orodha ya hali ya juu na picha na brochure',ss3:'<strong>NextGen AI Inaiuza</strong> — AI inaunganisha mali yako na wanunuzi saa 24/7',ss4:'<strong>Funga Mkataba</strong> — Tunashughulikia mazungumzo, nyaraka, na uhamishaji',sell_btn1:'Orodhesha Mali Yangu',sell_btn2:'Uliza NextGen',
+partners_title:'Inaaminika na Taasisi Bora za Fedha Tanzania',
+testi_ey:'Hadithi za Wateja',testi_title:'Wateja Wetu Wanasema Nini',
+t1:'NEXT-GEN walinisaidia kupata kiwanja bora Masaki kupitia mnada wa benki. Mchakato ulikuwa uwazi na timu ilikuwa ya kitaalamu.',t1a:'David Mwangi',t1r:'Mwekezaji wa Mali, Nairobi',
+t2:'Tulipanga jengo letu kupitia NEXT-GEN na tulipata mpangaji bora ndani ya wiki 2. NextGen AI na nyaraka zao zilikuwa bora sana.',t2a:'Fatuma Hassan',t2r:'Mmiliki wa Mali, Dar es Salaam',
+t3:'NextGen AI ni ya ajabu. Nilielezea nilichotaka kwa Kiswahili na ilinipata mali sahihi Zanzibar ndani ya dakika chache.',t3a:'John Kimaro',t3r:'Msanidi, Arusha',
+cta_title:'Uko Tayari Kupata <em>Mali Yako?</em>',cta_sub:'Jiunge na maelfu ya wanunuzi, wauzaji, wapangaji, na wawekezaji wanaomwamini NEXT-GEN.',cta_btn1:'Tazama Mali',cta_nova:'Uliza NextGen AI',cta_btn2:'Wasiliana Nasi',
+footer_about:'Jukwaa bora la mali isiyohamia Tanzania. Tunaunganisha wanunuzi, wauzaji, wapangaji, na wawekezaji.',f_quick:'Viungo vya Haraka',f_svc:'Huduma',f_contact:'Mawasiliano',f_copy:'© 2025 NEXT-GEN Auctioneer + Realtor. Haki zote zimehifadhiwa.',f_lic:'Mzabuni Aliyeidhinishwa'}
+};
+
+var lang='en';
+function setLang(l,btn){lang=l;document.querySelectorAll('.lang-btn').forEach(b=>b.classList.remove('active'));if(btn)btn.classList.add('active');renderT();setNovaLang(l)}
+function renderT(){document.querySelectorAll('[data-t]').forEach(el=>{var k=el.dataset.t,v=T[lang][k];if(!v)return;if(el.dataset.html==='1')el.innerHTML=v;else el.textContent=v})}
+
+// ── HERO SLIDESHOW ──
+var slide=0,slides=document.querySelectorAll('.hero-slide'),hdots=document.querySelectorAll('.hdot');
+function goSlide(n,btn){
+  slides[slide].classList.remove('active');hdots[slide].classList.remove('active');
+  slide=n;slides[slide].classList.add('active');hdots[slide].classList.add('active');
+}
+setInterval(function(){goSlide((slide+1)%slides.length)},5000);
+
+// ── NAV SCROLL ──
+window.addEventListener('scroll',function(){document.getElementById('mainNav').classList.toggle('scrolled',window.scrollY>60)});
+
+// ── SEARCH TABS ──
+function setTab(el){document.querySelectorAll('.stab').forEach(t=>t.classList.remove('active'));el.classList.add('active')}
+function aiSearch(){
+  var t=document.getElementById('aiTxt').value.trim();
+  if(!t)return;
+  document.getElementById('aiTxt').value='';
+  // Open NextGen AI panel and send the search query through CF API
+  openNova(t);
+}
+function toggleMobile(){document.getElementById('mobileMenu').classList.toggle('open')}
+
+// ── AUCTION TIMERS ──
+function updateTimers(){
+  [['d1','h1','m1',14,6,32],['d2','h2','m2',7,14,18]].forEach(function(x){
+    var d=document.getElementById(x[0]);if(!d)return;
+    d.textContent=String(x[3]).padStart(2,'0');
+    document.getElementById(x[1]).textContent=String(x[4]).padStart(2,'0');
+    document.getElementById(x[2]).textContent=String(x[5]).padStart(2,'0');
+  });
+}
+updateTimers();
+
+// ── NextGen AI ENGINE ──
+var PROPS=[
+  {id:1,title:"Luxury Villa — Masaki",price:"TZS 1.8B",loc:"Masaki, Dar es Salaam",type:"Villa",beds:5,baths:4,sqm:650,status:"For Sale",tags:["Pool","Furnished","Garden"]},
+  {id:2,title:"Executive Villa — Oyster Bay",price:"TZS 2.4B",loc:"Oyster Bay, Dar es Salaam",type:"Villa",beds:6,sqm:820,status:"For Sale",tags:["Ocean View","Pool","Guest House"]},
+  {id:3,title:"Modern Apartment — Mikocheni",price:"TZS 280M",loc:"Mikocheni, Dar es Salaam",type:"Apartment",beds:3,sqm:180,status:"For Sale",tags:["Secure","Parking","New Build"]},
+  {id:4,title:"Commercial Plot — CBD Kisutu",price:"TZS 850M",loc:"Kisutu, Dar es Salaam",type:"Plot",sqm:2400,status:"For Sale",tags:["Title Deed","CBD","Corner Plot"]},
+  {id:5,title:"Beachfront Plot — Mbezi Beach",price:"TZS 620M",loc:"Mbezi Beach, Dar es Salaam",type:"Plot",sqm:800,status:"For Sale",tags:["Ocean Access","Surveyed","Title Deed"]},
+  {id:6,title:"Affordable Plot — Kigamboni",price:"TZS 95M",loc:"Kigamboni, Dar es Salaam",type:"Plot",sqm:500,status:"For Sale",tags:["Growing Area","Title Deed"]},
+  {id:7,title:"Edible Oil Factory — Dodoma",price:"TZS 14B",loc:"Dodoma Industrial Zone",type:"Factory",sqm:22000,status:"Bank Auction",tags:["CRDB Bank","5.2 Acres","Fully Equipped"],auction:true},
+  {id:8,title:"Beachfront Resort — Dar",price:"TZS 3.2B",loc:"Dar es Salaam Coast",type:"Resort",units:12,status:"Bank Auction",tags:["NMB Bank","12 Units","0.8 Acres"],auction:true},
+  {id:9,title:"Agricultural Farm — Morogoro",price:"TZS 180M",loc:"Morogoro Region",type:"Farm",sqm:120000,status:"For Sale",tags:["30 Acres","Water Source","Fertile Soil"]},
+  {id:10,title:"Boutique Hotel — Nungwi",price:"USD 1.2M",loc:"Nungwi, Zanzibar",type:"Hotel",beds:20,status:"For Sale",tags:["Beachfront","Licensed","Revenue Generating"]},
+  {id:11,title:"Beachfront Plot — Zanzibar",price:"USD 850K",loc:"Nungwi, Zanzibar",type:"Plot",sqm:3200,status:"For Sale",tags:["Direct Beachfront","Title Deed","Ocean View"]},
+  {id:12,title:"Corporate Office — Upanga",price:"TZS 12M/mo",loc:"Upanga, Dar es Salaam",type:"Office Lease",sqm:1200,status:"For Lease",tags:["3 Floors","Parking","Secure"],lease:true},
+  {id:13,title:"Executive Villa — Mbezi Rental",price:"TZS 5M/mo",loc:"Mbezi Beach, Dar es Salaam",type:"House Rental",beds:4,status:"For Rent",tags:["Pool","Garden","Furnished"],lease:true},
+  {id:14,title:"Retail Space — Masaki",price:"TZS 8M/mo",loc:"Masaki, Dar es Salaam",type:"Retail Lease",sqm:300,status:"For Lease",tags:["High Traffic","Parking","Premium Area"],lease:true},
+  {id:15,title:"Warehouse Complex — Ubungo",price:"TZS 22M/mo",loc:"Ubungo, Dar es Salaam",type:"Warehouse Lease",sqm:3000,status:"For Lease",tags:["Industrial","Loading Bay","Security"],lease:true},
+  {id:16,title:"Large Farm — Iringa",price:"TZS 350M",loc:"Iringa Region",type:"Farm",sqm:200000,status:"For Sale",tags:["50 Acres","Water Source","Road Access"]},
+  {id:17,title:"Starter Plot — Mbagala",price:"TZS 45M",loc:"Mbagala, Dar es Salaam",type:"Plot",sqm:400,status:"For Sale",tags:["Affordable","Surveyed","Near Road"]}
+];
+
+var NG_SYS='You are NextGen AI, the Property Advisor for NEXT-GEN Auctioneer + Realtor — Tanzania\'s premier real estate and auctioneering company.\n\nCOMPANY:\n- NEXT-GEN Auctioneer + Realtor (Next-Gen Holdings Company Limited)\n- Head Office: Ali Hassan Mwinyi Road, Kisutu, 3rd Floor, Haidary Plaza, P.O. Box 77139, Dar es Salaam\n- Email: nextgentanzania@gmail.com | Phone: +255 659 166 440 / +255 767 109 763\n- WhatsApp: +255 767 109 763 | BRELA registered, Licensed Auctioneer\n\nYOUR CAPABILITIES:\n1. Help clients BUY properties\n2. Help clients RENT or LEASE (residential & commercial)\n3. Help find BANK AUCTION properties — register, bid process\n4. Guide INVESTORS on best areas in Tanzania\n5. Help SELLERS list and market their property\n6. Answer questions about LEASING process and legal agreements\n7. Give Tanzania real estate MARKET insights\n\nALWAYS respond in the SAME LANGUAGE the user writes in (English or Kiswahili).\n\nAVAILABLE PROPERTIES:\n'+JSON.stringify(PROPS)+'\n\nWhen recommending specific properties, add this EXACTLY at the end of your response:\nRECOMMENDATIONS:{"ids":[1,2,3]}\nOnly add when recommending from the list above. Include 1-3 best matches only.\n\nLEASING: NEXT-GEN handles residential rentals + long-term commercial leases. We verify landlords, prepare legal documents, offer managed property service.\n\nAUCTIONS: Partner banks: CRDB, NMB, NCBA, NBC, Stanbic, Equity, DTB. Bidders must register with ID + deposit. Major current: Edible Oil Factory Dodoma TZS 14B (CRDB), Resort Dar TZS 3.2B (NMB).\n\nTONE: Professional, warm, knowledgeable. Keep responses concise and actionable. Always end with a clear next step.';
+
+var novaHistory=[],novaLoading=false,novaPanelOpen=false,ngLangMode='en',novaWelcomed=false;
+
+function setNovaLang(l,el){
+  ngLangMode=l;
+  if(el){document.querySelectorAll('.nlp').forEach(p=>p.classList.remove('active'));el.classList.add('active')}
+  var sw=['🏡 Villa za kifahari','🏦 Mnada wa benki','📋 Kodisha ofisi','🏖️ Zanzibar','💰 Chini 500M','📊 Uwekezaji','🌾 Ardhi ya kilimo'];
+  var en=['🏡 Luxury villas','🏦 Bank auctions','📋 Lease office','🏖️ Zanzibar','💰 Under 500M','📊 Investment','🌾 Farm land'];
+  document.querySelectorAll('.nchip').forEach(function(c,i){c.textContent=l==='sw'?(sw[i]||c.textContent):(en[i]||c.textContent)});
+  document.getElementById('novaTxt').placeholder=l==='sw'?'Uliza kuhusu mali, kukodisha, mnada...':'Ask about properties, leasing, auctions...';
+}
+
+function toggleNova(){
+  novaPanelOpen=!novaPanelOpen;
+  document.getElementById('nova-panel').classList.toggle('open',novaPanelOpen);
+  document.getElementById('nova-bubble').style.display='none';
+  if(novaPanelOpen&&!novaWelcomed){novaWelcomed=true;setTimeout(novaWelcome,400)}
+}
+
+function openNova(msg){
+  if(!novaPanelOpen)toggleNova();
+  if(msg)setTimeout(function(){novaSendMsg(msg)},500);
+}
+
+function novaWelcome(){
+  var msgs = document.getElementById('novaMsgs');
+
+  // Main welcome message
+  if(ngLangMode==='sw'){
+    addNovaBotMsg('Karibu NEXT-GEN! 🏡\nMimi ni NextGen AI, mshauri wako wa mali.\n\nNinaweza kukusaidiaje leo?',[]);
+  } else {
+    addNovaBotMsg('Hello! Welcome to NEXT-GEN Auctioneer + Realtor! 🏡\nI\'m NextGen AI, your personal property advisor.\n\nHow can I help you today?',[]);
+  }
+
+  // Quick option buttons
+  setTimeout(function(){
+    var m = document.getElementById('novaMsgs');
+    var d = document.createElement('div');
+    d.className = 'nmsg bot';
+    var opts = ngLangMode==='sw' ? [
+      {icon:'🛒', label:'Nataka Kununua', msg:'Nataka kununua mali. Nipe chaguzi.'},
+      {icon:'🔑', label:'Nataka Kukodi / Kupanga', msg:'Nataka kukodi au kupanga nyumba au ofisi.'},
+      {icon:'💼', label:'Nataka Kuuza/Kuorodhesha', msg:'Ninataka kuorodhesha mali yangu kwa mauzo au kukodisha.'},
+      {icon:'📈', label:'Uwekezaji', msg:'Ninataka kuelewa fursa za uwekezaji Tanzania.'},
+      {icon:'🔨', label:'Mnada wa Benki', msg:'Niambie kuhusu mali za mnada wa benki.'},
+    ] : [
+      {icon:'🛒', label:'I want to buy', msg:'I want to buy a property. Show me options.'},
+      {icon:'🔑', label:'I want to rent / lease', msg:'I want to rent or lease a property.'},
+      {icon:'💼', label:'I am a property owner', msg:'I want to list my property for sale or rent.'},
+      {icon:'📈', label:'Investment opportunities', msg:'Tell me about investment opportunities in Tanzania.'},
+      {icon:'🔨', label:'Bank auction properties', msg:'Tell me about current bank auction properties.'},
+    ];
+    var btns = opts.map(o =>
+      '<button onclick="novaQuickOpt(this,\''+o.msg.replace(/'/g,"\\'")+'\')" style="background:var(--off-white);border:1.5px solid var(--gray-light);border-radius:20px;padding:8px 14px;font-size:11.5px;font-weight:600;color:var(--navy);cursor:pointer;font-family:\'Inter\',sans-serif;transition:all .2s;display:flex;align-items:center;gap:6px;white-space:nowrap" onmouseover="this.style.borderColor=\'#E91E8C\';this.style.color=\'#E91E8C\'" onmouseout="this.style.borderColor=\'var(--gray-light)\';this.style.color=\'var(--navy)\'">'+o.icon+' '+o.label+'</button>'
+    ).join('');
+    d.innerHTML = '<div class="nmsg-av" style="background:linear-gradient(135deg,#E91E8C,#7B2FF7);border-radius:50%;width:26px;height:26px;display:flex;align-items:center;justify-content:center;font-size:12px">🏠</div><div style="display:flex;flex-wrap:wrap;gap:6px;max-width:90%">'+btns+'</div>';
+    m.appendChild(d);
+    m.scrollTop = m.scrollHeight;
+  }, 600);
+}
+
+function novaChip(el){
+  var text=el.textContent.trim();
+  var queries={
+    '🏡 Luxury villas':'Show me luxury villas and executive homes available in Dar es Salaam',
+    '🏦 Bank auctions':'Tell me about current bank auction properties. What is available and how do I register to bid?',
+    '📋 Lease office':'I am looking for commercial office space to lease in Dar es Salaam. What are my options?',
+    '🏖️ Zanzibar':'Show me properties available in Zanzibar — plots, hotels, and investment opportunities',
+    '💰 Under 500M':'Show me properties under TZS 500 million available now',
+    '📊 Investment':'What are the best real estate investment opportunities in Tanzania right now? Include ROI analysis',
+    '🌾 Farm land':'Show me agricultural farm land available for sale in Tanzania'
+  };
+  var sw={
+    '🏡 Villa za kifahari':'Nionyeshe villa na nyumba za kifahari zinazopatikana Dar es Salaam',
+    '🏦 Mnada wa benki':'Niambie kuhusu mali za mnada wa benki. Zinazopatikana sasa ni zipi na nijiandikisheje?',
+    '📋 Kodisha ofisi':'Natafuta ofisi ya kukodisha Dar es Salaam. Nionyeshe chaguzi zangu',
+    '🏖️ Zanzibar':'Nionyeshe mali zinazopatikana Zanzibar — viwanja, hoteli, na fursa za uwekezaji',
+    '💰 Chini 500M':'Nionyeshe mali chini ya TZS 500 milioni zinazopatikana sasa',
+    '📊 Uwekezaji':'Fursa bora za uwekezaji wa mali Tanzania sasa hivi ni zipi? Jumuisha uchambuzi wa faida',
+    '🌾 Ardhi ya kilimo':'Nionyeshe ardhi ya kilimo inayopatikana kwa mauzo Tanzania'
+  };
+  var q=(ngLangMode==='sw'?sw:queries)[text]||text.replace(/^[^\s]+ /,'');
+  novaSendMsg(q);
+}
+
+async function novaSend(){
+  var t=document.getElementById('novaTxt').value.trim();
+  if(!t||novaLoading)return;
+  document.getElementById('novaTxt').value='';
+  novaResize(document.getElementById('novaTxt'));
+  novaSendMsg(t);
+}
+
+// ── CLOUDFLARE WORKERS API ENDPOINT ──
+var CF_API = 'https://nextgen-ai-api.kitentyaluth.workers.dev/api/ai';
+
+async function novaSendMsg(text){
+  if(novaLoading)return;
+  addNovaUserMsg(text);
+  novaHistory.push({role:'user',content:text});
+  novaLoading=true;
+  document.getElementById('novaSend').disabled=true;
+  addNovaTyping();
+  try{
+    // Use your Cloudflare Workers API
+    var resp=await fetch(CF_API,{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({
+        message: text,
+        history: novaHistory.slice(-10), // last 10 messages for context
+        system: NG_SYS,
+        lang: ngLangMode
+      })
+    });
+
+    if(!resp.ok) throw new Error('API error: '+resp.status);
+    var data=await resp.json();
+
+    // Support both response formats:
+    // Format 1 (your CF Worker): { answer: "...", properties: [...] }
+    // Format 2 (direct Anthropic): { content: [{text:"..."}] }
+    var raw='';
+    var cfProps=[];
+
+    if(data.answer){
+      // Cloudflare Worker format
+      raw=data.answer;
+      cfProps=data.properties||[];
+    } else if(data.content){
+      // Direct Anthropic format (fallback)
+      raw=(data.content||[]).map(function(b){return b.text||''}).join('').trim();
+    }
+
+    // Extract RECOMMENDATIONS from raw text (if present)
+    var match=raw.match(/RECOMMENDATIONS:\{"ids":\[([^\]]*)\]\}/);
+    var ids=match?match[1].split(',').map(Number).filter(Boolean):[];
+    var clean=raw.replace(/RECOMMENDATIONS:\{"ids":\[[^\]]*\]\}/,'').trim();
+
+    // If CF Worker returned property objects, map them to IDs
+    if(cfProps.length>0 && ids.length===0){
+      ids=cfProps.map(function(p,i){return p.id||(i+1)}).slice(0,3);
+    }
+
+    novaHistory.push({role:'assistant',content:raw||clean});
+    removeNovaTyping();
+    addNovaBotMsg(clean,ids);
+
+  }catch(e){
+    console.error('NextGen AI error:',e);
+    removeNovaTyping();
+    // Friendly error in right language
+    addNovaBotMsg(ngLangMode==='sw'
+      ?'Samahani, NextGen AI haijaungana vizuri. Tafadhali jaribu tena au wasiliana nasi moja kwa moja:\n📞 +255 767 109 763 (WhatsApp)'
+      :'Sorry, NextGen AI couldn\'t connect. Please try again or contact us directly:\n📞 +255 767 109 763 (WhatsApp)',[]);
+  }
+  novaLoading=false;
+  document.getElementById('novaSend').disabled=false;
+}
+
+function novaQuickOpt(btn, msg) {
+  // Disable all option buttons after selection
+  btn.closest('.nmsg').querySelectorAll('button').forEach(b => b.disabled = true);
+  btn.style.background = 'var(--navy)';
+  btn.style.color = '#fff';
+  btn.style.borderColor = 'var(--navy)';
+  setTimeout(function(){ novaSendMsg(msg); }, 200);
+}
+
+function addNovaUserMsg(text){
+  var m=document.getElementById('novaMsgs');
+  var d=document.createElement('div');
+  d.className='nmsg user';
+  d.innerHTML='<div class="nmsg-av">YOU</div><div class="nbubble">'+esc(text)+'</div>';
+  m.appendChild(d);m.scrollTop=m.scrollHeight;
+}
+
+function addNovaBotMsg(text,ids){
+  var m=document.getElementById('novaMsgs');
+  var d=document.createElement('div');
+  d.className='nmsg bot';
+  var cards='';
+  if(ids&&ids.length>0){
+    cards='<div style="margin-top:8px;display:flex;flex-direction:column;gap:6px">';
+    ids.forEach(function(id){
+      var p=PROPS.find(function(x){return x.id===id});
+      if(!p)return;
+      var badgeClass=p.auction?'auc':p.lease?'lease':'';
+      var badgeText=p.auction?'🔨 BANK AUCTION':p.lease?'📋 FOR LEASE':'✅ '+p.status;
+      cards+='<div class="nova-pc">';
+      cards+='<div class="npc-badge '+badgeClass+'">'+badgeText+'</div>';
+      cards+='<div class="npc-title">'+p.title+'</div>';
+      cards+='<div class="npc-price">'+p.price+'</div>';
+      cards+='<div class="npc-loc">📍 '+p.loc+'</div>';
+      cards+='<div class="npc-tags">'+p.tags.map(function(t){return'<span class="npc-tag">'+t+'</span>'}).join('')+'</div>';
+      cards+='<a href="property/'+p.id+'" style="display:inline-block;margin-top:7px;background:var(--navy);color:#fff;text-decoration:none;border-radius:6px;padding:5px 12px;font-size:11px;font-weight:600;font-family:\'Inter\',sans-serif">📋 View Property Details →</a>';
+      cards+='</div>';
+    });
+    cards+='</div>';
+  }
+  // Parse markdown links [text](url) in AI response
+  var formattedText = esc(text)
+    .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" style="color:var(--magenta);font-weight:600;text-decoration:underline" target="_self">$1</a>')
+    .replace(/\n/g,'<br>');
+  d.innerHTML='<div class="nmsg-av">🏠</div><div class="nbubble">'+formattedText+cards+'</div>';
+  m.appendChild(d);m.scrollTop=m.scrollHeight;
+}
+
+function addNovaTyping(){
+  var m=document.getElementById('novaMsgs');
+  var d=document.createElement('div');
+  d.className='nmsg bot';d.id='novaTyping';
+  d.innerHTML='<div class="nmsg-av">🏠</div><div class="typing-ind"><div class="td"></div><div class="td"></div><div class="td"></div></div>';
+  m.appendChild(d);m.scrollTop=m.scrollHeight;
+}
+function removeNovaTyping(){var t=document.getElementById('novaTyping');if(t)t.remove()}
+function esc(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}
+function novaKey(e){if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();novaSend()}}
+function novaResize(el){el.style.height='auto';el.style.height=Math.min(el.scrollHeight,80)+'px'}
+
+// Show bubble after 4 sec
+setTimeout(function(){
+  var b=document.getElementById('nova-bubble');
+  b.style.display='block';
+  setTimeout(function(){if(!novaPanelOpen)b.style.display='none'},8000);
+},4000);
+
+// ── MODALS ──
+var MODALS={
+general:'<h2 class="m-title">Browse Properties</h2><p class="m-sub">Tell us what you\'re looking for — our team will match you with the best options.</p><div class="fg2"><div class="fg"><label>Full Name</label><input type="text" placeholder="Your full name"></div><div class="fg"><label>Phone / WhatsApp</label><input type="tel" placeholder="+255..."></div></div><div class="fg"><label>I am looking to</label><select><option>Buy a Property</option><option>Rent / Lease a Property</option><option>Invest in Property</option><option>List My Property</option></select></div><div class="fg2"><div class="fg"><label>Property Type</label><select><option>Any</option><option>Villa / House</option><option>Apartment</option><option>Plot</option><option>Commercial</option><option>Hotel</option><option>Farm</option></select></div><div class="fg"><label>Location</label><select><option>Any</option><option>Dar es Salaam</option><option>Zanzibar</option><option>Arusha</option><option>Dodoma</option></select></div></div><div class="fg"><label>Budget</label><input type="text" placeholder="TZS or USD"></div><button class="sub-btn" onclick="submitModal()">Send Inquiry →</button>',
+lease:'<h2 class="m-title">Property Leasing</h2><p class="m-sub">Looking for a property to lease? Tell us your needs.</p><div class="fg2"><div class="fg"><label>Full Name</label><input type="text" placeholder="Your name"></div><div class="fg"><label>Phone / WhatsApp</label><input type="tel" placeholder="+255..."></div></div><div class="fg"><label>Lease Type</label><select><option>Commercial Office</option><option>Retail Space</option><option>Warehouse / Industrial</option><option>Residential House</option><option>Apartment</option></select></div><div class="fg2"><div class="fg"><label>Preferred Location</label><select><option>Dar es Salaam</option><option>Zanzibar</option><option>Arusha</option><option>Other</option></select></div><div class="fg"><label>Monthly Budget</label><input type="text" placeholder="TZS per month"></div></div><div class="fg2"><div class="fg"><label>Duration</label><select><option>3 Months</option><option>6 Months</option><option>1 Year</option><option>2+ Years</option></select></div><div class="fg"><label>Space Required</label><input type="text" placeholder="sqm or rooms"></div></div><div class="fg"><label>Additional Requirements</label><textarea rows="2" placeholder="Parking, power backup, furnished, etc."></textarea></div><button class="sub-btn" onclick="submitModal()">Submit Lease Request →</button>',
+auction:'<h2 class="m-title">Register to Bid</h2><p class="m-sub">Complete your registration to access auction documents and participate in bidding.</p><div class="fg2"><div class="fg"><label>Full Name</label><input type="text" placeholder="Legal full name"></div><div class="fg"><label>National ID / Passport</label><input type="text" placeholder="ID number"></div></div><div class="fg2"><div class="fg"><label>Phone</label><input type="tel" placeholder="+255..."></div><div class="fg"><label>Email</label><input type="email" placeholder="your@email.com"></div></div><div class="fg"><label>Bidding As</label><select><option>Individual</option><option>Company / Organization</option></select></div><div class="fg"><label>Which Property?</label><select><option>Edible Oil Factory — Dodoma (TZS 14B)</option><option>Beachfront Resort — Dar (TZS 3.2B)</option><option>Other / Multiple</option></select></div><button class="sub-btn" onclick="submitModal()">Register & Get Tender Docs →</button>',
+special:'<h2 class="m-title">Special Requirements</h2><p class="m-sub">Tell us about your unique property needs.</p><div class="fg2"><div class="fg"><label>Full Name</label><input type="text" placeholder="Your name"></div><div class="fg"><label>Phone / WhatsApp</label><input type="tel" placeholder="+255..."></div></div><div class="fg"><label>Type of Need</label><div class="nt-wrap"><button class="nt" onclick="this.classList.toggle(\'sel\')">🔨 Demolition</button><button class="nt" onclick="this.classList.toggle(\'sel\')">📐 Site Prep</button><button class="nt" onclick="this.classList.toggle(\'sel\')">💼 Bulk Purchase</button><button class="nt" onclick="this.classList.toggle(\'sel\')">🏗️ Development</button><button class="nt" onclick="this.classList.toggle(\'sel\')">🏭 Industrial Lease</button><button class="nt" onclick="this.classList.toggle(\'sel\')">🤝 Joint Venture</button></div></div><div class="fg"><label>Describe Your Need</label><textarea rows="3" placeholder="Tell us more..."></textarea></div><div class="fg"><label>Budget</label><input type="text" placeholder="TZS or USD"></div><button class="sub-btn" onclick="submitModal()">Submit Request →</button>',
+clearance:'<h2 class="m-title">Land Clearance Request</h2><p class="m-sub">We coordinate demolition, legal clearance, and site preparation.</p><div class="fg2"><div class="fg"><label>Full Name</label><input type="text" placeholder="Your name"></div><div class="fg"><label>Phone / WhatsApp</label><input type="tel" placeholder="+255..."></div></div><div class="fg"><label>Property Location</label><input type="text" placeholder="Region, District, Street"></div><div class="fg2"><div class="fg"><label>Plot Size</label><input type="text" placeholder="sqm or acres"></div><div class="fg"><label>Current Structures</label><select><option>Vacant Land</option><option>Old Buildings</option><option>Multiple Structures</option></select></div></div><div class="fg"><label>What will you build after?</label><textarea rows="2" placeholder="Residential, commercial, etc."></textarea></div><button class="sub-btn" onclick="submitModal()">Submit Request →</button>',
+sell:'<h2 class="m-title">List My Property</h2><p class="m-sub">Tell us about your property and we\'ll get it in front of serious buyers or tenants.</p><div class="fg2"><div class="fg"><label>Your Name</label><input type="text" placeholder="Full name"></div><div class="fg"><label>Phone / WhatsApp</label><input type="tel" placeholder="+255..."></div></div><div class="fg"><label>Property Type</label><select><option>House / Villa</option><option>Plot / Land</option><option>Commercial Property</option><option>Apartment</option><option>Hotel / Resort</option><option>Farm / Agricultural</option></select></div><div class="fg2"><div class="fg"><label>Location</label><input type="text" placeholder="Area, District"></div><div class="fg"><label>Asking Price</label><input type="text" placeholder="TZS or USD"></div></div><div class="fg"><label>Listing Purpose</label><select><option>For Sale</option><option>For Rent</option><option>For Lease</option><option>For Auction</option></select></div><div class="fg"><label>Description</label><textarea rows="3" placeholder="Brief description of your property..."></textarea></div><button class="sub-btn" onclick="submitModal()">Submit Listing →</button>',
+consultation:'<h2 class="m-title">Book a Free Consultation</h2><p class="m-sub">Schedule a meeting with our team — in person at our office, via phone, or video call.</p><div class="fg2"><div class="fg"><label>Full Name *</label><input type="text" placeholder="Your full name"></div><div class="fg"><label>Phone / WhatsApp *</label><input type="tel" placeholder="+255..."></div></div><div class="fg"><label>Email</label><input type="email" placeholder="your@email.com"></div><div class="fg"><label>I want to discuss</label><select><option>Buying a Property</option><option>Selling / Listing My Property</option><option>Property Investment</option><option>Leasing / Renting</option><option>Bank Auction Property</option><option>Property Valuation</option><option>Other</option></select></div><div class="fg2"><div class="fg"><label>Preferred Meeting Type</label><select><option>WhatsApp Call</option><option>In-Person (Haidary Plaza)</option><option>Video Call (Zoom/Meet)</option><option>Phone Call</option></select></div><div class="fg"><label>Preferred Date/Time</label><input type="text" placeholder="e.g. Monday morning, this week"></div></div><div class="fg"><label>Budget Range (Optional)</label><input type="text" placeholder="TZS or USD"></div><button class="sub-btn" onclick="submitModal()">Book Consultation →</button>',
+contact:'<h2 class="m-title">Contact Us</h2><p class="m-sub">Reach our team directly or send a message.</p><div style="background:rgba(13,18,64,.04);border-radius:10px;padding:16px;margin-bottom:20px;display:flex;flex-direction:column;gap:10px"><div style="display:flex;gap:10px;font-size:13px;color:#333;align-items:center">📞 <span>+255 659 166 440 | +255 767 109 763</span></div><div style="display:flex;gap:10px;font-size:13px;color:#333;align-items:center">💬 <span>WhatsApp: +255 767 109 763</span></div><div style="display:flex;gap:10px;font-size:13px;color:#333;align-items:center">✉️ <span>nextgentanzania@gmail.com</span></div><div style="display:flex;gap:10px;font-size:13px;color:#333;align-items:flex-start">📍 <span>Ali Hassan Mwinyi Rd, Kisutu, 3rd Floor, Haidary Plaza, Dar es Salaam</span></div></div><div class="fg2"><div class="fg"><label>Your Name</label><input type="text" placeholder="Full name"></div><div class="fg"><label>Phone</label><input type="tel" placeholder="+255..."></div></div><div class="fg"><label>Message</label><textarea rows="4" placeholder="How can we help you?"></textarea></div><button class="sub-btn" onclick="submitModal()">Send Message →</button>'
+};
+
+function openModal(t){document.getElementById('modalContent').innerHTML=MODALS[t]||MODALS.general;document.getElementById('modalOv').classList.add('open')}
+function closeModal(e){if(!e||e.target===document.getElementById('modalOv'))document.getElementById('modalOv').classList.remove('open')}
+function submitModal(){
+  document.getElementById('modalContent').innerHTML='<div style="text-align:center;padding:40px 16px"><div style="width:64px;height:64px;background:rgba(233,30,140,.1);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 18px;font-size:28px">✓</div><h3 style="font-family:\'Playfair Display\',serif;font-size:22px;color:#0D1240;margin-bottom:8px">Request Received!</h3><p style="font-size:13.5px;color:#6B6B8A;line-height:1.7;margin-bottom:22px">Our team will contact you within 24 hours.<br><br>For immediate help:<br><strong style="color:#0D1240">WhatsApp: +255 767 109 763</strong></p><button onclick="closeModal()" style="background:#0D1240;color:#fff;border:none;padding:11px 26px;border-radius:8px;font-size:13.5px;font-weight:600;cursor:pointer;font-family:\'Inter\',sans-serif">Close</button></div>';
+}
+
+// Init
+renderT();
+</script>
+</body>
+</html>

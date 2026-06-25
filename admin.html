@@ -1,0 +1,1009 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NEXT-GEN Admin Dashboard</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--navy:#0D1240;--navy-dark:#080C2E;--navy-light:#1A2060;--magenta:#E91E8C;--magenta-dark:#C0176F;--gold:#C9A84C;--white:#fff;--off:#F8F7FF;--gl:#E8E8F0;--tm:#6B6B8A;--td:#1A1A2E;--green:#22C55E;--red:#EF4444;--blue:#3B82F6;--orange:#F59E0B}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',sans-serif;background:var(--off);color:var(--td);display:flex;min-height:100vh}
+.sidebar{width:240px;background:var(--navy-dark);display:flex;flex-direction:column;position:fixed;top:0;left:0;height:100vh;z-index:100}
+.sidebar-logo{padding:20px 20px 16px;border-bottom:1px solid rgba(255,255,255,.07);display:flex;align-items:center;gap:10px}
+.sidebar-logo img{height:36px}
+.logo-text .l1{font-family:'Playfair Display',serif;font-size:15px;font-weight:700;color:#fff;line-height:1}
+.logo-text .l2{font-size:8px;color:var(--magenta);letter-spacing:1.5px;text-transform:uppercase;margin-top:2px}
+.sidebar-badge{background:rgba(233,30,140,.15);border:1px solid rgba(233,30,140,.3);border-radius:6px;padding:3px 9px;font-size:9.5px;font-weight:700;color:var(--magenta);letter-spacing:.8px;text-transform:uppercase;margin:12px 20px}
+nav.sidenav{flex:1;padding:8px 12px;overflow-y:auto}
+.nav-item{display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:9px;cursor:pointer;color:rgba(255,255,255,.55);font-size:13px;font-weight:500;margin-bottom:2px;transition:all .2s;text-decoration:none;border:none;background:none;width:100%;text-align:left}
+.nav-item:hover{background:rgba(255,255,255,.06);color:rgba(255,255,255,.85)}
+.nav-item.active{background:rgba(233,30,140,.14);color:var(--magenta);border:1px solid rgba(233,30,140,.2)}
+.nav-item svg{width:17px;height:17px;stroke:currentColor;fill:none;stroke-width:2;flex-shrink:0}
+.nav-divider{height:1px;background:rgba(255,255,255,.06);margin:8px 0}
+.sidebar-footer{padding:16px 20px;border-top:1px solid rgba(255,255,255,.06)}
+.user-card{display:flex;align-items:center;gap:10px;margin-bottom:12px}
+.user-av{width:34px;height:34px;border-radius:50%;background:linear-gradient(135deg,var(--magenta),#7B2FF7);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;color:#fff;flex-shrink:0}
+.user-name{font-size:12.5px;font-weight:600;color:#fff}
+.user-role{font-size:10px;color:rgba(255,255,255,.4)}
+.logout-btn{display:flex;align-items:center;gap:8px;color:rgba(255,255,255,.4);font-size:12.5px;cursor:pointer;padding:8px 10px;border-radius:7px;transition:all .2s;border:none;background:none;width:100%;font-weight:500}
+.logout-btn:hover{background:rgba(239,68,68,.1);color:var(--red)}
+.logout-btn svg{width:15px;height:15px;stroke:currentColor;fill:none;stroke-width:2}
+.main{margin-left:240px;flex:1;display:flex;flex-direction:column;min-height:100vh}
+.topbar{background:#fff;border-bottom:1px solid var(--gl);padding:0 28px;height:60px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:50}
+.topbar-title{font-size:16px;font-weight:600;color:var(--navy)}
+.topbar-sub{font-size:12px;color:var(--tm)}
+.topbar-right{display:flex;align-items:center;gap:10px}
+.tb-btn{background:none;border:1.5px solid var(--gl);border-radius:8px;padding:7px 14px;font-size:12.5px;font-weight:600;color:var(--tm);cursor:pointer;font-family:'Inter',sans-serif;display:flex;align-items:center;gap:6px;transition:all .2s}
+.tb-btn:hover{border-color:var(--navy);color:var(--navy)}
+.tb-btn svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2}
+.tb-btn.primary{background:var(--magenta);border-color:var(--magenta);color:#fff}
+.tb-btn.primary:hover{background:var(--magenta-dark)}
+.content{padding:24px 28px;flex:1}
+.page{display:none}.page.active{display:block}
+/* API STATUS BAR */
+.api-status{display:flex;align-items:center;gap:8px;padding:8px 14px;border-radius:8px;font-size:12px;font-weight:600;margin-bottom:20px;border:1px solid}
+.api-status.ok{background:rgba(34,197,94,.08);border-color:rgba(34,197,94,.2);color:#166534}
+.api-status.err{background:rgba(239,68,68,.08);border-color:rgba(239,68,68,.2);color:#991b1b}
+.api-status.loading{background:rgba(59,130,246,.08);border-color:rgba(59,130,246,.2);color:#1e40af}
+.status-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.dot-ok{background:var(--green)}
+.dot-err{background:var(--red)}
+.dot-loading{background:var(--blue);animation:pulse 1.5s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+/* STATS */
+.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:24px}
+.stat-card{background:#fff;border:1px solid var(--gl);border-radius:14px;padding:20px;transition:box-shadow .2s}
+.stat-card:hover{box-shadow:0 4px 20px rgba(13,18,64,.08)}
+.stat-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
+.stat-icon{width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center}
+.stat-icon svg{width:20px;height:20px;fill:none;stroke-width:2}
+.stat-icon.mg{background:rgba(233,30,140,.1)}.stat-icon.mg svg{stroke:var(--magenta)}
+.stat-icon.gd{background:rgba(201,168,76,.1)}.stat-icon.gd svg{stroke:var(--gold)}
+.stat-icon.gr{background:rgba(34,197,94,.1)}.stat-icon.gr svg{stroke:var(--green)}
+.stat-icon.bl{background:rgba(59,130,246,.1)}.stat-icon.bl svg{stroke:var(--blue)}
+.stat-change{font-size:11px;font-weight:600;padding:3px 8px;border-radius:5px;background:rgba(34,197,94,.1);color:var(--green)}
+.stat-val{font-family:'Playfair Display',serif;font-size:28px;font-weight:700;color:var(--navy);line-height:1;margin-bottom:4px}
+.stat-lbl{font-size:12px;color:var(--tm)}
+/* QUICK ACTIONS */
+.section-title{font-size:15px;font-weight:600;color:var(--navy);margin-bottom:14px;display:flex;align-items:center;gap:8px}
+.section-title svg{width:16px;height:16px;stroke:var(--magenta);fill:none;stroke-width:2}
+.qa-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:24px}
+.qa-card{background:#fff;border:1px solid var(--gl);border-radius:12px;padding:18px;cursor:pointer;transition:all .25s;display:flex;flex-direction:column;gap:10px;text-align:center}
+.qa-card:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(13,18,64,.1);border-color:rgba(233,30,140,.2)}
+.qa-icon{width:44px;height:44px;border-radius:10px;display:flex;align-items:center;justify-content:center;margin:0 auto}
+.qa-icon svg{width:22px;height:22px;fill:none;stroke-width:2}
+.qa-title{font-size:13px;font-weight:600;color:var(--navy)}
+.qa-sub{font-size:11px;color:var(--tm)}
+/* CHART */
+.chart-card{background:#fff;border:1px solid var(--gl);border-radius:14px;padding:22px;margin-bottom:24px}
+.chart-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px}
+.chart-title{font-size:14px;font-weight:600;color:var(--navy)}
+.chart-filters{display:flex;gap:6px}
+.cf{background:var(--off);border:1.5px solid var(--gl);border-radius:6px;padding:4px 12px;font-size:11.5px;font-weight:600;cursor:pointer;font-family:'Inter',sans-serif;color:var(--tm);transition:all .2s}
+.cf.active{background:var(--navy);border-color:var(--navy);color:#fff}
+.chart-area{height:180px;display:flex;align-items:flex-end;gap:8px;padding-top:20px;position:relative}
+.chart-area::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(to top,transparent,transparent calc(25% - 1px),rgba(13,18,64,.04) calc(25% - 1px),rgba(13,18,64,.04) 25%)}
+.bar-group{flex:1;display:flex;flex-direction:column;align-items:center;gap:4px}
+.bar{width:100%;border-radius:5px 5px 0 0;transition:height .6s ease;cursor:pointer;position:relative;min-height:4px}
+.bar:hover::after{content:attr(data-val);position:absolute;top:-22px;left:50%;transform:translateX(-50%);background:var(--navy);color:#fff;font-size:10px;padding:2px 6px;border-radius:4px;white-space:nowrap}
+.bar.buyers{background:linear-gradient(to top,var(--magenta),var(--magenta-dark))}
+.bar.sellers{background:linear-gradient(to top,var(--navy-light),var(--navy))}
+.bar-label{font-size:10px;color:var(--tm)}
+.chart-legend{display:flex;gap:16px;margin-top:14px;justify-content:center}
+.legend-item{display:flex;align-items:center;gap:6px;font-size:11.5px;color:var(--tm)}
+.legend-dot{width:10px;height:10px;border-radius:3px}
+/* TABLE */
+.table-card{background:#fff;border:1px solid var(--gl);border-radius:14px;overflow:hidden;margin-bottom:24px}
+.table-header{padding:16px 20px;border-bottom:1px solid var(--gl);display:flex;align-items:center;justify-content:space-between}
+.table-title{font-size:14px;font-weight:600;color:var(--navy)}
+.search-inp{border:1.5px solid var(--gl);border-radius:8px;padding:7px 12px;font-size:12.5px;font-family:'Inter',sans-serif;color:var(--td);outline:none;transition:border-color .2s;width:200px}
+.search-inp:focus{border-color:var(--magenta)}
+table{width:100%;border-collapse:collapse}
+th{padding:11px 16px;text-align:left;font-size:10.5px;font-weight:700;color:var(--tm);text-transform:uppercase;letter-spacing:.8px;border-bottom:1px solid var(--gl);background:var(--off)}
+td{padding:12px 16px;font-size:13px;color:var(--td);border-bottom:1px solid rgba(232,232,240,.5)}
+tr:last-child td{border-bottom:none}
+tr:hover td{background:rgba(248,247,255,.7)}
+.lead-status{display:inline-block;font-size:10px;font-weight:700;padding:3px 9px;border-radius:5px;letter-spacing:.5px;text-transform:uppercase}
+.ls-new{background:rgba(59,130,246,.1);color:var(--blue)}
+.ls-contacted{background:rgba(245,158,11,.1);color:var(--orange)}
+.ls-visit{background:rgba(201,168,76,.1);color:#8A6A00}
+.ls-negotiating{background:rgba(233,30,140,.1);color:var(--magenta)}
+.ls-closed{background:rgba(34,197,94,.1);color:var(--green)}
+.ls-lost{background:rgba(239,68,68,.1);color:var(--red)}
+.lt-buyer{background:rgba(233,30,140,.08);color:var(--magenta);font-size:10px;font-weight:600;padding:2px 7px;border-radius:4px}
+.lt-seller{background:rgba(13,18,64,.08);color:var(--navy);font-size:10px;font-weight:600;padding:2px 7px;border-radius:4px}
+.action-btns{display:flex;gap:5px}
+.ab{background:none;border:1.5px solid var(--gl);border-radius:6px;padding:4px 8px;font-size:11px;font-weight:600;cursor:pointer;font-family:'Inter',sans-serif;color:var(--tm);transition:all .2s}
+.ab:hover{border-color:var(--magenta);color:var(--magenta)}
+.ab.danger:hover{border-color:var(--red);color:var(--red)}
+/* PROPERTIES */
+.props-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px;margin-bottom:24px}
+.admin-prop{background:#fff;border:1px solid var(--gl);border-radius:14px;overflow:hidden;transition:box-shadow .25s}
+.admin-prop:hover{box-shadow:0 6px 24px rgba(13,18,64,.1)}
+.ap-img{height:160px;background:linear-gradient(135deg,var(--navy-light),var(--navy));position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;font-size:40px;color:rgba(255,255,255,.15)}
+.ap-img img{width:100%;height:100%;object-fit:cover;position:absolute;inset:0}
+.ap-status{position:absolute;top:10px;left:10px;font-size:9.5px;font-weight:700;padding:3px 9px;border-radius:4px;letter-spacing:.8px;text-transform:uppercase;z-index:1}
+.aps-sale{background:var(--magenta);color:#fff}
+.aps-auction{background:var(--gold);color:var(--navy)}
+.aps-lease{background:#0891B2;color:#fff}
+.ap-body{padding:14px}
+.ap-price{font-family:'Playfair Display',serif;font-size:17px;font-weight:700;color:var(--navy);margin-bottom:2px}
+.ap-title{font-size:13.5px;font-weight:600;color:var(--td);margin-bottom:4px}
+.ap-loc{font-size:11.5px;color:var(--tm);margin-bottom:12px}
+.ap-actions{display:flex;gap:7px}
+.apa{flex:1;padding:7px;border-radius:7px;border:1.5px solid var(--gl);background:#fff;font-size:11.5px;font-weight:600;color:var(--tm);cursor:pointer;font-family:'Inter',sans-serif;transition:all .2s;text-align:center}
+.apa:hover{border-color:var(--magenta);color:var(--magenta)}
+.apa.edit{background:var(--navy);border-color:var(--navy);color:#fff}
+.apa.edit:hover{background:var(--magenta);border-color:var(--magenta)}
+.empty-state{text-align:center;padding:60px 20px;color:var(--tm)}
+.empty-state svg{width:48px;height:48px;stroke:var(--gl);fill:none;stroke-width:1.5;margin:0 auto 16px;display:block}
+.empty-state h3{font-size:15px;font-weight:600;color:var(--navy);margin-bottom:6px}
+.empty-state p{font-size:13px;margin-bottom:18px}
+/* FORM */
+.form-card{background:#fff;border:1px solid var(--gl);border-radius:14px;padding:28px;margin-bottom:20px}
+.form-section-title{font-size:13px;font-weight:700;color:var(--navy);text-transform:uppercase;letter-spacing:1px;margin-bottom:16px;padding-bottom:8px;border-bottom:1px solid var(--gl);display:flex;align-items:center;gap:7px}
+.form-section-title svg{width:15px;height:15px;stroke:var(--magenta);fill:none;stroke-width:2}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px}
+.form-grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin-bottom:14px}
+.form-full{margin-bottom:14px}
+.fg-label{display:block;font-size:11px;font-weight:700;color:var(--tm);letter-spacing:.5px;text-transform:uppercase;margin-bottom:5px}
+.fg-input,.fg-select,.fg-textarea{width:100%;border:1.5px solid var(--gl);border-radius:9px;padding:10px 13px;font-size:13.5px;font-family:'Inter',sans-serif;color:var(--td);outline:none;transition:border-color .2s;background:#fff;resize:vertical}
+.fg-input:focus,.fg-select:focus,.fg-textarea:focus{border-color:var(--magenta)}
+.upload-zone{border:2px dashed var(--gl);border-radius:12px;padding:32px;text-align:center;cursor:pointer;transition:all .2s;background:var(--off)}
+.upload-zone:hover{border-color:var(--magenta);background:rgba(233,30,140,.03)}
+.upload-zone svg{width:32px;height:32px;stroke:var(--tm);fill:none;stroke-width:1.5;margin:0 auto 10px;display:block}
+.upload-preview{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.preview-img{width:80px;height:80px;border-radius:8px;object-fit:cover;border:2px solid var(--gl)}
+.features-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:14px}
+.feature-check{display:flex;align-items:center;gap:7px;font-size:12.5px;color:var(--td);cursor:pointer}
+.feature-check input{accent-color:var(--magenta);width:14px;height:14px}
+.btn-cancel{background:none;border:1.5px solid var(--gl);border-radius:9px;padding:11px 24px;font-size:14px;font-weight:600;color:var(--tm);cursor:pointer;font-family:'Inter',sans-serif;transition:all .2s}
+.btn-cancel:hover{border-color:var(--red);color:var(--red)}
+.btn-save{background:var(--magenta);border:none;border-radius:9px;padding:11px 28px;font-size:14px;font-weight:600;color:#fff;cursor:pointer;font-family:'Inter',sans-serif;transition:background .2s}
+.btn-save:hover{background:var(--magenta-dark)}
+.btn-draft{background:var(--navy);border:none;border-radius:9px;padding:11px 24px;font-size:14px;font-weight:600;color:#fff;cursor:pointer;font-family:'Inter',sans-serif}
+/* AI INSIGHTS */
+.insights-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:24px}
+.insight-card{background:#fff;border:1px solid var(--gl);border-radius:14px;padding:22px}
+.insight-card.full{grid-column:span 2}
+.insight-header{display:flex;align-items:center;gap:10px;margin-bottom:16px}
+.insight-icon{width:36px;height:36px;border-radius:9px;background:linear-gradient(135deg,var(--magenta),#7B2FF7);display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0}
+.insight-title{font-size:14px;font-weight:600;color:var(--navy)}
+.insight-sub{font-size:11px;color:var(--tm)}
+.ai-loading{display:flex;align-items:center;gap:10px;padding:16px;background:rgba(233,30,140,.04);border-radius:10px;border:1px dashed rgba(233,30,140,.2)}
+.ai-loading span{font-size:12.5px;color:var(--tm)}
+.ai-dot{width:8px;height:8px;background:var(--magenta);border-radius:50%;animation:pulse 1.5s infinite;flex-shrink:0}
+.ai-result{font-size:13px;color:var(--td);line-height:1.7}
+.hotzone-row{display:flex;align-items:center;gap:12px;margin-bottom:10px}
+.hz-name{font-size:13px;font-weight:600;color:var(--navy);width:100px;flex-shrink:0}
+.hz-bar-track{flex:1;height:8px;background:var(--gl);border-radius:4px;overflow:hidden}
+.hz-bar-fill{height:100%;border-radius:4px;background:linear-gradient(to right,var(--magenta),#7B2FF7)}
+.hz-val{font-size:12px;font-weight:700;color:var(--magenta);width:40px;text-align:right}
+.yield-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:4px}
+.yield-card{background:var(--off);border-radius:9px;padding:12px;text-align:center}
+.yield-val{font-family:'Playfair Display',serif;font-size:22px;font-weight:700;color:var(--navy)}
+.yield-val span{color:var(--magenta)}
+.yield-lbl{font-size:10px;color:var(--tm);text-transform:uppercase;letter-spacing:.5px;margin-top:3px}
+/* SELL WIDGET */
+.sell-widget{background:linear-gradient(135deg,var(--navy-dark) 0%,#1A0A60 100%);border-radius:20px;padding:48px;display:flex;align-items:center;justify-content:space-between;gap:40px;flex-wrap:wrap;position:relative;overflow:hidden;margin-bottom:24px}
+.sell-widget::before{content:'';position:absolute;top:-40px;right:-40px;width:200px;height:200px;background:rgba(233,30,140,.1);border-radius:50%}
+.sw-left{position:relative;z-index:2}
+.sw-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(233,30,140,.15);border:1px solid rgba(233,30,140,.3);border-radius:20px;padding:4px 12px;margin-bottom:14px}
+.sw-badge span{font-size:10px;font-weight:700;color:var(--magenta);letter-spacing:1px;text-transform:uppercase}
+.sw-title{font-family:'Playfair Display',serif;font-size:clamp(22px,2.5vw,32px);font-weight:700;color:#fff;line-height:1.2;margin-bottom:10px}
+.sw-sub{font-size:14px;color:rgba(255,255,255,.65);line-height:1.7;max-width:480px}
+.sw-right{display:flex;gap:12px;flex-wrap:wrap;position:relative;z-index:2;flex-shrink:0}
+.sw-btn{padding:13px 26px;border-radius:9px;font-size:14px;font-weight:600;cursor:pointer;font-family:'Inter',sans-serif;transition:all .2s;border:none}
+.sw-btn.primary{background:var(--magenta);color:#fff}
+.sw-btn.outline{background:transparent;color:#fff;border:1.5px solid rgba(255,255,255,.35)}
+/* TOAST */
+#toast{position:fixed;top:20px;right:20px;z-index:9999;display:flex;flex-direction:column;gap:8px}
+.toast-item{background:var(--navy-dark);color:#fff;padding:12px 18px;border-radius:10px;font-size:13px;font-weight:500;display:flex;align-items:center;gap:10px;box-shadow:0 8px 32px rgba(0,0,0,.3);animation:slideIn .3s ease}
+.toast-item.success{border-left:3px solid var(--green)}
+.toast-item.error{border-left:3px solid var(--red)}
+.toast-item.info{border-left:3px solid var(--blue)}
+@keyframes slideIn{from{transform:translateX(100%);opacity:0}to{transform:translateX(0);opacity:1}}
+/* MODAL */
+.modal-ov{display:none;position:fixed;inset:0;background:rgba(8,12,46,.8);z-index:2000;align-items:center;justify-content:center;padding:20px}
+.modal-ov.open{display:flex}
+.modal-box{background:#fff;border-radius:18px;padding:32px;max-width:480px;width:100%;position:relative;max-height:90vh;overflow-y:auto}
+.modal-x{position:absolute;top:14px;right:14px;background:var(--gl);border:none;width:28px;height:28px;border-radius:50%;cursor:pointer;font-size:16px;display:flex;align-items:center;justify-content:center;color:var(--navy)}
+.modal-title{font-family:'Playfair Display',serif;font-size:21px;font-weight:700;color:var(--navy);margin-bottom:4px}
+.modal-sub{font-size:13px;color:var(--tm);margin-bottom:20px}
+.fg{margin-bottom:16px}
+.fg label{display:block;font-size:11px;font-weight:700;color:var(--tm);letter-spacing:.5px;text-transform:uppercase;margin-bottom:6px}
+.fg input,.fg select,.fg textarea{width:100%;border:1.5px solid var(--gl);border-radius:9px;padding:10px 13px;font-size:13.5px;font-family:'Inter',sans-serif;color:var(--td);outline:none;transition:border-color .2s;resize:vertical}
+.fg input:focus,.fg select:focus,.fg textarea:focus{border-color:var(--magenta)}
+.fg2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.sub-btn{width:100%;background:var(--navy);color:#fff;border:none;padding:13px;border-radius:9px;font-size:14px;font-weight:600;cursor:pointer;font-family:'Inter',sans-serif;margin-top:7px;transition:background .2s}
+.sub-btn:hover{background:var(--magenta)}
+/* PIPELINE */
+.pipeline-stages{display:flex;flex-direction:column;gap:10px}
+.pipeline-row{display:flex;align-items:center;gap:12px}
+.pipeline-label{font-size:12.5px;font-weight:600;color:var(--navy);width:110px;flex-shrink:0}
+.pipeline-track{flex:1;height:10px;background:var(--gl);border-radius:5px;overflow:hidden}
+.pipeline-fill{height:100%;border-radius:5px;background:linear-gradient(to right,var(--magenta),#7B2FF7);transition:width .8s ease}
+.pipeline-count{font-size:12px;font-weight:700;color:var(--navy);width:24px;text-align:right}
+@media(max-width:900px){
+.sidebar{transform:translateX(-100%)}.main{margin-left:0}
+.stats-grid{grid-template-columns:1fr 1fr}
+.form-grid,.form-grid-3{grid-template-columns:1fr}
+.insights-grid{grid-template-columns:1fr}
+.insight-card.full{grid-column:span 1}
+}
+</style>
+</head>
+<body>
+
+<!-- LOGIN OVERLAY -->
+<div id="loginOverlay" style="display:none;position:fixed;inset:0;background:linear-gradient(135deg,#080C2E,#1A0A60);z-index:9999;align-items:center;justify-content:center">
+  <div style="background:#fff;border-radius:20px;padding:44px 40px;max-width:420px;width:90%;text-align:center">
+    <div style="font-size:40px;margin-bottom:16px">🔐</div>
+    <div style="font-family:'Playfair Display',serif;font-size:24px;font-weight:700;color:#0D1240;margin-bottom:6px">Admin Access</div>
+    <div style="font-size:13px;color:#6B6B8A;margin-bottom:28px">NEXT-GEN Auctioneer + Realtor</div>
+    <div style="text-align:left;margin-bottom:16px">
+      <label style="display:block;font-size:11px;font-weight:700;color:#6B6B8A;letter-spacing:.5px;text-transform:uppercase;margin-bottom:6px">Password</label>
+      <input type="password" id="loginPw" placeholder="Enter admin password" style="width:100%;border:1.5px solid #E8E8F0;border-radius:9px;padding:12px 14px;font-size:14px;font-family:'Inter',sans-serif;outline:none;transition:border-color .2s" onfocus="this.style.borderColor='#E91E8C'" onblur="this.style.borderColor='#E8E8F0'" onkeydown="if(event.key==='Enter')doLogin()">
+    </div>
+    <div id="loginError" style="font-size:12px;color:#EF4444;margin-bottom:12px;display:none">❌ Incorrect password. Try again.</div>
+    <button onclick="doLogin()" style="width:100%;background:#E91E8C;color:#fff;border:none;padding:13px;border-radius:9px;font-size:14px;font-weight:600;cursor:pointer;font-family:'Inter',sans-serif;transition:background .2s" onmouseover="this.style.background='#C0176F'" onmouseout="this.style.background='#E91E8C'">
+      Login to Dashboard →
+    </button>
+    <div style="font-size:11px;color:#6B6B8A;margin-top:16px">Session expires after 8 hours</div>
+  </div>
+</div>
+
+<aside class="sidebar">
+  <div class="sidebar-logo">
+    <img src="Next-Gen_Auctioneer_LOGO.jpg" alt="NEXT-GEN" onerror="this.style.display='none'">
+    <div class="logo-text"><div class="l1">NEXT-GEN</div><div class="l2">Admin Panel</div></div>
+  </div>
+  <div class="sidebar-badge">Admin Dashboard</div>
+  <nav class="sidenav">
+    <button class="nav-item active" onclick="showPage('dashboard',this)"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>Dashboard</button>
+    <button class="nav-item" onclick="showPage('add-property',this)"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>Add Property</button>
+    <button class="nav-item" onclick="showPage('properties',this)"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg>Properties</button>
+    <button class="nav-item" onclick="showPage('leads',this)"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>Leads<span id="leadBadge" style="margin-left:auto;background:var(--magenta);color:#fff;font-size:10px;font-weight:700;padding:1px 7px;border-radius:10px">0</span></button>
+    <button class="nav-item" onclick="showPage('analytics',this)"><svg viewBox="0 0 24 24"><path d="M18 20V10M12 20V4M6 20v-6"/></svg>Analytics</button>
+    <div class="nav-divider"></div>
+    <button class="nav-item" onclick="showPage('ai-insights',this)"><svg viewBox="0 0 24 24"><path d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg>NextGen AI Insights</button>
+    <button class="nav-item" onclick="showPage('sell-widget',this)"><svg viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/></svg>Sell/Lease Widget</button>
+    <div class="nav-divider"></div>
+    <a class="nav-item" href="index.html" target="_blank"><svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>View Website</a>
+  </nav>
+  <div class="sidebar-footer">
+    <div class="user-card"><div class="user-av">LM</div><div><div class="user-name">Luth — NEXT-GEN</div><div class="user-role">Managing Director</div></div></div>
+    <button class="logout-btn" onclick="adminLogout()"><svg viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4M16 17l5-5-5-5M21 12H9"/></svg>Logout</button>
+  </div>
+</aside>
+
+<div class="main">
+  <div class="topbar">
+    <div>
+      <div class="topbar-title" id="topbarTitle">CRM Dashboard</div>
+      <div class="topbar-sub">Manage properties, leads and analytics</div>
+    </div>
+    <div class="topbar-right">
+      <button class="tb-btn" onclick="loadLeads();showPage('leads',null)"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>View Leads</button>
+      <button class="tb-btn" onclick="loadProperties();showPage('properties',null)"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg>Manage Listings</button>
+      <button class="tb-btn primary" onclick="showPage('add-property',null)"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>+ Add Property</button>
+    </div>
+  </div>
+
+  <div class="content">
+
+    <!-- DASHBOARD -->
+    <div class="page active" id="page-dashboard">
+      <div class="api-status loading" id="apiStatus"><div class="status-dot dot-loading"></div><span id="apiStatusText">Connecting to NEXT-GEN API...</span></div>
+      <div class="stats-grid">
+        <div class="stat-card"><div class="stat-top"><div class="stat-icon mg"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg></div><span class="stat-change" id="propChange">Loading</span></div><div class="stat-val" id="statProps">—</div><div class="stat-lbl">Total Properties</div></div>
+        <div class="stat-card"><div class="stat-top"><div class="stat-icon bl"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/></svg></div><span class="stat-change">Sellers</span></div><div class="stat-val" id="statSellers">—</div><div class="stat-lbl">Seller Leads</div></div>
+        <div class="stat-card"><div class="stat-top"><div class="stat-icon gd"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg></div><span class="stat-change">Buyers</span></div><div class="stat-val" id="statBuyers">—</div><div class="stat-lbl">Buyer Leads</div></div>
+        <div class="stat-card"><div class="stat-top"><div class="stat-icon gr"><svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 100 7h5a3.5 3.5 0 110 7H6"/></svg></div><span class="stat-change">New</span></div><div class="stat-val" id="statNew">—</div><div class="stat-lbl">New Leads Today</div></div>
+      </div>
+      <div class="section-title"><svg viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>Quick Actions</div>
+      <div class="qa-grid">
+        <div class="qa-card" onclick="showPage('add-property',null)"><div class="qa-icon" style="background:rgba(233,30,140,.1)"><svg viewBox="0 0 24 24" style="stroke:var(--magenta)"><path d="M12 5v14M5 12h14"/></svg></div><div class="qa-title">Add Property</div><div class="qa-sub">List new property for sale, rent, or auction</div></div>
+        <div class="qa-card" onclick="loadLeads();showPage('leads',null)"><div class="qa-icon" style="background:rgba(59,130,246,.1)"><svg viewBox="0 0 24 24" style="stroke:var(--blue)"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/></svg></div><div class="qa-title">View Leads</div><div class="qa-sub">Track buyer and seller inquiries from R2</div></div>
+        <div class="qa-card" onclick="showPage('ai-insights',null)"><div class="qa-icon" style="background:rgba(233,30,140,.05)"><svg viewBox="0 0 24 24" style="stroke:var(--magenta)"><path d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3"/></svg></div><div class="qa-title">NextGen AI Insights</div><div class="qa-sub">Tanzania real estate intelligence</div></div>
+      </div>
+      <div class="chart-card">
+        <div class="chart-header"><div class="chart-title">Lead Analytics — Buyers vs Sellers</div><div class="chart-filters"><button class="cf active" onclick="setChartFilter(this)">6M</button><button class="cf" onclick="setChartFilter(this)">3M</button><button class="cf" onclick="setChartFilter(this)">1M</button></div></div>
+        <div class="chart-area" id="chartArea"></div>
+        <div class="chart-legend"><div class="legend-item"><div class="legend-dot" style="background:var(--magenta)"></div>Buyers</div><div class="legend-item"><div class="legend-dot" style="background:var(--navy)"></div>Sellers</div></div>
+      </div>
+      <div class="section-title"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>Recent Leads</div>
+      <div class="table-card"><div class="table-header"><div class="table-title">Latest Inquiries</div><input type="text" class="search-inp" placeholder="Search leads..." oninput="filterLeads(this.value)"></div><div id="recentLeadsTable"><div style="padding:24px;text-align:center;color:var(--tm);font-size:13px">Loading leads from R2...</div></div></div>
+    </div>
+
+    <!-- ADD PROPERTY -->
+    <div class="page" id="page-add-property">
+      <div class="form-card">
+        <div class="form-section-title"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg>Basic Information</div>
+        <div class="form-grid"><div><label class="fg-label">Property Title *</label><input type="text" class="fg-input" id="propTitle" placeholder="e.g. Luxury Villa — Masaki"></div><div><label class="fg-label">Listing Type *</label><select class="fg-select" id="propType"><option value="">Select...</option><option>For Sale</option><option>For Rent</option><option>For Lease</option><option>Bank Auction</option></select></div></div>
+        <div class="form-grid-3"><div><label class="fg-label">Category *</label><select class="fg-select" id="propCat"><option value="">Select...</option><option>Villa / House</option><option>Apartment</option><option>Plot / Land</option><option>Commercial</option><option>Hotel / Resort</option><option>Factory</option><option>Farm</option><option>Office</option><option>Warehouse</option></select></div><div><label class="fg-label">Price / Rent *</label><input type="text" class="fg-input" id="propPrice" placeholder="e.g. 1,800,000,000"></div><div><label class="fg-label">Currency</label><select class="fg-select" id="propCurrency"><option>TZS</option><option>USD</option><option>EUR</option></select></div></div>
+        <div class="form-full"><label class="fg-label">Description *</label><textarea class="fg-textarea" id="propDesc" rows="4" placeholder="Describe the property in detail..."></textarea></div>
+      </div>
+      <div class="form-card">
+        <div class="form-section-title"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>Location</div>
+        <div class="form-grid"><div><label class="fg-label">Region *</label><select class="fg-select" id="propRegion"><option value="">Select...</option><option>Dar es Salaam</option><option>Zanzibar North</option><option>Zanzibar South</option><option>Arusha</option><option>Mwanza</option><option>Dodoma</option><option>Mbeya</option><option>Morogoro</option><option>Tanga</option><option>Iringa</option><option>Other</option></select></div><div><label class="fg-label">District / Area</label><input type="text" class="fg-input" id="propDistrict" placeholder="e.g. Masaki, Oyster Bay"></div></div>
+        <div class="form-grid"><div><label class="fg-label">Street / Landmark</label><input type="text" class="fg-input" id="propStreet" placeholder="e.g. Near Slipway"></div><div><label class="fg-label">GPS (Optional)</label><input type="text" class="fg-input" id="propGPS" placeholder="-6.7924, 39.2083"></div></div>
+      </div>
+      <div class="form-card">
+        <div class="form-section-title"><svg viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"/></svg>Specifications</div>
+        <div class="form-grid-3"><div><label class="fg-label">Size (sqm/acres)</label><input type="text" class="fg-input" id="propSize" placeholder="650 sqm"></div><div><label class="fg-label">Bedrooms</label><select class="fg-select" id="propBeds"><option value="">N/A</option><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7+</option></select></div><div><label class="fg-label">Bathrooms</label><select class="fg-select" id="propBaths"><option value="">N/A</option><option>1</option><option>2</option><option>3</option><option>4</option><option>5+</option></select></div></div>
+        <div class="form-grid"><div><label class="fg-label">Year Built / Plot No.</label><input type="text" class="fg-input" id="propYear" placeholder="2019 or Plot 45/A"></div><div><label class="fg-label">Title Deed Status</label><select class="fg-select" id="propTitle2"><option>Title Deed (Full Ownership)</option><option>Certificate of Occupancy</option><option>Right of Occupancy</option><option>Under Survey</option></select></div></div>
+        <label class="fg-label" style="margin-bottom:8px">Features & Amenities</label>
+        <div class="features-grid">
+          <label class="feature-check"><input type="checkbox" value="Swimming Pool"> Pool</label>
+          <label class="feature-check"><input type="checkbox" value="Garage"> Garage</label>
+          <label class="feature-check"><input type="checkbox" value="Garden"> Garden</label>
+          <label class="feature-check"><input type="checkbox" value="Furnished"> Furnished</label>
+          <label class="feature-check"><input type="checkbox" value="Sea View"> Sea View</label>
+          <label class="feature-check"><input type="checkbox" value="Beachfront"> Beachfront</label>
+          <label class="feature-check"><input type="checkbox" value="Security"> Security</label>
+          <label class="feature-check"><input type="checkbox" value="Generator"> Generator</label>
+          <label class="feature-check"><input type="checkbox" value="Water Tank"> Water Tank</label>
+          <label class="feature-check"><input type="checkbox" value="CCTV"> CCTV</label>
+          <label class="feature-check"><input type="checkbox" value="Staff Quarters"> Staff Qtrs</label>
+          <label class="feature-check"><input type="checkbox" value="Guest House"> Guest House</label>
+        </div>
+      </div>
+      <div class="form-card">
+        <div class="form-section-title"><svg viewBox="0 0 24 24"><path d="M21 19a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h4l2 3h4l2-3h4a2 2 0 012 2z"/><circle cx="12" cy="12" r="3"/></svg>Photos & Media</div>
+        <div class="upload-zone" onclick="document.getElementById('photoUpload').click()" ondrop="handleDrop(event)" ondragover="event.preventDefault()"><svg viewBox="0 0 24 24"><path d="M21 19a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h4l2 3h4l2-3h4a2 2 0 012 2z"/><circle cx="12" cy="12" r="3"/></svg><h4>Drag & Drop Photos Here</h4><p>JPG, PNG, WEBP — minimum 8 photos recommended</p><input type="file" id="photoUpload" multiple accept="image/*" style="display:none" onchange="handlePhotos(this)"></div>
+        <div class="upload-preview" id="photoPreview"></div>
+        <div style="margin-top:14px"><label class="fg-label">Video / Drone URL</label><input type="text" class="fg-input" id="propVideo" placeholder="YouTube or Google Drive link"></div>
+        <div style="margin-top:12px"><label class="fg-label">360° Tour URL</label><input type="text" class="fg-input" id="propVirtual" placeholder="Matterport or Kuula link"></div>
+      </div>
+      <div class="form-card">
+        <div class="form-section-title"><svg viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="8.5" cy="7" r="4"/></svg>Ownership & Agent</div>
+        <div class="form-grid"><div><label class="fg-label">Owner Name</label><input type="text" class="fg-input" id="propOwner" placeholder="Full legal name"></div><div><label class="fg-label">Owner Phone</label><input type="tel" class="fg-input" id="propOwnerPhone" placeholder="+255..."></div></div>
+        <div class="form-grid"><div><label class="fg-label">Assigned Agent</label><select class="fg-select" id="propAgent"><option>Luth (Managing Director)</option><option>Agent 2</option><option>Agent 3</option></select></div><div><label class="fg-label">Commission (%)</label><input type="text" class="fg-input" id="propCommission" placeholder="3%"></div></div>
+        <div class="form-full"><label class="fg-label">Internal Notes</label><textarea class="fg-textarea" id="propNotes" rows="2" placeholder="Internal notes about this property..."></textarea></div>
+      </div>
+      <div style="display:flex;gap:10px;justify-content:flex-end;margin-bottom:24px">
+        <button class="btn-cancel" onclick="showPage('dashboard',null)">Cancel</button>
+        <button class="btn-draft" onclick="saveProp('draft')">💾 Save Draft</button>
+        <button class="btn-save" onclick="saveProp('live')">🚀 Publish to Website</button>
+      </div>
+    </div>
+
+    <!-- PROPERTIES -->
+    <div class="page" id="page-properties">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:20px">
+        <div><div class="section-title" style="margin-bottom:4px"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg>Property Portfolio</div><div style="font-size:12px;color:var(--tm)" id="propCount">Loading from R2...</div></div>
+        <button class="btn-save" onclick="showPage('add-property',null)">+ Add Property</button>
+      </div>
+      <div class="props-grid" id="propsGrid"><div style="grid-column:1/-1;text-align:center;padding:40px;color:var(--tm)">Loading properties from R2 storage...</div></div>
+    </div>
+
+    <!-- LEADS -->
+    <div class="page" id="page-leads">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:20px">
+        <div><div class="section-title" style="margin-bottom:4px"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>All Leads — R2 Storage</div><div style="font-size:12px;color:var(--tm)" id="leadCount">Loading...</div></div>
+        <button class="btn-save" onclick="openAddLead()">+ Add Lead</button>
+      </div>
+      <div class="chart-card" style="margin-bottom:20px">
+        <div class="chart-header"><div class="chart-title">Lead Pipeline</div><button class="btn-save" style="font-size:12px;padding:6px 14px" onclick="loadLeads()">🔄 Refresh</button></div>
+        <div id="pipelineView" style="display:flex;gap:8px;overflow-x:auto;padding-bottom:8px"></div>
+      </div>
+      <div class="table-card">
+        <div class="table-header"><div class="table-title">Lead Details</div><input type="text" class="search-inp" placeholder="Search by name, phone..." oninput="filterLeads(this.value)"></div>
+        <div id="leadsTableWrap"><div style="padding:24px;text-align:center;color:var(--tm);font-size:13px">Loading leads from R2...</div></div>
+      </div>
+    </div>
+
+    <!-- ANALYTICS -->
+    <div class="page" id="page-analytics">
+      <div style="display:grid;grid-template-columns:2fr 1fr;gap:16px">
+        <div class="chart-card">
+          <div class="chart-header"><div class="chart-title">Lead Conversion Pipeline</div></div>
+          <div id="pipelineAnalytics" class="pipeline-stages" style="margin-bottom:16px"></div>
+        </div>
+        <div class="insight-card">
+          <div class="insight-header"><div class="insight-icon">📊</div><div><div class="insight-title">Performance</div><div class="insight-sub">R2 Storage Data</div></div></div>
+          <div id="analyticsMetrics" style="display:flex;flex-direction:column;gap:12px"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- AI INSIGHTS -->
+    <div class="page" id="page-ai-insights">
+      <div class="insights-grid">
+        <div class="insight-card full">
+          <div class="insight-header"><div class="insight-icon">🤖</div><div><div class="insight-title">NextGen AI Market Intelligence</div><div class="insight-sub">Powered by Claude AI via Cloudflare Workers — Real Tanzania analysis</div></div></div>
+          <div id="aiMarketInsight"><div class="ai-loading"><div class="ai-dot"></div><span>Click a button below to generate AI market intelligence...</span></div></div>
+          <div style="margin-top:16px;display:flex;gap:8px;flex-wrap:wrap">
+            <button class="btn-save" onclick="generateAIInsight('market')">🏠 Market Overview</button>
+            <button class="btn-draft" onclick="generateAIInsight('investment')">📈 Investment Analysis</button>
+            <button class="btn-draft" onclick="generateAIInsight('pricing')">💰 Pricing Strategy</button>
+            <button class="btn-cancel" onclick="generateAIInsight('auction')">🔨 Auction Intelligence</button>
+          </div>
+        </div>
+        <div class="insight-card">
+          <div class="insight-header"><div class="insight-icon">🔥</div><div><div class="insight-title">Tanzania Hot Zones</div><div class="insight-sub">2025–2026 investment hotspots</div></div></div>
+          <div style="display:flex;flex-direction:column;gap:10px">
+            <div class="hotzone-row"><div class="hz-name">Paje, Zanzibar</div><div class="hz-bar-track"><div class="hz-bar-fill" style="width:92%"></div></div><div class="hz-val">+55%</div></div>
+            <div class="hotzone-row"><div class="hz-name">Kigamboni</div><div class="hz-bar-track"><div class="hz-bar-fill" style="width:79%"></div></div><div class="hz-val">+42%</div></div>
+            <div class="hotzone-row"><div class="hz-name">Bagamoyo</div><div class="hz-bar-track"><div class="hz-bar-fill" style="width:72%"></div></div><div class="hz-val">+38%</div></div>
+            <div class="hotzone-row"><div class="hz-name">Masaki/OB</div><div class="hz-bar-track"><div class="hz-bar-fill" style="width:88%"></div></div><div class="hz-val">+35%</div></div>
+            <div class="hotzone-row"><div class="hz-name">Dodoma CBD</div><div class="hz-bar-track"><div class="hz-bar-fill" style="width:62%"></div></div><div class="hz-val">+31%</div></div>
+          </div>
+        </div>
+        <div class="insight-card">
+          <div class="insight-header"><div class="insight-icon">💰</div><div><div class="insight-title">Rental Yields</div><div class="insight-sub">Tanzania market averages</div></div></div>
+          <div class="yield-cards">
+            <div class="yield-card"><div class="yield-val">8.4<span>%</span></div><div class="yield-lbl">Residential</div></div>
+            <div class="yield-card"><div class="yield-val">11.2<span>%</span></div><div class="yield-lbl">Commercial</div></div>
+            <div class="yield-card"><div class="yield-val">14.8<span>%</span></div><div class="yield-lbl">Tourism</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SELL WIDGET -->
+    <div class="page" id="page-sell-widget">
+      <div class="section-title"><svg viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/></svg>Sell / Lease Widget</div>
+      <div style="background:#f0f0f5;border-radius:14px;padding:24px;margin-bottom:24px">
+        <div style="font-size:11px;font-weight:700;color:var(--tm);letter-spacing:1px;text-transform:uppercase;margin-bottom:12px">LIVE PREVIEW</div>
+        <div class="sell-widget">
+          <div class="sw-left">
+            <div class="sw-badge"><span id="sw-badge-text">New Listing Opportunity</span></div>
+            <div class="sw-title" id="sw-title">Want to Sell or Lease Your Property?</div>
+            <div class="sw-sub" id="sw-sub">List your property with NEXT-GEN and access qualified buyers, investors, institutions and premium auction networks across Tanzania.</div>
+          </div>
+          <div class="sw-right">
+            <button class="sw-btn primary" id="sw-btn1">List Your Property</button>
+            <button class="sw-btn outline" id="sw-btn2">Contact Agent</button>
+          </div>
+        </div>
+      </div>
+      <div class="form-card">
+        <div class="form-section-title"><svg viewBox="0 0 24 24"><path d="M12 20h9M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>Customize Widget</div>
+        <div class="form-grid">
+          <div><label class="fg-label">Badge Text</label><input type="text" class="fg-input" value="New Listing Opportunity" oninput="document.getElementById('sw-badge-text').textContent=this.value"></div>
+          <div><label class="fg-label">Headline</label><input type="text" class="fg-input" value="Want to Sell or Lease Your Property?" oninput="document.getElementById('sw-title').textContent=this.value"></div>
+        </div>
+        <div class="form-full"><label class="fg-label">Subtext</label><textarea class="fg-textarea" rows="2" oninput="document.getElementById('sw-sub').textContent=this.value">List your property with NEXT-GEN and access qualified buyers, investors, institutions and premium auction networks across Tanzania.</textarea></div>
+        <div class="form-grid">
+          <div><label class="fg-label">Primary Button</label><input type="text" class="fg-input" value="List Your Property" oninput="document.getElementById('sw-btn1').textContent=this.value"></div>
+          <div><label class="fg-label">Secondary Button</label><input type="text" class="fg-input" value="Contact Agent" oninput="document.getElementById('sw-btn2').textContent=this.value"></div>
+        </div>
+      </div>
+      <div class="form-card">
+        <div class="form-section-title"><svg viewBox="0 0 24 24"><path d="M16 18l2-2-2-2M8 18l-2-2 2-2M12 2v20"/></svg>HTML Code — Paste in index.html</div>
+        <textarea class="fg-textarea" rows="10" style="font-family:monospace;font-size:11.5px;background:#f8f7ff" readonly id="widgetCode"></textarea>
+        <div style="margin-top:10px;display:flex;gap:8px">
+          <button class="btn-save" onclick="copyWidgetCode()">📋 Copy Code</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ADD LEAD MODAL -->
+<div class="modal-ov" id="leadModal" onclick="if(event.target===this)closeLeadModal()">
+  <div class="modal-box">
+    <button class="modal-x" onclick="closeLeadModal()">×</button>
+    <div class="modal-title">Add Lead</div>
+    <div class="modal-sub">Record a new buyer or seller inquiry</div>
+    <div class="fg2"><div class="fg"><label>Full Name *</label><input type="text" class="fg-input" id="lName" placeholder="Client name"></div><div class="fg"><label>Phone *</label><input type="tel" class="fg-input" id="lPhone" placeholder="+255..."></div></div>
+    <div class="fg"><label>Lead Type</label><select class="fg-input" id="lType"><option value="buyer">Buyer</option><option value="seller">Seller</option><option value="investor">Investor</option><option value="tenant">Tenant</option></select></div>
+    <div class="fg"><label>Property Interest</label><input type="text" class="fg-input" id="lInterest" placeholder="e.g. 3 bed villa Masaki under TZS 500M"></div>
+    <div class="fg"><label>Status</label><select class="fg-input" id="lStatus"><option value="new">New Lead</option><option value="contacted">Contacted</option><option value="visit">Site Visit</option><option value="negotiating">Negotiating</option><option value="closed">Closed</option><option value="lost">Lost</option></select></div>
+    <div style="display:flex;gap:8px;justify-content:flex-end;margin-top:16px">
+      <button class="btn-cancel" onclick="closeLeadModal()">Cancel</button>
+      <button class="btn-save" onclick="addLead()">Save to R2 →</button>
+    </div>
+  </div>
+</div>
+
+<div id="toast"></div>
+
+<script>
+// ── API CONFIG ──
+var API = 'https://nextgen-ai-api.kitentyaluth.workers.dev';
+var ADMIN_TOKEN = '';
+
+// In-memory cache
+var DB = { properties: [], leads: [], stats: {} };
+
+// ── AUTH ──
+function getStoredToken() {
+  try {
+    var data = JSON.parse(sessionStorage.getItem('ng_admin') || '{}');
+    if (data.token && data.expires && Date.now() < data.expires) return data.token;
+    sessionStorage.removeItem('ng_admin');
+  } catch(e) {}
+  return null;
+}
+
+function saveToken(token, expires) {
+  sessionStorage.setItem('ng_admin', JSON.stringify({ token, expires }));
+  ADMIN_TOKEN = token;
+}
+
+function clearToken() {
+  sessionStorage.removeItem('ng_admin');
+  ADMIN_TOKEN = '';
+}
+
+async function doLogin() {
+  var pw = document.getElementById('loginPw').value;
+  var errEl = document.getElementById('loginError');
+  errEl.style.display = 'none';
+  if (!pw) { errEl.textContent = '❌ Please enter your password.'; errEl.style.display = 'block'; return; }
+  try {
+    var resp = await fetch(API + '/api/admin/login', {
+      method: 'POST', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ password: pw })
+    });
+    var data = await resp.json();
+    if (!resp.ok || !data.token) {
+      errEl.textContent = '❌ Incorrect password. Try again.';
+      errEl.style.display = 'block';
+      document.getElementById('loginPw').value = '';
+      return;
+    }
+    saveToken(data.token, data.expires);
+    document.getElementById('loginOverlay').style.display = 'none';
+    initDashboard();
+  } catch(e) {
+    errEl.textContent = '❌ Cannot connect to server. Check API.';
+    errEl.style.display = 'block';
+  }
+}
+
+async function adminLogout() {
+  if (!confirm('Logout from admin dashboard?')) return;
+  try {
+    await fetch(API + '/api/admin/logout', {
+      method: 'POST',
+      headers: { 'X-Admin-Token': ADMIN_TOKEN }
+    });
+  } catch(e) {}
+  clearToken();
+  document.getElementById('loginOverlay').style.display = 'flex';
+  document.getElementById('loginPw').value = '';
+  document.getElementById('loginError').style.display = 'none';
+  showToast('Logged out successfully', 'success');
+}
+
+function authHeaders() {
+  return { 'Content-Type': 'application/json', 'X-Admin-Token': ADMIN_TOKEN };
+}
+
+// ── INIT ──
+window.onload = async function() {
+  var token = getStoredToken();
+  if (!token) {
+    document.getElementById('loginOverlay').style.display = 'flex';
+  } else {
+    ADMIN_TOKEN = token;
+    // Verify token with server
+    try {
+      var vResp = await fetch(API + '/api/admin/verify', { headers: { 'X-Admin-Token': token } });
+      var vData = await vResp.json();
+      if (!vData.valid) {
+        clearToken();
+        document.getElementById('loginOverlay').style.display = 'flex';
+        return;
+      }
+    } catch(e) { /* offline — allow cached token */ }
+    initDashboard();
+  }
+};
+
+function initDashboard() {
+  checkAPIHealth();
+  renderChart();
+  document.getElementById('widgetCode').value = getWidgetHTML();
+}
+
+async function checkAPIHealth() {
+  var statusEl = document.getElementById('apiStatus');
+  var textEl = document.getElementById('apiStatusText');
+  try {
+    var resp = await fetch(API + '/health', { signal: AbortSignal.timeout(8000) });
+    var data = await resp.json();
+    statusEl.className = 'api-status ok';
+    statusEl.querySelector('.status-dot').className = 'status-dot dot-ok';
+    textEl.textContent = '✅ ' + (data.status || 'API Connected') + ' | AI: ' + (data.ai || '?') + ' | Storage: ' + (data.storage || '?');
+    // Load stats
+    loadAnalytics();
+    loadLeads();
+    loadProperties();
+  } catch(e) {
+    statusEl.className = 'api-status err';
+    statusEl.querySelector('.status-dot').className = 'status-dot dot-err';
+    textEl.textContent = '❌ Cannot connect to API at ' + API + ' — Check Worker is deployed';
+  }
+}
+
+async function loadAnalytics() {
+  try {
+    var resp = await fetch(API + '/api/analytics');
+    var data = await resp.json();
+    var s = data.stats || {};
+    DB.stats = s;
+    document.getElementById('statProps').textContent = s.totalProperties || '0';
+    document.getElementById('statBuyers').textContent = s.buyerLeads || '0';
+    document.getElementById('statSellers').textContent = s.sellerLeads || '0';
+    document.getElementById('statNew').textContent = s.newLeads || '0';
+    document.getElementById('propChange').textContent = (s.totalProperties || 0) + ' total';
+    document.getElementById('leadBadge').textContent = s.newLeads || '0';
+
+    // Analytics page metrics
+    var metrics = document.getElementById('analyticsMetrics');
+    if (metrics) {
+      metrics.innerHTML = [
+        ['Total Leads', s.totalLeads || 0],
+        ['Buyer Leads', s.buyerLeads || 0],
+        ['Seller Leads', s.sellerLeads || 0],
+        ['New Leads', s.newLeads || 0, 'var(--blue)'],
+        ['Closed Deals', s.closedLeads || 0, 'var(--green)'],
+      ].map(([label, val, color]) =>
+        `<div style="display:flex;justify-content:space-between;align-items:center;padding:10px;background:var(--off);border-radius:8px">
+          <div style="font-size:13px;color:var(--td)">${label}</div>
+          <div style="font-size:14px;font-weight:700;color:${color||'var(--navy)'}">${val}</div>
+        </div>`
+      ).join('');
+    }
+  } catch(e) {
+    console.error('Analytics error:', e);
+  }
+}
+
+// ── LEADS ──
+async function loadLeads() {
+  try {
+    var resp = await fetch(API + '/api/leads');
+    var data = await resp.json();
+    DB.leads = data.leads || [];
+    document.getElementById('leadCount').textContent = DB.leads.length + ' leads in R2 storage';
+    renderLeadsTable(DB.leads);
+    renderPipeline(DB.leads);
+    renderPipelineAnalytics(DB.leads);
+  } catch(e) {
+    document.getElementById('leadsTableWrap').innerHTML = '<div class="empty-state"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/></svg><h3>Cannot Load Leads</h3><p>Check API connection</p></div>';
+  }
+}
+
+function renderLeadsTable(leads) {
+  var statusClass = {new:'ls-new',contacted:'ls-contacted',visit:'ls-visit',negotiating:'ls-negotiating',closed:'ls-closed',lost:'ls-lost'};
+  var statusLabel = {new:'New',contacted:'Contacted',visit:'Site Visit',negotiating:'Negotiating',closed:'Closed',lost:'Lost'};
+
+  if (!leads.length) {
+    var empty = '<div class="empty-state"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/></svg><h3>No Leads Yet</h3><p>Leads from website contact forms will appear here automatically</p></div>';
+    ['recentLeadsTable','leadsTableWrap'].forEach(id => { var el = document.getElementById(id); if(el) el.innerHTML = empty; });
+    return;
+  }
+
+  var html = `<table><thead><tr><th>Client</th><th>Type</th><th>Interest</th><th>Status</th><th>Date</th><th>Actions</th></tr></thead><tbody>
+  ${leads.slice(0,50).map((l,i) => `<tr>
+    <td><div style="font-weight:600;color:var(--navy)">${l.name||'—'}</div><div style="font-size:11px;color:var(--tm)">${l.phone||'—'}</div></td>
+    <td><span class="${l.type==='buyer'?'lt-buyer':'lt-seller'}">${l.type||'—'}</span></td>
+    <td style="max-width:160px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${l.interest||'—'}</td>
+    <td><span class="lead-status ${statusClass[l.status]||'ls-new'}">${statusLabel[l.status]||'New'}</span></td>
+    <td style="font-size:11.5px;color:var(--tm)">${l.date?new Date(l.date).toLocaleDateString():'—'}</td>
+    <td><div class="action-btns">
+      <button class="ab" onclick="updateLead('${l.id}')">Update</button>
+      <button class="ab" onclick="window.open('https://wa.me/${(l.phone||'').replace(/\D/g,'')}?text=Hello ${l.name||''}')">WA</button>
+    </div></td>
+  </tr>`).join('')}
+  </tbody></table>`;
+
+  ['recentLeadsTable','leadsTableWrap'].forEach(id => { var el = document.getElementById(id); if(el) el.innerHTML = html; });
+}
+
+function renderPipeline(leads) {
+  var stages = ['new','contacted','visit','negotiating','closed','lost'];
+  var colors = {new:'#3B82F6',contacted:'#F59E0B',visit:'#C9A84C',negotiating:'#E91E8C',closed:'#22C55E',lost:'#EF4444'};
+  var labels = {new:'New',contacted:'Contacted',visit:'Site Visit',negotiating:'Negotiating',closed:'Closed',lost:'Lost'};
+  var html = stages.map(s => {
+    var count = leads.filter(l => l.status === s).length;
+    return `<div style="background:#fff;border:1px solid var(--gl);border-radius:10px;padding:14px 16px;min-width:100px;text-align:center;flex-shrink:0">
+      <div style="font-size:22px;font-weight:700;color:${colors[s]};font-family:'Playfair Display',serif">${count}</div>
+      <div style="font-size:11px;color:var(--tm);margin-top:3px;font-weight:600">${labels[s]}</div>
+    </div>`;
+  }).join('');
+  var el = document.getElementById('pipelineView');
+  if(el) el.innerHTML = html;
+}
+
+function renderPipelineAnalytics(leads) {
+  var stages = [{l:'New Leads',k:'new'},{l:'Contacted',k:'contacted'},{l:'Site Visit',k:'visit'},{l:'Negotiating',k:'negotiating'},{l:'Closed',k:'closed'}];
+  var total = Math.max(leads.length, 1);
+  var html = stages.map(s => {
+    var count = leads.filter(l => l.status === s.k).length;
+    var pct = Math.round((count / total) * 100);
+    return `<div class="pipeline-row"><div class="pipeline-label">${s.l}</div><div class="pipeline-track"><div class="pipeline-fill" style="width:${pct}%"></div></div><div class="pipeline-count">${count}</div></div>`;
+  }).join('');
+  var el = document.getElementById('pipelineAnalytics');
+  if(el) el.innerHTML = html;
+}
+
+function filterLeads(q) {
+  q = q.toLowerCase();
+  var filtered = DB.leads.filter(l => (l.name||'').toLowerCase().includes(q) || (l.phone||'').includes(q) || (l.interest||'').toLowerCase().includes(q));
+  renderLeadsTable(filtered);
+}
+
+function openAddLead() { document.getElementById('leadModal').classList.add('open'); }
+function closeLeadModal() { document.getElementById('leadModal').classList.remove('open'); }
+
+async function addLead() {
+  var name = document.getElementById('lName').value.trim();
+  var phone = document.getElementById('lPhone').value.trim();
+  if(!name || !phone) { showToast('Name and phone required','error'); return; }
+  try {
+    var resp = await fetch(API + '/api/leads', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        name, phone,
+        type: document.getElementById('lType').value,
+        interest: document.getElementById('lInterest').value,
+        status: document.getElementById('lStatus').value
+      })
+    });
+    var data = await resp.json();
+    if (data.success) {
+      closeLeadModal();
+      showToast('Lead saved to R2: ' + name, 'success');
+      document.getElementById('lName').value = '';
+      document.getElementById('lPhone').value = '';
+      document.getElementById('lInterest').value = '';
+      await loadLeads();
+      await loadAnalytics();
+    } else {
+      showToast('Error: ' + (data.error || 'Save failed'), 'error');
+    }
+  } catch(e) {
+    showToast('API Error: ' + e.message, 'error');
+  }
+}
+
+async function updateLead(id) {
+  var opts = ['new','contacted','visit','negotiating','closed','lost'];
+  var labels = ['New','Contacted','Site Visit','Negotiating','Closed','Lost'];
+  var lead = DB.leads.find(l => l.id == id);
+  if (!lead) return;
+  var cur = opts.indexOf(lead.status);
+  var next = (cur + 1) % opts.length;
+  try {
+    await fetch(API + '/api/leads/' + id, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ status: opts[next] })
+    });
+    showToast('Status → ' + labels[next], 'success');
+    await loadLeads();
+  } catch(e) {
+    showToast('Update failed', 'error');
+  }
+}
+
+// ── PROPERTIES ──
+async function loadProperties() {
+  try {
+    var resp = await fetch(API + '/api/properties');
+    var data = await resp.json();
+    DB.properties = data.properties || [];
+    var countEl = document.getElementById('propCount');
+    if(countEl) countEl.textContent = DB.properties.length + ' properties in R2 storage';
+    renderPropsGrid();
+  } catch(e) {
+    var grid = document.getElementById('propsGrid');
+    if(grid) grid.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:40px;color:var(--red)">Cannot load properties — check API</div>';
+  }
+}
+
+function renderPropsGrid() {
+  var grid = document.getElementById('propsGrid');
+  if (!grid) return;
+  if (!DB.properties.length) {
+    grid.innerHTML = `<div class="empty-state" style="grid-column:1/-1"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg><h3>No Properties Yet</h3><p>Add your first property listing</p><button class="btn-save" onclick="showPage('add-property',null)">+ Add First Property</button></div>`;
+    return;
+  }
+  var sc = {'For Sale':'aps-sale','Bank Auction':'aps-auction','For Lease':'aps-lease','For Rent':'aps-lease'};
+  grid.innerHTML = DB.properties.map((p,i) => `
+    <div class="admin-prop">
+      <div class="ap-img">🏠
+        ${p.photos&&p.photos[0]?`<img src="${p.photos[0]}" alt="${p.title}" onerror="this.style.display='none'">`:'' }
+        <span class="ap-status ${sc[p.type]||'aps-sale'}">${p.type||'For Sale'}</span>
+      </div>
+      <div class="ap-body">
+        <div class="ap-price">${p.currency||'TZS'} ${p.price||'—'}</div>
+        <div class="ap-title">${p.title||'Untitled'}</div>
+        <div class="ap-loc">📍 ${p.district?p.district+', ':''}${p.region||'Tanzania'}</div>
+        <div class="ap-actions">
+          <button class="apa edit" onclick="showToast('Edit coming soon','info')">✏️ Edit</button>
+          <button class="apa" onclick="deleteProp('${p.id}')">🗑️ Delete</button>
+          <button class="apa" onclick="window.open('https://wa.me/255767109763?text=Property: ${encodeURIComponent(p.title||'')}')">💬 Share</button>
+        </div>
+      </div>
+    </div>`).join('');
+}
+
+async function saveProp(mode) {
+  var title = document.getElementById('propTitle').value.trim();
+  if (!title) { showToast('Property title is required', 'error'); return; }
+  var photos = [];
+  document.querySelectorAll('.preview-img').forEach(img => photos.push(img.src));
+  var features = [];
+  document.querySelectorAll('.feature-check input:checked').forEach(cb => features.push(cb.value));
+  var prop = {
+    title, type: document.getElementById('propType').value,
+    category: document.getElementById('propCat').value,
+    price: document.getElementById('propPrice').value,
+    currency: document.getElementById('propCurrency').value,
+    desc: document.getElementById('propDesc').value,
+    region: document.getElementById('propRegion').value,
+    district: document.getElementById('propDistrict').value,
+    size: document.getElementById('propSize').value,
+    beds: document.getElementById('propBeds').value,
+    baths: document.getElementById('propBaths').value,
+    features, photos, status: mode
+  };
+  try {
+    var resp = await fetch(API + '/api/properties', {
+      method: 'POST',
+      headers: authHeaders(),
+      body: JSON.stringify(prop)
+    });
+    var data = await resp.json();
+    if (data.success) {
+      showToast(mode === 'live' ? '🚀 Property published to R2!' : '💾 Draft saved to R2', 'success');
+      showPage('properties', null);
+      await loadProperties();
+      await loadAnalytics();
+    } else {
+      showToast('Error: ' + (data.error || 'Save failed'), 'error');
+    }
+  } catch(e) {
+    showToast('API Error: ' + e.message, 'error');
+  }
+}
+
+async function deleteProp(id) {
+  if (!confirm('Delete this property from R2?')) return;
+  try {
+    await fetch(API + '/api/properties/' + id, { method: 'DELETE' });
+    showToast('Property deleted', 'info');
+    await loadProperties();
+    await loadAnalytics();
+  } catch(e) {
+    showToast('Delete failed', 'error');
+  }
+}
+
+// ── PHOTO UPLOAD ──
+function handlePhotos(input) {
+  var files = Array.from(input.files);
+  var preview = document.getElementById('photoPreview');
+  files.forEach(f => {
+    if (!f.type.startsWith('image/')) return;
+    var r = new FileReader();
+    r.onload = e => {
+      var img = document.createElement('img');
+      img.src = e.target.result; img.className = 'preview-img';
+      preview.appendChild(img);
+    };
+    r.readAsDataURL(f);
+  });
+  showToast(files.length + ' photo(s) added', 'success');
+}
+function handleDrop(e) { e.preventDefault(); if(e.dataTransfer.files) handlePhotos({files:e.dataTransfer.files}); }
+
+// ── AI INSIGHTS ──
+async function generateAIInsight(type) {
+  var el = document.getElementById('aiMarketInsight');
+  el.innerHTML = '<div class="ai-loading"><div class="ai-dot"></div><span>NextGen AI inachambua soko la Tanzania kupitia Cloudflare Worker...</span></div>';
+  var prompts = {
+    market: 'As a Tanzania real estate expert for NEXT-GEN, give market overview 2025: key trends, opportunities, risks. Focus on DSM, Zanzibar, Dodoma. Specific TZS prices. Format with • bullet points.',
+    investment: 'Top 5 Tanzania real estate investment opportunities 2025 for NEXT-GEN clients. Specific areas, expected ROI %, entry price in TZS, why each is good now.',
+    pricing: 'Tanzania real estate pricing benchmarks 2025 in TZS: Masaki, Oyster Bay, Mbezi, Kigamboni, Zanzibar Nungwi, Paje, Dodoma. Residential, commercial, agricultural.',
+    auction: 'Tanzania bank auction opportunity 2025 for NEXT-GEN: CRDB, NMB, NCBA, NBC. Types of properties, typical discount, legal requirements, risks.'
+  };
+  try {
+    var resp = await fetch(API + '/api/ai', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ message: prompts[type], lang: 'en' })
+    });
+    if(!resp.ok) throw new Error('API ' + resp.status);
+    var data = await resp.json();
+    var text = data.answer || 'No response received';
+    var formatted = text
+      .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+      .replace(/^#{1,3}\s*(.*)/gm, '<div style="font-size:14px;font-weight:700;color:var(--navy);margin:14px 0 6px">$1</div>')
+      .replace(/^[•\-]\s*(.*)/gm, '<div style="display:flex;gap:8px;margin-bottom:5px"><span style="color:var(--magenta);flex-shrink:0">•</span><span>$1</span></div>')
+      .replace(/\n\n/g, '<br>').replace(/\n/g, '<br>');
+    el.innerHTML = '<div class="ai-result">' + formatted + '<div style="margin-top:12px;padding-top:10px;border-top:1px solid var(--gl);font-size:11px;color:var(--tm)">Generated by NextGen AI via Cloudflare Worker · ' + new Date().toLocaleTimeString() + '</div></div>';
+  } catch(e) {
+    el.innerHTML = '<div class="ai-result" style="padding:16px;background:rgba(239,68,68,.05);border:1px solid rgba(239,68,68,.2);border-radius:10px"><strong style="color:var(--red)">AI Connection Error</strong><br><br>Cannot reach: <code>' + API + '/api/ai</code><br><br>' + e.message + '<br><br><strong>Check:</strong><br>• Worker is deployed at ' + API + '<br>• ANTHROPIC_API_KEY is set in Worker Variables<br>• R2 Bucket is bound as BUCKET</div>';
+  }
+}
+
+// ── CHART ──
+function renderChart() {
+  var data = [{m:'Jan',b:2,s:1},{m:'Feb',b:4,s:2},{m:'Mar',b:3,s:1},{m:'Apr',b:6,s:3},{m:'May',b:5,s:2},{m:'Jun',b:8,s:4}];
+  if (DB.leads.length > 0) {
+    var months = ['Jan','Feb','Mar','Apr','May','Jun'];
+    data = months.map((m,i) => ({
+      m,
+      b: Math.max(1, Math.floor(DB.leads.filter(l=>l.type==='buyer').length * (i+1)/6)),
+      s: Math.max(1, Math.floor(DB.leads.filter(l=>l.type==='seller').length * (i+1)/6))
+    }));
+  }
+  var max = Math.max(...data.map(d => Math.max(d.b, d.s)), 8);
+  document.getElementById('chartArea').innerHTML = data.map(d =>
+    `<div class="bar-group">
+      <div style="display:flex;gap:3px;align-items:flex-end;height:160px">
+        <div class="bar buyers" style="height:${Math.max(4,(d.b/max)*160)}px;flex:1" data-val="${d.b} buyers"></div>
+        <div class="bar sellers" style="height:${Math.max(4,(d.s/max)*160)}px;flex:1" data-val="${d.s} sellers"></div>
+      </div>
+      <div class="bar-label">${d.m}</div>
+    </div>`).join('');
+}
+function setChartFilter(btn) { document.querySelectorAll('.cf').forEach(b=>b.classList.remove('active')); btn.classList.add('active'); renderChart(); }
+
+// ── PAGE NAV ──
+function showPage(id, btn) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+  var page = document.getElementById('page-' + id);
+  if(page) page.classList.add('active');
+  if(btn) btn.classList.add('active');
+  var titles = {dashboard:'CRM Dashboard','add-property':'Add New Property',properties:'Property Portfolio',leads:'Leads Management',analytics:'Analytics','ai-insights':'NextGen AI Insights','sell-widget':'Sell / Lease Widget'};
+  document.getElementById('topbarTitle').textContent = titles[id] || id;
+  if(id === 'properties') loadProperties();
+  if(id === 'leads') loadLeads();
+  if(id === 'analytics') { loadLeads(); loadAnalytics(); }
+  if(id === 'sell-widget') document.getElementById('widgetCode').value = getWidgetHTML();
+}
+
+// ── WIDGET CODE ──
+function getWidgetHTML() {
+  return `<!-- NEXT-GEN Sell/Lease Widget -->
+<section style="padding:60px 5%;background:var(--off-white)">
+  <div style="background:linear-gradient(135deg,#080C2E,#1A0A60);border-radius:20px;padding:48px;display:flex;align-items:center;justify-content:space-between;gap:40px;flex-wrap:wrap;max-width:1400px;margin:0 auto">
+    <div style="position:relative;z-index:2">
+      <div style="background:rgba(233,30,140,.15);border:1px solid rgba(233,30,140,.3);border-radius:20px;padding:4px 14px;margin-bottom:14px;display:inline-block">
+        <span style="font-size:10px;font-weight:700;color:#E91E8C;letter-spacing:1px;text-transform:uppercase">Listing Opportunity</span>
+      </div>
+      <h2 style="font-family:'Playfair Display',serif;font-size:clamp(22px,2.5vw,32px);font-weight:700;color:#fff;margin-bottom:10px">Want to Sell or Lease Your Property?</h2>
+      <p style="font-size:14px;color:rgba(255,255,255,.65);line-height:1.7;max-width:480px">List your property with NEXT-GEN and access qualified buyers, investors, institutions and premium auction networks across Tanzania.</p>
+    </div>
+    <div style="display:flex;gap:12px;flex-wrap:wrap;flex-shrink:0">
+      <button onclick="openModal('sell')" style="background:#E91E8C;color:#fff;border:none;padding:13px 26px;border-radius:9px;font-size:14px;font-weight:600;cursor:pointer;font-family:'Inter',sans-serif">List Your Property</button>
+      <button onclick="openModal('contact')" style="background:transparent;color:#fff;border:1.5px solid rgba(255,255,255,.35);padding:13px 26px;border-radius:9px;font-size:14px;font-weight:600;cursor:pointer;font-family:'Inter',sans-serif">Contact Agent</button>
+    </div>
+  </div>
+</section>`;
+}
+
+function copyWidgetCode() {
+  var code = document.getElementById('widgetCode');
+  navigator.clipboard.writeText(code.value)
+    .then(() => showToast('Widget HTML copied!', 'success'))
+    .catch(() => { code.select(); document.execCommand('copy'); showToast('Copied!', 'success'); });
+}
+
+// ── TOAST ──
+function showToast(msg, type) {
+  var t = document.getElementById('toast');
+  var d = document.createElement('div');
+  d.className = 'toast-item ' + (type||'info');
+  d.innerHTML = (type==='success'?'✅':type==='error'?'❌':'ℹ️') + ' ' + msg;
+  t.appendChild(d);
+  setTimeout(() => d.remove(), 4000);
+}
+</script>
+</body>
+</html>
