@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>NEXT-GEN Admin Dashboard</title>
+<title>NEXT-GEN Admin Dashboard | nextgentanzania.com</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
@@ -107,6 +107,9 @@ tr:last-child td{border-bottom:none}
 tr:hover td{background:rgba(248,247,255,.7)}
 .lead-status{display:inline-block;font-size:10px;font-weight:700;padding:3px 9px;border-radius:5px;letter-spacing:.5px;text-transform:uppercase}
 .ls-new{background:rgba(59,130,246,.1);color:var(--blue)}
+.lt-buyer{background:rgba(59,130,246,.1);color:var(--blue);font-size:10px;font-weight:700;padding:2px 7px;border-radius:4px;text-transform:uppercase}
+.lt-seller{background:rgba(233,30,140,.1);color:var(--magenta);font-size:10px;font-weight:700;padding:2px 7px;border-radius:4px;text-transform:uppercase}
+.lt-investor{background:rgba(201,168,76,.12);color:#8A6A00;font-size:10px;font-weight:700;padding:2px 7px;border-radius:4px;text-transform:uppercase}
 .ls-contacted{background:rgba(245,158,11,.1);color:var(--orange)}
 .ls-visit{background:rgba(201,168,76,.1);color:#8A6A00}
 .ls-negotiating{background:rgba(233,30,140,.1);color:var(--magenta)}
@@ -268,6 +271,8 @@ tr:hover td{background:rgba(248,247,255,.7)}
     <button class="nav-item" onclick="showPage('leads',this)"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>Leads<span id="leadBadge" style="margin-left:auto;background:var(--magenta);color:#fff;font-size:10px;font-weight:700;padding:1px 7px;border-radius:10px">0</span></button>
     <button class="nav-item" onclick="showPage('analytics',this)"><svg viewBox="0 0 24 24"><path d="M18 20V10M12 20V4M6 20v-6"/></svg>Analytics</button>
     <div class="nav-divider"></div>
+    <button class="nav-item" onclick="showPage('blog',this)"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>Blog / Insights</button>
+    <button class="nav-item" onclick="showPage('auctions',this)"><svg viewBox="0 0 24 24"><path d="M18 8h1a4 4 0 010 8h-1"/><path d="M2 8h16v9a4 4 0 01-4 4H6a4 4 0 01-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg>Auctions</button>
     <button class="nav-item" onclick="showPage('ai-insights',this)"><svg viewBox="0 0 24 24"><path d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg>NextGen AI Insights</button>
     <button class="nav-item" onclick="showPage('sell-widget',this)"><svg viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/></svg>Sell/Lease Widget</button>
     <div class="nav-divider"></div>
@@ -328,7 +333,7 @@ tr:hover td{background:rgba(248,247,255,.7)}
       </div>
       <div class="form-card">
         <div class="form-section-title"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>Location</div>
-        <div class="form-grid"><div><label class="fg-label">Region *</label><select class="fg-select" id="propRegion"><option value="">Select...</option><option>Dar es Salaam</option><option>Zanzibar North</option><option>Zanzibar South</option><option>Arusha</option><option>Mwanza</option><option>Dodoma</option><option>Mbeya</option><option>Morogoro</option><option>Tanga</option><option>Iringa</option><option>Other</option></select></div><div><label class="fg-label">District / Area</label><input type="text" class="fg-input" id="propDistrict" placeholder="e.g. Masaki, Oyster Bay"></div></div>
+        <div class="form-grid"><div><label class="fg-label">Region *</label><select class="fg-select" id="propRegion"><option value="">Select Region...</option><option>Dar es Salaam</option><option>Zanzibar — Unguja Kaskazini</option><option>Zanzibar — Unguja Kusini</option><option>Zanzibar — Mjini Magharibi</option><option>Zanzibar — Pemba Kaskazini</option><option>Zanzibar — Pemba Kusini</option><option>Arusha</option><option>Kilimanjaro</option><option>Tanga</option><option>Morogoro</option><option>Pwani (Coast)</option><option>Lindi</option><option>Mtwara</option><option>Ruvuma</option><option>Iringa</option><option>Mbeya</option><option>Njombe</option><option>Songwe</option><option>Dodoma</option><option>Singida</option><option>Tabora</option><option>Rukwa</option><option>Katavi</option><option>Kigoma</option><option>Kagera</option><option>Mwanza</option><option>Mara</option><option>Shinyanga</option><option>Simiyu</option><option>Geita</option></select></div><div><label class="fg-label">District / Area</label><input type="text" class="fg-input" id="propDistrict" placeholder="e.g. Masaki, Oyster Bay, Nungwi"></div></div>
         <div class="form-grid"><div><label class="fg-label">Street / Landmark</label><input type="text" class="fg-input" id="propStreet" placeholder="e.g. Near Slipway"></div><div><label class="fg-label">GPS (Optional)</label><input type="text" class="fg-input" id="propGPS" placeholder="-6.7924, 39.2083"></div></div>
       </div>
       <div class="form-card">
@@ -424,7 +429,7 @@ tr:hover td{background:rgba(248,247,255,.7)}
           </div>
         </div>
         <div class="insight-card">
-          <div class="insight-header"><div class="insight-icon">🔥</div><div><div class="insight-title">Tanzania Hot Zones</div><div class="insight-sub">2025–2026 investment hotspots</div></div></div>
+          <div class="insight-header"><div class="insight-icon">🔥</div><div><div class="insight-title">Tanzania Hot Zones</div><div class="insight-sub">2026 investment hotspots</div></div></div>
           <div style="display:flex;flex-direction:column;gap:10px">
             <div class="hotzone-row"><div class="hz-name">Paje, Zanzibar</div><div class="hz-bar-track"><div class="hz-bar-fill" style="width:92%"></div></div><div class="hz-val">+55%</div></div>
             <div class="hotzone-row"><div class="hz-name">Kigamboni</div><div class="hz-bar-track"><div class="hz-bar-fill" style="width:79%"></div></div><div class="hz-val">+42%</div></div>
@@ -491,7 +496,8 @@ tr:hover td{background:rgba(248,247,255,.7)}
     <button class="modal-x" onclick="closeLeadModal()">×</button>
     <div class="modal-title">Add Lead</div>
     <div class="modal-sub">Record a new buyer or seller inquiry</div>
-    <div class="fg2"><div class="fg"><label>Full Name *</label><input type="text" class="fg-input" id="lName" placeholder="Client name"></div><div class="fg"><label>Phone *</label><input type="tel" class="fg-input" id="lPhone" placeholder="+255..."></div></div>
+    <div class="fg2"><div class="fg"><label>Full Name *</label><input type="text" class="fg-input" id="lName" placeholder="Client full name"></div><div class="fg"><label>Phone / WhatsApp *</label><input type="tel" class="fg-input" id="lPhone" placeholder="+255..."></div></div>
+    <div class="fg"><label>Email</label><input type="email" class="fg-input" id="lEmail" placeholder="client@email.com"></div>
     <div class="fg"><label>Lead Type</label><select class="fg-input" id="lType"><option value="buyer">Buyer</option><option value="seller">Seller</option><option value="investor">Investor</option><option value="tenant">Tenant</option></select></div>
     <div class="fg"><label>Property Interest</label><input type="text" class="fg-input" id="lInterest" placeholder="e.g. 3 bed villa Masaki under TZS 500M"></div>
     <div class="fg"><label>Status</label><select class="fg-input" id="lStatus"><option value="new">New Lead</option><option value="contacted">Contacted</option><option value="visit">Site Visit</option><option value="negotiating">Negotiating</option><option value="closed">Closed</option><option value="lost">Lost</option></select></div>
@@ -502,10 +508,113 @@ tr:hover td{background:rgba(248,247,255,.7)}
   </div>
 </div>
 
+
+<!-- ═══ BLOG PAGE ═══ -->
+<div class="page" id="page-blog">
+  <div class="page-hdr">
+    <div>
+      <div class="page-title">Blog & Market Insights</div>
+      <div class="page-sub">Create and publish articles to your website's blog section</div>
+    </div>
+    <button class="btn-save" onclick="showBlogEditor()">+ Write New Post</button>
+  </div>
+  <!-- Editor -->
+  <div id="blogEditor" style="display:none;background:#fff;border:1px solid var(--gl);border-radius:14px;padding:28px;margin-bottom:28px">
+    <h3 style="font-size:16px;font-weight:700;color:var(--navy);margin-bottom:20px" id="blogEditorTitle">New Blog Post</h3>
+    <input type="hidden" id="blogEditId">
+    <div style="display:grid;gap:14px">
+      <div><label class="fg-label">Post Title *</label><input type="text" class="fg-input" id="blogTitle" placeholder="e.g. Best Investment Areas in Zanzibar 2026"></div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px"><div><label class="fg-label">Category</label><select class="fg-select" id="blogCategory"><option>Market Insights</option><option>Investment Guide</option><option>Legal Guide</option><option>Hospitality</option><option>Bank Auctions</option><option>Zanzibar</option><option>Dar es Salaam</option><option>Company News</option></select></div><div><label class="fg-label">Language</label><select class="fg-select" id="blogLang"><option value="en">English</option><option value="sw">Kiswahili</option></select></div></div>
+      <div><label class="fg-label">Short Excerpt (shown on blog grid)</label><textarea class="fg-input" id="blogExcerpt" rows="2" placeholder="1-2 sentence summary..."></textarea></div>
+      <div><label class="fg-label">Full Article Content</label><textarea class="fg-input" id="blogContent" rows="10" placeholder="Write your full article here..."></textarea></div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px"><div><label class="fg-label">Cover Image (filename or URL)</label><input type="text" class="fg-input" id="blogImage" placeholder="e.g. 1.jfif"></div><div><label class="fg-label">Author</label><input type="text" class="fg-input" id="blogAuthor" value="NEXT-GEN Research"></div></div>
+      <div><label class="fg-label">Tags (comma-separated)</label><input type="text" class="fg-input" id="blogTags" placeholder="Zanzibar, Investment, 2026"></div>
+    </div>
+    <div style="display:flex;gap:10px;margin-top:20px;flex-wrap:wrap">
+      <button class="btn-save" onclick="saveBlogPost('published')">🚀 Publish Now</button>
+      <button class="btn-draft" onclick="saveBlogPost('draft')">💾 Save Draft</button>
+      <button style="background:transparent;border:1.5px solid var(--gl);color:var(--tm);padding:10px 18px;border-radius:8px;cursor:pointer;font-family:Inter,sans-serif;font-weight:600;font-size:13px" onclick="hideBlogEditor()">Cancel</button>
+    </div>
+  </div>
+  <!-- Posts list -->
+  <div id="blogPostsList"><div style="text-align:center;padding:48px;color:var(--tm)">Loading posts...</div></div>
+</div>
+
+<!-- ═══ AUCTIONS PAGE ═══ -->
+<div class="page" id="page-auctions">
+  <div class="page-hdr">
+    <div>
+      <div class="page-title">Bank Auctions</div>
+      <div class="page-sub">Manage auction listings — update dates, prices and details. Changes appear on the website immediately.</div>
+    </div>
+    <button class="btn-save" onclick="saveAuctions()">💾 Save Changes</button>
+  </div>
+
+  <div style="background:#fff8e1;border:1px solid #F59E0B;border-radius:10px;padding:14px 18px;margin-bottom:24px;display:flex;gap:10px;align-items:flex-start">
+    <span style="font-size:18px">💡</span>
+    <div style="font-size:13px;color:#92400E;line-height:1.6">
+      <strong>How it works:</strong> Edit the auction details below and click "Save Changes". 
+      The countdown timer on the website will automatically update to your new end date. 
+      Date/Time is in <strong>East Africa Time (EAT = UTC+3)</strong>.
+    </div>
+  </div>
+
+  <!-- Auction 1 -->
+  <div style="background:#fff;border:1px solid var(--gl);border-radius:14px;padding:28px;margin-bottom:20px">
+    <div style="display:flex;align-items:center;gap:10px;margin-bottom:20px">
+      <div style="width:36px;height:36px;background:rgba(201,168,76,.12);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:18px">🔨</div>
+      <div>
+        <div style="font-size:15px;font-weight:700;color:var(--navy)">Auction Slot 1</div>
+        <div style="font-size:11px;color:var(--tm)">Appears as first auction card on website</div>
+      </div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
+      <div><label class="fg-label">Bank Name</label><input type="text" class="fg-input" id="auc1bank" placeholder="e.g. CRDB Bank"></div>
+      <div><label class="fg-label">Reserve Price</label><input type="text" class="fg-input" id="auc1price" placeholder="e.g. TZS 14B"></div>
+      <div style="grid-column:1/-1"><label class="fg-label">Property Title</label><input type="text" class="fg-input" id="auc1title" placeholder="e.g. Edible Oil Factory — Dodoma Industrial Zone"></div>
+      <div style="grid-column:1/-1"><label class="fg-label">Subtitle / Details</label><input type="text" class="fg-input" id="auc1sub" placeholder="e.g. 5.2 Acres · Fully Equipped · Ready to Operate"></div>
+      <div><label class="fg-label">Auction End Date (EAT)</label><input type="datetime-local" class="fg-input" id="auc1end"></div>
+      <div><label class="fg-label">Cover Image (filename or URL)</label><input type="text" class="fg-input" id="auc1img" placeholder="e.g. 18.jfif"></div>
+      <div style="grid-column:1/-1"><label class="fg-label">Internal Notes (not shown on website)</label><input type="text" class="fg-input" id="auc1notes" placeholder="Tender document ref, contact person, etc."></div>
+    </div>
+    <div id="auc1countdown" style="margin-top:16px;padding:12px 16px;background:var(--off-white);border-radius:8px;font-size:13px;color:var(--tm)">Enter end date to see countdown preview</div>
+  </div>
+
+  <!-- Auction 2 -->
+  <div style="background:#fff;border:1px solid var(--gl);border-radius:14px;padding:28px;margin-bottom:24px">
+    <div style="display:flex;align-items:center;gap:10px;margin-bottom:20px">
+      <div style="width:36px;height:36px;background:rgba(233,30,140,.08);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:18px">🔨</div>
+      <div>
+        <div style="font-size:15px;font-weight:700;color:var(--navy)">Auction Slot 2</div>
+        <div style="font-size:11px;color:var(--tm)">Appears as second auction card on website</div>
+      </div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
+      <div><label class="fg-label">Bank Name</label><input type="text" class="fg-input" id="auc2bank" placeholder="e.g. NMB Bank"></div>
+      <div><label class="fg-label">Reserve Price</label><input type="text" class="fg-input" id="auc2price" placeholder="e.g. TZS 3.2B"></div>
+      <div style="grid-column:1/-1"><label class="fg-label">Property Title</label><input type="text" class="fg-input" id="auc2title" placeholder="e.g. Beachfront Resort Complex — Dar es Salaam"></div>
+      <div style="grid-column:1/-1"><label class="fg-label">Subtitle / Details</label><input type="text" class="fg-input" id="auc2sub" placeholder="e.g. 0.8 Acres · 12 Units · Premium Location"></div>
+      <div><label class="fg-label">Auction End Date (EAT)</label><input type="datetime-local" class="fg-input" id="auc2end"></div>
+      <div><label class="fg-label">Cover Image (filename or URL)</label><input type="text" class="fg-input" id="auc2img" placeholder="e.g. 2.jfif"></div>
+      <div style="grid-column:1/-1"><label class="fg-label">Internal Notes</label><input type="text" class="fg-input" id="auc2notes" placeholder="Tender document ref, contact person, etc."></div>
+    </div>
+    <div id="auc2countdown" style="margin-top:16px;padding:12px 16px;background:var(--off-white);border-radius:8px;font-size:13px;color:var(--tm)">Enter end date to see countdown preview</div>
+  </div>
+
+  <div style="display:flex;gap:10px">
+    <button class="btn-save" onclick="saveAuctions()" style="min-width:180px">💾 Save Changes to R2</button>
+    <button class="btn-draft" onclick="loadAuctionPage()">↺ Reload from Saved</button>
+  </div>
+  <div id="aucSaveMsg" style="margin-top:10px;font-size:13px;color:var(--tm)"></div>
+</div>
+
 <div id="toast"></div>
 
 <script>
 // ── API CONFIG ──
+// NEXT-GEN Admin Dashboard v5.0
+// Domain: nextgentanzania.com
+// Worker: Set ADMIN_PASSWORD + ANTHROPIC_API_KEY + R2_ACCOUNT_ID in Worker env vars
 var API = 'https://nextgen-ai-api.kitentyaluth.workers.dev';
 var ADMIN_TOKEN = '';
 
@@ -604,6 +713,272 @@ function initDashboard() {
   document.getElementById('widgetCode').value = getWidgetHTML();
 }
 
+// ── AUCTIONS ──
+var DB_AUCTIONS = [];
+
+async function loadAuctionPage() {
+  try {
+    var resp = await fetch(API + '/api/auctions');
+    var data = await resp.json();
+    DB_AUCTIONS = data.auctions || [];
+  } catch(e) {
+    DB_AUCTIONS = [];
+  }
+
+  // Defaults if no data saved yet
+  var defaults = [
+    { bank:'CRDB Bank', title:'Edible Oil Factory — Dodoma Industrial Zone',
+      subtitle:'5.2 Acres · Fully Equipped · Ready to Operate',
+      price:'TZS 14B', endDate:'2026-07-10T09:00', image:'18.jfif', notes:'' },
+    { bank:'NMB Bank', title:'Beachfront Resort Complex — Dar es Salaam',
+      subtitle:'0.8 Acres · 12 Units · Premium Location',
+      price:'TZS 3.2B', endDate:'2026-07-03T15:00', image:'2.jfif', notes:'' },
+  ];
+
+  [0,1].forEach(function(i){
+    var n = i + 1;
+    var src = DB_AUCTIONS[i] || defaults[i];
+    var sv = function(id, val){ var el=document.getElementById(id); if(el) el.value = val||''; };
+    sv('auc'+n+'bank',  src.bank);
+    sv('auc'+n+'price', src.price);
+    sv('auc'+n+'title', src.title);
+    sv('auc'+n+'sub',   src.subtitle);
+    sv('auc'+n+'img',   src.image);
+    sv('auc'+n+'notes', src.notes);
+    // Convert UTC ISO to local datetime-local format (EAT = UTC+3)
+    if(src.endDate){
+      try {
+        var d = new Date(src.endDate);
+        // Add 3 hours for EAT if stored as UTC
+        var eat = new Date(d.getTime() + (src.endDate.endsWith('Z') ? 3*3600000 : 0));
+        var pad = function(n){ return String(n).padStart(2,'0'); };
+        var local = eat.getFullYear()+'-'+pad(eat.getMonth()+1)+'-'+pad(eat.getDate())+'T'+pad(eat.getHours())+':'+pad(eat.getMinutes());
+        sv('auc'+n+'end', local);
+        updateAucCountdown(n);
+      } catch(e){}
+    }
+    // Live countdown preview listener
+    var endEl = document.getElementById('auc'+n+'end');
+    if(endEl) {
+      endEl.removeEventListener('input', endEl._listener || function(){});
+      endEl._listener = function(){ updateAucCountdown(n); };
+      endEl.addEventListener('input', endEl._listener);
+    }
+  });
+}
+
+function updateAucCountdown(n) {
+  var endEl = document.getElementById('auc'+n+'end');
+  var cdEl  = document.getElementById('auc'+n+'countdown');
+  if(!endEl || !cdEl) return;
+  var val = endEl.value;
+  if(!val){ cdEl.textContent = 'Enter end date to see countdown preview'; return; }
+  // datetime-local is in local time — treat as EAT (UTC+3) → convert to UTC
+  var localDate = new Date(val);
+  var utcDate   = new Date(localDate.getTime() - 3*3600000); // subtract 3h
+  var diff = utcDate - Date.now();
+  if(diff <= 0){
+    cdEl.textContent = '⚠️ This date has already passed — auction will show as CLOSED on website';
+    cdEl.style.color = '#EF4444';
+    return;
+  }
+  cdEl.style.color = '';
+  var days  = Math.floor(diff / 86400000);
+  var hours = Math.floor((diff % 86400000) / 3600000);
+  var mins  = Math.floor((diff % 3600000) / 60000);
+  cdEl.innerHTML = '⏱ Website will show: <strong>' + days + 'd ' + hours + 'h ' + mins + 'm</strong> remaining';
+}
+
+async function saveAuctions() {
+  var msgEl = document.getElementById('aucSaveMsg');
+  msgEl.textContent = 'Saving...';
+  var auctions = [0,1].map(function(i){
+    var n = i + 1;
+    var gv = function(id){ var el=document.getElementById(id); return el?el.value.trim():''; };
+    var endLocal = gv('auc'+n+'end');
+    // Convert local EAT datetime to UTC ISO string
+    var endUTC = '';
+    if(endLocal){
+      var d = new Date(endLocal);
+      var utc = new Date(d.getTime() - 3*3600000);
+      endUTC = utc.toISOString();
+    }
+    return {
+      id:       i + 1,
+      bank:     gv('auc'+n+'bank'),
+      title:    gv('auc'+n+'title'),
+      subtitle: gv('auc'+n+'sub'),
+      price:    gv('auc'+n+'price'),
+      endDate:  endUTC,
+      image:    gv('auc'+n+'img'),
+      notes:    gv('auc'+n+'notes'),
+      status:   'active',
+    };
+  });
+  try {
+    var resp = await fetch(API + '/api/auctions', {
+      method: 'POST',
+      headers: authHeaders(),
+      body: JSON.stringify(auctions)
+    });
+    var data = await resp.json();
+    if(data.success){
+      showToast('✅ Auction settings saved! Website timers will update within 30 seconds.', 'success');
+      msgEl.textContent = '✅ Saved at ' + new Date().toLocaleTimeString();
+    } else {
+      showToast('Error: ' + (data.error||'Save failed'), 'error');
+      msgEl.textContent = '❌ ' + (data.error||'Save failed');
+    }
+  } catch(e) {
+    showToast('API Error: ' + e.message, 'error');
+    msgEl.textContent = '❌ ' + e.message;
+  }
+}
+
+// ── BLOG ──
+var DB_BLOG = [];
+
+async function loadBlogPosts() {
+  try {
+    var resp = await fetch(API + '/api/blog/admin/all', { headers: authHeaders() });
+    var data = await resp.json();
+    DB_BLOG = data.posts || [];
+    renderBlogList();
+  } catch(e) {
+    var el = document.getElementById('blogPostsList');
+    if(el) el.innerHTML = '<div style="color:var(--red);padding:20px">Could not load posts: ' + e.message + '</div>';
+  }
+}
+
+function renderBlogList() {
+  var el = document.getElementById('blogPostsList');
+  if(!el) return;
+  if(!DB_BLOG.length) {
+    el.innerHTML = '<div style="text-align:center;padding:48px;color:var(--tm)"><div style="font-size:40px;margin-bottom:12px">📝</div><h3 style="font-size:18px;margin-bottom:8px">No posts yet</h3><p>Click "Write New Post" to create your first article.</p></div>';
+    return;
+  }
+  el.innerHTML = '<div style="display:flex;flex-direction:column;gap:12px">' +
+    DB_BLOG.map(function(p) {
+      var badge = p.status === 'published'
+        ? '<span style="background:rgba(34,197,94,.1);color:#16A34A;font-size:10px;font-weight:700;padding:2px 8px;border-radius:4px;text-transform:uppercase">Published</span>'
+        : '<span style="background:rgba(107,107,138,.1);color:var(--tm);font-size:10px;font-weight:700;padding:2px 8px;border-radius:4px;text-transform:uppercase">Draft</span>';
+      return '<div style="background:#fff;border:1px solid var(--gl);border-radius:12px;padding:20px;display:flex;align-items:center;gap:16px">' +
+        (p.image ? '<img src="' + p.image + '" style="width:80px;height:60px;object-fit:cover;border-radius:8px;flex-shrink:0" onerror="this.style.display='none'">' : '') +
+        '<div style="flex:1;min-width:0">' +
+          '<div style="display:flex;align-items:center;gap:8px;margin-bottom:6px">' + badge +
+            '<span style="font-size:10px;color:var(--tm)">' + p.category + '</span>' +
+            '<span style="font-size:10px;color:var(--tm)">· ' + new Date(p.createdAt).toLocaleDateString('en-TZ') + '</span>' +
+          '</div>' +
+          '<div style="font-size:15px;font-weight:700;color:var(--navy);margin-bottom:4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">' + p.title + '</div>' +
+          '<div style="font-size:12px;color:var(--tm);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">' + (p.excerpt||'No excerpt') + '</div>' +
+        '</div>' +
+        '<div style="display:flex;gap:8px;flex-shrink:0">' +
+          '<button onclick="editBlogPost('' + p.id + '')" style="background:var(--navy);color:#fff;border:none;border-radius:7px;padding:7px 13px;font-size:12px;font-weight:600;cursor:pointer;font-family:Inter,sans-serif">✏️ Edit</button>' +
+          (p.status === 'draft'
+            ? '<button onclick="publishBlogPost('' + p.id + '')" style="background:#22C55E;color:#fff;border:none;border-radius:7px;padding:7px 13px;font-size:12px;font-weight:600;cursor:pointer;font-family:Inter,sans-serif">🚀 Publish</button>'
+            : '<button onclick="unpublishBlogPost('' + p.id + '')" style="background:var(--tm);color:#fff;border:none;border-radius:7px;padding:7px 13px;font-size:12px;font-weight:600;cursor:pointer;font-family:Inter,sans-serif">📌 Unpublish</button>') +
+          '<button onclick="deleteBlogPost('' + p.id + '')" style="background:rgba(239,68,68,.1);color:#EF4444;border:1px solid rgba(239,68,68,.2);border-radius:7px;padding:7px 13px;font-size:12px;font-weight:600;cursor:pointer;font-family:Inter,sans-serif">🗑️</button>' +
+        '</div>' +
+      '</div>';
+    }).join('') + '</div>';
+}
+
+function showBlogEditor(post) {
+  document.getElementById('blogEditor').style.display = 'block';
+  document.getElementById('blogEditorTitle').textContent = post ? 'Edit Post' : 'New Blog Post';
+  document.getElementById('blogEditId').value   = post ? post.id : '';
+  document.getElementById('blogTitle').value    = post ? post.title : '';
+  document.getElementById('blogCategory').value = post ? post.category : 'Market Insights';
+  document.getElementById('blogLang').value     = post ? post.lang : 'en';
+  document.getElementById('blogExcerpt').value  = post ? post.excerpt : '';
+  document.getElementById('blogContent').value  = post ? post.content : '';
+  document.getElementById('blogImage').value    = post ? post.image : '';
+  document.getElementById('blogAuthor').value   = post ? post.author : 'NEXT-GEN Research';
+  document.getElementById('blogTags').value     = post && post.tags ? post.tags.join(', ') : '';
+  document.getElementById('blogEditor').scrollIntoView({behavior:'smooth'});
+}
+
+function hideBlogEditor() {
+  document.getElementById('blogEditor').style.display = 'none';
+}
+
+async function saveBlogPost(status) {
+  var title = document.getElementById('blogTitle').value.trim();
+  if(!title) { showToast('Post title is required', 'error'); return; }
+  var editId = document.getElementById('blogEditId').value;
+  var tags = document.getElementById('blogTags').value.split(',').map(function(t){return t.trim();}).filter(Boolean);
+  var post = {
+    title:    title,
+    category: document.getElementById('blogCategory').value,
+    lang:     document.getElementById('blogLang').value,
+    excerpt:  document.getElementById('blogExcerpt').value.trim(),
+    content:  document.getElementById('blogContent').value.trim(),
+    image:    document.getElementById('blogImage').value.trim(),
+    author:   document.getElementById('blogAuthor').value.trim() || 'NEXT-GEN Research',
+    tags:     tags,
+    status:   status,
+  };
+  if(editId) { post.id = parseInt(editId); }
+  try {
+    var resp = await fetch(API + '/api/blog', { method:'POST', headers: authHeaders(), body: JSON.stringify(post) });
+    var data = await resp.json();
+    if(data.success) {
+      showToast(status === 'published' ? '🚀 Post published!' : '💾 Draft saved', 'success');
+      hideBlogEditor();
+      await loadBlogPosts();
+    } else {
+      showToast('Error: ' + (data.error||'Save failed'), 'error');
+    }
+  } catch(e) {
+    showToast('API Error: ' + e.message, 'error');
+  }
+}
+
+async function editBlogPost(id) {
+  try {
+    var resp = await fetch(API + '/api/blog/' + id, { headers: authHeaders() });
+    var data = await resp.json();
+    if(data.post) showBlogEditor(data.post);
+    else showToast('Could not load post', 'error');
+  } catch(e) {
+    // fallback: find in DB_BLOG
+    var p = DB_BLOG.find(function(x){ return String(x.id)===String(id); });
+    if(p) showBlogEditor(p);
+    else showToast('Post not found', 'error');
+  }
+}
+
+async function publishBlogPost(id) {
+  var post = DB_BLOG.find(function(p){ return String(p.id)===String(id); });
+  if(!post) return;
+  post.status = 'published';
+  try {
+    await fetch(API + '/api/blog', { method:'POST', headers: authHeaders(), body: JSON.stringify(post) });
+    showToast('Post published! ✅', 'success');
+    await loadBlogPosts();
+  } catch(e) { showToast('Error: ' + e.message, 'error'); }
+}
+
+async function unpublishBlogPost(id) {
+  var post = DB_BLOG.find(function(p){ return String(p.id)===String(id); });
+  if(!post) return;
+  post.status = 'draft';
+  try {
+    await fetch(API + '/api/blog', { method:'POST', headers: authHeaders(), body: JSON.stringify(post) });
+    showToast('Post moved to drafts', 'success');
+    await loadBlogPosts();
+  } catch(e) { showToast('Error: ' + e.message, 'error'); }
+}
+
+async function deleteBlogPost(id) {
+  if(!confirm('Delete this post permanently?')) return;
+  try {
+    await fetch(API + '/api/blog/' + id, { method:'DELETE', headers: authHeaders() });
+    showToast('Post deleted', 'success');
+    await loadBlogPosts();
+  } catch(e) { showToast('Error: ' + e.message, 'error'); }
+}
+
 async function checkAPIHealth() {
   var statusEl = document.getElementById('apiStatus');
   var textEl = document.getElementById('apiStatusText');
@@ -626,7 +1001,7 @@ async function checkAPIHealth() {
 
 async function loadAnalytics() {
   try {
-    var resp = await fetch(API + '/api/analytics');
+    var resp = await fetch(API + '/api/analytics', { headers: authHeaders() });
     var data = await resp.json();
     var s = data.stats || {};
     DB.stats = s;
@@ -636,6 +1011,8 @@ async function loadAnalytics() {
     document.getElementById('statNew').textContent = s.newLeads || '0';
     document.getElementById('propChange').textContent = (s.totalProperties || 0) + ' total';
     document.getElementById('leadBadge').textContent = s.newLeads || '0';
+    // Render chart with real monthly data from API
+    if (s.monthly) renderChart(s.monthly);
 
     // Analytics page metrics
     var metrics = document.getElementById('analyticsMetrics');
@@ -661,7 +1038,7 @@ async function loadAnalytics() {
 // ── LEADS ──
 async function loadLeads() {
   try {
-    var resp = await fetch(API + '/api/leads');
+    var resp = await fetch(API + '/api/leads', { headers: authHeaders() });
     var data = await resp.json();
     DB.leads = data.leads || [];
     document.getElementById('leadCount').textContent = DB.leads.length + ' leads in R2 storage';
@@ -683,19 +1060,38 @@ function renderLeadsTable(leads) {
     return;
   }
 
-  var html = `<table><thead><tr><th>Client</th><th>Type</th><th>Interest</th><th>Status</th><th>Date</th><th>Actions</th></tr></thead><tbody>
-  ${leads.slice(0,50).map((l,i) => `<tr>
-    <td><div style="font-weight:600;color:var(--navy)">${l.name||'—'}</div><div style="font-size:11px;color:var(--tm)">${l.phone||'—'}</div></td>
-    <td><span class="${l.type==='buyer'?'lt-buyer':'lt-seller'}">${l.type||'—'}</span></td>
-    <td style="max-width:160px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${l.interest||'—'}</td>
-    <td><span class="lead-status ${statusClass[l.status]||'ls-new'}">${statusLabel[l.status]||'New'}</span></td>
-    <td style="font-size:11.5px;color:var(--tm)">${l.date?new Date(l.date).toLocaleDateString():'—'}</td>
-    <td><div class="action-btns">
-      <button class="ab" onclick="updateLead('${l.id}')">Update</button>
-      <button class="ab" onclick="window.open('https://wa.me/${(l.phone||'').replace(/\D/g,'')}?text=Hello ${l.name||''}')">WA</button>
-    </div></td>
-  </tr>`).join('')}
-  </tbody></table>`;
+  var html = '<table><thead><tr>' +
+    '<th>Client</th><th>Contact</th><th>Type</th>' +
+    '<th>Interest</th><th>Region</th><th>Budget</th>' +
+    '<th>Source</th><th>Status</th><th>Date</th><th>Actions</th>' +
+    '</tr></thead><tbody>' +
+    leads.slice(0,100).map(function(l) {
+      var sc = statusClass[l.status] || 'ls-new';
+      var sl = statusLabel[l.status] || 'New';
+      var typeClass = l.type === 'seller' ? 'lt-seller' : l.type === 'investor' ? 'lt-investor' : 'lt-buyer';
+      var phone = (l.phone||'').replace(/\D/g,'');
+      var waMsg = encodeURIComponent('Hello ' + (l.name||'') + ', this is NEXT-GEN Auctioneer + Realtor. Following up on your inquiry.');
+      return '<tr>' +
+        '<td><div style="font-weight:600;color:var(--navy)">' + (l.name||'—') + '</div>' +
+          '<div style="font-size:10px;color:var(--tm)">Ref: NG-' + String(l.id).slice(-6) + '</div></td>' +
+        '<td><div style="font-size:12px">' + (l.phone||'—') + '</div>' +
+          (l.email ? '<div style="font-size:10.5px;color:#3B82F6"><a href="mailto:' + l.email + '" style="color:#3B82F6;text-decoration:none">✉ ' + l.email + '</a></div>' : '') +
+        '</td>' +
+        '<td><span class="' + typeClass + '">' + (l.type||'—') + '</span></td>' +
+        '<td style="max-width:140px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:12px">' + (l.interest||'—') + '</td>' +
+        '<td style="font-size:12px;color:var(--tm)">' + (l.region||'—') + '</td>' +
+        '<td style="font-size:12px;color:var(--tm)">' + (l.budget||'—') + '</td>' +
+        '<td style="font-size:11px"><span style="background:rgba(13,18,64,.06);border-radius:4px;padding:2px 6px">' + (l.source||'Website') + '</span></td>' +
+        '<td><span class="lead-status ' + sc + '">' + sl + '</span></td>' +
+        '<td style="font-size:11.5px;color:var(--tm)">' + (l.date ? new Date(l.date).toLocaleDateString('en-TZ') : '—') + '</td>' +
+        '<td><div class="action-btns">' +
+          '<button class="ab" onclick="updateLead(' + "'" + l.id + "'" + ')">Update</button>' +
+          (phone ? '<button class="ab" onclick="window.open('https://wa.me/' + phone + '?text=' + waMsg + '')">WA</button>' : '') +
+          (l.email ? '<button class="ab" onclick="window.open('mailto:' + l.email + '')">Email</button>' : '') +
+        '</div></td>' +
+      '</tr>';
+    }).join('') +
+    '</tbody></table>';
 
   ['recentLeadsTable','leadsTableWrap'].forEach(id => { var el = document.getElementById(id); if(el) el.innerHTML = html; });
 }
@@ -729,7 +1125,15 @@ function renderPipelineAnalytics(leads) {
 
 function filterLeads(q) {
   q = q.toLowerCase();
-  var filtered = DB.leads.filter(l => (l.name||'').toLowerCase().includes(q) || (l.phone||'').includes(q) || (l.interest||'').toLowerCase().includes(q));
+  var filtered = DB.leads.filter(function(l) {
+    return (l.name||'').toLowerCase().includes(q) ||
+           (l.phone||'').includes(q) ||
+           (l.email||'').toLowerCase().includes(q) ||
+           (l.interest||'').toLowerCase().includes(q) ||
+           (l.region||'').toLowerCase().includes(q) ||
+           (l.source||'').toLowerCase().includes(q) ||
+           (l.type||'').toLowerCase().includes(q);
+  });
   renderLeadsTable(filtered);
 }
 
@@ -741,14 +1145,22 @@ async function addLead() {
   var phone = document.getElementById('lPhone').value.trim();
   if(!name || !phone) { showToast('Name and phone required','error'); return; }
   try {
+    var lEmail = (document.getElementById('lEmail') ? document.getElementById('lEmail').value.trim() : '');
+    var lRegion = (document.getElementById('lRegion') ? document.getElementById('lRegion').value.trim() : '');
+    var lBudget = (document.getElementById('lBudget') ? document.getElementById('lBudget').value.trim() : '');
     var resp = await fetch(API + '/api/leads', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        name, phone,
-        type: document.getElementById('lType').value,
+        name:     name,
+        phone:    phone,
+        email:    lEmail,
+        type:     document.getElementById('lType').value,
         interest: document.getElementById('lInterest').value,
-        status: document.getElementById('lStatus').value
+        region:   lRegion,
+        budget:   lBudget,
+        status:   document.getElementById('lStatus').value,
+        source:   'Admin Manual Entry',
       })
     });
     var data = await resp.json();
@@ -758,6 +1170,7 @@ async function addLead() {
       document.getElementById('lName').value = '';
       document.getElementById('lPhone').value = '';
       document.getElementById('lInterest').value = '';
+      if(document.getElementById('lEmail')) document.getElementById('lEmail').value = '';
       await loadLeads();
       await loadAnalytics();
     } else {
@@ -768,30 +1181,94 @@ async function addLead() {
   }
 }
 
-async function updateLead(id) {
-  var opts = ['new','contacted','visit','negotiating','closed','lost'];
-  var labels = ['New','Contacted','Site Visit','Negotiating','Closed','Lost'];
-  var lead = DB.leads.find(l => l.id == id);
-  if (!lead) return;
-  var cur = opts.indexOf(lead.status);
-  var next = (cur + 1) % opts.length;
+function updateLead(id) {
+  var lead = DB.leads.find(function(l){ return String(l.id) === String(id); });
+  if (!lead) { showToast('Lead not found', 'error'); return; }
+
+  // Build or reuse modal
+  var m = document.getElementById('leadUpdateModal');
+  if (!m) {
+    m = document.createElement('div');
+    m.id = 'leadUpdateModal';
+    m.style.cssText = 'display:none;position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:1000;align-items:center;justify-content:center';
+    m.innerHTML = '<div id="lumInner" style="background:#fff;border-radius:18px;padding:28px;max-width:480px;width:90%;max-height:90vh;overflow-y:auto;box-shadow:0 24px 80px rgba(0,0,0,.2)"></div>';
+    document.body.appendChild(m);
+    m.addEventListener('click', function(e){ if(e.target===m) m.style.display='none'; });
+  }
+
+  var statusOpts = [
+    {v:'new',        l:'🔵 New',              c:'#3B82F6'},
+    {v:'contacted',  l:'🟡 Contacted',         c:'#F59E0B'},
+    {v:'visit',      l:'🟤 Site Visit',         c:'#C9A84C'},
+    {v:'negotiating',l:'🟣 Negotiating',        c:'#E91E8C'},
+    {v:'closed',     l:'🟢 Closed / Won',       c:'#22C55E'},
+    {v:'lost',       l:'🔴 Lost',               c:'#EF4444'},
+  ];
+
+  var statusBtns = statusOpts.map(function(o) {
+    var active = lead.status === o.v;
+    return '<button onclick="doUpdateLead('' + id + '','' + o.v + '')" ' +
+      'style="display:block;width:100%;text-align:left;padding:10px 14px;margin-bottom:6px;' +
+      'border-radius:9px;border:1.5px solid ' + (active ? o.c : '#E8E8F0') + ';' +
+      'background:' + (active ? o.c : '#F8F7FF') + ';' +
+      'color:' + (active ? '#fff' : '#1A1A2E') + ';' +
+      'font-size:13.5px;font-weight:600;cursor:pointer;font-family:Inter,sans-serif">' +
+      o.l + (active ? ' ✓' : '') + '</button>';
+  }).join('');
+
+  var waPhone  = (lead.phone||'').replace(/\D/g,'');
+  var waMsg    = encodeURIComponent('Hello ' + (lead.name||'') + ', this is NEXT-GEN Auctioneer + Realtor. Following up on your property inquiry.');
+  var emailHref = 'mailto:' + (lead.email||'') + '?subject=' + encodeURIComponent('Re: Your Property Inquiry — NEXT-GEN');
+
+  document.getElementById('lumInner').innerHTML =
+    '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:18px">' +
+      '<h3 style="font-family:Playfair Display,serif;font-size:18px;color:#0D1240">Update Lead</h3>' +
+      '<button onclick="document.getElementById('leadUpdateModal').style.display='none'" ' +
+        'style="background:none;border:none;font-size:22px;cursor:pointer;color:#6B6B8A;line-height:1">×</button>' +
+    '</div>' +
+    '<div style="background:#F8F7FF;border-radius:10px;padding:14px;margin-bottom:18px;font-size:13px">' +
+      '<strong style="color:#0D1240;font-size:14px">' + (lead.name||'—') + '</strong>' +
+      '<span style="color:#6B6B8A;font-size:11px;margin-left:8px">Ref: NG-' + String(id).slice(-6) + '</span><br>' +
+      (lead.phone ? '<span style="color:#6B6B8A">📞 ' + lead.phone + '</span><br>' : '') +
+      (lead.email ? '<span><a href="' + emailHref + '" style="color:#3B82F6;font-size:12px">✉ ' + lead.email + '</a></span><br>' : '') +
+      '<span style="color:#6B6B8A">Type: ' + (lead.type||'buyer') + ' | Source: ' + (lead.source||'Website') + '</span><br>' +
+      (lead.interest ? '<span style="color:#6B6B8A">Interest: ' + lead.interest + '</span><br>' : '') +
+      (lead.region ? '<span style="color:#6B6B8A">Region: ' + lead.region + '</span>' : '') +
+    '</div>' +
+    '<div style="font-size:11px;font-weight:700;color:#6B6B8A;text-transform:uppercase;letter-spacing:1px;margin-bottom:10px">Set Status</div>' +
+    statusBtns +
+    '<div style="font-size:11px;font-weight:700;color:#6B6B8A;text-transform:uppercase;letter-spacing:1px;margin:14px 0 8px">Quick Contact</div>' +
+    '<div style="display:flex;gap:8px">' +
+      (lead.email ? '<a href="' + emailHref + '" style="flex:1;background:#0D1240;color:#fff;border-radius:8px;padding:10px;font-size:12px;font-weight:600;text-align:center;text-decoration:none">✉ Email</a>' : '') +
+      (waPhone ? '<a href="https://wa.me/' + waPhone + '?text=' + waMsg + '" target="_blank" style="flex:1;background:#25D366;color:#fff;border-radius:8px;padding:10px;font-size:12px;font-weight:600;text-align:center;text-decoration:none">💬 WA</a>' : '') +
+      (lead.phone ? '<a href="tel:' + lead.phone + '" style="flex:1;background:#E91E8C;color:#fff;border-radius:8px;padding:10px;font-size:12px;font-weight:600;text-align:center;text-decoration:none">📞 Call</a>' : '') +
+    '</div>';
+
+  m.style.display = 'flex';
+}
+
+
+async function doUpdateLead(id, status) {
   try {
     await fetch(API + '/api/leads/' + id, {
       method: 'PUT',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ status: opts[next] })
+      headers: authHeaders(),
+      body: JSON.stringify({ status })
     });
-    showToast('Status → ' + labels[next], 'success');
+    document.getElementById('leadUpdateModal').style.display = 'none';
+    var labels = {new:'New',contacted:'Contacted',visit:'Site Visit',negotiating:'Negotiating',closed:'Closed ✅',lost:'Lost'};
+    showToast('Status updated → ' + (labels[status]||status), 'success');
     await loadLeads();
+    await loadAnalytics();
   } catch(e) {
-    showToast('Update failed', 'error');
+    showToast('Update failed: ' + e.message, 'error');
   }
 }
 
 // ── PROPERTIES ──
 async function loadProperties() {
   try {
-    var resp = await fetch(API + '/api/properties');
+    var resp = await fetch(API + '/api/properties/admin', { headers: authHeaders() });
     var data = await resp.json();
     DB.properties = data.properties || [];
     var countEl = document.getElementById('propCount');
@@ -822,43 +1299,70 @@ function renderPropsGrid() {
         <div class="ap-title">${p.title||'Untitled'}</div>
         <div class="ap-loc">📍 ${p.district?p.district+', ':''}${p.region||'Tanzania'}</div>
         <div class="ap-actions">
-          <button class="apa edit" onclick="showToast('Edit coming soon','info')">✏️ Edit</button>
+          <button class="apa edit" onclick="editProp('${p.id}')">✏️ Edit</button>
           <button class="apa" onclick="deleteProp('${p.id}')">🗑️ Delete</button>
-          <button class="apa" onclick="window.open('https://wa.me/255767109763?text=Property: ${encodeURIComponent(p.title||'')}')">💬 Share</button>
+          <button class="apa" onclick="window.open('https://wa.me/255659166440?text=Property: ${encodeURIComponent(p.title||'')}')">💬 Share</button>
         </div>
       </div>
     </div>`).join('');
 }
 
 async function saveProp(mode) {
-  var title = document.getElementById('propTitle').value.trim();
+  var titleEl = document.getElementById('propTitle');
+  var title = titleEl.value.trim();
   if (!title) { showToast('Property title is required', 'error'); return; }
+  var editId = titleEl.dataset.editId || null;
   var photos = [];
-  document.querySelectorAll('.preview-img').forEach(img => photos.push(img.src));
+  document.querySelectorAll('.preview-img').forEach(function(img){
+    // Prefer R2 URL if available, fallback to src
+    photos.push(img.dataset.r2url || img.src);
+  });
   var features = [];
-  document.querySelectorAll('.feature-check input:checked').forEach(cb => features.push(cb.value));
+  document.querySelectorAll('.feature-check input:checked').forEach(function(cb){ features.push(cb.value); });
+  function gv(id) { var el = document.getElementById(id); return el ? el.value.trim() : ''; }
   var prop = {
-    title, type: document.getElementById('propType').value,
-    category: document.getElementById('propCat').value,
-    price: document.getElementById('propPrice').value,
-    currency: document.getElementById('propCurrency').value,
-    desc: document.getElementById('propDesc').value,
-    region: document.getElementById('propRegion').value,
-    district: document.getElementById('propDistrict').value,
-    size: document.getElementById('propSize').value,
-    beds: document.getElementById('propBeds').value,
-    baths: document.getElementById('propBaths').value,
-    features, photos, status: mode
+    title:       title,
+    type:        gv('propType'),
+    category:    gv('propCat'),
+    price:       gv('propPrice'),
+    currency:    gv('propCurrency'),
+    description: gv('propDesc'),
+    region:      gv('propRegion'),
+    district:    gv('propDistrict'),
+    street:      gv('propStreet'),
+    gps:         gv('propGPS'),
+    size:        gv('propSize'),
+    beds:        gv('propBeds'),
+    baths:       gv('propBaths'),
+    year:        gv('propYear'),
+    titleDeed:   gv('propTitle2'),
+    bank:        gv('propBank'),
+    notes:       gv('propNotes'),
+    features:    features,
+    photos:      photos,
+    status:      mode,
   };
   try {
-    var resp = await fetch(API + '/api/properties', {
-      method: 'POST',
+    var method = 'POST';
+    var endpoint = API + '/api/properties';
+    // If editing existing property — use PUT
+    if (editId) {
+      method = 'PUT';
+      endpoint = API + '/api/properties/' + editId;
+      prop.id = editId;
+    }
+    var resp = await fetch(endpoint, {
+      method: method,
       headers: authHeaders(),
       body: JSON.stringify(prop)
     });
     var data = await resp.json();
     if (data.success) {
-      showToast(mode === 'live' ? '🚀 Property published to R2!' : '💾 Draft saved to R2', 'success');
+      showToast(editId ? '✅ Property updated!' : mode === 'live' ? '🚀 Property published!' : '💾 Draft saved', 'success');
+      // Reset edit mode
+      titleEl.dataset.editId = '';
+      document.querySelector('.btn-save').textContent = '🚀 Publish to Website';
+      document.querySelector('.btn-draft').textContent = '💾 Save Draft';
       showPage('properties', null);
       await loadProperties();
       await loadAnalytics();
@@ -870,10 +1374,52 @@ async function saveProp(mode) {
   }
 }
 
+async function editProp(id) {
+  var prop = DB.properties.find(function(p){ return p.id == id; });
+  if (!prop) { showToast('Property not found in cache', 'error'); return; }
+  // Switch to add-property page and populate fields
+  showPage('add-property', null);
+  document.getElementById('topbarTitle').textContent = 'Edit Property';
+  setTimeout(function() {
+    try {
+      if(prop.title) document.getElementById('propTitle').value = prop.title;
+      if(prop.type) document.getElementById('propType').value = prop.type;
+      if(prop.category) document.getElementById('propCat').value = prop.category;
+      if(prop.price) document.getElementById('propPrice').value = prop.price;
+      if(prop.currency) document.getElementById('propCurrency').value = prop.currency;
+      if(prop.description||prop.desc) document.getElementById('propDesc').value = prop.description || prop.desc || '';
+      var sv = function(id, val) { var el = document.getElementById(id); if(el && val) el.value = val; };
+      sv('propStreet',  prop.street);
+      sv('propGPS',     prop.gps);
+      sv('propYear',    prop.year);
+      sv('propTitle2',  prop.titleDeed);
+      sv('propBank',    prop.bank);
+      sv('propNotes',   prop.notes);
+      if(prop.region) document.getElementById('propRegion').value = prop.region;
+      if(prop.district) document.getElementById('propDistrict').value = prop.district;
+      if(prop.size || prop.sqm) document.getElementById('propSize').value = prop.size || prop.sqm || '';
+      if(prop.beds) document.getElementById('propBeds').value = prop.beds;
+      if(prop.baths) document.getElementById('propBaths').value = prop.baths;
+      // Set features checkboxes
+      if (prop.features && prop.features.length) {
+        document.querySelectorAll('.feature-check input').forEach(function(cb) {
+          cb.checked = prop.features.indexOf(cb.value) > -1;
+        });
+      }
+      // Store ID for update mode
+      document.getElementById('propTitle').dataset.editId = prop.id;
+      // Update save button labels
+      document.querySelector('.btn-save').textContent = '🚀 Update Listing';
+      document.querySelector('.btn-draft').textContent = '💾 Save as Draft';
+      showToast('Editing: ' + prop.title, 'info');
+    } catch(e) { showToast('Could not load all fields: ' + e.message, 'error'); }
+  }, 200);
+}
+
 async function deleteProp(id) {
   if (!confirm('Delete this property from R2?')) return;
   try {
-    await fetch(API + '/api/properties/' + id, { method: 'DELETE' });
+    await fetch(API + '/api/properties/' + id, { method: 'DELETE', headers: authHeaders() });
     showToast('Property deleted', 'info');
     await loadProperties();
     await loadAnalytics();
@@ -882,22 +1428,69 @@ async function deleteProp(id) {
   }
 }
 
-// ── PHOTO UPLOAD ──
-function handlePhotos(input) {
-  var files = Array.from(input.files);
+// ── PHOTO UPLOAD (R2) ──
+async function handlePhotos(input) {
+  var files = Array.from(input.files || []);
   var preview = document.getElementById('photoPreview');
-  files.forEach(f => {
-    if (!f.type.startsWith('image/')) return;
-    var r = new FileReader();
-    r.onload = e => {
-      var img = document.createElement('img');
-      img.src = e.target.result; img.className = 'preview-img';
-      preview.appendChild(img);
-    };
-    r.readAsDataURL(f);
-  });
-  showToast(files.length + ' photo(s) added', 'success');
+  if (!files.length) return;
+  showToast('Uploading ' + files.length + ' photo(s) to R2...', 'info');
+
+  for (var i = 0; i < files.length; i++) {
+    var f = files[i];
+    if (!f.type.startsWith('image/')) continue;
+    if (f.size > 10 * 1024 * 1024) { showToast(f.name + ' too large (max 10MB)', 'error'); continue; }
+
+    // Show local preview immediately
+    var previewUrl = URL.createObjectURL(f);
+    var wrap = document.createElement('div');
+    wrap.style.cssText = 'position:relative;display:inline-block';
+    var img = document.createElement('img');
+    img.src = previewUrl;
+    img.className = 'preview-img';
+    img.style.opacity = '0.5';
+    img.dataset.uploading = 'true';
+    var spinner = document.createElement('div');
+    spinner.style.cssText = 'position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:20px';
+    spinner.textContent = '⏳';
+    wrap.appendChild(img);
+    wrap.appendChild(spinner);
+    preview.appendChild(wrap);
+
+    try {
+      var resp = await fetch(API + '/api/upload', {
+        method: 'POST',
+        headers: { 'X-Admin-Token': ADMIN_TOKEN, 'Content-Type': f.type },
+        body: f
+      });
+      var data = await resp.json();
+      if (data.success && data.url) {
+        img.src = data.url;
+        img.dataset.r2url = data.url;
+        img.dataset.uploading = '';
+        img.style.opacity = '1';
+        spinner.remove();
+        showToast('Photo uploaded ✅', 'success');
+      } else {
+        // Fallback: keep as base64 data URL if R2 upload fails
+        var reader = new FileReader();
+        reader.onload = function(e) {
+          img.src = e.target.result;
+          img.style.opacity = '1';
+          spinner.remove();
+        };
+        reader.readAsDataURL(f);
+        showToast('R2 upload failed — using local preview. Check R2_ACCOUNT_ID env var.', 'error');
+      }
+    } catch(e) {
+      // Fallback to base64
+      var reader = new FileReader();
+      reader.onload = function(ev) { img.src = ev.target.result; img.style.opacity='1'; spinner.remove(); };
+      reader.readAsDataURL(f);
+      showToast('Upload error — using local. (' + e.message + ')', 'error');
+    }
+  }
 }
+
 function handleDrop(e) { e.preventDefault(); if(e.dataTransfer.files) handlePhotos({files:e.dataTransfer.files}); }
 
 // ── AI INSIGHTS ──
@@ -905,10 +1498,10 @@ async function generateAIInsight(type) {
   var el = document.getElementById('aiMarketInsight');
   el.innerHTML = '<div class="ai-loading"><div class="ai-dot"></div><span>NextGen AI inachambua soko la Tanzania kupitia Cloudflare Worker...</span></div>';
   var prompts = {
-    market: 'As a Tanzania real estate expert for NEXT-GEN, give market overview 2025: key trends, opportunities, risks. Focus on DSM, Zanzibar, Dodoma. Specific TZS prices. Format with • bullet points.',
-    investment: 'Top 5 Tanzania real estate investment opportunities 2025 for NEXT-GEN clients. Specific areas, expected ROI %, entry price in TZS, why each is good now.',
-    pricing: 'Tanzania real estate pricing benchmarks 2025 in TZS: Masaki, Oyster Bay, Mbezi, Kigamboni, Zanzibar Nungwi, Paje, Dodoma. Residential, commercial, agricultural.',
-    auction: 'Tanzania bank auction opportunity 2025 for NEXT-GEN: CRDB, NMB, NCBA, NBC. Types of properties, typical discount, legal requirements, risks.'
+    market: 'As a Tanzania real estate expert for NEXT-GEN, give market overview 2026: key trends, opportunities, risks. Focus on DSM, Zanzibar, Dodoma. Specific TZS prices. Format with • bullet points.',
+    investment: 'Top 5 Tanzania real estate investment opportunities 2026 for NEXT-GEN clients. Specific areas, expected ROI %, entry price in TZS, why each is good now.',
+    pricing: 'Tanzania real estate pricing benchmarks 2026 in TZS: Masaki, Oyster Bay, Mbezi, Kigamboni, Zanzibar Nungwi, Paje, Dodoma. Residential, commercial, agricultural.',
+    auction: 'Tanzania bank auction opportunity 2026 for NEXT-GEN: CRDB, NMB, NCBA, NBC. Types of properties, typical discount, legal requirements, risks.'
   };
   try {
     var resp = await fetch(API + '/api/ai', {
@@ -931,27 +1524,42 @@ async function generateAIInsight(type) {
 }
 
 // ── CHART ──
-function renderChart() {
-  var data = [{m:'Jan',b:2,s:1},{m:'Feb',b:4,s:2},{m:'Mar',b:3,s:1},{m:'Apr',b:6,s:3},{m:'May',b:5,s:2},{m:'Jun',b:8,s:4}];
-  if (DB.leads.length > 0) {
-    var months = ['Jan','Feb','Mar','Apr','May','Jun'];
-    data = months.map((m,i) => ({
-      m,
-      b: Math.max(1, Math.floor(DB.leads.filter(l=>l.type==='buyer').length * (i+1)/6)),
-      s: Math.max(1, Math.floor(DB.leads.filter(l=>l.type==='seller').length * (i+1)/6))
-    }));
+function renderChart(monthlyData) {
+  // Use real monthly data from analytics API if available, else derive from DB.leads
+  var data;
+  if (monthlyData && monthlyData.length) {
+    data = monthlyData.map(function(m){ return {m: m.label, b: m.buyers, s: m.sellers}; });
+  } else {
+    // Build real data from DB.leads by actual month
+    var months = {};
+    var now = new Date();
+    for (var i = 5; i >= 0; i--) {
+      var d = new Date(now.getFullYear(), now.getMonth() - i, 1);
+      var key = d.toLocaleString('en',{month:'short'}) + ' ' + String(d.getFullYear()).slice(2);
+      months[key] = { m: key, b: 0, s: 0, start: d.getTime(), end: new Date(d.getFullYear(), d.getMonth()+1, 1).getTime() };
+    }
+    DB.leads.forEach(function(l) {
+      var t = new Date(l.date).getTime();
+      Object.values(months).forEach(function(mo) {
+        if (t >= mo.start && t < mo.end) {
+          if (l.type === 'buyer') mo.b++; else mo.s++;
+        }
+      });
+    });
+    data = Object.values(months);
   }
-  var max = Math.max(...data.map(d => Math.max(d.b, d.s)), 8);
-  document.getElementById('chartArea').innerHTML = data.map(d =>
-    `<div class="bar-group">
-      <div style="display:flex;gap:3px;align-items:flex-end;height:160px">
-        <div class="bar buyers" style="height:${Math.max(4,(d.b/max)*160)}px;flex:1" data-val="${d.b} buyers"></div>
-        <div class="bar sellers" style="height:${Math.max(4,(d.s/max)*160)}px;flex:1" data-val="${d.s} sellers"></div>
-      </div>
-      <div class="bar-label">${d.m}</div>
-    </div>`).join('');
+  var max = Math.max.apply(null, data.map(function(d){ return Math.max(d.b, d.s); }).concat([4]));
+  document.getElementById('chartArea').innerHTML = data.map(function(d){
+    return '<div class="bar-group">' +
+      '<div style="display:flex;gap:3px;align-items:flex-end;height:160px">' +
+        '<div class="bar buyers" style="height:'+Math.max(4,(d.b/max)*160)+'px;flex:1" data-val="'+d.b+' buyers"></div>' +
+        '<div class="bar sellers" style="height:'+Math.max(4,(d.s/max)*160)+'px;flex:1" data-val="'+d.s+' sellers"></div>' +
+      '</div>' +
+      '<div class="bar-label">'+d.m+'</div>' +
+    '</div>';
+  }).join('');
 }
-function setChartFilter(btn) { document.querySelectorAll('.cf').forEach(b=>b.classList.remove('active')); btn.classList.add('active'); renderChart(); }
+function setChartFilter(btn) { document.querySelectorAll('.cf').forEach(function(b){b.classList.remove('active');}); btn.classList.add('active'); renderChart(); }
 
 // ── PAGE NAV ──
 function showPage(id, btn) {
@@ -960,12 +1568,14 @@ function showPage(id, btn) {
   var page = document.getElementById('page-' + id);
   if(page) page.classList.add('active');
   if(btn) btn.classList.add('active');
-  var titles = {dashboard:'CRM Dashboard','add-property':'Add New Property',properties:'Property Portfolio',leads:'Leads Management',analytics:'Analytics','ai-insights':'NextGen AI Insights','sell-widget':'Sell / Lease Widget'};
+  var titles = {dashboard:'CRM Dashboard','add-property':'Add New Property',properties:'Property Portfolio',leads:'Leads Management',analytics:'Analytics','ai-insights':'NextGen AI Insights','sell-widget':'Sell / Lease Widget',blog:'Blog & Insights'};
   document.getElementById('topbarTitle').textContent = titles[id] || id;
   if(id === 'properties') loadProperties();
   if(id === 'leads') loadLeads();
   if(id === 'analytics') { loadLeads(); loadAnalytics(); }
   if(id === 'sell-widget') document.getElementById('widgetCode').value = getWidgetHTML();
+  if(id === 'blog') loadBlogPosts();
+  if(id === 'auctions') loadAuctionPage();
 }
 
 // ── WIDGET CODE ──
