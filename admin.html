@@ -260,7 +260,7 @@ tr:hover td{background:rgba(248,247,255,.7)}
 
 <aside class="sidebar">
   <div class="sidebar-logo">
-    <img src="Next-Gen_Auctioneer_LOGO.jpg" alt="NEXT-GEN" onerror="this.style.display='none'">
+    <img src="Next-Gen_Auctioneer_LOGO.jpg" alt="NEXT-GEN" onerror="this.style.display=&quot;none&quot;">
     <div class="logo-text"><div class="l1">NEXT-GEN</div><div class="l2">Admin Panel</div></div>
   </div>
   <div class="sidebar-badge">Admin Dashboard</div>
@@ -612,10 +612,10 @@ tr:hover td{background:rgba(248,247,255,.7)}
 
 <script>
 // ── API CONFIG ──
-// NEXT-GEN Admin Dashboard v5.0
-// Domain: nextgentanzania.com
-// Worker: Set ADMIN_PASSWORD + ANTHROPIC_API_KEY + R2_ACCOUNT_ID in Worker env vars
-var API = 'https://nextgen-ai-api.kitentyaluth.workers.dev';
+// NEXT-GEN Admin Dashboard v6.0
+// Auto-detect worker URL — update WORKER_URL to your Cloudflare Worker URL
+var WORKER_URL = 'https://nextgen-ai-api.kitentyaluth.workers.dev'; // ← UPDATE THIS to your worker URL
+var API = WORKER_URL;
 var ADMIN_TOKEN = '';
 
 // In-memory cache
@@ -863,7 +863,7 @@ function renderBlogList() {
         ? '<span style="background:rgba(34,197,94,.1);color:#16A34A;font-size:10px;font-weight:700;padding:2px 8px;border-radius:4px;text-transform:uppercase">Published</span>'
         : '<span style="background:rgba(107,107,138,.1);color:var(--tm);font-size:10px;font-weight:700;padding:2px 8px;border-radius:4px;text-transform:uppercase">Draft</span>';
       return '<div style="background:#fff;border:1px solid var(--gl);border-radius:12px;padding:20px;display:flex;align-items:center;gap:16px">' +
-        (p.image ? '<img src="' + p.image + '" style="width:80px;height:60px;object-fit:cover;border-radius:8px;flex-shrink:0" onerror="this.style.display='none'">' : '') +
+        (p.image ? '<img src="' + p.image + '" style="width:80px;height:60px;object-fit:cover;border-radius:8px;flex-shrink:0" onerror="this.style.display=&quot;none&quot;">' : '') +
         '<div style="flex:1;min-width:0">' +
           '<div style="display:flex;align-items:center;gap:8px;margin-bottom:6px">' + badge +
             '<span style="font-size:10px;color:var(--tm)">' + p.category + '</span>' +
@@ -983,7 +983,11 @@ async function checkAPIHealth() {
   var statusEl = document.getElementById('apiStatus');
   var textEl = document.getElementById('apiStatusText');
   try {
-    var resp = await fetch(API + '/health', { signal: AbortSignal.timeout(8000) });
+    var resp = await fetch(API + '/health', {
+      signal: AbortSignal.timeout(10000),
+      headers: { 'Content-Type': 'application/json' }
+    });
+    if (!resp.ok) throw new Error('HTTP ' + resp.status);
     var data = await resp.json();
     statusEl.className = 'api-status ok';
     statusEl.querySelector('.status-dot').className = 'status-dot dot-ok';
@@ -1086,8 +1090,8 @@ function renderLeadsTable(leads) {
         '<td style="font-size:11.5px;color:var(--tm)">' + (l.date ? new Date(l.date).toLocaleDateString('en-TZ') : '—') + '</td>' +
         '<td><div class="action-btns">' +
           '<button class="ab" onclick="updateLead(' + "'" + l.id + "'" + ')">Update</button>' +
-          (phone ? '<button class="ab" onclick="window.open('https://wa.me/' + phone + '?text=' + waMsg + '')">WA</button>' : '') +
-          (l.email ? '<button class="ab" onclick="window.open('mailto:' + l.email + '')">Email</button>' : '') +
+          (phone ? '<a class="ab" href="https://wa.me/' + phone + '?text=' + waMsg + '" target="_blank">WA</a>' : '') +
+          (l.email ? '<a class="ab" href="mailto:' + l.email + '">Email</a>' : '') +
         '</div></td>' +
       '</tr>';
     }).join('') +
@@ -1223,7 +1227,7 @@ function updateLead(id) {
   document.getElementById('lumInner').innerHTML =
     '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:18px">' +
       '<h3 style="font-family:Playfair Display,serif;font-size:18px;color:#0D1240">Update Lead</h3>' +
-      '<button onclick="document.getElementById('leadUpdateModal').style.display='none'" ' +
+      '<button onclick="document.getElementById(\'leadUpdateModal\').style.display=\'none\'" ' +
         'style="background:none;border:none;font-size:22px;cursor:pointer;color:#6B6B8A;line-height:1">×</button>' +
     '</div>' +
     '<div style="background:#F8F7FF;border-radius:10px;padding:14px;margin-bottom:18px;font-size:13px">' +
@@ -1291,7 +1295,7 @@ function renderPropsGrid() {
   grid.innerHTML = DB.properties.map((p,i) => `
     <div class="admin-prop">
       <div class="ap-img">🏠
-        ${p.photos&&p.photos[0]?`<img src="${p.photos[0]}" alt="${p.title}" onerror="this.style.display='none'">`:'' }
+        ${p.photos&&p.photos[0]?`<img src="${p.photos[0]}" alt="${p.title}" onerror="this.style.display=&quot;none&quot;">`:'' }
         <span class="ap-status ${sc[p.type]||'aps-sale'}">${p.type||'For Sale'}</span>
       </div>
       <div class="ap-body">
