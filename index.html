@@ -22,7 +22,7 @@
 :root{--navy:#0D1240;--navy-dark:#080C2E;--navy-light:#1A2060;--magenta:#E91E8C;--magenta-dark:#C0176F;--gold:#C9A84C;--gold-light:#E4C068;--white:#fff;--off-white:#F8F7FF;--gray-light:#E8E8F0;--text-dark:#1A1A2E;--text-muted:#6B6B8A}
 html{scroll-behavior:smooth}
 body{font-family:'Inter',sans-serif;background:#fff;color:var(--text-dark);overflow-x:hidden}
-nav{position:fixed;top:0;left:0;right:0;z-index:900;transition:background .3s}
+nav{position:fixed;top:0;left:0;right:0;z-index:900;transition:background .3s;background:rgba(8,12,46,0.85);backdrop-filter:blur(12px)}
 nav.scrolled{background:rgba(8,12,46,0.98);backdrop-filter:blur(16px);box-shadow:0 2px 30px rgba(0,0,0,.3);border-bottom:1px solid rgba(233,30,140,.15)}
 .nav-inner{display:flex;align-items:center;justify-content:space-between;height:76px;padding:0 5%;max-width:1400px;margin:0 auto}
 .nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none}
@@ -33,10 +33,10 @@ nav.scrolled{background:rgba(8,12,46,0.98);backdrop-filter:blur(16px);box-shadow
 .nav-links a{color:rgba(255,255,255,.82);text-decoration:none;font-size:12.5px;font-weight:500;padding:7px 12px;border-radius:6px;transition:all .2s}
 .nav-links a:hover{color:#fff;background:rgba(255,255,255,.08)}
 .nav-right{display:flex;align-items:center;gap:10px}
-.lang-toggle{display:flex;gap:2px;background:rgba(255,255,255,.07);border-radius:20px;padding:3px}
-.lang-btn{background:none;border:none;color:rgba(255,255,255,.5);font-size:11px;font-weight:700;padding:4px 10px;border-radius:16px;cursor:pointer;transition:all .2s;font-family:'Inter',sans-serif}
+.lang-toggle{display:flex;gap:2px;background:rgba(255,255,255,.07);border-radius:20px;padding:3px;flex-wrap:nowrap}
+.lang-btn{background:none;border:none;color:rgba(255,255,255,.5);font-size:10px;font-weight:700;padding:4px 8px;border-radius:16px;cursor:pointer;transition:all .2s;font-family:'Inter',sans-serif;white-space:nowrap}
 .lang-btn.active{background:var(--magenta);color:#fff}
-.lang-toggle{display:flex;gap:3px;flex-wrap:wrap}
+.lang-toggle{display:flex;gap:2px;flex-wrap:nowrap;align-items:center}
 [dir=rtl] body{font-family:'Inter',sans-serif}
 [dir=rtl] .sec-hdr,[dir=rtl] .prop-info,[dir=rtl] .footer-grid{text-align:right}
 [dir=rtl] .nova-msgs .nmsg.user{flex-direction:row-reverse}
@@ -993,7 +993,7 @@ svc_ey:'Nos Services',svc_title:'Solutions Immobilières Complètes',svc_sub:"De
 s1t:'Ventes Immobilières',s1p:'Achetez et vendez des terrains résidentiels, commerciaux et agricoles avec documents vérifiés.',s2t:'Enchères Bancaires',s2p:'Accédez aux biens saisis par CRDB, NMB, NCBA, NBC et banques partenaires.',s3t:'Évaluation Immobilière',s3p:"Rapports d'évaluation certifiés pour hypothèque, assurance, fiscalité et investissement.",s4t:'Services de Commissaire-Priseur',s4p:'Services de vente aux enchères agréés pour successions, tribunaux, gouvernement et entreprises.',s5t:'Conseil en Investissement',s5p:'Analyse de portefeuille, projections de rendement et conseils stratégiques.',s6t:'Gestion Immobilière',s6p:'Gestion complète : recherche de locataires, encaissement des loyers, maintenance et rapports.',s7t:'Location Immobilière',s7p:"Location courte et longue durée pour bureaux, entrepôts, commerces, logements et industriel.",s8t:'Défrichage Foncier',s8p:'Coordination de démolition, défrichage, préparation de site et mise en état de développement.',learn_more:'En savoir plus',
 auc_ey:'Enchères en Cours',auc_title:'Biens Saisis par les Banques',auc_sub:'Biens vérifiés des banques partenaires. Inscrivez-vous pour enchérir et téléchargez les documents officiels.',closes_in:'Se termine dans',
 hm_title:'Zones Chaudes Tanzanie 2025–2026',hm_sub:'Points chauds à fort potentiel de rendement analysés par IA en Tanzanie.',
-w_prop:'Biens Vendus',w_banks:'Banques Partenaires',w_sat:'Satisfaction Client',w_deals:'Transactions Conclues',licensed_by:'Agréé et Réglementé par',why_ey:'Pourquoi NEXT-GEN',why_title:'Le Partenaire Immobilier le Plus Fiable de Tanzanie',w1t:'Agréé et Réglementé',w1p:"Commissaires-priseurs et agents immobiliers entièrement agréés sous le cadre réglementaire tanzanien.",w2t:'Biens Vérifiés Uniquement',w2p:'Chaque annonce fait l'objet d'une vérification de titre foncier, contrôle cadastral et confirmation de propriété.',w3t:'NextGen AI — Conseiller 24/7',w3p:"Notre conseiller immobilier IA associe instantanément acheteurs et locataires au bien idéal.",w4t:'Accompagnement de A à Z',w4p:'Documentation juridique, facilitation du paiement et transfert post-vente ou post-location par notre équipe.',
+w_prop:'Biens Vendus',w_banks:'Banques Partenaires',w_sat:'Satisfaction Client',w_deals:'Transactions Conclues',licensed_by:'Agréé et Réglementé par',why_ey:'Pourquoi NEXT-GEN',why_title:'Le Partenaire Immobilier le Plus Fiable de Tanzanie',w1t:'Agréé et Réglementé',w1p:"Commissaires-priseurs et agents immobiliers entièrement agréés sous le cadre réglementaire tanzanien.",w2t:'Biens Vérifiés Uniquement',w2p:"Chaque annonce fait l'objet d'une vérification de titre foncier, contrôle cadastral et confirmation de propriété.",w3t:'NextGen AI — Conseiller 24/7',w3p:"Notre conseiller immobilier IA associe instantanément acheteurs et locataires au bien idéal.",w4t:'Accompagnement de A à Z',w4p:'Documentation juridique, facilitation du paiement et transfert post-vente ou post-location par notre équipe.',
 sell_ey:'Vendez avec Nous',sell_title:'Atteignez des Acheteurs Sérieux grâce au Marketing IA',sell_sub:'Publiez votre bien sur la plateforme la plus fiable de Tanzanie. Nous gérons tout, de l'évaluation à la conclusion.',ss1:'<strong>Estimation IA</strong> — Obtenez une estimation de valeur marchande instantanée',ss2:'<strong>Annonce Professionnelle</strong> — Annonce premium avec photos et brochure',ss3:'<strong>NextGen AI Commercialise</strong> — L'IA associe votre bien aux acheteurs 24/7',ss4:'<strong>Conclure la Vente</strong> — Nous gérons la négociation, les documents légaux et le transfert',sell_btn1:'Publier mon Bien',sell_btn2:'Demander à NextGen',
 partners_title:'Approuvé par les Principales Institutions Financières de Tanzanie',
 testi_ey:'Témoignages Clients',testi_title:'Ce que disent nos Clients',
