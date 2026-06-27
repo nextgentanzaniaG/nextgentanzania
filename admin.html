@@ -260,7 +260,7 @@ tr:hover td{background:rgba(248,247,255,.7)}
 
 <aside class="sidebar">
   <div class="sidebar-logo">
-    <img src="Next-Gen_Auctioneer_LOGO.jpg" alt="NEXT-GEN" onerror="this.style.display=&quot;none&quot;">
+    <img src="Next-Gen_Auctioneer_LOGO.jpg" alt="NEXT-GEN" onerror="this.style.display='none'">
     <div class="logo-text"><div class="l1">NEXT-GEN</div><div class="l2">Admin Panel</div></div>
   </div>
   <div class="sidebar-badge">Admin Dashboard</div>
@@ -688,21 +688,27 @@ function authHeaders() {
 
 // ── INIT ──
 window.onload = async function() {
+  console.log('Admin loading... API:', API);
   var token = getStoredToken();
   if (!token) {
+    console.log('No token — showing login');
     document.getElementById('loginOverlay').style.display = 'flex';
   } else {
     ADMIN_TOKEN = token;
-    // Verify token with server
+    console.log('Token found — verifying...');
     try {
       var vResp = await fetch(API + '/api/admin/verify', { headers: { 'X-Admin-Token': token } });
       var vData = await vResp.json();
+      console.log('Verify result:', vData);
       if (!vData.valid) {
         clearToken();
         document.getElementById('loginOverlay').style.display = 'flex';
         return;
       }
-    } catch(e) { /* offline — allow cached token */ }
+    } catch(e) {
+      console.warn('Verify failed (offline?):', e.message);
+      /* offline — allow cached token */
+    }
     initDashboard();
   }
 };
@@ -873,11 +879,11 @@ function renderBlogList() {
           '<div style="font-size:12px;color:var(--tm);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">' + (p.excerpt||'No excerpt') + '</div>' +
         '</div>' +
         '<div style="display:flex;gap:8px;flex-shrink:0">' +
-          '<button onclick="editBlogPost('' + p.id + '')" style="background:var(--navy);color:#fff;border:none;border-radius:7px;padding:7px 13px;font-size:12px;font-weight:600;cursor:pointer;font-family:Inter,sans-serif">✏️ Edit</button>' +
+          '<button onclick="editBlogPost(\'' + p.id + '\')" style="background:var(--navy);color:#fff;border:none;border-radius:7px;padding:7px 13px;font-size:12px;font-weight:600;cursor:pointer;font-family:Inter,sans-serif">✏️ Edit</button>' +
           (p.status === 'draft'
-            ? '<button onclick="publishBlogPost('' + p.id + '')" style="background:#22C55E;color:#fff;border:none;border-radius:7px;padding:7px 13px;font-size:12px;font-weight:600;cursor:pointer;font-family:Inter,sans-serif">🚀 Publish</button>'
-            : '<button onclick="unpublishBlogPost('' + p.id + '')" style="background:var(--tm);color:#fff;border:none;border-radius:7px;padding:7px 13px;font-size:12px;font-weight:600;cursor:pointer;font-family:Inter,sans-serif">📌 Unpublish</button>') +
-          '<button onclick="deleteBlogPost('' + p.id + '')" style="background:rgba(239,68,68,.1);color:#EF4444;border:1px solid rgba(239,68,68,.2);border-radius:7px;padding:7px 13px;font-size:12px;font-weight:600;cursor:pointer;font-family:Inter,sans-serif">🗑️</button>' +
+            ? '<button onclick="publishBlogPost(\'' + p.id + '\')" style="background:#22C55E;color:#fff;border:none;border-radius:7px;padding:7px 13px;font-size:12px;font-weight:600;cursor:pointer;font-family:Inter,sans-serif">🚀 Publish</button>'
+            : '<button onclick="unpublishBlogPost(\'' + p.id + '\')" style="background:var(--tm);color:#fff;border:none;border-radius:7px;padding:7px 13px;font-size:12px;font-weight:600;cursor:pointer;font-family:Inter,sans-serif">📌 Unpublish</button>') +
+          '<button onclick="deleteBlogPost(\'' + p.id + '\')" style="background:rgba(239,68,68,.1);color:#EF4444;border:1px solid rgba(239,68,68,.2);border-radius:7px;padding:7px 13px;font-size:12px;font-weight:600;cursor:pointer;font-family:Inter,sans-serif">🗑️</button>' +
         '</div>' +
       '</div>';
     }).join('') + '</div>';
@@ -983,10 +989,13 @@ async function checkAPIHealth() {
   var statusEl = document.getElementById('apiStatus');
   var textEl = document.getElementById('apiStatusText');
   try {
+    var ctrl = new AbortController();
+    var timer = setTimeout(function(){ ctrl.abort(); }, 10000);
     var resp = await fetch(API + '/health', {
-      signal: AbortSignal.timeout(10000),
-      headers: { 'Content-Type': 'application/json' }
+      signal: ctrl.signal,
+      headers: { 'Accept': 'application/json' }
     });
+    clearTimeout(timer);
     if (!resp.ok) throw new Error('HTTP ' + resp.status);
     var data = await resp.json();
     statusEl.className = 'api-status ok';
@@ -999,7 +1008,8 @@ async function checkAPIHealth() {
   } catch(e) {
     statusEl.className = 'api-status err';
     statusEl.querySelector('.status-dot').className = 'status-dot dot-err';
-    textEl.textContent = '❌ Cannot connect to API at ' + API + ' — Check Worker is deployed';
+    textEl.textContent = '❌ Error: ' + e.message + ' | API: ' + API;
+    console.error('API Health Error:', e);
   }
 }
 
@@ -1211,7 +1221,7 @@ function updateLead(id) {
 
   var statusBtns = statusOpts.map(function(o) {
     var active = lead.status === o.v;
-    return '<button onclick="doUpdateLead('' + id + '','' + o.v + '')" ' +
+    return '<button onclick="doUpdateLead(\'' + id + '\',\'' + o.v + '\')" ' +
       'style="display:block;width:100%;text-align:left;padding:10px 14px;margin-bottom:6px;' +
       'border-radius:9px;border:1.5px solid ' + (active ? o.c : '#E8E8F0') + ';' +
       'background:' + (active ? o.c : '#F8F7FF') + ';' +
@@ -1295,7 +1305,7 @@ function renderPropsGrid() {
   grid.innerHTML = DB.properties.map((p,i) => `
     <div class="admin-prop">
       <div class="ap-img">🏠
-        ${p.photos&&p.photos[0]?`<img src="${p.photos[0]}" alt="${p.title}" onerror="this.style.display=&quot;none&quot;">`:'' }
+        ${p.photos&&p.photos[0]?`<img src="${p.photos[0]}" alt="${p.title}" onerror="this.style.display='none'">`:'' }
         <span class="ap-status ${sc[p.type]||'aps-sale'}">${p.type||'For Sale'}</span>
       </div>
       <div class="ap-body">
