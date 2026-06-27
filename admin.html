@@ -333,6 +333,7 @@ tr:hover td{background:rgba(248,247,255,.7)}
       </div>
       <div class="form-card">
         <div class="form-section-title"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>Location</div>
+        <div class="form-grid"><div><label class="fg-label">Featured Section</label><select class="fg-select" id="propFeatured"><option value="">Not Featured</option><option value="featured">⭐ Featured Listings (Top Section)</option><option value="recent">🆕 Recently Listed</option><option value="leasing">📋 Leasing Section</option></select></div><div><label class="fg-label">Display Priority</label><select class="fg-select" id="propPriority"><option value="0">Normal</option><option value="1">High — Show First</option><option value="2">Top Priority</option></select></div></div>
         <div class="form-grid"><div><label class="fg-label">Region *</label><select class="fg-select" id="propRegion"><option value="">Select Region...</option><option>Dar es Salaam</option><option>Zanzibar — Unguja Kaskazini</option><option>Zanzibar — Unguja Kusini</option><option>Zanzibar — Mjini Magharibi</option><option>Zanzibar — Pemba Kaskazini</option><option>Zanzibar — Pemba Kusini</option><option>Arusha</option><option>Kilimanjaro</option><option>Tanga</option><option>Morogoro</option><option>Pwani (Coast)</option><option>Lindi</option><option>Mtwara</option><option>Ruvuma</option><option>Iringa</option><option>Mbeya</option><option>Njombe</option><option>Songwe</option><option>Dodoma</option><option>Singida</option><option>Tabora</option><option>Rukwa</option><option>Katavi</option><option>Kigoma</option><option>Kagera</option><option>Mwanza</option><option>Mara</option><option>Shinyanga</option><option>Simiyu</option><option>Geita</option></select></div><div><label class="fg-label">District / Area</label><input type="text" class="fg-input" id="propDistrict" placeholder="e.g. Masaki, Oyster Bay, Nungwi"></div></div>
         <div class="form-grid"><div><label class="fg-label">Street / Landmark</label><input type="text" class="fg-input" id="propStreet" placeholder="e.g. Near Slipway"></div><div><label class="fg-label">GPS (Optional)</label><input type="text" class="fg-input" id="propGPS" placeholder="-6.7924, 39.2083"></div></div>
       </div>
@@ -1066,48 +1067,80 @@ async function loadLeads() {
 
 function renderLeadsTable(leads) {
   var statusClass = {new:'ls-new',contacted:'ls-contacted',visit:'ls-visit',negotiating:'ls-negotiating',closed:'ls-closed',lost:'ls-lost'};
-  var statusLabel = {new:'New',contacted:'Contacted',visit:'Site Visit',negotiating:'Negotiating',closed:'Closed',lost:'Lost'};
+  var statusLabel = {new:'🔵 New',contacted:'🟡 Contacted',visit:'🟠 Site Visit',negotiating:'🟣 Negotiating',closed:'🟢 Closed',lost:'🔴 Lost'};
+  var sourceIcon = {
+    'Website Form':'🌐','NextGen AI Chat':'🤖','Property Detail Page':'🏠',
+    'Auction Registration':'🔨','Send Enquiry — Nav':'✉️','List Property — sell':'🏡',
+    'List Property — rent':'🔑','List Property — auction':'🔨','List Property — valuation':'📊',
+    'Send Enquiry':'✉️','AI Chat':'🤖'
+  };
 
   if (!leads.length) {
     var empty = '<div class="empty-state"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/></svg><h3>No Leads Yet</h3><p>Leads from website contact forms will appear here automatically</p></div>';
-    ['recentLeadsTable','leadsTableWrap'].forEach(id => { var el = document.getElementById(id); if(el) el.innerHTML = empty; });
+    ['recentLeadsTable','leadsTableWrap'].forEach(function(id){ var el = document.getElementById(id); if(el) el.innerHTML = empty; });
     return;
   }
 
-  var html = '<table><thead><tr>' +
-    '<th>Client</th><th>Contact</th><th>Type</th>' +
-    '<th>Interest</th><th>Region</th><th>Budget</th>' +
-    '<th>Source</th><th>Status</th><th>Date</th><th>Actions</th>' +
-    '</tr></thead><tbody>' +
+  // ── MESSAGE THREAD STYLE ──
+  var html = '<div style="display:flex;flex-direction:column;gap:12px;padding:4px 0">' +
     leads.slice(0,100).map(function(l) {
       var sc = statusClass[l.status] || 'ls-new';
-      var sl = statusLabel[l.status] || 'New';
+      var sl = statusLabel[l.status] || '🔵 New';
       var typeClass = l.type === 'seller' ? 'lt-seller' : l.type === 'investor' ? 'lt-investor' : 'lt-buyer';
       var phone = (l.phone||'').replace(/\D/g,'');
       var waMsg = encodeURIComponent('Hello ' + (l.name||'') + ', this is NEXT-GEN Auctioneer + Realtor. Following up on your inquiry.');
-      return '<tr>' +
-        '<td><div style="font-weight:600;color:var(--navy)">' + (l.name||'—') + '</div>' +
-          '<div style="font-size:10px;color:var(--tm)">Ref: NG-' + String(l.id).slice(-6) + '</div></td>' +
-        '<td><div style="font-size:12px">' + (l.phone||'—') + '</div>' +
-          (l.email ? '<div style="font-size:10.5px;color:#3B82F6"><a href="mailto:' + l.email + '" style="color:#3B82F6;text-decoration:none">✉ ' + l.email + '</a></div>' : '') +
-        '</td>' +
-        '<td><span class="' + typeClass + '">' + (l.type||'—') + '</span></td>' +
-        '<td style="max-width:140px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:12px">' + (l.interest||'—') + '</td>' +
-        '<td style="font-size:12px;color:var(--tm)">' + (l.region||'—') + '</td>' +
-        '<td style="font-size:12px;color:var(--tm)">' + (l.budget||'—') + '</td>' +
-        '<td style="font-size:11px"><span style="background:rgba(13,18,64,.06);border-radius:4px;padding:2px 6px">' + (l.source||'Website') + '</span></td>' +
-        '<td><span class="lead-status ' + sc + '">' + sl + '</span></td>' +
-        '<td style="font-size:11.5px;color:var(--tm)">' + (l.date ? new Date(l.date).toLocaleDateString('en-TZ') : '—') + '</td>' +
-        '<td><div class="action-btns">' +
-          '<button class="ab" onclick="updateLead(' + "'" + l.id + "'" + ')">Update</button>' +
-          (phone ? '<a class="ab" href="https://wa.me/' + phone + '?text=' + waMsg + '" target="_blank">WA</a>' : '') +
-          (l.email ? '<a class="ab" href="mailto:' + l.email + '">Email</a>' : '') +
-        '</div></td>' +
-      '</tr>';
-    }).join('') +
-    '</tbody></table>';
+      var isNew = l.status === 'new';
+      var srcIcon = sourceIcon[l.source] || '📋';
+      var dateStr = l.date ? new Date(l.date).toLocaleString('en-TZ',{day:'numeric',month:'short',year:'numeric',hour:'2-digit',minute:'2-digit'}) : '—';
 
-  ['recentLeadsTable','leadsTableWrap'].forEach(id => { var el = document.getElementById(id); if(el) el.innerHTML = html; });
+      // Build content message
+      var contentParts = [];
+      if(l.interest) contentParts.push('<strong>Interest:</strong> ' + l.interest);
+      if(l.propertyTitle) contentParts.push('<strong>Property:</strong> ' + l.propertyTitle + (l.propertyPrice?' — '+l.propertyPrice:''));
+      if(l.region) contentParts.push('<strong>Region:</strong> ' + l.region);
+      if(l.budget) contentParts.push('<strong>Budget:</strong> ' + l.budget);
+      if(l.notes) contentParts.push('<strong>Notes:</strong> ' + l.notes);
+      var contentHtml = contentParts.map(function(c){ return '<div style="font-size:12.5px;color:#4A4A6A;line-height:1.6;margin-bottom:3px">'+c+'</div>'; }).join('');
+
+      return '<div onclick="openLeadThread(\'' + l.id + '\')" style="background:#fff;border-radius:13px;border:1.5px solid '+(isNew?'#3B82F6':'var(--gray-light)')+';padding:16px 18px;cursor:pointer;transition:all .2s;position:relative" onmouseover="this.style.boxShadow=\'0 4px 20px rgba(13,18,64,.1)\'" onmouseout="this.style.boxShadow=\'none\'">' +
+        (isNew?'<div style="position:absolute;top:14px;right:14px;width:9px;height:9px;background:#3B82F6;border-radius:50%" title="Unread"></div>':'') +
+        '<div style="display:flex;align-items:flex-start;gap:12px">' +
+          '<div style="width:42px;height:42px;background:linear-gradient(135deg,var(--navy),var(--magenta));border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:700;color:#fff;flex-shrink:0">' + (l.name||'?').charAt(0).toUpperCase() + '</div>' +
+          '<div style="flex:1;min-width:0">' +
+            '<div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:6px">' +
+              '<span style="font-size:14px;font-weight:700;color:var(--navy)">' + (l.name||'Unknown Client') + '</span>' +
+              '<span class="lead-status ' + sc + '" style="font-size:10px">' + sl + '</span>' +
+              '<span class="' + typeClass + '" style="font-size:10px">' + (l.type||'buyer') + '</span>' +
+            '</div>' +
+            '<div style="display:flex;gap:14px;flex-wrap:wrap;margin-bottom:8px">' +
+              (l.phone?'<span style="font-size:12px;color:var(--navy)">📞 '+l.phone+'</span>':'') +
+              (l.email?'<span style="font-size:12px;color:#3B82F6">✉️ '+l.email+'</span>':'') +
+            '</div>' +
+            contentHtml +
+            '<div style="display:flex;align-items:center;gap:10px;margin-top:10px;flex-wrap:wrap">' +
+              '<span style="font-size:10.5px;color:var(--tm);background:rgba(13,18,64,.05);border-radius:4px;padding:2px 7px">'+srcIcon+' ' + (l.source||'Website') + '</span>' +
+              '<span style="font-size:10.5px;color:var(--tm)">🗓 '+dateStr+'</span>' +
+              '<span style="font-size:10.5px;color:var(--tm)">Ref: NG-'+String(l.id).slice(-7)+'</span>' +
+            '</div>' +
+          '</div>' +
+        '</div>' +
+        '<div style="display:flex;gap:7px;margin-top:12px;padding-top:10px;border-top:1px solid var(--gray-light)">' +
+          '<button class="ab" onclick="event.stopPropagation();updateLead(\'' + l.id + '\')" style="font-size:11px">✏️ Update</button>' +
+          (phone?'<a class="ab" href="https://wa.me/'+phone+'?text='+waMsg+'" target="_blank" onclick="event.stopPropagation()" style="font-size:11px">💬 WhatsApp</a>':'') +
+          (l.email?'<a class="ab" href="mailto:'+l.email+'" onclick="event.stopPropagation()" style="font-size:11px">✉️ Email</a>':'') +
+        '</div>' +
+      '</div>';
+    }).join('') +
+  '</div>';
+
+  ['recentLeadsTable','leadsTableWrap'].forEach(function(id){ var el = document.getElementById(id); if(el) el.innerHTML = html; });
+}
+
+function openLeadThread(id){
+  var lead = DB.leads.find(function(l){ return String(l.id) === String(id); });
+  if(!lead) return;
+  // Open the update lead modal with full details
+  updateLead(id);
 }
 
 function renderPipeline(leads) {
@@ -1337,6 +1370,8 @@ async function saveProp(mode) {
   var prop = {
     title:       title,
     type:        gv('propType'),
+    featured:    gv('propFeatured'),
+    priority:    gv('propPriority') || '0',
     category:    gv('propCat'),
     price:       gv('propPrice'),
     currency:    gv('propCurrency'),
@@ -1410,6 +1445,8 @@ async function editProp(id) {
       sv('propBank',    prop.bank);
       sv('propNotes',   prop.notes);
       if(prop.region) document.getElementById('propRegion').value = prop.region;
+      if(prop.featured && document.getElementById('propFeatured')) document.getElementById('propFeatured').value = prop.featured;
+      if(prop.priority && document.getElementById('propPriority')) document.getElementById('propPriority').value = prop.priority;
       if(prop.district) document.getElementById('propDistrict').value = prop.district;
       if(prop.size || prop.sqm) document.getElementById('propSize').value = prop.size || prop.sqm || '';
       if(prop.beds) document.getElementById('propBeds').value = prop.beds;
