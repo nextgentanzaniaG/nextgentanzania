@@ -43,6 +43,8 @@ nav.scrolled{background:rgba(8,12,46,0.98);backdrop-filter:blur(16px);box-shadow
 .nav-enquiry-btn{background:transparent;color:rgba(255,255,255,.82);border:1.5px solid rgba(255,255,255,.3);padding:9px 16px;border-radius:8px;font-size:12.5px;font-weight:600;cursor:pointer;font-family:'Inter',sans-serif;transition:all .2s}
 .nav-enquiry-btn:hover{border-color:#fff;color:#fff;background:rgba(255,255,255,.08)}
 .nav-nova-btn{background:linear-gradient(135deg,var(--magenta),#7B2FF7);color:#fff;border:none;padding:9px 18px;border-radius:8px;font-size:12.5px;font-weight:600;cursor:pointer;font-family:'Inter',sans-serif;display:flex;align-items:center;gap:6px}
+.nav-list-btn{background:var(--gold);color:var(--navy-dark);border:none;padding:9px 18px;border-radius:8px;font-size:12.5px;font-weight:700;cursor:pointer;font-family:'Inter',sans-serif;transition:all .2s}
+.nav-list-btn:hover{background:var(--gold-light)}
 .nav-cta{background:var(--magenta);color:#fff;border:none;padding:9px 20px;border-radius:8px;font-size:12.5px;font-weight:600;cursor:pointer;font-family:'Inter',sans-serif;transition:background .2s}
 .nav-cta:hover{background:var(--magenta-dark)}
 .menu-toggle{display:none;background:none;border:none;cursor:pointer;flex-direction:column;gap:5px;padding:4px}
@@ -392,14 +394,52 @@ footer{background:var(--navy-dark);padding:68px 5% 34px}
 .why-content{padding-left:0;padding-top:36px}
 .auc-img{width:150px}
 }
+/* ── MOBILE NAV ── */
+/* Nav becomes 2-row on mobile: logo + hamburger top, scrollable links bottom */
 @media(max-width:960px){
-.nav-links,.nav-nova-btn,.nav-cta{display:none}
-.menu-toggle{display:flex}
-.search-fields{grid-template-columns:1fr 1fr}
-.search-go{width:100%}
-.footer-grid{grid-template-columns:1fr 1fr;gap:28px}
-.cats-grid{grid-template-columns:repeat(2,1fr)}
-.cat-card.featured{grid-column:span 1}
+  /* Hide desktop-only items */
+  .menu-toggle{display:none}/* we use the new bottom bar instead */
+  .nav-links{display:none}
+
+  /* Nav inner: logo left, action buttons right — compact */
+  .nav-inner{height:60px;padding:0 4%}
+  .nav-right{gap:6px;flex-wrap:nowrap}
+
+  /* Lang toggle — compact */
+  .lang-toggle{background:rgba(255,255,255,.05);padding:2px}
+  .lang-btn{font-size:9px;padding:3px 6px}
+
+  /* Action buttons — icon only on small, text+icon on medium */
+  .nav-enquiry-btn{padding:7px 10px;font-size:11px;white-space:nowrap}
+  .nav-nova-btn{padding:7px 10px;font-size:11px;white-space:nowrap}
+  .nav-cta{padding:7px 10px;font-size:11px;white-space:nowrap}
+  .nav-list-btn{padding:7px 10px;font-size:11px;white-space:nowrap}
+
+  /* Bottom mobile nav bar — fixed at bottom */
+  #mobileNavBar{display:flex}
+
+  /* Search, footer, cats */
+  .search-fields{grid-template-columns:1fr 1fr}
+  .search-go{width:100%}
+  .footer-grid{grid-template-columns:1fr 1fr;gap:28px}
+  .cats-grid{grid-template-columns:repeat(2,1fr)}
+  .cat-card.featured{grid-column:span 1}
+}
+
+@media(max-width:640px){
+  .nav-inner{height:56px;padding:0 3%}
+  .nav-right{gap:4px}
+  /* On very small screens: hide text labels, show emoji only */
+  .nav-enquiry-btn .btn-label{display:none}
+  .nav-nova-btn .btn-label{display:none}
+  .nav-cta .btn-label{display:none}
+  .nav-list-btn .btn-label{display:none}
+  .nav-enquiry-btn{padding:7px 9px;font-size:13px}
+  .nav-nova-btn{padding:7px 9px;font-size:13px}
+  .nav-cta{padding:7px 9px;font-size:13px}
+  .nav-list-btn{padding:7px 9px;font-size:13px}
+  /* Lang toggle — hide labels, show codes */
+  .lang-btn{padding:3px 5px;font-size:9px}
 }
 @media(max-width:600px){
 .footer-grid{grid-template-columns:1fr}
@@ -438,19 +478,44 @@ footer{background:var(--navy-dark);padding:68px 5% 34px}
         <button class="lang-btn" onclick="setLang('ar',this)">ع</button>
         <button class="lang-btn" onclick="setLang('fr',this)">FR</button>
       </div>
-      <button class="nav-enquiry-btn" onclick="openModal('enquiry')">✉️ Send Enquiry</button>
-      <button class="nav-nova-btn" onclick="openNova()">🤖 Ask NextGen AI</button>
-      <button class="nav-cta" onclick="openModal('general')" data-t="nav_cta">Browse Properties</button>
+      <button class="nav-enquiry-btn" onclick="openModal('enquiry')">✉️<span class="btn-label"> Send Enquiry</span></button>
+      <button class="nav-nova-btn" onclick="openNova()">🤖<span class="btn-label"> Ask AI</span></button>
+      <button class="nav-cta" onclick="openBrowseModal()" data-t="nav_cta">🏠<span class="btn-label"> Browse</span></button>
+      <button class="nav-list-btn" onclick="document.getElementById('list-property').scrollIntoView({behavior:'smooth'})">+<span class="btn-label"> List Property</span></button>
     </div>
-    <button class="menu-toggle" onclick="toggleMobile()"><span></span><span></span><span></span></button>
+
   </div>
 </nav>
-<div class="mobile-menu" id="mobileMenu">
-  <a href="#home" onclick="toggleMobile()">Home</a><a href="#listings" onclick="toggleMobile()">Listings</a>
-  <a href="#lease" onclick="toggleMobile()">Leasing</a><a href="#auctions" onclick="toggleMobile()">Auctions</a>
-  <a href="#services" onclick="toggleMobile()">Services</a><a href="#sell" onclick="toggleMobile()">Sell Property</a>
-  <a href="#contact" onclick="toggleMobile()">Contact</a>
+<!-- MOBILE BOTTOM NAV BAR -->
+<div id="mobileNavBar" style="display:none;position:fixed;bottom:0;left:0;right:0;z-index:950;background:rgba(8,12,46,.97);backdrop-filter:blur(16px);border-top:1px solid rgba(255,255,255,.1);overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;white-space:nowrap;padding:0">
+  <div style="display:inline-flex;min-width:100%;padding:0 2px">
+    <a href="#home" class="mob-nav-link">🏠<span>Home</span></a>
+    <a href="#listings" class="mob-nav-link">📋<span>Listings</span></a>
+    <a href="#lease" class="mob-nav-link">🔑<span>Leasing</span></a>
+    <a href="#auctions" class="mob-nav-link">🔨<span>Auctions</span></a>
+    <a href="#services" class="mob-nav-link">⚙️<span>Services</span></a>
+    <a href="#sell" class="mob-nav-link">💼<span>Sell</span></a>
+    <a href="#contact" class="mob-nav-link">📞<span>Contact</span></a>
+    <a href="#list-property" class="mob-nav-link" style="color:var(--gold)">➕<span>List</span></a>
+    <button onclick="openModal('enquiry')" class="mob-nav-link mob-nav-btn">✉️<span>Enquiry</span></button>
+    <button onclick="openNova()" class="mob-nav-link mob-nav-btn" style="background:linear-gradient(135deg,rgba(233,30,140,.15),rgba(123,47,247,.15))">🤖<span>AI Chat</span></button>
+    <button onclick="openBrowseModal()" class="mob-nav-link mob-nav-btn" style="background:rgba(233,30,140,.1)">🏘️<span>Browse</span></button>
+  </div>
 </div>
+<!-- Add bottom padding on mobile so content not hidden behind nav bar -->
+<style>
+.mob-nav-link{display:inline-flex;flex-direction:column;align-items:center;justify-content:center;padding:10px 14px;color:rgba(255,255,255,.7);text-decoration:none;font-family:'Inter',sans-serif;font-size:9px;gap:3px;border:none;background:transparent;cursor:pointer;white-space:nowrap;min-width:56px;transition:color .2s}
+.mob-nav-link span{font-size:9px;font-weight:600;letter-spacing:.3px}
+.mob-nav-link:first-child{font-size:16px}
+.mob-nav-link:hover,.mob-nav-link:active{color:#fff}
+.mob-nav-btn{font-size:16px}
+#mobileNavBar::-webkit-scrollbar{display:none}
+@media(max-width:960px){
+  body{padding-bottom:60px}/* space for fixed bottom nav */
+  #wa-btn{bottom:74px}/* move WA button above nav bar */
+  #nova-fab{bottom:74px}
+}
+</style>
 
 <!-- HERO with Real Photos Slideshow -->
 <section id="home" class="hero">
@@ -1046,7 +1111,21 @@ if(slides&&slides.length>0){
 }
 
 // ── NAV SCROLL ──
-window.addEventListener('scroll',function(){document.getElementById('mainNav').classList.toggle('scrolled',window.scrollY>60)});
+window.addEventListener('scroll',function(){
+  document.getElementById('mainNav').classList.toggle('scrolled',window.scrollY>60);
+  var mob = document.getElementById('mobileNavBar');
+  if(mob) mob.style.display = window.innerWidth<=960 ? 'block' : 'none';
+});
+// Show mobile nav on resize too
+window.addEventListener('resize',function(){
+  var mob = document.getElementById('mobileNavBar');
+  if(mob) mob.style.display = window.innerWidth<=960 ? 'block' : 'none';
+});
+// Init on load
+(function(){
+  var mob = document.getElementById('mobileNavBar');
+  if(mob && window.innerWidth<=960) mob.style.display = 'block';
+})();
 
 // ── SEARCH TABS & LIVE SEARCH FILTER ──
 function setTab(el){
