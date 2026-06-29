@@ -268,7 +268,7 @@ tr:hover td{background:rgba(248,247,255,.7)}
     <button class="nav-item active" onclick="showPage('dashboard',this)"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>Dashboard</button>
     <button class="nav-item" onclick="showPage('add-property',this)"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>Add Property</button>
     <button class="nav-item" onclick="showPage('properties',this)"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg>Properties</button>
-    <button class="nav-item" onclick="showPage('leads',this)"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>Leads<span id="leadBadge" style="margin-left:auto;background:var(--magenta);color:#fff;font-size:10px;font-weight:700;padding:1px 7px;border-radius:10px">0</span></button>
+    <button class="nav-item" onclick="showPage('leads',this)"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>Leads<span id="leadsBadge" style="margin-left:auto;background:#3B82F6;color:#fff;border-radius:8px;padding:0 6px;font-size:9px;font-weight:700;min-width:16px;text-align:center"></span><span id="leadBadge" style="margin-left:auto;background:var(--magenta);color:#fff;font-size:10px;font-weight:700;padding:1px 7px;border-radius:10px">0</span></button>
     <button class="nav-item" onclick="showPage('analytics',this)"><svg viewBox="0 0 24 24"><path d="M18 20V10M12 20V4M6 20v-6"/></svg>Analytics</button>
     <div class="nav-divider"></div>
     <button class="nav-item" onclick="showPage('blog',this)"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>Blog / Insights</button>
@@ -1056,7 +1056,12 @@ async function loadLeads() {
     var resp = await fetch(API + '/api/leads', { headers: authHeaders() });
     var data = await resp.json();
     DB.leads = data.leads || [];
-    document.getElementById('leadCount').textContent = DB.leads.length + ' leads in R2 storage';
+    var unread = DB.leads.filter(function(l){ return !l.readAt; }).length;
+    var countEl = document.getElementById('leadCount');
+    if(countEl) countEl.innerHTML = DB.leads.length + ' leads' + (unread?' <strong style="color:#3B82F6">· '+unread+' unread</strong>':'');
+    // Update sidebar badge
+    var sbadge = document.getElementById('leadsBadge');
+    if(sbadge) sbadge.textContent = unread > 0 ? unread : '';
     renderLeadsTable(DB.leads);
     renderPipeline(DB.leads);
     renderPipelineAnalytics(DB.leads);
@@ -1065,83 +1070,229 @@ async function loadLeads() {
   }
 }
 
-function renderLeadsTable(leads) {
-  var statusClass = {new:'ls-new',contacted:'ls-contacted',visit:'ls-visit',negotiating:'ls-negotiating',closed:'ls-closed',lost:'ls-lost'};
-  var statusLabel = {new:'🔵 New',contacted:'🟡 Contacted',visit:'🟠 Site Visit',negotiating:'🟣 Negotiating',closed:'🟢 Closed',lost:'🔴 Lost'};
-  var sourceIcon = {
-    'Website Form':'🌐','NextGen AI Chat':'🤖','Property Detail Page':'🏠',
-    'Auction Registration':'🔨','Send Enquiry — Nav':'✉️','List Property — sell':'🏡',
-    'List Property — rent':'🔑','List Property — auction':'🔨','List Property — valuation':'📊',
-    'Send Enquiry':'✉️','AI Chat':'🤖'
-  };
+// ── SOURCE ICONS & STATUS MAPS (shared) ──
+var LEAD_STATUS_CLASS  = {new:'ls-new',contacted:'ls-contacted',visit:'ls-visit',negotiating:'ls-negotiating',closed:'ls-closed',lost:'ls-lost'};
+var LEAD_STATUS_LABEL  = {new:'🔵 New',contacted:'🟡 Contacted',visit:'🟠 Site Visit',negotiating:'🟣 Negotiating',closed:'🟢 Closed',lost:'🔴 Lost'};
+var LEAD_STATUS_COLOR  = {new:'#3B82F6',contacted:'#F59E0B',visit:'#C9A84C',negotiating:'#E91E8C',closed:'#22C55E',lost:'#EF4444'};
+var LEAD_SOURCE_ICON   = {
+  'Website Form':'🌐','NextGen AI Chat':'🤖','Property Detail Page':'🏠','Auction Registration':'🔨',
+  'Send Enquiry — Nav':'✉️','Send Enquiry':'✉️','List Property — sell':'🏡','List Property — rent':'🔑',
+  'List Property — auction':'🔨','List Property — valuation':'📊','AI Chat':'🤖',
+  'Contact Us':'📞','Leasing Section':'🔑','Special Request':'⭐','Seller AI Agent':'🤖'
+};
+var LEAD_TYPE_CLASS = {buyer:'lt-buyer',seller:'lt-seller',investor:'lt-investor'};
 
+function renderLeadsTable(leads) {
+  var empty = '<div class="empty-state"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/></svg><h3>No Leads Yet</h3><p>Leads from website contact forms will appear here</p></div>';
   if (!leads.length) {
-    var empty = '<div class="empty-state"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/></svg><h3>No Leads Yet</h3><p>Leads from website contact forms will appear here automatically</p></div>';
-    ['recentLeadsTable','leadsTableWrap'].forEach(function(id){ var el = document.getElementById(id); if(el) el.innerHTML = empty; });
+    ['recentLeadsTable','leadsTableWrap'].forEach(function(id){ var el=document.getElementById(id); if(el) el.innerHTML=empty; });
     return;
   }
 
-  // ── MESSAGE THREAD STYLE ──
-  var html = '<div style="display:flex;flex-direction:column;gap:12px;padding:4px 0">' +
+  var unread = leads.filter(function(l){ return !l.readAt; }).length;
+  var countBadge = unread > 0 ? '<span style="background:#3B82F6;color:#fff;border-radius:10px;padding:1px 8px;font-size:10px;font-weight:700;margin-left:6px">'+unread+' unread</span>' : '';
+
+  // Filter bar
+  var filterBar = '<div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px;align-items:center">' +
+    '<span style="font-size:12px;font-weight:700;color:var(--tm)">Filter:</span>' +
+    ['all','new','contacted','negotiating','closed','seller','buyer','investor'].map(function(f){
+      var label = {all:'All',new:'🔵 New',contacted:'🟡 Contacted',negotiating:'🟣 Negotiating',closed:'🟢 Closed',seller:'Sellers',buyer:'Buyers',investor:'Investors'}[f];
+      return '<button onclick="filterLeadsByStatus(\'' + f + '\')" style="background:var(--off);border:1.5px solid var(--gl);border-radius:16px;padding:4px 12px;font-size:11px;font-weight:600;color:var(--tm);cursor:pointer;font-family:Inter,sans-serif;transition:all .2s" onmouseover="this.style.borderColor=\'#E91E8C\';this.style.color=\'#E91E8C\'" onmouseout="this.style.borderColor=\'var(--gl)\';this.style.color=\'var(--tm)\'">'+label+'</button>';
+    }).join('') +
+  '</div>';
+
+  var html = filterBar + '<div style="display:flex;flex-direction:column;gap:10px">' +
     leads.slice(0,100).map(function(l) {
-      var sc = statusClass[l.status] || 'ls-new';
-      var sl = statusLabel[l.status] || '🔵 New';
-      var typeClass = l.type === 'seller' ? 'lt-seller' : l.type === 'investor' ? 'lt-investor' : 'lt-buyer';
-      var phone = (l.phone||'').replace(/\D/g,'');
-      var waMsg = encodeURIComponent('Hello ' + (l.name||'') + ', this is NEXT-GEN Auctioneer + Realtor. Following up on your inquiry.');
-      var isNew = l.status === 'new';
-      var srcIcon = sourceIcon[l.source] || '📋';
-      var dateStr = l.date ? new Date(l.date).toLocaleString('en-TZ',{day:'numeric',month:'short',year:'numeric',hour:'2-digit',minute:'2-digit'}) : '—';
+      var sc = LEAD_STATUS_CLASS[l.status] || 'ls-new';
+      var sl = LEAD_STATUS_LABEL[l.status] || '🔵 New';
+      var tc = LEAD_TYPE_CLASS[l.type]     || 'lt-buyer';
+      var phone  = (l.phone||'').replace(/\D/g,'');
+      var isNew  = !l.readAt;
+      var srcIcon= LEAD_SOURCE_ICON[l.source] || '📋';
+      var dateStr= l.date ? new Date(l.date).toLocaleString('en-TZ',{day:'numeric',month:'short',hour:'2-digit',minute:'2-digit'}) : '—';
+      var waMsg  = encodeURIComponent('Hello ' + (l.name||'') + ', this is NEXT-GEN Auctioneer + Realtor. Following up on your inquiry.');
 
-      // Build content message
-      var contentParts = [];
-      if(l.interest) contentParts.push('<strong>Interest:</strong> ' + l.interest);
-      if(l.propertyTitle) contentParts.push('<strong>Property:</strong> ' + l.propertyTitle + (l.propertyPrice?' — '+l.propertyPrice:''));
-      if(l.region) contentParts.push('<strong>Region:</strong> ' + l.region);
-      if(l.budget) contentParts.push('<strong>Budget:</strong> ' + l.budget);
-      if(l.notes) contentParts.push('<strong>Notes:</strong> ' + l.notes);
-      var contentHtml = contentParts.map(function(c){ return '<div style="font-size:12.5px;color:#4A4A6A;line-height:1.6;margin-bottom:3px">'+c+'</div>'; }).join('');
+      // Message preview — first meaningful field
+      var preview = l.interest || l.notes || l.subject || (l.propertyTitle ? 'Re: '+l.propertyTitle : '') || 'No additional details';
+      if(preview.length > 90) preview = preview.slice(0,90) + '…';
 
-      return '<div onclick="openLeadThread(\'' + l.id + '\')" style="background:#fff;border-radius:13px;border:1.5px solid '+(isNew?'#3B82F6':'var(--gray-light)')+';padding:16px 18px;cursor:pointer;transition:all .2s;position:relative" onmouseover="this.style.boxShadow=\'0 4px 20px rgba(13,18,64,.1)\'" onmouseout="this.style.boxShadow=\'none\'">' +
-        (isNew?'<div style="position:absolute;top:14px;right:14px;width:9px;height:9px;background:#3B82F6;border-radius:50%" title="Unread"></div>':'') +
-        '<div style="display:flex;align-items:flex-start;gap:12px">' +
-          '<div style="width:42px;height:42px;background:linear-gradient(135deg,var(--navy),var(--magenta));border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:700;color:#fff;flex-shrink:0">' + (l.name||'?').charAt(0).toUpperCase() + '</div>' +
-          '<div style="flex:1;min-width:0">' +
-            '<div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:6px">' +
-              '<span style="font-size:14px;font-weight:700;color:var(--navy)">' + (l.name||'Unknown Client') + '</span>' +
-              '<span class="lead-status ' + sc + '" style="font-size:10px">' + sl + '</span>' +
-              '<span class="' + typeClass + '" style="font-size:10px">' + (l.type||'buyer') + '</span>' +
-            '</div>' +
-            '<div style="display:flex;gap:14px;flex-wrap:wrap;margin-bottom:8px">' +
-              (l.phone?'<span style="font-size:12px;color:var(--navy)">📞 '+l.phone+'</span>':'') +
-              (l.email?'<span style="font-size:12px;color:#3B82F6">✉️ '+l.email+'</span>':'') +
-            '</div>' +
-            contentHtml +
-            '<div style="display:flex;align-items:center;gap:10px;margin-top:10px;flex-wrap:wrap">' +
-              '<span style="font-size:10.5px;color:var(--tm);background:rgba(13,18,64,.05);border-radius:4px;padding:2px 7px">'+srcIcon+' ' + (l.source||'Website') + '</span>' +
-              '<span style="font-size:10.5px;color:var(--tm)">🗓 '+dateStr+'</span>' +
-              '<span style="font-size:10.5px;color:var(--tm)">Ref: NG-'+String(l.id).slice(-7)+'</span>' +
-            '</div>' +
+      return '<div onclick="openLeadDetail(\'' + l.id + '\')" ' +
+        'style="background:#fff;border-radius:12px;border:1.5px solid '+(isNew?'#3B82F6':'var(--gl)')+';' +
+        'padding:14px 16px;cursor:pointer;transition:all .2s;display:flex;gap:12px;align-items:flex-start;position:relative" ' +
+        'onmouseover="this.style.boxShadow=\'0 4px 20px rgba(13,18,64,.1)\'" onmouseout="this.style.boxShadow=\'none\'">' +
+        // Avatar
+        '<div style="width:40px;height:40px;background:linear-gradient(135deg,var(--navy),var(--magenta));border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700;color:#fff;flex-shrink:0;margin-top:2px">' + (l.name||'?').charAt(0).toUpperCase() + '</div>' +
+        // Content
+        '<div style="flex:1;min-width:0">' +
+          // Row 1: name + badges
+          '<div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin-bottom:4px">' +
+            '<span style="font-size:13.5px;font-weight:700;color:var(--navy)">' + (l.name||'Unknown') + '</span>' +
+            (isNew?'<span style="background:#3B82F6;color:#fff;font-size:9.5px;font-weight:700;padding:1px 7px;border-radius:8px">NEW</span>':'') +
+            '<span class="lead-status ' + sc + '" style="font-size:10px">' + sl + '</span>' +
+            '<span class="' + tc + '" style="font-size:10px">' + (l.type||'buyer') + '</span>' +
+          '</div>' +
+          // Row 2: preview message
+          '<div style="font-size:12.5px;color:var(--tm);margin-bottom:5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%">' + preview + '</div>' +
+          // Row 3: meta info
+          '<div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center">' +
+            (l.phone?'<span style="font-size:11px;color:var(--td)">📞 '+l.phone+'</span>':'') +
+            (l.email?'<span style="font-size:11px;color:#3B82F6">✉️ '+l.email.split('@')[0]+'@…</span>':'') +
+            '<span style="font-size:10px;color:var(--tm);background:var(--off);border-radius:4px;padding:1px 6px">'+srcIcon+' '+(l.source||'Website')+'</span>' +
+            '<span style="font-size:10px;color:var(--tm)">'+dateStr+'</span>' +
           '</div>' +
         '</div>' +
-        '<div style="display:flex;gap:7px;margin-top:12px;padding-top:10px;border-top:1px solid var(--gray-light)">' +
-          '<button class="ab" onclick="event.stopPropagation();updateLead(\'' + l.id + '\')" style="font-size:11px">✏️ Update</button>' +
-          (phone?'<a class="ab" href="https://wa.me/'+phone+'?text='+waMsg+'" target="_blank" onclick="event.stopPropagation()" style="font-size:11px">💬 WhatsApp</a>':'') +
-          (l.email?'<a class="ab" href="mailto:'+l.email+'" onclick="event.stopPropagation()" style="font-size:11px">✉️ Email</a>':'') +
+        // Quick action buttons (right side)
+        '<div style="display:flex;flex-direction:column;gap:5px;flex-shrink:0">' +
+          (phone?'<a href="https://wa.me/'+phone+'?text='+waMsg+'" target="_blank" onclick="event.stopPropagation()" style="background:#25D366;color:#fff;border:none;border-radius:6px;padding:4px 8px;font-size:10px;font-weight:600;text-decoration:none;text-align:center">💬 WA</a>':'') +
+          (l.email?'<a href="mailto:'+l.email+'" onclick="event.stopPropagation()" style="background:var(--navy);color:#fff;border:none;border-radius:6px;padding:4px 8px;font-size:10px;font-weight:600;text-decoration:none;text-align:center">✉️</a>':'') +
         '</div>' +
       '</div>';
     }).join('') +
   '</div>';
 
-  ['recentLeadsTable','leadsTableWrap'].forEach(function(id){ var el = document.getElementById(id); if(el) el.innerHTML = html; });
+  ['recentLeadsTable','leadsTableWrap'].forEach(function(id){ var el=document.getElementById(id); if(el) el.innerHTML=html; });
 }
 
-function openLeadThread(id){
-  var lead = DB.leads.find(function(l){ return String(l.id) === String(id); });
-  if(!lead) return;
-  // Open the update lead modal with full details
-  updateLead(id);
+// ── FILTER BY STATUS/TYPE ──
+function filterLeadsByStatus(f) {
+  var filtered;
+  if(f==='all') filtered = DB.leads;
+  else if(['buyer','seller','investor'].includes(f)) filtered = DB.leads.filter(function(l){ return l.type===f; });
+  else filtered = DB.leads.filter(function(l){ return l.status===f; });
+  renderLeadsTable(filtered);
 }
+
+// ── OPEN LEAD DETAIL PANEL (full screen) ──
+function openLeadDetail(id) {
+  var lead = DB.leads.find(function(l){ return String(l.id)===String(id); });
+  if(!lead) return;
+
+  // Mark as read
+  if(!lead.readAt) {
+    lead.readAt = new Date().toISOString();
+    fetch(API + '/api/leads/'+id+'/read', { method:'POST', headers: authHeaders() }).catch(function(){});
+    // Update local DB
+    var li = DB.leads.findIndex(function(l){ return String(l.id)===String(id); });
+    if(li>-1) DB.leads[li].readAt = lead.readAt;
+  }
+
+  var m = document.getElementById('leadDetailPanel');
+  if(!m) {
+    m = document.createElement('div');
+    m.id = 'leadDetailPanel';
+    m.style.cssText = 'display:none;position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:1000;align-items:flex-start;justify-content:flex-end;padding:12px';
+    m.addEventListener('click', function(e){ if(e.target===m) closeLDP(); });
+    document.body.appendChild(m);
+  }
+
+  var sc = LEAD_STATUS_CLASS[lead.status] || 'ls-new';
+  var sl = LEAD_STATUS_LABEL[lead.status] || '🔵 New';
+  var tc = LEAD_TYPE_CLASS[lead.type]     || 'lt-buyer';
+  var phone  = (lead.phone||'').replace(/\D/g,'');
+  var waMsg  = encodeURIComponent('Hello ' + (lead.name||'') + ', this is NEXT-GEN Auctioneer + Realtor. Following up on your property inquiry.');
+  var emailHref = 'mailto:'+(lead.email||'')+'?subject='+encodeURIComponent('Re: Your Property Inquiry — NEXT-GEN');
+  var srcIcon = LEAD_SOURCE_ICON[lead.source] || '📋';
+  var dateStr = lead.date ? new Date(lead.date).toLocaleString('en-TZ',{weekday:'short',day:'numeric',month:'short',year:'numeric',hour:'2-digit',minute:'2-digit'}) : '—';
+
+  // Build all detail rows
+  var details = [];
+  if(lead.interest)      details.push({icon:'💬',label:'Interest / Request', val:lead.interest});
+  if(lead.propertyTitle) details.push({icon:'🏠',label:'Property Enquired', val:lead.propertyTitle+(lead.propertyPrice?' — '+lead.propertyPrice:'')});
+  if(lead.subject)       details.push({icon:'📌',label:'Subject', val:lead.subject});
+  if(lead.region)        details.push({icon:'📍',label:'Preferred Region', val:lead.region});
+  if(lead.budget)        details.push({icon:'💰',label:'Budget', val:lead.budget});
+  if(lead.listingIntent) details.push({icon:'🔖',label:'Listing Intent', val:lead.listingIntent});
+  if(lead.notes)         details.push({icon:'📝',label:'Notes / Message', val:lead.notes});
+  if(lead.lang)          details.push({icon:'🌐',label:'Language', val:lead.lang.toUpperCase()});
+
+  var detailRows = details.map(function(d){
+    return '<div style="padding:10px 0;border-bottom:1px solid var(--gl)">' +
+      '<div style="font-size:10px;font-weight:700;color:var(--tm);text-transform:uppercase;letter-spacing:.8px;margin-bottom:4px">'+d.icon+' '+d.label+'</div>' +
+      '<div style="font-size:13px;color:var(--td);line-height:1.6">'+d.val+'</div>' +
+    '</div>';
+  }).join('');
+
+  var statusBtns = Object.keys(LEAD_STATUS_LABEL).map(function(v){
+    var active = lead.status === v;
+    return '<button onclick="doUpdateLead(\'' + id + '\',\'' + v + '\')" style="padding:7px 12px;border-radius:8px;border:1.5px solid '+(active?LEAD_STATUS_COLOR[v]:'var(--gl)')+';background:'+(active?LEAD_STATUS_COLOR[v]:'#fff')+';color:'+(active?'#fff':'var(--td)')+';font-size:11.5px;font-weight:600;cursor:pointer;font-family:Inter,sans-serif;white-space:nowrap">'+LEAD_STATUS_LABEL[v]+(active?' ✓':'')+'</button>';
+  }).join('');
+
+  m.innerHTML =
+    '<div style="background:#fff;border-radius:18px;width:100%;max-width:480px;height:calc(100vh - 24px);overflow-y:auto;display:flex;flex-direction:column;box-shadow:0 24px 80px rgba(0,0,0,.25)">' +
+      // Header
+      '<div style="background:var(--navy-dark);padding:18px 20px;border-radius:18px 18px 0 0;display:flex;align-items:center;gap:12px;flex-shrink:0">' +
+        '<div style="width:44px;height:44px;background:linear-gradient(135deg,var(--magenta),#7B2FF7);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:700;color:#fff;flex-shrink:0">'+(lead.name||'?').charAt(0).toUpperCase()+'</div>' +
+        '<div style="flex:1">' +
+          '<div style="font-size:15px;font-weight:700;color:#fff">'+(lead.name||'Unknown Client')+'</div>' +
+          '<div style="font-size:10px;color:rgba(255,255,255,.5);margin-top:2px">Ref: NG-'+String(lead.id).slice(-7)+' · '+srcIcon+' '+(lead.source||'Website')+'</div>' +
+        '</div>' +
+        '<div style="display:flex;gap:6px;align-items:center">' +
+          '<span class="lead-status '+sc+'" style="font-size:10px">'+sl+'</span>' +
+          '<button onclick="closeLDP()" style="background:rgba(255,255,255,.12);border:none;color:#fff;width:28px;height:28px;border-radius:50%;cursor:pointer;font-size:16px;line-height:1;font-family:Inter,sans-serif">×</button>' +
+        '</div>' +
+      '</div>' +
+      // Contact strip
+      '<div style="display:flex;gap:0;border-bottom:1px solid var(--gl);flex-shrink:0">' +
+        (phone?'<a href="https://wa.me/'+phone+'?text='+waMsg+'" target="_blank" style="flex:1;background:#25D366;color:#fff;padding:12px 8px;font-size:12px;font-weight:700;text-decoration:none;text-align:center;display:flex;flex-direction:column;align-items:center;gap:3px"><span style="font-size:18px">💬</span>WhatsApp</a>':'') +
+        (lead.email?'<a href="'+emailHref+'" style="flex:1;background:var(--navy);color:#fff;padding:12px 8px;font-size:12px;font-weight:700;text-decoration:none;text-align:center;display:flex;flex-direction:column;align-items:center;gap:3px"><span style="font-size:18px">✉️</span>Email</a>':'') +
+        (lead.phone?'<a href="tel:'+lead.phone+'" style="flex:1;background:var(--magenta);color:#fff;padding:12px 8px;font-size:12px;font-weight:700;text-decoration:none;text-align:center;display:flex;flex-direction:column;align-items:center;gap:3px"><span style="font-size:18px">📞</span>Call</a>':'') +
+      '</div>' +
+      // Body
+      '<div style="padding:18px 20px;flex:1;overflow-y:auto">' +
+        // Meta badges row
+        '<div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px">' +
+          '<span class="'+tc+'" style="font-size:11px">'+(lead.type||'buyer')+'</span>' +
+          '<span style="background:rgba(13,18,64,.06);color:var(--navy);font-size:11px;font-weight:600;padding:3px 9px;border-radius:6px">'+srcIcon+' '+(lead.source||'Website')+'</span>' +
+          '<span style="font-size:11px;color:var(--tm)">🗓 '+dateStr+'</span>' +
+        '</div>' +
+        // Detail rows
+        detailRows +
+        // Status update
+        '<div style="margin-top:16px">' +
+          '<div style="font-size:10px;font-weight:700;color:var(--tm);text-transform:uppercase;letter-spacing:.8px;margin-bottom:8px">📊 Update Status</div>' +
+          '<div style="display:flex;gap:6px;flex-wrap:wrap">' + statusBtns + '</div>' +
+        '</div>' +
+        // Notes input
+        '<div style="margin-top:16px">' +
+          '<div style="font-size:10px;font-weight:700;color:var(--tm);text-transform:uppercase;letter-spacing:.8px;margin-bottom:6px">✍️ Add Note</div>' +
+          '<textarea id="ldpNote" rows="2" placeholder="Add a note for this lead..." style="width:100%;border:1.5px solid var(--gl);border-radius:8px;padding:8px 10px;font-size:12.5px;font-family:Inter,sans-serif;outline:none;resize:none"></textarea>' +
+          '<button onclick="saveLDPNote(\'' + id + '\')" style="margin-top:6px;background:var(--navy);color:#fff;border:none;padding:8px 16px;border-radius:8px;font-size:12px;font-weight:600;cursor:pointer;font-family:Inter,sans-serif">Save Note →</button>' +
+        '</div>' +
+      '</div>' +
+    '</div>';
+
+  m.style.display = 'flex';
+}
+
+function closeLDP() {
+  var m = document.getElementById('leadDetailPanel');
+  if(m) m.style.display = 'none';
+  // Refresh list to update read status
+  renderLeadsTable(DB.leads);
+}
+
+async function saveLDPNote(id) {
+  var note = (document.getElementById('ldpNote')||{}).value||'';
+  if(!note.trim()) return;
+  var lead = DB.leads.find(function(l){ return String(l.id)===String(id); });
+  if(!lead) return;
+  var updated = (lead.notes?lead.notes+'\n':'') + '['+new Date().toLocaleDateString('en-TZ')+'] ' + note;
+  try {
+    await fetch(API + '/api/leads/' + id, {
+      method: 'PUT', headers: authHeaders(),
+      body: JSON.stringify({ notes: updated })
+    });
+    lead.notes = updated;
+    if(document.getElementById('ldpNote')) document.getElementById('ldpNote').value = '';
+    showToast('Note saved ✅', 'success');
+    // Refresh panel
+    openLeadDetail(id);
+  } catch(e) {
+    showToast('Failed to save note', 'error');
+  }
+}
+
+function openLeadThread(id){ openLeadDetail(id); }
 
 function renderPipeline(leads) {
   var stages = ['new','contacted','visit','negotiating','closed','lost'];
@@ -1229,83 +1380,24 @@ async function addLead() {
 }
 
 function updateLead(id) {
-  var lead = DB.leads.find(function(l){ return String(l.id) === String(id); });
-  if (!lead) { showToast('Lead not found', 'error'); return; }
-
-  // Build or reuse modal
-  var m = document.getElementById('leadUpdateModal');
-  if (!m) {
-    m = document.createElement('div');
-    m.id = 'leadUpdateModal';
-    m.style.cssText = 'display:none;position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:1000;align-items:center;justify-content:center';
-    m.innerHTML = '<div id="lumInner" style="background:#fff;border-radius:18px;padding:28px;max-width:480px;width:90%;max-height:90vh;overflow-y:auto;box-shadow:0 24px 80px rgba(0,0,0,.2)"></div>';
-    document.body.appendChild(m);
-    m.addEventListener('click', function(e){ if(e.target===m) m.style.display='none'; });
-  }
-
-  var statusOpts = [
-    {v:'new',        l:'🔵 New',              c:'#3B82F6'},
-    {v:'contacted',  l:'🟡 Contacted',         c:'#F59E0B'},
-    {v:'visit',      l:'🟤 Site Visit',         c:'#C9A84C'},
-    {v:'negotiating',l:'🟣 Negotiating',        c:'#E91E8C'},
-    {v:'closed',     l:'🟢 Closed / Won',       c:'#22C55E'},
-    {v:'lost',       l:'🔴 Lost',               c:'#EF4444'},
-  ];
-
-  var statusBtns = statusOpts.map(function(o) {
-    var active = lead.status === o.v;
-    return '<button onclick="doUpdateLead(\'' + id + '\',\'' + o.v + '\')" ' +
-      'style="display:block;width:100%;text-align:left;padding:10px 14px;margin-bottom:6px;' +
-      'border-radius:9px;border:1.5px solid ' + (active ? o.c : '#E8E8F0') + ';' +
-      'background:' + (active ? o.c : '#F8F7FF') + ';' +
-      'color:' + (active ? '#fff' : '#1A1A2E') + ';' +
-      'font-size:13.5px;font-weight:600;cursor:pointer;font-family:Inter,sans-serif">' +
-      o.l + (active ? ' ✓' : '') + '</button>';
-  }).join('');
-
-  var waPhone  = (lead.phone||'').replace(/\D/g,'');
-  var waMsg    = encodeURIComponent('Hello ' + (lead.name||'') + ', this is NEXT-GEN Auctioneer + Realtor. Following up on your property inquiry.');
-  var emailHref = 'mailto:' + (lead.email||'') + '?subject=' + encodeURIComponent('Re: Your Property Inquiry — NEXT-GEN');
-
-  document.getElementById('lumInner').innerHTML =
-    '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:18px">' +
-      '<h3 style="font-family:Playfair Display,serif;font-size:18px;color:#0D1240">Update Lead</h3>' +
-      '<button onclick="document.getElementById(\'leadUpdateModal\').style.display=\'none\'" ' +
-        'style="background:none;border:none;font-size:22px;cursor:pointer;color:#6B6B8A;line-height:1">×</button>' +
-    '</div>' +
-    '<div style="background:#F8F7FF;border-radius:10px;padding:14px;margin-bottom:18px;font-size:13px">' +
-      '<strong style="color:#0D1240;font-size:14px">' + (lead.name||'—') + '</strong>' +
-      '<span style="color:#6B6B8A;font-size:11px;margin-left:8px">Ref: NG-' + String(id).slice(-6) + '</span><br>' +
-      (lead.phone ? '<span style="color:#6B6B8A">📞 ' + lead.phone + '</span><br>' : '') +
-      (lead.email ? '<span><a href="' + emailHref + '" style="color:#3B82F6;font-size:12px">✉ ' + lead.email + '</a></span><br>' : '') +
-      '<span style="color:#6B6B8A">Type: ' + (lead.type||'buyer') + ' | Source: ' + (lead.source||'Website') + '</span><br>' +
-      (lead.interest ? '<span style="color:#6B6B8A">Interest: ' + lead.interest + '</span><br>' : '') +
-      (lead.region ? '<span style="color:#6B6B8A">Region: ' + lead.region + '</span>' : '') +
-    '</div>' +
-    '<div style="font-size:11px;font-weight:700;color:#6B6B8A;text-transform:uppercase;letter-spacing:1px;margin-bottom:10px">Set Status</div>' +
-    statusBtns +
-    '<div style="font-size:11px;font-weight:700;color:#6B6B8A;text-transform:uppercase;letter-spacing:1px;margin:14px 0 8px">Quick Contact</div>' +
-    '<div style="display:flex;gap:8px">' +
-      (lead.email ? '<a href="' + emailHref + '" style="flex:1;background:#0D1240;color:#fff;border-radius:8px;padding:10px;font-size:12px;font-weight:600;text-align:center;text-decoration:none">✉ Email</a>' : '') +
-      (waPhone ? '<a href="https://wa.me/' + waPhone + '?text=' + waMsg + '" target="_blank" style="flex:1;background:#25D366;color:#fff;border-radius:8px;padding:10px;font-size:12px;font-weight:600;text-align:center;text-decoration:none">💬 WA</a>' : '') +
-      (lead.phone ? '<a href="tel:' + lead.phone + '" style="flex:1;background:#E91E8C;color:#fff;border-radius:8px;padding:10px;font-size:12px;font-weight:600;text-align:center;text-decoration:none">📞 Call</a>' : '') +
-    '</div>';
-
-  m.style.display = 'flex';
+  // Now delegates to openLeadDetail which is the full proper panel
+  openLeadDetail(id);
 }
 
 
 async function doUpdateLead(id, status) {
   try {
     await fetch(API + '/api/leads/' + id, {
-      method: 'PUT',
-      headers: authHeaders(),
+      method: 'PUT', headers: authHeaders(),
       body: JSON.stringify({ status })
     });
-    document.getElementById('leadUpdateModal').style.display = 'none';
-    var labels = {new:'New',contacted:'Contacted',visit:'Site Visit',negotiating:'Negotiating',closed:'Closed ✅',lost:'Lost'};
-    showToast('Status updated → ' + (labels[status]||status), 'success');
-    await loadLeads();
+    var labels = {new:'🔵 New',contacted:'🟡 Contacted',visit:'🟠 Site Visit',negotiating:'🟣 Negotiating',closed:'🟢 Closed',lost:'🔴 Lost'};
+    showToast('Status → ' + (labels[status]||status), 'success');
+    // Update local DB immediately
+    var li = DB.leads.findIndex(function(l){ return String(l.id)===String(id); });
+    if(li>-1) DB.leads[li].status = status;
+    // Refresh panel
+    openLeadDetail(id);
     await loadAnalytics();
   } catch(e) {
     showToast('Update failed: ' + e.message, 'error');
