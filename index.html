@@ -1489,7 +1489,7 @@ function renderRecentlyListed(){
   if(!grid) return;
 
   // Combine: R2 new listings first, then last 3 built-in PROPS
-  var allRecent = R2_PROPS.slice(0, 6).concat(
+  var allRecent = R2_PROPS.filter(function(p){return p.featured!=='featured';}).slice(0, 6).concat(
     PROPS.slice(-3).reverse()
   ).slice(0, 6);
 
@@ -1534,7 +1534,7 @@ function renderRecentlyListed(){
 function injectFeaturedProperties(){
   // Featured listings section
   var featuredGrid = document.querySelector('#listings .listings-grid');
-  var featuredProps = R2_PROPS.filter(function(p){ return p.featured==='featured' && p.status==='live'; });
+  var featuredProps = R2_PROPS.filter(function(p){ return p.featured==='featured'; });
   if(featuredGrid && featuredProps.length){
     function badgeClass(p){ return p.status==='Bank Auction'?'auction':p.status==='For Lease'||p.status==='For Rent'?'lease':'sale'; }
     var newCards = featuredProps.map(function(p){
@@ -2160,7 +2160,9 @@ async function submitModal(){
 
 // ── PROPERTY VIEW MODAL ──
 async function viewProperty(id){
-  window.location.href = '/property/' + id;
+  // For R2 properties (timestamp IDs > 1000000000000), go directly to worker
+  // For built-in properties (IDs 1-17), also go to worker via proxy
+  window.location.href = 'https://nextgen-ai-api.kitentyaluth.workers.dev/property/' + id;
 }
 
 function formatNum(n){ return n.toLocaleString('en-TZ'); }
