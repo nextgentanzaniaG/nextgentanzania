@@ -51,6 +51,8 @@ nav.sidenav{flex:1;padding:8px 12px;overflow-y:auto}
 .dot-ok{background:var(--green)}
 .dot-err{background:var(--red)}
 .dot-loading{background:var(--blue);animation:pulse 1.5s infinite}
+.login-card{animation:slideUp .4s ease}
+@keyframes slideUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
 /* STATS */
 .stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:24px}
@@ -241,8 +243,8 @@ tr:hover td{background:rgba(248,247,255,.7)}
 <body>
 
 <!-- LOGIN OVERLAY -->
-<div id="loginOverlay" style="display:none;position:fixed;inset:0;background:linear-gradient(135deg,#080C2E,#1A0A60);z-index:9999;align-items:center;justify-content:center">
-  <div style="background:#fff;border-radius:20px;padding:44px 40px;max-width:420px;width:90%;text-align:center">
+<div id="loginOverlay" style="display:flex;position:fixed;inset:0;background:linear-gradient(135deg,#080C2E,#1A0A60);z-index:9999;align-items:center;justify-content:center;transition:opacity .3s">
+  <div class="login-card" style="background:#fff;border-radius:20px;padding:44px 40px;max-width:420px;width:90%;text-align:center">
     <div style="font-size:40px;margin-bottom:16px">🔐</div>
     <div style="font-family:'Playfair Display',serif;font-size:24px;font-weight:700;color:#0D1240;margin-bottom:6px">Admin Access</div>
     <div style="font-size:13px;color:#6B6B8A;margin-bottom:28px">NEXT-GEN Auctioneer + Realtor</div>
