@@ -358,14 +358,14 @@ function applyFilters(){
     if(p.sqm)meta+='<span class="c-tag">📐 '+p.sqm.toLocaleString()+'m²</span>';
     if(p.units)meta+='<span class="c-tag">🏢 '+p.units+' Units</span>';
     var tags=(p.tags||[]).slice(0,3).map(function(t){return'<span class="c-tag">'+t+'</span>';}).join('');
-    return '<div class="card" onclick="window.location.href=\'https://nextgen-ai-api.kitentyaluth.workers.dev/property/'+p.id+'\'">'
+    return '<div class="card" onclick="window.location.href=\'/property/'+p.id+'\'">'
       +'<div class="c-img"><img src="'+img+'" alt="'+p.title+'" loading="lazy" onerror="this.onerror=null;this.src=\'1.jfif\'">'
       +'<span class="c-badge '+badgeCls(p)+'">'+p.status+'</span>'+(p.r2?'<span style="position:absolute;top:12px;right:12px;background:#22C55E;color:#fff;font-size:9px;font-weight:700;padding:3px 8px;border-radius:4px">NEW</span>':'')
       +'</div>'
       +'<div class="c-body"><div class="c-price">'+p.price+'</div><div class="c-title">'+p.title+'</div><div class="c-loc">📍 '+p.loc+'</div>'
       +'<div class="c-tags">'+meta+tags+'</div>'
       +'<div class="c-acts">'
-        +'<button class="cbtn prim" onclick="event.stopPropagation();window.location.href=\'https://nextgen-ai-api.kitentyaluth.workers.dev/property/'+p.id+'\'">📋 View Details</button>'
+        +'<button class="cbtn prim" onclick="event.stopPropagation();window.location.href=\'/property/'+p.id+'\'">📋 View Details</button>'
         +'<a class="cbtn wa" href="https://wa.me/255659166440?text='+wa+'" target="_blank" onclick="event.stopPropagation()">💬</a>'
       +'</div></div></div>';
   }).join('');

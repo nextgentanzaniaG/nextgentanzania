@@ -410,7 +410,7 @@ function renderCard(p){
   if(p.units) meta+='<span class="c-mi">\uD83C\uDFE2 '+p.units+' Units</span>';
   if(!meta&&p.tags&&p.tags[0]) meta='<span class="c-mi">'+p.tags[0]+'</span>';
   var tags=(p.tags||[]).slice(0,3).map(function(t){return'<span class="c-tag">'+t+'</span>';}).join('');
-  return '<div class="card" onclick="window.location.href=\'https://nextgen-ai-api.kitentyaluth.workers.dev/property/'+p.id+'\'">'
+  return '<div class="card" onclick="window.location.href=\'/property/'+p.id+'\'">'
     +'<div class="c-img"><img src="'+img+'" alt="'+p.title+'" loading="lazy" onerror="this.onerror=null;this.src=\'1.jfif\'">'
     +'<span class="c-badge '+badgeCls(p)+'">'+p.status+'</span>'
     +(p.r2?'<span class="c-new">NEW</span>':'')
@@ -422,7 +422,7 @@ function renderCard(p){
       +(meta?'<div class="c-meta">'+meta+'</div>':'')
       +(tags?'<div class="c-tags">'+tags+'</div>':'')
       +'<div class="c-acts">'
-        +'<button class="cbtn prim" onclick="event.stopPropagation();window.location.href=\'https://nextgen-ai-api.kitentyaluth.workers.dev/property/'+p.id+'\'">'
+        +'<button class="cbtn prim" onclick="event.stopPropagation();window.location.href=\'/property/'+p.id+'\'">'
           +'\uD83D\uDCCB View</button>'
         +'<button class="cbtn" onclick="event.stopPropagation();printCard(p)" title="Print" style="flex:none;padding:8px 10px">🖨️</button>'
         +'<button class="cbtn" onclick="event.stopPropagation();exportCardPDF(p)" title="PDF" style="flex:none;padding:8px 10px">📄</button>'

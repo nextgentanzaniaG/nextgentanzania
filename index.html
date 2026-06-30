@@ -2161,9 +2161,9 @@ async function submitModal(){
 
 // ── PROPERTY VIEW MODAL ──
 async function viewProperty(id){
-  // For R2 properties (timestamp IDs > 1000000000000), go directly to worker
-  // For built-in properties (IDs 1-17), also go to worker via proxy
-  window.location.href = 'https://nextgen-ai-api.kitentyaluth.workers.dev/property/' + id;
+  // Use relative URL so _redirects proxy routes to Worker transparently
+  // Domain stays nextgentanzania.com in the browser
+  window.location.href = '/property/' + id;
 }
 
 function formatNum(n){ return n.toLocaleString('en-TZ'); }
