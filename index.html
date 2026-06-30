@@ -398,6 +398,7 @@ footer{background:var(--navy-dark,#080C2E);padding:48px 5% 34px;text-align:cente
 .why-content{padding-left:0;padding-top:36px}
 .auc-img{width:150px}
 }
+#mobileNavBar{display:none}
 /* ── MOBILE NAV ── */
 /* Nav becomes 2-row on mobile: logo + hamburger top, scrollable links bottom */
 @media(max-width:960px){
@@ -420,7 +421,7 @@ footer{background:var(--navy-dark,#080C2E);padding:48px 5% 34px;text-align:cente
   .nav-list-btn{padding:7px 10px;font-size:11px;white-space:nowrap}
 
   /* Bottom mobile nav bar — fixed at bottom */
-  #mobileNavBar{display:flex}
+  #mobileNavBar{position:fixed;bottom:0;left:0;right:0;z-index:900;display:flex;align-items:center;overflow-x:auto;gap:2px;padding:4px 8px;background:rgba(8,12,46,.98);backdrop-filter:blur(20px);border-top:1px solid rgba(233,30,140,.2);padding-bottom:calc(4px + env(safe-area-inset-bottom));}
 
   /* Search, footer, cats */
   .search-fields{grid-template-columns:1fr 1fr}
@@ -534,30 +535,25 @@ footer{background:var(--navy-dark,#080C2E);padding:48px 5% 34px;text-align:cente
   </div>
 </nav>
 <!-- MOBILE BOTTOM NAV BAR -->
-<div id="mobileNavBar"><div style="display:flex;gap:4px;padding:8px;overflow-x:auto;flex-wrap:wrap">
-  <a href="index.html" style="color:rgba(255,255,255,.7);font-size:12px;font-weight:500;padding:6px 12px;border-radius:6px;white-space:nowrap">🏠 Home</a>
-  <a href="listings.html" style="color:rgba(255,255,255,.7);font-size:12px;font-weight:500;padding:6px 12px;border-radius:6px;white-space:nowrap">📋 Properties</a>
-  <a href="services.html" style="color:rgba(255,255,255,.7);font-size:12px;font-weight:500;padding:6px 12px;border-radius:6px;white-space:nowrap">⚙️ Services</a>
-  <a href="auctions.html" style="color:rgba(255,255,255,.7);font-size:12px;font-weight:500;padding:6px 12px;border-radius:6px;white-space:nowrap">🔨 Auctions</a>
-  <a href="leasing.html" style="color:rgba(255,255,255,.7);font-size:12px;font-weight:500;padding:6px 12px;border-radius:6px;white-space:nowrap">🔑 Leasing</a>
-  <a href="commercial.html" style="color:rgba(255,255,255,.7);font-size:12px;font-weight:500;padding:6px 12px;border-radius:6px;white-space:nowrap">🏢 Commercial</a>
-  <a href="invest.html" style="color:rgba(255,255,255,.7);font-size:12px;font-weight:500;padding:6px 12px;border-radius:6px;white-space:nowrap">📈 Invest</a>
-  <a href="foreign-buyers.html" style="color:rgba(255,255,255,.7);font-size:12px;font-weight:500;padding:6px 12px;border-radius:6px;white-space:nowrap">🌍 Foreign Buyers</a>
-  <a href="sell.html" style="color:rgba(255,255,255,.7);font-size:12px;font-weight:500;padding:6px 12px;border-radius:6px;white-space:nowrap">💼 Sell</a>
-  <a href="blog.html" style="color:rgba(255,255,255,.7);font-size:12px;font-weight:500;padding:6px 12px;border-radius:6px;white-space:nowrap">📰 Blog</a>
-  <a href="about.html" style="color:rgba(255,255,255,.7);font-size:12px;font-weight:500;padding:6px 12px;border-radius:6px;white-space:nowrap">🏛️ About</a>
-  <a href="contact.html" style="color:rgba(255,255,255,.7);font-size:12px;font-weight:500;padding:6px 12px;border-radius:6px;white-space:nowrap">📞 Contact</a>
-</div>
-  <span id="cc-note" style="font-size:10px;color:rgba(255,255,255,.3)">Indicative rates</span>
-</div></div>
+<div id="mobileNavBar">
+  <a href="index.html" class="mob-nav-link">🏠<span>Home</span></a>
+  <a href="listings.html" class="mob-nav-link">📋<span>Properties</span></a>
+  <a href="services.html" class="mob-nav-link">⚙️<span>Services</span></a>
+  <a href="auctions.html" class="mob-nav-link">🔨<span>Auctions</span></a>
+  <a href="leasing.html" class="mob-nav-link">🔑<span>Leasing</span></a>
+  <a href="commercial.html" class="mob-nav-link">🏢<span>Commercial</span></a>
+  <a href="invest.html" class="mob-nav-link">📈<span>Invest</span></a>
+  <a href="foreign-buyers.html" class="mob-nav-link">🌍<span>Foreign Buyers</span></a>
+  <a href="sell.html" class="mob-nav-link">💼<span>Sell</span></a>
+  <a href="blog.html" class="mob-nav-link">📰<span>Blog</span></a>
+  <a href="about.html" class="mob-nav-link">🏛️<span>About</span></a>
+  <a href="contact.html" class="mob-nav-link">📞<span>Contact</span></a>
 </div>
 <!-- Add bottom padding on mobile so content not hidden behind nav bar -->
 <style>
-.mob-nav-link{display:inline-flex;flex-direction:column;align-items:center;justify-content:center;padding:10px 14px;color:rgba(255,255,255,.7);text-decoration:none;font-family:'Inter',sans-serif;font-size:9px;gap:3px;border:none;background:transparent;cursor:pointer;white-space:nowrap;min-width:56px;transition:color .2s}
+.mob-nav-link{display:inline-flex;flex-direction:column;align-items:center;justify-content:center;padding:8px 12px;color:rgba(255,255,255,.7);text-decoration:none;font-family:'Inter',sans-serif;font-size:16px;gap:3px;border:none;background:transparent;cursor:pointer;white-space:nowrap;min-width:60px;flex-shrink:0;transition:color .2s}
 .mob-nav-link span{font-size:9px;font-weight:600;letter-spacing:.3px}
-.mob-nav-link:first-child{font-size:16px}
 .mob-nav-link:hover,.mob-nav-link:active{color:#fff}
-.mob-nav-btn{font-size:16px}
 #mobileNavBar::-webkit-scrollbar{display:none}
 @media(max-width:960px){
   body{padding-bottom:60px}/* space for fixed bottom nav */
@@ -1176,19 +1172,7 @@ if(slides&&slides.length>0){
 // ── NAV SCROLL ──
 window.addEventListener('scroll',function(){
   document.getElementById('mainNav').classList.toggle('scrolled',window.scrollY>60);
-  var mob = document.getElementById('mobileNavBar');
-  if(mob) mob.style.display = window.innerWidth<=960 ? 'block' : 'none';
 });
-// Show mobile nav on resize too
-window.addEventListener('resize',function(){
-  var mob = document.getElementById('mobileNavBar');
-  if(mob) mob.style.display = window.innerWidth<=960 ? 'block' : 'none';
-});
-// Init on load
-(function(){
-  var mob = document.getElementById('mobileNavBar');
-  if(mob && window.innerWidth<=960) mob.style.display = 'block';
-})();
 
 // ── SEARCH TABS & LIVE SEARCH FILTER ──
 function setTab(el){
@@ -2466,26 +2450,6 @@ renderT();
 
 
 // ── CURRENCY CONVERTER ──
-var CC_RATES = { USD:2550, EUR:2780, GBP:3220, AED:694, CNY:352, TZS:1 };
-function convertCurrency(){
-  var amount = parseFloat(document.getElementById('cc-amount').value)||0;
-  var from = document.getElementById('cc-from').value;
-  var to = document.getElementById('cc-to').value;
-  if(from === to){ document.getElementById('cc-result').textContent = amount.toLocaleString()+' '+to; return; }
-  var tzs = amount * CC_RATES[from];
-  var result = tzs / CC_RATES[to];
-  var fmt = result >= 1000000 ? (result/1000000).toFixed(2)+'M' : result >= 1000 ? (result/1000).toFixed(1)+'K' : result.toFixed(2);
-  document.getElementById('cc-result').textContent = fmt + ' ' + to;
-  document.getElementById('cc-rate-note').textContent = '1 '+from+' = '+(CC_RATES[from]/CC_RATES[to]).toFixed(2)+' '+to+' (indicative)';
-}
-// Fetch live rates from exchangerate-api (optional)
-fetch('https://open.er-api.com/v6/latest/TZS').then(function(r){return r.json();}).then(function(d){
-  if(d.rates){
-    Object.keys(CC_RATES).forEach(function(c){if(c!=='TZS'&&d.rates[c]) CC_RATES[c]=1/d.rates[c];});
-    convertCurrency();
-  }
-}).catch(function(){convertCurrency();});
-convertCurrency();
 
 </script>
 </body>
