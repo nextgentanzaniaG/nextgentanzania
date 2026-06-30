@@ -1,1 +1,3 @@
-/property/* https://nextgen-ai-api.kitentyaluth.workers.dev/property/:splat 200
+# /property/* is handled by Pages Function at functions/property/[id].js
+# API calls go directly to worker (from browser JS - no redirect needed)
+/api/photo/* https://nextgen-ai-api.kitentyaluth.workers.dev/api/photo/:splat 302
