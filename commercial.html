@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="description" content="Commercial real estate Tanzania — offices, retail, warehouses, industrial, factories and mixed-use properties for sale and lease. NEXT-GEN Auctioneer + Realtor.">
+<title>Commercial Real Estate | NEXT-GEN Auctioneer + Realtor Tanzania</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--navy:#0D1240;--navy-dark:#080C2E;--magenta:#E91E8C;--gold:#C9A84C;--off:#F8F7FF;--gl:#E8E8F0;--td:#1A1A2E;--tm:#6B6B8A;--green:#22C55E;--blue:#0891B2}
+body{font-family:'Inter',sans-serif;background:var(--off);color:var(--td)}
+a{text-decoration:none;color:inherit}
+nav{background:rgba(8,12,46,.97);backdrop-filter:blur(16px);position:sticky;top:0;z-index:200;border-bottom:1px solid rgba(233,30,140,.15)}
+.nav-in{display:flex;align-items:center;justify-content:space-between;height:64px;padding:0 5%;max-width:1400px;margin:0 auto}
+.nlogo .l1{font-family:'Playfair Display',serif;font-size:17px;font-weight:700;color:#fff}
+.nlogo .l2{font-size:8px;color:var(--magenta);letter-spacing:2px;text-transform:uppercase;display:block;margin-top:2px}
+.nlinks{display:flex;gap:2px}.nlinks a{color:rgba(255,255,255,.65);font-size:12.5px;font-weight:500;padding:7px 12px;border-radius:7px;transition:all .2s}
+.nlinks a:hover,.nlinks a.on{color:#fff;background:rgba(255,255,255,.08)}
+.nlinks a.on{background:rgba(233,30,140,.12);color:var(--magenta)}
+.nav-cta{background:var(--magenta);color:#fff;padding:9px 18px;border-radius:8px;font-size:12.5px;font-weight:600;display:inline-block;transition:background .2s}
+.nav-cta:hover{background:#C0176F}
+@media(max-width:800px){.nlinks{display:none}}
+.hero{background:linear-gradient(135deg,#080C2E,#0D2040);padding:64px 5% 52px;text-align:center;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 70% 40%,rgba(8,145,178,.12),transparent 50%)}
+.hero-in{max-width:900px;margin:0 auto;position:relative;z-index:2}
+.ey{font-size:11px;font-weight:700;color:var(--magenta);letter-spacing:2.5px;text-transform:uppercase;margin-bottom:10px;display:block}
+.hero h1{font-family:'Playfair Display',serif;font-size:clamp(28px,4.5vw,50px);font-weight:700;color:#fff;line-height:1.1;margin-bottom:14px}
+.hero h1 em{font-style:italic;color:var(--gold)}
+.hero p{font-size:16px;color:rgba(255,255,255,.62);margin-bottom:28px;line-height:1.75}
+.hero-stats{display:flex;justify-content:center;gap:40px;flex-wrap:wrap}
+.hs-num{font-family:'Playfair Display',serif;font-size:32px;font-weight:700;color:var(--gold)}
+.hs-lbl{font-size:11px;color:rgba(255,255,255,.45);text-transform:uppercase;letter-spacing:.5px;margin-top:3px}
+.fbar{background:#fff;border-bottom:1px solid var(--gl);position:sticky;top:64px;z-index:100;overflow-x:auto;white-space:nowrap}
+.fbar-in{max-width:1400px;margin:0 auto;padding:0 5%;display:flex;height:52px;align-items:center;gap:2px}
+.ftab{background:none;border:none;border-bottom:3px solid transparent;padding:0 16px;height:52px;font-size:13px;font-weight:600;color:var(--tm);cursor:pointer;font-family:'Inter',sans-serif;white-space:nowrap;transition:all .2s}
+.ftab:hover{color:var(--navy)}.ftab.on{color:var(--navy);border-bottom-color:var(--magenta)}
+.main{max-width:1400px;margin:0 auto;padding:28px 5% 80px;display:grid;grid-template-columns:252px 1fr;gap:24px;align-items:start}
+@media(max-width:900px){.main{grid-template-columns:1fr}}
+.sb{background:#fff;border-radius:14px;border:1px solid var(--gl);position:sticky;top:124px;overflow:hidden}
+.sb-top{padding:16px 18px;border-bottom:1px solid var(--gl);display:flex;align-items:center;justify-content:space-between}
+.sb-top h3{font-size:13.5px;font-weight:700;color:var(--navy)}
+.sb-clr{background:none;border:none;font-size:11.5px;color:var(--magenta);cursor:pointer;font-family:'Inter',sans-serif;font-weight:600}
+.sb-sec{padding:14px 18px;border-bottom:1px solid var(--gl)}
+.sb-sec:last-child{border-bottom:none}
+.sb-lbl{font-size:9.5px;font-weight:700;color:var(--tm);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px}
+.sb-sec select,.sb-sec input{width:100%;border:1.5px solid var(--gl);border-radius:8px;padding:8px 11px;font-size:13px;font-family:'Inter',sans-serif;color:var(--td);background:#fff;outline:none;transition:border-color .2s}
+.sb-sec select:focus,.sb-sec input:focus{border-color:var(--magenta)}
+.sb-go{width:100%;background:var(--navy);color:#fff;border:none;padding:10px;border-radius:9px;font-size:13px;font-weight:600;cursor:pointer;font-family:'Inter',sans-serif;transition:background .2s;margin-top:6px}
+.sb-go:hover{background:var(--magenta)}
+@media(max-width:900px){.sb{position:static}}
+.rtop{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;flex-wrap:wrap;gap:10px}
+.rcount{font-size:14px;color:var(--tm)}.rcount strong{color:var(--navy)}
+.rsort select{border:1.5px solid var(--gl);border-radius:8px;padding:7px 11px;font-size:12.5px;font-family:'Inter',sans-serif;color:var(--td);background:#fff;outline:none}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(285px,1fr));gap:18px}
+.card{background:#fff;border-radius:16px;overflow:hidden;border:1px solid var(--gl);transition:all .28s;cursor:pointer}
+.card:hover{transform:translateY(-5px);box-shadow:0 20px 50px rgba(13,18,64,.11)}
+.c-img{height:200px;overflow:hidden;position:relative}
+.c-img img{width:100%;height:100%;object-fit:cover;transition:transform .5s}
+.card:hover .c-img img{transform:scale(1.05)}
+.c-badge{position:absolute;top:12px;left:12px;font-size:10px;font-weight:700;padding:4px 10px;border-radius:5px;letter-spacing:.7px;text-transform:uppercase}
+.b-sale{background:var(--magenta);color:#fff}.b-auc{background:var(--gold);color:var(--navy)}
+.b-lease{background:var(--blue);color:#fff}
+.c-body{padding:16px}
+.c-price{font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:var(--navy);margin-bottom:3px}
+.c-title{font-size:14px;font-weight:600;color:var(--td);margin-bottom:5px}
+.c-loc{font-size:12px;color:var(--tm);margin-bottom:9px}
+.c-tags{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:10px}
+.c-tag{background:var(--off);border-radius:4px;padding:2px 7px;font-size:10px;color:var(--tm);font-weight:500}
+.c-acts{display:flex;gap:7px}
+.cbtn{flex:1;padding:8px 6px;border-radius:7px;border:1.5px solid var(--gl);background:#fff;font-size:11.5px;font-weight:600;color:var(--tm);cursor:pointer;font-family:'Inter',sans-serif;transition:all .2s;display:flex;align-items:center;justify-content:center;gap:4px;text-decoration:none}
+.cbtn:hover{border-color:var(--magenta);color:var(--magenta)}
+.cbtn.prim{background:var(--navy);border-color:var(--navy);color:#fff;flex:2}.cbtn.prim:hover{background:var(--magenta);border-color:var(--magenta)}
+.cbtn.wa{background:#25D366;border-color:#25D366;color:#fff;flex:none;padding:8px 10px}
+/* WHY COMMERCIAL */
+.why-sec{background:linear-gradient(135deg,var(--navy),var(--navy-dark));border-radius:18px;padding:32px;margin-bottom:28px}
+.why-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:14px;margin-top:20px}
+.wg-item{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:11px;padding:16px}
+.wg-icon{font-size:24px;margin-bottom:8px}
+.wg-title{font-size:13px;font-weight:700;color:#fff;margin-bottom:4px}
+.wg-body{font-size:12px;color:rgba(255,255,255,.55);line-height:1.55}
+/* SERVICES STRIP */
+.svc-strip{background:#fff;border:1px solid var(--gl);border-radius:16px;padding:24px;margin-bottom:24px}
+.svc-strip h3{font-size:15px;font-weight:700;color:var(--navy);margin-bottom:16px}
+.svc-list{display:flex;flex-wrap:wrap;gap:10px}
+.svc-pill{background:var(--off);border:1px solid var(--gl);border-radius:7px;padding:7px 14px;font-size:12.5px;font-weight:500;color:var(--navy);display:flex;align-items:center;gap:6px;transition:all .2s;text-decoration:none}
+.svc-pill:hover{border-color:var(--magenta);color:var(--magenta)}
+footer{background:#080C2E;padding:32px 5%;text-align:center}
+footer .fl1{font-family:'Playfair Display',serif;font-size:17px;font-weight:700;color:#fff}
+footer .fl2{font-size:8px;color:var(--magenta);letter-spacing:2px;text-transform:uppercase;display:block;margin-top:2px}
+footer p{font-size:11.5px;color:rgba(255,255,255,.25);margin-top:12px}
+#waf{position:fixed;bottom:24px;left:24px;z-index:999;width:50px;height:50px;background:#25D366;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 6px 20px rgba(37,211,102,.4);transition:transform .3s}
+#waf:hover{transform:scale(1.1)}
+#waf svg{width:25px;height:25px;fill:#fff}
+
+/* Mobile nav */
+.mob-menu{display:none;position:absolute;top:64px;left:0;right:0;background:rgba(8,12,46,.98);z-index:199;padding:8px 5%;border-bottom:1px solid rgba(233,30,140,.15);flex-direction:column;gap:2px}
+.mob-menu.open{display:flex}
+.mob-menu a{color:rgba(255,255,255,.8);font-size:13.5px;font-weight:500;padding:10px 8px;border-bottom:1px solid rgba(255,255,255,.06);text-decoration:none}
+.mob-menu a:last-child{border-bottom:none}
+.menu-tog{display:none;background:none;border:none;cursor:pointer;flex-direction:column;gap:5px;padding:6px;margin-left:8px}
+.menu-tog span{display:block;width:22px;height:2px;background:#fff;border-radius:2px;transition:all .3s}
+@media(max-width:800px){.nlinks{display:none!important}.menu-tog{display:flex}}
+</style>
+<script>
+// Auto page tracker — fires silently on load
+(function(){
+  try{
+    var page = window.location.pathname.replace(/^\//, '') || 'index.html';
+    var ref  = document.referrer ? document.referrer.replace(/https?:\/\/[^\/]+/,'') : '';
+    var lang = (navigator.language || 'en').slice(0,5);
+    fetch('https://nextgen-ai-api.kitentyaluth.workers.dev/api/track',{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({page:page, ref:ref, lang:lang}),
+      keepalive:true
+    }).catch(function(){});
+  }catch(e){}
+})();
+</script>
+</head>
+<body>
+<nav>
+  <div class="nav-in">
+    <a href="index.html" class="nlogo"><div class="l1">NEXT-GEN</div><div class="l2">Auctioneer + Realtor</div></a>
+    <div class="nlinks">
+      <a href="listings.html">Properties</a>
+      <a href="services.html">Services</a>
+      <a href="invest.html">Invest</a>
+      <a href="commercial.html" class="on">Commercial</a>
+      <a href="blog.html">Blog</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+    </div>
+    <a href="contact.html" class="nav-cta">
+    <button class="menu-tog" onclick="document.getElementById('mobMenu').classList.toggle('open')" aria-label="Menu"><span></span><span></span><span></span></button>Enquire Now →</a>
+  </div>
+</nav>
+<div class="mob-menu" id="mobMenu">
+  <a href="index.html">🏠 Home</a>
+  <a href="listings.html">📋 Properties</a>
+  <a href="services.html">⚙️ Services</a>
+  <a href="auctions.html">🔨 Auctions</a>
+  <a href="leasing.html">🔑 Leasing</a>
+  <a href="commercial.html">🏢 Commercial</a>
+  <a href="invest.html">📈 Invest</a>
+  <a href="foreign-buyers.html">🌍 Foreign Buyers</a>
+  <a href="sell.html">💼 Sell</a>
+  <a href="blog.html">📰 Blog</a>
+  <a href="about.html">🏛️ About</a>
+  <a href="contact.html">📞 Contact</a>
+</div>
+
+<div class="hero">
+  <div class="hero-in">
+    <span class="ey">Commercial Real Estate Tanzania</span>
+    <h1>Offices, Retail, Warehouses<br><em>&amp; Industrial Properties</em></h1>
+    <p>Tanzania's premier commercial property platform — offices for lease, retail spaces, industrial warehouses, factories, and mixed-use developments for sale and long-term lease.</p>
+    <div class="hero-stats">
+      <div><div class="hs-num">10–14%</div><div class="hs-lbl">Commercial Yield</div></div>
+      <div><div class="hs-num">1,200+</div><div class="hs-lbl">sqm Available</div></div>
+      <div><div class="hs-num">3,000+</div><div class="hs-lbl">sqm Warehouse</div></div>
+      <div><div class="hs-num">7</div><div class="hs-lbl">Commercial Districts</div></div>
+    </div>
+  </div>
+</div>
+
+<div class="fbar">
+  <div class="fbar-in">
+    <button class="ftab on" onclick="setTab(function(p){return ['Office Lease','Retail Lease','Warehouse Lease','Factory','Office','Commercial','Industrial'].includes(p.type)},this)">🏢 All Commercial</button>
+    <button class="ftab" onclick="setTab(function(p){return p.type==='Office Lease'||p.type==='Office'},this)">💼 Offices</button>
+    <button class="ftab" onclick="setTab(function(p){return p.type==='Retail Lease'||p.type==='Retail'},this)">🛒 Retail</button>
+    <button class="ftab" onclick="setTab(function(p){return p.type==='Warehouse Lease'||p.type==='Warehouse'},this)">🏭 Warehouses</button>
+    <button class="ftab" onclick="setTab(function(p){return p.type==='Factory'||p.type==='Industrial'},this)">⚙️ Industrial</button>
+    <button class="ftab" onclick="setTab(function(p){return p.status==='Bank Auction'&&['Factory','Industrial','Office'].includes(p.type)},this)">🔨 Auction</button>
+  </div>
+</div>
+
+<div class="main">
+  <div class="sb" id="sb">
+    <div class="sb-top"><h3>🔍 Filter</h3><button class="sb-clr" onclick="clearFilters()">Clear</button></div>
+    <div class="sb-sec">
+      <div class="sb-lbl">Property Type</div>
+      <select id="fType" onchange="applyFilters()">
+        <option value="">All Types</option>
+        <option value="Office Lease">Corporate Office</option>
+        <option value="Retail Lease">Retail / Showroom</option>
+        <option value="Warehouse Lease">Warehouse</option>
+        <option value="Factory">Industrial / Factory</option>
+      </select>
+    </div>
+    <div class="sb-sec">
+      <div class="sb-lbl">Location</div>
+      <select id="fRegion" onchange="applyFilters()">
+        <option value="">All Areas</option>
+        <option>Dar es Salaam</option><option>Masaki</option><option>Upanga</option>
+        <option>Ubungo</option><option>Kisutu CBD</option><option>Dodoma</option>
+      </select>
+    </div>
+    <div class="sb-sec">
+      <div class="sb-lbl">Min. Size (sqm)</div>
+      <select id="fSize" onchange="applyFilters()">
+        <option value="">Any Size</option>
+        <option value="100">100+ sqm</option><option value="300">300+ sqm</option>
+        <option value="500">500+ sqm</option><option value="1000">1,000+ sqm</option>
+        <option value="3000">3,000+ sqm</option>
+      </select>
+    </div>
+    <div class="sb-sec">
+      <div class="sb-lbl">Search</div>
+      <input type="text" id="fSearch" placeholder="Masaki, parking, generator..." oninput="applyFilters()">
+      <button class="sb-go" onclick="applyFilters()">Apply</button>
+    </div>
+  </div>
+
+  <div>
+    <!-- WHY COMMERCIAL -->
+    <div class="why-sec">
+      <div style="font-size:11px;font-weight:700;color:var(--gold);letter-spacing:2px;text-transform:uppercase;margin-bottom:8px">Why Commercial Property in Tanzania?</div>
+      <div class="why-grid">
+        <div class="wg-item"><div class="wg-icon">📈</div><div class="wg-title">10–14% Gross Yield</div><div class="wg-body">Premium offices and retail in Masaki and Upanga consistently deliver double-digit gross yields.</div></div>
+        <div class="wg-item"><div class="wg-icon">🤝</div><div class="wg-title">Long-Term Tenants</div><div class="wg-body">NGOs, embassies, multinationals and corporations typically sign 3–5 year leases — stable, predictable income.</div></div>
+        <div class="wg-item"><div class="wg-icon">🏗️</div><div class="wg-title">Supply Deficit</div><div class="wg-body">Dar es Salaam has a chronic shortage of Grade A commercial space. Demand consistently outpaces supply.</div></div>
+        <div class="wg-item"><div class="wg-icon">💼</div><div class="wg-title">USD Leases</div><div class="wg-body">Many commercial leases are denominated in USD — protecting investors from TZS depreciation.</div></div>
+      </div>
+    </div>
+
+    <!-- SERVICES FOR COMMERCIAL -->
+    <div class="svc-strip">
+      <h3>Commercial Property Services</h3>
+      <div class="svc-list">
+        <a href="services.html#escrow" class="svc-pill">🔐 Escrow for Transactions</a>
+        <a href="services.html#valuation" class="svc-pill">📊 Commercial Valuation</a>
+        <a href="services.html#legal" class="svc-pill">⚖️ Lease Agreement Drafting</a>
+        <a href="services.html#property-mgmt" class="svc-pill">🏘️ Property Management</a>
+        <a href="services.html#mortgage" class="svc-pill">🏦 Commercial Mortgage</a>
+        <a href="auctions.html" class="svc-pill">🔨 Industrial Auctions</a>
+      </div>
+    </div>
+
+    <div class="rtop">
+      <div class="rcount">Showing <strong id="rcount">—</strong> commercial properties</div>
+      <select id="sortBy" onchange="applyFilters()" style="border:1.5px solid var(--gl);border-radius:8px;padding:7px 11px;font-size:12.5px;font-family:'Inter',sans-serif;color:var(--td);background:#fff;outline:none">
+        <option value="default">Sort: Default</option>
+        <option value="price-asc">Price: Low → High</option>
+        <option value="price-desc">Price: High → Low</option>
+      </select>
+    </div>
+    <div class="grid" id="grid"></div>
+  </div>
+</div>
+
+<footer>
+  <div style="font-family:'Playfair Display',serif;font-size:17px;font-weight:700;color:#fff">NEXT-GEN</div>
+  <span style="font-size:8px;color:var(--magenta,#E91E8C);letter-spacing:2px;text-transform:uppercase;display:block;margin-top:2px">Auctioneer + Realtor</span>
+  <div style="display:flex;justify-content:center;gap:14px;flex-wrap:wrap;margin:14px 0">
+    <a href="index.html" style="font-size:12.5px;color:rgba(255,255,255,.45);transition:color .2s" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,.45)'">Home</a>
+    <a href="listings.html" style="font-size:12.5px;color:rgba(255,255,255,.45);transition:color .2s" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,.45)'">Properties</a>
+    <a href="services.html" style="font-size:12.5px;color:rgba(255,255,255,.45);transition:color .2s" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,.45)'">Services</a>
+    <a href="commercial.html" style="font-size:12.5px;color:rgba(255,255,255,.45);transition:color .2s" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,.45)'">Commercial</a>
+    <a href="auctions.html" style="font-size:12.5px;color:rgba(255,255,255,.45);transition:color .2s" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,.45)'">Auctions</a>
+    <a href="invest-guide.html" style="font-size:12.5px;color:rgba(255,255,255,.45);transition:color .2s" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,.45)'">Invest</a>
+    <a href="foreign-buyers.html" style="font-size:12.5px;color:rgba(255,255,255,.45);transition:color .2s" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,.45)'">Foreign Buyers</a>
+    <a href="blog.html" style="font-size:12.5px;color:rgba(255,255,255,.45);transition:color .2s" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,.45)'">Blog</a>
+    <a href="about.html" style="font-size:12.5px;color:rgba(255,255,255,.45);transition:color .2s" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,.45)'">About</a>
+    <a href="sell.html" style="font-size:12.5px;color:rgba(255,255,255,.45);transition:color .2s" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,.45)'">Sell</a>
+    <a href="contact.html" style="font-size:12.5px;color:rgba(255,255,255,.45);transition:color .2s" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,.45)'">Contact</a>
+  </div>
+  <p style="font-size:11.5px;color:rgba(255,255,255,.25);margin-top:4px">© 2026 NEXT-GEN Auctioneer + Realtor (Next-Gen Holdings Company Limited) · BRELA Registered · Licensed Auctioneer<br>
+  📧 nextgentanzania@gmail.com · 📞 +255 659 166 440 · Haidary Plaza, 3rd Floor, Ali Hassan Mwinyi Rd, Kisutu, Dar es Salaam</p>
+
+    <a href="faq.html" class="fl">Faq</a>
+  
+    <a href="partners.html" class="fl">Partners</a>
+  
+    <a href="testimonials.html" class="fl">Testimonials</a>
+  
+    <a href="market-report.html" class="fl">Market Report</a>
+  
+    <a href="privacy-policy.html" class="fl">Privacy Policy</a>
+  
+    <a href="terms.html" class="fl">Terms</a>
+  
+    <a href="sitemap.html" class="fl">Sitemap</a>
+  </footer>
+
+<a id="waf" href="https://wa.me/255659166440?text=Hello%20NEXT-GEN!%20I%20am%20looking%20for%20commercial%20property%20in%20Tanzania." target="_blank">
+  <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413z m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</a>
+
+<script>
+const API='https://nextgen-ai-api.kitentyaluth.workers.dev';
+var PROPS=[
+  {id:4,title:"Commercial Plot — CBD Kisutu",price:"TZS 850M",loc:"Kisutu, Dar es Salaam",type:"Plot",sqm:2400,status:"For Sale",tags:["Title Deed","CBD","Corner Plot"],img:"4.jfif"},
+  {id:7,title:"Edible Oil Factory — Dodoma",price:"TZS 14B",loc:"Dodoma Industrial Zone",type:"Factory",sqm:22000,status:"Bank Auction",tags:["CRDB Bank","5.2 Acres","Fully Equipped"],img:"18.jfif"},
+  {id:8,title:"Beachfront Resort — Dar",price:"TZS 3.2B",loc:"Dar es Salaam Coast",type:"Resort",units:12,status:"Bank Auction",tags:["NMB Bank","12 Units","Restaurant"],img:"2.jfif"},
+  {id:12,title:"Corporate Office — Upanga",price:"TZS 12M/mo",loc:"Upanga, Dar es Salaam",type:"Office Lease",sqm:1200,status:"For Lease",tags:["3 Floors","Parking","Generator"],img:"17.jfif"},
+  {id:14,title:"Retail Space — Masaki",price:"TZS 8M/mo",loc:"Masaki, Dar es Salaam",type:"Retail Lease",sqm:300,status:"For Lease",tags:["High Traffic","Parking","Premium"],img:"4.jfif"},
+  {id:15,title:"Warehouse Complex — Ubungo",price:"TZS 22M/mo",loc:"Ubungo, Dar es Salaam",type:"Warehouse Lease",sqm:3000,status:"For Lease",tags:["Industrial","Loading Bay","Security"],img:"18.jfif"}
+];
+var ALL_PROPS=PROPS.slice();
+var BASE_FILTER=function(p){return ['Office Lease','Retail Lease','Warehouse Lease','Factory','Office','Commercial','Industrial','Resort','Plot'].includes(p.type)||p.status==='Bank Auction';};
+var filteredAll=[];
+
+async function loadR2(){
+  try{
+    var r=await fetch(API+'/api/properties');var d=await r.json();
+    var live=(d.properties||[]).filter(function(p){return p.status==='live'&&['Office Lease','Retail Lease','Warehouse Lease','Factory','Industrial','Commercial'].includes(p.type);});
+    var r2=live.map(function(p){return{id:p.id,title:p.title,price:'TZS '+(p.price||'—'),loc:(p.district?p.district+', ':'')+p.region,type:p.type,sqm:p.size?parseInt(p.size):null,status:p.category||'For Lease',tags:p.tags||[],img:p.img||null,r2:true};});
+    ALL_PROPS=r2.concat(PROPS);
+  }catch(e){ALL_PROPS=PROPS.slice();}
+  applyFilters();
+}
+
+function badgeCls(p){if(p.status==='Bank Auction')return 'b-auc';if(p.status==='For Lease')return 'b-lease';return 'b-sale';}
+
+function setTab(f,btn){
+  document.querySelectorAll('.ftab').forEach(function(t){t.classList.remove('on');});
+  if(btn)btn.classList.add('on');
+  BASE_FILTER=f;applyFilters();
+}
+
+function applyFilters(){
+  var fType=document.getElementById('fType').value;
+  var fRegion=document.getElementById('fRegion').value;
+  var fSize=parseInt(document.getElementById('fSize').value)||0;
+  var fSearch=(document.getElementById('fSearch').value||'').toLowerCase();
+  var sortBy=document.getElementById('sortBy').value;
+  var f=ALL_PROPS.filter(function(p){
+    if(!BASE_FILTER(p))return false;
+    if(fType&&p.type!==fType)return false;
+    if(fRegion&&!(p.loc||'').toLowerCase().includes(fRegion.toLowerCase()))return false;
+    if(fSize&&(!p.sqm||p.sqm<fSize))return false;
+    if(fSearch){var h=((p.title||'')+(p.loc||'')+(p.type||'')+(p.tags||[]).join(' ')).toLowerCase();if(!h.includes(fSearch))return false;}
+    return true;
+  });
+  filteredAll=f;
+  document.getElementById('rcount').textContent=f.length;
+  var g=document.getElementById('grid');
+  if(!f.length){g.innerHTML='<div style="text-align:center;padding:48px;grid-column:1/-1"><div style="font-size:44px;margin-bottom:12px">🏢</div><h3 style="font-family:Playfair Display,serif;color:var(--navy);margin-bottom:8px">No results found</h3><p style="color:var(--tm)">Try different filters or <a href="listings.html" style="color:var(--magenta)">browse all properties</a></p></div>';return;}
+  g.innerHTML=f.map(function(p){
+    var img=p.img||(p.id+'.jfif');
+    var wa=encodeURIComponent('Hello! I am interested in '+p.title+' ('+p.price+'). Please share details.');
+    var meta='';
+    if(p.sqm)meta+='<span class="c-tag">📐 '+p.sqm.toLocaleString()+'m²</span>';
+    if(p.units)meta+='<span class="c-tag">🏢 '+p.units+' Units</span>';
+    var tags=(p.tags||[]).slice(0,3).map(function(t){return'<span class="c-tag">'+t+'</span>';}).join('');
+    return '<div class="card" onclick="window.location.href=\'property/'+p.id+'\'">'
+      +'<div class="c-img"><img src="'+img+'" loading="lazy" onerror="this.onerror=null;this.src=\'1.jfif\'">'
+      +'<span class="c-badge '+badgeCls(p)+'">'+p.status+'</span>'+(p.r2?'<span style="position:absolute;top:12px;right:12px;background:#22C55E;color:#fff;font-size:9px;font-weight:700;padding:3px 8px;border-radius:4px">NEW</span>':'')
+      +'</div>'
+      +'<div class="c-body"><div class="c-price">'+p.price+'</div><div class="c-title">'+p.title+'</div><div class="c-loc">📍 '+p.loc+'</div>'
+      +'<div class="c-tags">'+meta+tags+'</div>'
+      +'<div class="c-acts">'
+        +'<button class="cbtn prim" onclick="event.stopPropagation();window.location.href=\'property/'+p.id+'\'">📋 View Details</button>'
+        +'<a class="cbtn wa" href="https://wa.me/255659166440?text='+wa+'" target="_blank" onclick="event.stopPropagation()">💬</a>'
+      +'</div></div></div>';
+  }).join('');
+}
+
+function clearFilters(){
+  ['fType','fRegion','fSize','fSearch','sortBy'].forEach(function(id){var el=document.getElementById(id);if(el)el.value='';});
+  applyFilters();
+}
+
+ALL_PROPS=PROPS.slice();applyFilters();loadR2();
+
+// ── PRINT / PDF CARD EXPORT ──
+function printCard(p){
+  var w=window.open('','_blank','width=720,height=680');
+  if(!w){alert('Allow popups to print/save PDF.');return;}
+  var ref='NG-'+String(p.id).padStart(7,'0');
+  var tagHtml=(p.tags||[]).map(function(t){return'<span class="tg">\u2713 '+t+'</span>';}).join('');
+  var metaHtml='';
+  if(p.beds) metaHtml+='\uD83D\uDECF '+p.beds+' Bed &nbsp;&nbsp;';
+  if(p.baths) metaHtml+='\uD83D\uDEBF '+p.baths+' Bath &nbsp;&nbsp;';
+  if(p.sqm) metaHtml+='\uD83D\uDCCF '+p.sqm+'m\u00B2 &nbsp;&nbsp;';
+  if(p.units) metaHtml+='\uD83C\uDFE2 '+p.units+' Units &nbsp;&nbsp;';
+  w.document.write('<!DOCTYPE html><html><head><meta charset="UTF-8"><title>'+p.title+'</title>'
+  +'<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@400;600&display=swap" rel="stylesheet">'
+  +'<style>*{margin:0;padding:0;box-sizing:border-box}body{font-family:Inter,sans-serif;padding:36px;max-width:680px;margin:0 auto;color:#1A1A2E}'
+  +'.hdr{display:flex;justify-content:space-between;align-items:flex-start;border-bottom:3px solid #E91E8C;padding-bottom:16px;margin-bottom:22px}'
+  +'.logo{font-family:"Playfair Display",serif;font-size:20px;color:#0D1240;font-weight:700}'
+  +'.logo-s{font-size:8px;color:#E91E8C;letter-spacing:2px;text-transform:uppercase;display:block;margin-top:2px}'
+  +'.ref{font-size:11px;color:#6B6B8A;text-align:right;line-height:1.7}'
+  +'.bdg{display:inline-block;background:rgba(233,30,140,.1);color:#E91E8C;border:1px solid #E91E8C;'
+  +'padding:3px 11px;border-radius:4px;font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-bottom:12px}'
+  +'h1{font-family:"Playfair Display",serif;font-size:26px;color:#0D1240;margin-bottom:5px;font-weight:700}'
+  +'.loc{font-size:13px;color:#6B6B8A;margin-bottom:16px}'
+  +'.pb{background:#080C2E;color:#fff;padding:16px 22px;border-radius:10px;display:inline-block;margin-bottom:18px}'
+  +'.pl{font-size:9px;color:rgba(255,255,255,.4);text-transform:uppercase;letter-spacing:1.5px}'
+  +'.pv{font-family:"Playfair Display",serif;font-size:24px;font-weight:700;margin-top:4px}'
+  +'.meta{font-size:13px;color:#4A4A6A;margin-bottom:14px}'
+  +'.tags{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:18px}'
+  +'.tg{background:#F8F7FF;border:1px solid #E8E8F0;border-radius:5px;padding:4px 10px;font-size:11.5px;color:#0D1240}'
+  +'.contact{background:#0D1240;color:#fff;padding:20px 24px;border-radius:10px}'
+  +'.ct{font-size:9px;color:rgba(255,255,255,.4);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:10px}'
+  +'.cr{font-size:13px;color:rgba(255,255,255,.75);margin-bottom:6px}'
+  +'.footer{margin-top:16px;font-size:10px;color:#9999AA;text-align:center;border-top:1px solid #E8E8F0;padding-top:12px}'
+  +'@media print{body{-webkit-print-color-adjust:exact;print-color-adjust:exact}}'
+  +'</style></head><body>'
+  +'<div class="hdr">'
+    +'<div><div class="logo">NEXT-GEN<span class="logo-s">Auctioneer + Realtor</span></div>'
+    +'<div style="font-size:11px;color:#6B6B8A;margin-top:3px">nextgentanzania.com</div></div>'
+    +'<div class="ref"><strong>Ref: '+ref+'</strong><br>'
+    +new Date().toLocaleDateString('en-TZ',{day:'numeric',month:'long',year:'numeric'})+'</div>'
+  +'</div>'
+  +'<div class="bdg">'+p.status+'</div>'
+  +'<h1>'+p.title+'</h1>'
+  +'<div class="loc">\uD83D\uDCCD '+p.loc+'</div>'
+  +'<div class="pb"><div class="pl">Price</div><div class="pv">'+p.price+'</div></div><br>'
+  +(metaHtml?'<div class="meta">'+metaHtml+'</div>':'')
+  +(tagHtml?'<div class="tags">'+tagHtml+'</div>':'')
+  +'<div class="contact"><div class="ct">Contact NEXT-GEN Auctioneer + Realtor</div>'
+  +'<div class="cr">\u2709\uFE0F nextgentanzania@gmail.com</div>'
+  +'<div class="cr">\uD83D\uDCDE +255 659 166 440</div>'
+  +'<div class="cr">\uD83D\uDCAC WhatsApp: +255 659 166 440</div>'
+  +'<div class="cr" style="font-size:11.5px;margin-top:6px;color:rgba(255,255,255,.4)">'
+  +'Haidary Plaza, 3rd Floor, Ali Hassan Mwinyi Rd, Kisutu, Dar es Salaam</div>'
+  +'</div>'
+  +'<div class="footer">Property brochure by NEXT-GEN \u00B7 BRELA Registered \u00B7 Licensed Auctioneer \u00B7 \u00A9 '+new Date().getFullYear()+'</div>'
+  +'</body></html>');
+  w.document.close();
+  setTimeout(function(){w.print();},700);
+}
+function exportCardPDF(p){printCard(p);}
+
+</script>
+</body>
+</html>

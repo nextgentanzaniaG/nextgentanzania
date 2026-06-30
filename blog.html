@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="description" content="Tanzania Real Estate Insights — market analysis, investment guides, legal updates and property news from NEXT-GEN Auctioneer + Realtor.">
+<title>Blog & Market Insights | NEXT-GEN Auctioneer + Realtor Tanzania</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--navy:#0D1240;--navy-dark:#080C2E;--magenta:#E91E8C;--gold:#C9A84C;--off:#F8F7FF;--gl:#E8E8F0;--td:#1A1A2E;--tm:#6B6B8A;--green:#22C55E}
+body{font-family:'Inter',sans-serif;background:var(--off);color:var(--td)}
+a{text-decoration:none;color:inherit}
+nav{background:rgba(8,12,46,.97);backdrop-filter:blur(16px);position:sticky;top:0;z-index:200;border-bottom:1px solid rgba(233,30,140,.15)}
+.nav-in{display:flex;align-items:center;justify-content:space-between;height:64px;padding:0 5%;max-width:1400px;margin:0 auto}
+.nlogo .l1{font-family:'Playfair Display',serif;font-size:17px;font-weight:700;color:#fff}
+.nlogo .l2{font-size:8px;color:var(--magenta);letter-spacing:2px;text-transform:uppercase;display:block;margin-top:2px}
+.nlinks{display:flex;gap:2px}.nlinks a{color:rgba(255,255,255,.65);font-size:12.5px;font-weight:500;padding:7px 12px;border-radius:7px;transition:all .2s}
+.nlinks a:hover,.nlinks a.on{color:#fff;background:rgba(255,255,255,.08)}
+.nlinks a.on{background:rgba(233,30,140,.12);color:var(--magenta)}
+.nav-cta{background:var(--magenta);color:#fff;padding:9px 18px;border-radius:8px;font-size:12.5px;font-weight:600;display:inline-block;transition:background .2s}
+.nav-cta:hover{background:#C0176F}
+@media(max-width:800px){.nlinks{display:none}}
+/* HERO */
+.hero{background:linear-gradient(135deg,#080C2E,#0D1240);padding:56px 5% 44px}
+.hero-in{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center}
+@media(max-width:800px){.hero-in{grid-template-columns:1fr}}
+.hero-ey{font-size:11px;font-weight:700;color:var(--magenta);letter-spacing:2.5px;text-transform:uppercase;margin-bottom:10px}
+.hero h1{font-family:'Playfair Display',serif;font-size:clamp(28px,4vw,44px);font-weight:700;color:#fff;line-height:1.1;margin-bottom:12px}
+.hero h1 em{font-style:italic;color:var(--gold)}
+.hero p{font-size:15px;color:rgba(255,255,255,.62);line-height:1.75;margin-bottom:22px}
+.search-box{display:flex;gap:8px}
+.search-box input{flex:1;background:rgba(255,255,255,.1);border:1.5px solid rgba(255,255,255,.2);border-radius:9px;padding:11px 14px;font-size:13.5px;font-family:'Inter',sans-serif;color:#fff;outline:none;transition:border-color .2s}
+.search-box input::placeholder{color:rgba(255,255,255,.45)}
+.search-box input:focus{border-color:var(--magenta)}
+.search-btn{background:var(--magenta);color:#fff;border:none;border-radius:9px;padding:11px 18px;font-size:13px;font-weight:600;cursor:pointer;font-family:'Inter',sans-serif;white-space:nowrap;transition:background .2s}
+.search-btn:hover{background:#C0176F}
+.feat-post{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:16px;overflow:hidden;cursor:pointer;transition:border-color .25s}
+.feat-post:hover{border-color:rgba(233,30,140,.4)}
+.feat-img{height:200px;overflow:hidden}
+.feat-img img{width:100%;height:100%;object-fit:cover}
+.feat-body{padding:18px}
+.feat-cat{font-size:10px;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:.8px;margin-bottom:7px}
+.feat-title{font-family:'Playfair Display',serif;font-size:19px;font-weight:700;color:#fff;line-height:1.25;margin-bottom:8px}
+.feat-exc{font-size:13px;color:rgba(255,255,255,.55);line-height:1.65}
+.feat-meta{display:flex;align-items:center;gap:10px;margin-top:12px;font-size:11.5px;color:rgba(255,255,255,.35)}
+/* FILTER TABS */
+.fbar{background:#fff;border-bottom:1px solid var(--gl);position:sticky;top:64px;z-index:100;overflow-x:auto;white-space:nowrap}
+.fbar-in{max-width:1200px;margin:0 auto;padding:0 5%;display:flex;height:50px;align-items:center;gap:2px}
+.ftab{background:none;border:none;border-bottom:3px solid transparent;padding:0 16px;height:50px;font-size:13px;font-weight:600;color:var(--tm);cursor:pointer;font-family:'Inter',sans-serif;white-space:nowrap;transition:all .2s;flex-shrink:0}
+.ftab:hover{color:var(--navy)}.ftab.on{color:var(--navy);border-bottom-color:var(--magenta)}
+/* MAIN LAYOUT */
+.main{max-width:1200px;margin:0 auto;padding:36px 5% 80px;display:grid;grid-template-columns:1fr 300px;gap:32px;align-items:start}
+@media(max-width:900px){.main{grid-template-columns:1fr}}
+/* POSTS GRID */
+.posts-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:20px}
+.post-card{background:#fff;border-radius:16px;overflow:hidden;border:1px solid var(--gl);transition:all .25s;cursor:pointer}
+.post-card:hover{transform:translateY(-4px);box-shadow:0 16px 44px rgba(13,18,64,.1)}
+.pc-img{height:190px;overflow:hidden}
+.pc-img img{width:100%;height:100%;object-fit:cover;transition:transform .5s}
+.post-card:hover .pc-img img{transform:scale(1.05)}
+.pc-body{padding:20px}
+.pc-cat-row{display:flex;align-items:center;gap:8px;margin-bottom:10px}
+.pc-cat{font-size:10px;font-weight:700;padding:3px 9px;border-radius:4px;text-transform:uppercase;letter-spacing:.5px}
+.cat-invest{background:rgba(233,30,140,.08);color:var(--magenta)}
+.cat-legal{background:rgba(59,130,246,.08);color:#3B82F6}
+.cat-market{background:rgba(34,197,94,.08);color:#16A34A}
+.cat-zanzibar{background:rgba(8,145,178,.08);color:#0891B2}
+.cat-auction{background:rgba(201,168,76,.1);color:#8A6A00}
+.cat-guide{background:rgba(107,107,138,.08);color:var(--tm)}
+.pc-date{font-size:11px;color:var(--tm)}
+.pc-title{font-family:'Playfair Display',serif;font-size:18px;font-weight:700;color:var(--navy);line-height:1.25;margin-bottom:8px}
+.pc-exc{font-size:13px;color:var(--tm);line-height:1.65;margin-bottom:14px}
+.pc-footer{display:flex;align-items:center;justify-content:space-between;font-size:12px;color:var(--tm)}
+.read-more{color:var(--magenta);font-weight:600;font-size:12.5px}
+/* SIDEBAR */
+.sidebar{display:flex;flex-direction:column;gap:18px}
+.sb-card{background:#fff;border:1px solid var(--gl);border-radius:14px;padding:20px}
+.sb-title{font-size:13px;font-weight:700;color:var(--navy);margin-bottom:14px;padding-bottom:10px;border-bottom:1px solid var(--gl)}
+.sb-link{display:flex;gap:10px;align-items:flex-start;padding:8px 0;border-bottom:1px solid var(--gl);cursor:pointer;transition:opacity .2s}
+.sb-link:last-child{border-bottom:none;padding-bottom:0}
+.sb-link:hover{opacity:.75}
+.sb-link-img{width:52px;height:44px;border-radius:7px;overflow:hidden;flex-shrink:0}
+.sb-link-img img{width:100%;height:100%;object-fit:cover}
+.sb-link-title{font-size:12.5px;font-weight:600;color:var(--navy);line-height:1.35}
+.sb-link-date{font-size:11px;color:var(--tm);margin-top:3px}
+.tag-cloud{display:flex;flex-wrap:wrap;gap:7px}
+.tag{background:var(--off);border:1px solid var(--gl);border-radius:6px;padding:5px 12px;font-size:12px;font-weight:500;color:var(--navy);cursor:pointer;transition:all .2s}
+.tag:hover{border-color:var(--magenta);color:var(--magenta)}
+/* EMPTY */
+.empty{text-align:center;padding:48px 20px;grid-column:1/-1}
+/* NEWSLETTER */
+.nl-card{background:linear-gradient(135deg,var(--navy),var(--navy-dark));border-radius:14px;padding:24px;color:#fff}
+.nl-title{font-family:'Playfair Display',serif;font-size:18px;font-weight:700;margin-bottom:8px}
+.nl-body{font-size:13px;color:rgba(255,255,255,.6);margin-bottom:16px;line-height:1.6}
+.nl-form{display:flex;flex-direction:column;gap:8px}
+.nl-input{background:rgba(255,255,255,.1);border:1.5px solid rgba(255,255,255,.2);border-radius:8px;padding:10px 12px;font-size:13px;font-family:'Inter',sans-serif;color:#fff;outline:none}
+.nl-input::placeholder{color:rgba(255,255,255,.4)}
+.nl-btn{background:var(--magenta);color:#fff;border:none;border-radius:8px;padding:10px;font-size:13px;font-weight:600;cursor:pointer;font-family:'Inter',sans-serif;transition:background .2s}
+.nl-btn:hover{background:#C0176F}
+footer{background:var(--navy-dark);padding:32px 5%;text-align:center}
+footer .fl1{font-family:'Playfair Display',serif;font-size:17px;font-weight:700;color:#fff}
+footer .fl2{font-size:8px;color:var(--magenta);letter-spacing:2px;text-transform:uppercase;display:block;margin-top:2px}
+footer p{font-size:11.5px;color:rgba(255,255,255,.25);margin-top:12px}
+#waf{position:fixed;bottom:24px;left:24px;z-index:999;width:50px;height:50px;background:#25D366;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 6px 20px rgba(37,211,102,.4);transition:transform .3s}
+#waf:hover{transform:scale(1.1)}
+#waf svg{width:25px;height:25px;fill:#fff}
+
+/* Mobile nav */
+.mob-menu{display:none;position:absolute;top:64px;left:0;right:0;background:rgba(8,12,46,.98);z-index:199;padding:8px 5%;border-bottom:1px solid rgba(233,30,140,.15);flex-direction:column;gap:2px}
+.mob-menu.open{display:flex}
+.mob-menu a{color:rgba(255,255,255,.8);font-size:13.5px;font-weight:500;padding:10px 8px;border-bottom:1px solid rgba(255,255,255,.06);text-decoration:none}
+.mob-menu a:last-child{border-bottom:none}
+.menu-tog{display:none;background:none;border:none;cursor:pointer;flex-direction:column;gap:5px;padding:6px;margin-left:8px}
+.menu-tog span{display:block;width:22px;height:2px;background:#fff;border-radius:2px;transition:all .3s}
+@media(max-width:800px){.nlinks{display:none!important}.menu-tog{display:flex}}
+</style>
+<script>
+// Auto page tracker — fires silently on load
+(function(){
+  try{
+    var page = window.location.pathname.replace(/^\//, '') || 'index.html';
+    var ref  = document.referrer ? document.referrer.replace(/https?:\/\/[^\/]+/,'') : '';
+    var lang = (navigator.language || 'en').slice(0,5);
+    fetch('https://nextgen-ai-api.kitentyaluth.workers.dev/api/track',{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({page:page, ref:ref, lang:lang}),
+      keepalive:true
+    }).catch(function(){});
+  }catch(e){}
+})();
+</script>
+</head>
+<body>
+<nav>
+  <div class="nav-in">
+    <a href="index.html" class="nlogo"><div class="l1">NEXT-GEN</div><div class="l2">Auctioneer + Realtor</div></a>
+    <div class="nlinks">
+      <a href="listings.html">Properties</a>
+      <a href="services.html">Services</a>
+      <a href="invest.html">Invest</a>
+      <a href="commercial.html">Commercial</a>
+      <a href="blog.html" class="on">Blog</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+    </div>
+    <a href="contact.html" class="nav-cta">
+    <button class="menu-tog" onclick="document.getElementById('mobMenu').classList.toggle('open')" aria-label="Menu"><span></span><span></span><span></span></button>Enquire Now →</a>
+  </div>
+</nav>
+<div class="mob-menu" id="mobMenu">
+  <a href="index.html">🏠 Home</a>
+  <a href="listings.html">📋 Properties</a>
+  <a href="services.html">⚙️ Services</a>
+  <a href="auctions.html">🔨 Auctions</a>
+  <a href="leasing.html">🔑 Leasing</a>
+  <a href="commercial.html">🏢 Commercial</a>
+  <a href="invest.html">📈 Invest</a>
+  <a href="foreign-buyers.html">🌍 Foreign Buyers</a>
+  <a href="sell.html">💼 Sell</a>
+  <a href="blog.html">📰 Blog</a>
+  <a href="about.html">🏛️ About</a>
+  <a href="contact.html">📞 Contact</a>
+</div>
+
+<div class="hero">
+  <div class="hero-in">
+    <div>
+      <div class="hero-ey">Market Intelligence</div>
+      <h1>Tanzania Real Estate<br><em>Insights &amp; Analysis</em></h1>
+      <p>Expert guides for investors, buyers, developers and landlords navigating Tanzania's dynamic property market. Updated weekly.</p>
+      <div class="search-box">
+        <input type="text" id="searchInput" placeholder="Search articles, topics, areas..." oninput="filterPosts()">
+        <button class="search-btn" onclick="filterPosts()">Search</button>
+      </div>
+    </div>
+    <div class="feat-post" id="featuredPost" onclick="openPost(0)">
+      <div class="feat-img"><img src="1.jfif" alt="Featured" onerror="this.style.background='linear-gradient(135deg,#0D1240,#1A2060)'"></div>
+      <div class="feat-body">
+        <div class="feat-cat">📈 Investment Guide</div>
+        <div class="feat-title">Best Areas to Invest in Zanzibar 2026</div>
+        <div class="feat-exc">From Nungwi to Paje — which beachfront zones offer the highest capital appreciation and rental yield?</div>
+        <div class="feat-meta"><span>✍️ NEXT-GEN Research</span><span>•</span><span>June 2026</span><span>•</span><span>8 min read</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="fbar">
+  <div class="fbar-in">
+    <button class="ftab on" onclick="filterCat('all',this)">📰 All Articles</button>
+    <button class="ftab" onclick="filterCat('Investment Guide',this)">📈 Investment</button>
+    <button class="ftab" onclick="filterCat('Market Insights',this)">📊 Market</button>
+    <button class="ftab" onclick="filterCat('Legal Guide',this)">⚖️ Legal</button>
+    <button class="ftab" onclick="filterCat('Zanzibar',this)">🏝️ Zanzibar</button>
+    <button class="ftab" onclick="filterCat('Bank Auctions',this)">🔨 Auctions</button>
+    <button class="ftab" onclick="filterCat('Buyer Guide',this)">🏠 Buyer Guides</button>
+  </div>
+</div>
+
+<div class="main">
+  <!-- POSTS -->
+  <div>
+    <div id="postsGrid" class="posts-grid"></div>
+    <div id="loadMoreWrap" style="text-align:center;margin-top:28px;display:none">
+      <button onclick="loadMorePosts()" style="background:#fff;border:2px solid var(--gl);color:var(--navy);padding:12px 32px;border-radius:10px;font-size:14px;font-weight:600;cursor:pointer;font-family:'Inter',sans-serif">Load More Articles</button>
+    </div>
+  </div>
+
+  <!-- SIDEBAR -->
+  <div class="sidebar">
+    <div class="nl-card">
+      <div class="nl-title">📬 Market Updates</div>
+      <div class="nl-body">Get Tanzania property market intelligence delivered to your inbox monthly.</div>
+      <div class="nl-form">
+        <input class="nl-input" type="email" id="nlEmail" placeholder="your@email.com">
+        <button class="nl-btn" onclick="subscribeNL()">Subscribe Free →</button>
+      </div>
+    </div>
+    <div class="sb-card">
+      <div class="sb-title">🔥 Popular Articles</div>
+      <div id="popularPosts"></div>
+    </div>
+    <div class="sb-card">
+      <div class="sb-title">🏷️ Topics</div>
+      <div class="tag-cloud">
+        <span class="tag" onclick="filterCat('Investment Guide',null)">📈 Investment</span>
+        <span class="tag" onclick="filterCat('Zanzibar',null)">🏝️ Zanzibar</span>
+        <span class="tag" onclick="filterCat('Legal Guide',null)">⚖️ Legal</span>
+        <span class="tag" onclick="filterCat('Bank Auctions',null)">🔨 Auctions</span>
+        <span class="tag" onclick="filterCat('Market Insights',null)">📊 Market</span>
+        <span class="tag" onclick="filterCat('Buyer Guide',null)">🏠 Buyers</span>
+        <span class="tag" onclick="filterCat('Foreign Buyers',null)">🌍 Foreign Buyers</span>
+        <span class="tag" onclick="filterCat('Seller Tips',null)">💼 Sellers</span>
+      </div>
+    </div>
+    <div class="sb-card">
+      <div class="sb-title">🤖 Ask NextGen AI</div>
+      <p style="font-size:13px;color:var(--tm);margin-bottom:14px;line-height:1.65">Have a question about Tanzania's property market? Ask our AI advisor — available 24/7 in 5 languages.</p>
+      <a href="index.html" style="display:block;background:linear-gradient(135deg,var(--magenta),#7B2FF7);color:#fff;text-align:center;padding:11px;border-radius:9px;font-size:13px;font-weight:600">🤖 Ask AI Now →</a>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div style="font-family:'Playfair Display',serif;font-size:17px;font-weight:700;color:#fff">NEXT-GEN</div>
+  <span style="font-size:8px;color:var(--magenta,#E91E8C);letter-spacing:2px;text-transform:uppercase;display:block;margin-top:2px">Auctioneer + Realtor</span>
+  <div style="display:flex;justify-content:center;gap:14px;flex-wrap:wrap;margin:14px 0">
+    <a href="index.html" style="font-size:12.5px;color:rgba(255,255,255,.45);transition:color .2s" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,.45)'">Home</a>
+    <a href="listings.html" style="font-size:12.5px;color:rgba(255,255,255,.45);transition:color .2s" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,.45)'">Properties</a>
+    <a href="services.html" style="font-size:12.5px;color:rgba(255,255,255,.45);transition:color .2s" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,.45)'">Services</a>
+    <a href="commercial.html" style="font-size:12.5px;color:rgba(255,255,255,.45);transition:color .2s" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,.45)'">Commercial</a>
+    <a href="auctions.html" style="font-size:12.5px;color:rgba(255,255,255,.45);transition:color .2s" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,.45)'">Auctions</a>
+    <a href="invest-guide.html" style="font-size:12.5px;color:rgba(255,255,255,.45);transition:color .2s" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,.45)'">Invest</a>
+    <a href="foreign-buyers.html" style="font-size:12.5px;color:rgba(255,255,255,.45);transition:color .2s" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,.45)'">Foreign Buyers</a>
+    <a href="blog.html" style="font-size:12.5px;color:rgba(255,255,255,.45);transition:color .2s" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,.45)'">Blog</a>
+    <a href="about.html" style="font-size:12.5px;color:rgba(255,255,255,.45);transition:color .2s" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,.45)'">About</a>
+    <a href="sell.html" style="font-size:12.5px;color:rgba(255,255,255,.45);transition:color .2s" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,.45)'">Sell</a>
+    <a href="contact.html" style="font-size:12.5px;color:rgba(255,255,255,.45);transition:color .2s" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,.45)'">Contact</a>
+  </div>
+  <p style="font-size:11.5px;color:rgba(255,255,255,.25);margin-top:4px">© 2026 NEXT-GEN Auctioneer + Realtor (Next-Gen Holdings Company Limited) · BRELA Registered · Licensed Auctioneer<br>
+  📧 nextgentanzania@gmail.com · 📞 +255 659 166 440 · Haidary Plaza, 3rd Floor, Ali Hassan Mwinyi Rd, Kisutu, Dar es Salaam</p>
+
+    <a href="faq.html" class="fl">Faq</a>
+  
+    <a href="partners.html" class="fl">Partners</a>
+  
+    <a href="testimonials.html" class="fl">Testimonials</a>
+  
+    <a href="market-report.html" class="fl">Market Report</a>
+  
+    <a href="privacy-policy.html" class="fl">Privacy Policy</a>
+  
+    <a href="terms.html" class="fl">Terms</a>
+  
+    <a href="sitemap.html" class="fl">Sitemap</a>
+  </footer>
+
+<a id="waf" href="https://wa.me/255659166440" target="_blank">
+  <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413z m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</a>
+
+<script>
+const API = 'https://nextgen-ai-api.kitentyaluth.workers.dev';
+
+// Static fallback posts
+var STATIC_POSTS = [
+  {id:'s1',title:'Best Areas to Invest in Zanzibar 2026',category:'Investment Guide',author:'NEXT-GEN Research',excerpt:'From Nungwi to Paje — which beachfront zones offer the highest capital appreciation and rental yield for international investors?',image:'1.jfif',date:'June 2026',readTime:'8 min'},
+  {id:'s2',title:'How Foreigners Buy Property in Tanzania',category:'Legal Guide',author:'NEXT-GEN Legal Team',excerpt:'Step-by-step guide to land rights for non-citizens, derivative right of occupancy, TIC registration, and ownership structures.',image:'10.jfif',date:'May 2026',readTime:'12 min'},
+  {id:'s3',title:'Hotel Investment Guide: East Africa 2026',category:'Investment Guide',author:'NEXT-GEN Investments',excerpt:"Why savvy investors are targeting Zanzibar and Dar es Salaam for hospitality assets — yields of 14–22% and growing tourism.",image:'14.jfif',date:'April 2026',readTime:'10 min'},
+  {id:'s4',title:'Bank Auction Properties: How to Register and Win',category:'Bank Auctions',author:'NEXT-GEN Auctioneers',excerpt:'Everything you need to know about participating in bank property auctions in Tanzania — from CRDB to NMB.',image:'18.jfif',date:'March 2026',readTime:'7 min'},
+  {id:'s5',title:'Kigamboni: Dar es Salaam\'s Best Investment Zone',category:'Market Insights',author:'NEXT-GEN Research',excerpt:'With the bridge completed and infrastructure booming, Kigamboni is delivering +42% appreciation. Here is why.',image:'3.jfif',date:'March 2026',readTime:'6 min'},
+  {id:'s6',title:'Tanzania Property Tax Guide for Investors',category:'Legal Guide',author:'NEXT-GEN Legal Team',excerpt:'Capital gains tax, rental income tax, stamp duty and withholding tax — a complete guide for local and foreign property investors.',image:'4.jfif',date:'February 2026',readTime:'9 min'},
+  {id:'s7',title:'Dar es Salaam Commercial Property Market 2026',category:'Market Insights',author:'NEXT-GEN Research',excerpt:'Office, retail and industrial markets — who is leasing, what rates are doing, and where the opportunities are.',image:'17.jfif',date:'February 2026',readTime:'11 min'},
+  {id:'s8',title:'First-Time Buyer Guide: Tanzania Property Market',category:'Buyer Guide',author:'NEXT-GEN Team',excerpt:'Everything a first-time buyer needs to know — from choosing a location to signing the title deed.',image:'7.jfif',date:'January 2026',readTime:'14 min'},
+  {id:'s9',title:'Zanzibar Tourism Boom: What It Means for Investors',category:'Zanzibar',author:'NEXT-GEN Investments',excerpt:'800,000+ tourists in 2025, direct flights from Europe and the Gulf — Zanzibar\'s hospitality market is booming.',image:'11.jfif',date:'January 2026',readTime:'8 min'},
+];
+
+var R2_POSTS = [];
+var ALL_POSTS = [];
+var activeCategory = 'all';
+var searchTerm = '';
+var PAGE_SIZE = 6;
+var curPage = 1;
+
+async function loadR2Posts(){
+  try {
+    var r = await fetch(API + '/api/blog');
+    if(!r.ok) throw new Error();
+    var d = await r.json();
+    R2_POSTS = (d.posts||[]).filter(function(p){ return p.status==='published'; });
+  } catch(e){ R2_POSTS = []; }
+  ALL_POSTS = R2_POSTS.concat(STATIC_POSTS);
+  renderPosts();
+  renderPopular();
+}
+
+function getCatClass(cat){
+  var map = {'Investment Guide':'cat-invest','Legal Guide':'cat-legal','Market Insights':'cat-market','Zanzibar':'cat-zanzibar','Bank Auctions':'cat-auction'};
+  return map[cat] || 'cat-guide';
+}
+function getCatEmoji(cat){
+  var map = {'Investment Guide':'📈','Legal Guide':'⚖️','Market Insights':'📊','Zanzibar':'🏝️','Bank Auctions':'🔨','Buyer Guide':'🏠'};
+  return (map[cat]||'📰') + ' ' + cat;
+}
+
+function filterCat(cat, btn){
+  activeCategory = cat;
+  if(btn){ document.querySelectorAll('.ftab').forEach(function(t){t.classList.remove('on');}); btn.classList.add('on'); }
+  curPage = 1;
+  renderPosts();
+}
+function filterPosts(){
+  searchTerm = document.getElementById('searchInput').value.toLowerCase();
+  curPage = 1;
+  renderPosts();
+}
+
+function getFiltered(){
+  return ALL_POSTS.filter(function(p){
+    var catOk = activeCategory==='all' || p.category===activeCategory;
+    var srchOk = !searchTerm || (p.title+p.excerpt+p.category+p.author).toLowerCase().includes(searchTerm);
+    return catOk && srchOk;
+  });
+}
+
+function renderPosts(){
+  var filtered = getFiltered();
+  var page = filtered.slice(0, PAGE_SIZE * curPage);
+  var grid = document.getElementById('postsGrid');
+
+  if(!page.length){
+    grid.innerHTML = '<div class="empty"><div style="font-size:44px;margin-bottom:14px">🔍</div><h3 style="font-family:Playfair Display,serif;color:var(--navy);margin-bottom:8px">No articles found</h3><p style="color:var(--tm)">Try different keywords or browse all articles</p></div>';
+    document.getElementById('loadMoreWrap').style.display='none';
+    return;
+  }
+
+  grid.innerHTML = page.map(function(p,i){
+    var img = p.image || ((i%18+1)+'.jfif');
+    var dateStr = p.date || (p.createdAt ? new Date(p.createdAt).toLocaleString('en-TZ',{month:'long',year:'numeric'}) : '');
+    return '<div class="post-card" onclick="openPost(\''+p.id+'\')">'
+      +'<div class="pc-img"><img src="'+img+'" alt="'+p.title+'" loading="lazy" onerror="this.onerror=null;this.src=\'1.jfif\'"></div>'
+      +'<div class="pc-body">'
+        +'<div class="pc-cat-row"><span class="pc-cat '+getCatClass(p.category)+'">'+getCatEmoji(p.category)+'</span><span class="pc-date">'+dateStr+'</span></div>'
+        +'<div class="pc-title">'+p.title+'</div>'
+        +'<div class="pc-exc">'+(p.excerpt||'').substring(0,130)+'...</div>'
+        +'<div class="pc-footer"><span>✍️ '+(p.author||'NEXT-GEN')+'</span><span class="read-more">Read More →</span></div>'
+      +'</div>'
+    +'</div>';
+  }).join('');
+
+  var rem = filtered.length - PAGE_SIZE*curPage;
+  document.getElementById('loadMoreWrap').style.display = rem>0?'block':'none';
+}
+
+function loadMorePosts(){ curPage++; renderPosts(); }
+
+function renderPopular(){
+  var container = document.getElementById('popularPosts');
+  var popular = ALL_POSTS.slice(0,5);
+  container.innerHTML = popular.map(function(p){
+    var img = p.image||'1.jfif';
+    return '<div class="sb-link" onclick="openPost(\''+p.id+'\')">'
+      +'<div class="sb-link-img"><img src="'+img+'" onerror="this.style.display=\'none\'" loading="lazy"></div>'
+      +'<div><div class="sb-link-title">'+p.title+'</div><div class="sb-link-date">'+getCatEmoji(p.category)+'</div></div>'
+    +'</div>';
+  }).join('');
+}
+
+function openPost(id){
+  // Find post and open full article
+  var post = ALL_POSTS.find(function(p){ return p.id==id || p.id===id; });
+  if(!post) return;
+  // Navigate to post page or open modal
+  // For R2 posts: /api/blog/:id
+  // For static: open invest-guide or foreign-buyers pages
+  if(id==='s1') { window.location.href='invest-guide.html'; return; }
+  if(id==='s2') { window.location.href='foreign-buyers.html'; return; }
+  if(post.id && typeof post.id === 'number') {
+    // R2 post — open a simple modal
+    alert(post.title + '\n\n' + (post.excerpt||'') + '\n\nFull article coming soon on nextgentanzania.com');
+  }
+}
+
+function subscribeNL(){
+  var email = document.getElementById('nlEmail').value.trim();
+  if(!email||!email.includes('@')){ alert('Please enter a valid email address.'); return; }
+  // Save as lead
+  fetch(API+'/api/leads',{method:'POST',headers:{'Content-Type':'application/json'},
+    body:JSON.stringify({name:'Newsletter Subscriber',email:email,type:'buyer',source:'Blog Newsletter',interest:'Market Updates Subscription',status:'new',lang:'en'})
+  }).then(function(){
+    document.getElementById('nlEmail').value='';
+    alert('✅ Subscribed! You will receive market updates from NEXT-GEN.');
+  }).catch(function(){alert('✅ Thank you! We will add you to our updates list.');});
+}
+
+// Init
+ALL_POSTS = STATIC_POSTS.slice();
+renderPosts();
+renderPopular();
+loadR2Posts();
+</script>
+</body>
+</html>

@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="robots" content="noindex,nofollow">
+<title>Website Analytics | NEXT-GEN</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--navy:#0D1240;--navy-dark:#080C2E;--magenta:#E91E8C;--gold:#C9A84C;--off:#F8F7FF;--gl:#E8E8F0;--td:#1A1A2E;--tm:#6B6B8A;--green:#22C55E}
+body{font-family:'Inter',sans-serif;background:#0D1240;color:#fff;min-height:100vh}
+a{text-decoration:none;color:inherit}
+
+/* LOGIN */
+#loginScreen{position:fixed;inset:0;background:linear-gradient(135deg,#080C2E,#1A0A60);display:flex;align-items:center;justify-content:center;z-index:9999}
+.login-card{background:#fff;border-radius:20px;padding:44px 40px;max-width:380px;width:90%;text-align:center}
+.login-card h1{font-family:'Playfair Display',serif;font-size:26px;color:var(--navy);margin-bottom:6px}
+.login-card p{font-size:13.5px;color:var(--tm);margin-bottom:24px}
+.login-card input{width:100%;border:1.5px solid var(--gl);border-radius:9px;padding:12px 14px;font-size:14px;font-family:'Inter',sans-serif;outline:none;margin-bottom:12px;transition:border-color .2s}
+.login-card input:focus{border-color:var(--magenta)}
+.login-btn{width:100%;background:var(--navy);color:#fff;border:none;padding:13px;border-radius:9px;font-size:14px;font-weight:600;cursor:pointer;font-family:'Inter',sans-serif;transition:background .2s}
+.login-btn:hover{background:var(--magenta)}
+.login-err{color:#E91E8C;font-size:13px;margin-top:10px;display:none}
+
+/* NAV */
+.top-nav{background:rgba(8,12,46,.95);backdrop-filter:blur(12px);padding:0 24px;height:60px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid rgba(255,255,255,.08);position:sticky;top:0;z-index:100}
+.nav-logo{font-family:'Playfair Display',serif;font-size:16px;font-weight:700;color:#fff}
+.nav-logo span{font-size:8px;color:var(--magenta);letter-spacing:2px;text-transform:uppercase;display:block;margin-top:1px}
+.nav-btns{display:flex;gap:8px;align-items:center}
+.nav-btn{color:rgba(255,255,255,.6);font-size:12.5px;font-weight:500;padding:6px 13px;border-radius:7px;border:1px solid rgba(255,255,255,.12);transition:all .2s;cursor:pointer;background:none;font-family:'Inter',sans-serif}
+.nav-btn:hover{color:#fff;border-color:rgba(255,255,255,.3)}
+.nav-btn.active{color:#fff;background:rgba(233,30,140,.15);border-color:rgba(233,30,140,.3)}
+#lastUpdated{font-size:11px;color:rgba(255,255,255,.3)}
+
+/* MAIN LAYOUT */
+.main{max-width:1400px;margin:0 auto;padding:24px}
+
+/* PERIOD TABS */
+.period-tabs{display:flex;gap:6px;margin-bottom:24px;flex-wrap:wrap}
+.ptab{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);color:rgba(255,255,255,.6);padding:8px 20px;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;font-family:'Inter',sans-serif;transition:all .2s}
+.ptab:hover{background:rgba(255,255,255,.1);color:#fff}
+.ptab.on{background:rgba(233,30,140,.2);border-color:rgba(233,30,140,.5);color:#fff}
+
+/* STAT CARDS */
+.stats-row{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:14px;margin-bottom:24px}
+.stat-card{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.08);border-radius:14px;padding:20px}
+.stat-label{font-size:10.5px;font-weight:700;color:rgba(255,255,255,.4);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px}
+.stat-value{font-family:'Playfair Display',serif;font-size:36px;font-weight:700;color:#fff;line-height:1}
+.stat-sub{font-size:12px;color:rgba(255,255,255,.35);margin-top:5px}
+.stat-badge{display:inline-flex;align-items:center;gap:4px;font-size:11.5px;font-weight:600;padding:2px 8px;border-radius:10px;margin-top:6px}
+.badge-up{background:rgba(34,197,94,.15);color:#4ADE80}
+.badge-down{background:rgba(239,68,68,.15);color:#F87171}
+.badge-same{background:rgba(255,255,255,.08);color:rgba(255,255,255,.5)}
+
+/* CHARTS */
+.charts-row{display:grid;grid-template-columns:2fr 1fr;gap:14px;margin-bottom:24px}
+@media(max-width:900px){.charts-row{grid-template-columns:1fr}}
+.chart-card{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:14px;padding:22px}
+.chart-title{font-size:13px;font-weight:600;color:rgba(255,255,255,.7);margin-bottom:18px;display:flex;align-items:center;justify-content:space-between}
+.chart-wrap{position:relative;height:260px}
+
+/* PAGES TABLE */
+.table-card{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:14px;padding:22px;margin-bottom:14px}
+.table-title{font-size:13px;font-weight:600;color:rgba(255,255,255,.7);margin-bottom:16px}
+.tbl{width:100%;border-collapse:collapse}
+.tbl th{font-size:10.5px;font-weight:700;color:rgba(255,255,255,.35);text-transform:uppercase;letter-spacing:.5px;padding:8px 12px;text-align:left;border-bottom:1px solid rgba(255,255,255,.06)}
+.tbl td{padding:10px 12px;font-size:13px;color:rgba(255,255,255,.7);border-bottom:1px solid rgba(255,255,255,.04)}
+.tbl tr:hover td{background:rgba(255,255,255,.03)}
+.tbl tr:last-child td{border-bottom:none}
+.bar-cell{display:flex;align-items:center;gap:8px}
+.bar{height:6px;border-radius:3px;background:var(--magenta);flex-shrink:0;transition:width .6s}
+.bar.gold{background:var(--gold)}
+
+/* BOTTOM ROW */
+.bottom-row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:700px){.bottom-row{grid-template-columns:1fr}}
+
+/* RECENT VISITORS */
+.visitor-row{display:flex;align-items:center;justify-content:space-between;padding:8px 0;border-bottom:1px solid rgba(255,255,255,.05)}
+.visitor-row:last-child{border-bottom:none}
+.visitor-page{font-size:12.5px;color:rgba(255,255,255,.75);font-weight:500}
+.visitor-meta{font-size:11px;color:rgba(255,255,255,.35)}
+.visitor-country{font-size:12px;background:rgba(255,255,255,.07);padding:2px 8px;border-radius:5px;color:rgba(255,255,255,.55)}
+.visitor-time{font-size:11px;color:rgba(255,255,255,.3)}
+
+/* LOADING */
+.loading{text-align:center;padding:48px;color:rgba(255,255,255,.35);font-size:14px}
+.spinner{width:32px;height:32px;border:3px solid rgba(255,255,255,.1);border-top-color:var(--magenta);border-radius:50%;animation:spin .8s linear infinite;margin:0 auto 14px}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* EMPTY */
+.empty-state{text-align:center;padding:40px;color:rgba(255,255,255,.3)}
+.empty-state .e-icon{font-size:40px;margin-bottom:12px}
+.empty-state p{font-size:13.5px;line-height:1.65}
+
+/* BACK LINK */
+.back-link{display:inline-flex;align-items:center;gap:6px;color:rgba(255,255,255,.5);font-size:12.5px;padding:6px 14px;border:1px solid rgba(255,255,255,.12);border-radius:7px;transition:all .2s}
+.back-link:hover{color:#fff;border-color:rgba(255,255,255,.3)}
+</style>
+</head>
+<body>
+
+<!-- LOGIN -->
+<div id="loginScreen">
+  <div class="login-card">
+    <div style="font-size:36px;margin-bottom:12px">📊</div>
+    <h1>Analytics</h1>
+    <p>NEXT-GEN Website Analytics Dashboard.<br>Sign in to view your stats.</p>
+    <input type="password" id="loginPw" placeholder="Admin password" onkeydown="if(event.key==='Enter')doLogin()">
+    <button class="login-btn" onclick="doLogin()">Sign In →</button>
+    <div class="login-err" id="loginErr">Incorrect password. Try again.</div>
+  </div>
+</div>
+
+<!-- TOP NAV -->
+<nav class="top-nav">
+  <div class="nav-logo">NEXT-GEN <span>Analytics</span></div>
+  <div style="display:flex;align-items:center;gap:14px">
+    <span id="lastUpdated"></span>
+    <a href="index.html" class="back-link">← Website</a>
+    <a href="admin.html" class="nav-btn">Admin CRM</a>
+    <button class="nav-btn" onclick="doRefresh()">↻ Refresh</button>
+    <button class="nav-btn" onclick="doLogout()">Sign Out</button>
+  </div>
+</nav>
+
+<!-- MAIN -->
+<!-- Contact: nextgentanzania@gmail.com | +255 659 166 440 -->
+<div class="main">
+
+  <!-- LOADING STATE -->
+  <div id="loadingState" class="loading">
+    <div class="spinner"></div>
+    Loading analytics data...
+  </div>
+
+  <!-- DASHBOARD (hidden until loaded) -->
+  <div id="dashboard" style="display:none">
+
+    <!-- PERIOD TABS -->
+    <div class="period-tabs">
+      <button class="ptab on" onclick="setPeriod('today',this)">📅 Today</button>
+      <button class="ptab" onclick="setPeriod('week',this)">📆 This Week</button>
+      <button class="ptab" onclick="setPeriod('month',this)">🗓️ This Month</button>
+      <button class="ptab" onclick="setPeriod('year',this)">📊 This Year</button>
+      <button class="ptab" onclick="setPeriod('all',this)">♾️ All Time</button>
+    </div>
+
+    <!-- STAT CARDS -->
+    <div class="stats-row">
+      <div class="stat-card">
+        <div class="stat-label">Page Views</div>
+        <div class="stat-value" id="statViews">—</div>
+        <div id="statViewsBadge"></div>
+        <div class="stat-sub" id="statViewsSub"></div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">This Week</div>
+        <div class="stat-value" id="statWeek">—</div>
+        <div class="stat-sub">Current week total</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">This Month</div>
+        <div class="stat-value" id="statMonth">—</div>
+        <div class="stat-sub">Current month total</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">This Year</div>
+        <div class="stat-value" id="statYear">—</div>
+        <div class="stat-sub">Current year total</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">All Time</div>
+        <div class="stat-value" id="statTotal">—</div>
+        <div class="stat-sub">Since launch</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Top Country</div>
+        <div class="stat-value" id="statTopCountry" style="font-size:22px">—</div>
+        <div class="stat-sub" id="statTopCountryName"></div>
+      </div>
+    </div>
+
+    <!-- CHARTS ROW -->
+    <div class="charts-row">
+      <div class="chart-card">
+        <div class="chart-title">
+          <span id="chartTitle">Daily Traffic — Last 30 Days</span>
+          <span id="chartTotal" style="font-size:11px;color:rgba(255,255,255,.3)"></span>
+        </div>
+        <div class="chart-wrap"><canvas id="trafficChart"></canvas></div>
+      </div>
+      <div class="chart-card">
+        <div class="chart-title">Traffic by Country</div>
+        <div class="chart-wrap"><canvas id="countryChart"></canvas></div>
+      </div>
+    </div>
+
+    <!-- PAGES TABLE + RECENT VISITORS -->
+    <div class="bottom-row">
+      <div class="table-card">
+        <div class="table-title">🏆 Top Pages</div>
+        <table class="tbl">
+          <thead><tr><th>#</th><th>Page</th><th>Views</th><th>Share</th></tr></thead>
+          <tbody id="pagesTableBody"></tbody>
+        </table>
+      </div>
+      <div class="table-card">
+        <div class="table-title">🕐 Recent Visitors</div>
+        <div id="recentVisitors"></div>
+      </div>
+    </div>
+
+    <!-- MONTHLY BREAKDOWN -->
+    <div class="chart-card" style="margin-top:14px">
+      <div class="chart-title">Monthly Traffic — Last 12 Months</div>
+      <div style="height:200px"><canvas id="monthlyChart"></canvas></div>
+    </div>
+
+  </div><!-- end dashboard -->
+
+  <!-- NO DATA STATE -->
+  <div id="noDataState" style="display:none" class="empty-state">
+    <div class="e-icon">📊</div>
+    <h3 style="color:rgba(255,255,255,.6);font-size:18px;margin-bottom:8px">No Data Yet</h3>
+    <p>Analytics data will appear here once visitors start browsing your website.<br>
+    Deploy the updated files and the tracking will begin automatically.</p>
+  </div>
+
+</div>
+
+<script>
+const API = 'https://nextgen-ai-api.kitentyaluth.workers.dev';
+var TOKEN = '';
+var STATS = null;
+var RECENT = [];
+var currentPeriod = 'today';
+var trafficChartInst = null;
+var countryChartInst = null;
+var monthlyChartInst = null;
+
+// ── LOGIN ──
+function getStoredToken(){
+  try{ return localStorage.getItem('ng_analytics_token')||''; }catch(e){ return ''; }
+}
+function storeToken(t){
+  try{ localStorage.setItem('ng_analytics_token',t); }catch(e){}
+}
+
+async function doLogin(){
+  var pw = document.getElementById('loginPw').value;
+  if(!pw){ document.getElementById('loginErr').style.display='block'; return; }
+  try{
+    var r = await fetch(API+'/api/admin/login',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({password:pw})});
+    var d = await r.json();
+    if(d.token){
+      TOKEN = d.token;
+      storeToken(TOKEN);
+      document.getElementById('loginScreen').style.display='none';
+      loadDashboard();
+    } else {
+      document.getElementById('loginErr').style.display='block';
+    }
+  }catch(e){
+    document.getElementById('loginErr').textContent='Connection error. Check your internet.';
+    document.getElementById('loginErr').style.display='block';
+  }
+}
+function doLogout(){
+  try{ localStorage.removeItem('ng_analytics_token'); }catch(e){}
+  TOKEN='';
+  document.getElementById('loginScreen').style.display='flex';
+  document.getElementById('dashboard').style.display='none';
+}
+
+// ── LOAD DATA ──
+async function loadDashboard(){
+  document.getElementById('loadingState').style.display='block';
+  document.getElementById('dashboard').style.display='none';
+  document.getElementById('noDataState').style.display='none';
+
+  try{
+    var [statsRes, visitorsRes] = await Promise.all([
+      fetch(API+'/api/stats',{headers:{'X-Admin-Token':TOKEN}}),
+      fetch(API+'/api/visitors/recent',{headers:{'X-Admin-Token':TOKEN}})
+    ]);
+    
+    if(statsRes.status===401){
+      // Token expired — show login
+      document.getElementById('loadingState').style.display='none';
+      document.getElementById('loginScreen').style.display='flex';
+      return;
+    }
+
+    var statsData = await statsRes.json();
+    var visitorsData = await visitorsRes.json();
+    
+    STATS = statsData.stats;
+    RECENT = visitorsData.visitors || [];
+    
+    document.getElementById('loadingState').style.display='none';
+    
+    if(!STATS || STATS.total===0){
+      document.getElementById('noDataState').style.display='block';
+      return;
+    }
+    
+    document.getElementById('dashboard').style.display='block';
+    document.getElementById('lastUpdated').textContent = 'Updated: '+new Date().toLocaleTimeString();
+    
+    renderDashboard();
+    
+  }catch(e){
+    document.getElementById('loadingState').innerHTML='<div style="color:#F87171">Error loading data: '+e.message+'</div>';
+  }
+}
+
+function doRefresh(){ loadDashboard(); }
+
+// ── RENDER DASHBOARD ──
+function renderDashboard(){
+  var stats = STATS;
+  var now = new Date();
+  var todayKey = now.toISOString().slice(0,10);
+  var monthKey = now.toISOString().slice(0,7);
+  var yearKey = String(now.getFullYear());
+  var weekKey = getWeekKey(now);
+
+  // Today
+  var todayViews = (stats.daily||{})[todayKey]||0;
+  // Yesterday
+  var yest = new Date(now-86400000).toISOString().slice(0,10);
+  var yestViews = (stats.daily||{})[yest]||0;
+  
+  document.getElementById('statViews').textContent = fmt(todayViews);
+  document.getElementById('statWeek').textContent = fmt((stats.weekly||{})[weekKey]||0);
+  document.getElementById('statMonth').textContent = fmt((stats.monthly||{})[monthKey]||0);
+  document.getElementById('statYear').textContent = fmt((stats.yearly||{})[yearKey]||0);
+  document.getElementById('statTotal').textContent = fmt(stats.total||0);
+  
+  // Change badge
+  if(yestViews>0){
+    var pct = Math.round(((todayViews-yestViews)/yestViews)*100);
+    var badge = document.getElementById('statViewsBadge');
+    badge.innerHTML='<div class="stat-badge '+(pct>=0?'badge-up':'badge-down')+'">'+(pct>=0?'▲':'▼')+' '+Math.abs(pct)+'% vs yesterday</div>';
+  }
+  document.getElementById('statViewsSub').textContent = todayKey;
+
+  // Top country
+  var countries = stats.countries || {};
+  var topCountry = Object.entries(countries).sort((a,b)=>b[1]-a[1])[0];
+  if(topCountry){
+    document.getElementById('statTopCountry').textContent = getFlag(topCountry[0]);
+    document.getElementById('statTopCountryName').textContent = topCountry[0]+' ('+fmt(topCountry[1])+' views)';
+  }
+
+  renderTrafficChart('today');
+  renderCountryChart();
+  renderMonthlyChart();
+  renderPagesTable();
+  renderRecentVisitors();
+}
+
+function setPeriod(period, btn){
+  currentPeriod = period;
+  document.querySelectorAll('.ptab').forEach(function(t){t.classList.remove('on');});
+  btn.classList.add('on');
+  renderTrafficChart(period);
+  
+  var stats = STATS;
+  var now = new Date();
+  var todayKey = now.toISOString().slice(0,10);
+  var monthKey = now.toISOString().slice(0,7);
+  var yearKey = String(now.getFullYear());
+  var weekKey = getWeekKey(now);
+
+  var labels = {today:'Today',week:'This Week',month:'This Month',year:'This Year',all:'All Time'};
+  var values = {
+    today:(stats.daily||{})[todayKey]||0,
+    week:(stats.weekly||{})[weekKey]||0,
+    month:(stats.monthly||{})[monthKey]||0,
+    year:(stats.yearly||{})[yearKey]||0,
+    all:stats.total||0
+  };
+  document.getElementById('statViews').textContent = fmt(values[period]||0);
+  document.getElementById('statViewsSub').textContent = labels[period];
+}
+
+function renderTrafficChart(period){
+  var stats = STATS;
+  var daily = stats.daily || {};
+  var weekly = stats.weekly || {};
+  var monthly = stats.monthly || {};
+  var now = new Date();
+
+  var labels=[], data=[];
+
+  if(period==='today'){
+    // Last 30 days
+    document.getElementById('chartTitle').textContent='Daily Traffic — Last 30 Days';
+    for(var i=29;i>=0;i--){
+      var d = new Date(now-i*86400000).toISOString().slice(0,10);
+      labels.push(d.slice(5)); // MM-DD
+      data.push(daily[d]||0);
+    }
+  } else if(period==='week'){
+    // Last 12 weeks
+    document.getElementById('chartTitle').textContent='Weekly Traffic — Last 12 Weeks';
+    for(var i=11;i>=0;i--){
+      var d = new Date(now-i*7*86400000);
+      var wk = getWeekKey(d);
+      labels.push(wk.slice(5)); // W##
+      data.push(weekly[wk]||0);
+    }
+  } else if(period==='month'||period==='year'){
+    // Last 12 months
+    document.getElementById('chartTitle').textContent='Monthly Traffic — Last 12 Months';
+    for(var i=11;i>=0;i--){
+      var d = new Date(now.getFullYear(), now.getMonth()-i, 1);
+      var mk = d.toISOString().slice(0,7);
+      labels.push(mk.slice(5)); // MM
+      data.push(monthly[mk]||0);
+    }
+  } else {
+    // All time — monthly
+    document.getElementById('chartTitle').textContent='All Time — Monthly';
+    var allKeys = Object.keys(monthly).sort();
+    labels = allKeys.map(function(k){return k.slice(5);});
+    data = allKeys.map(function(k){return monthly[k];});
+  }
+
+  var total = data.reduce(function(a,b){return a+b;},0);
+  document.getElementById('chartTotal').textContent = 'Total: '+fmt(total);
+
+  var ctx = document.getElementById('trafficChart').getContext('2d');
+  if(trafficChartInst) trafficChartInst.destroy();
+  trafficChartInst = new Chart(ctx, {
+    type:'bar',
+    data:{
+      labels:labels,
+      datasets:[{label:'Page Views',data:data,
+        backgroundColor:'rgba(233,30,140,.6)',
+        borderColor:'rgba(233,30,140,1)',
+        borderWidth:1,borderRadius:4}]
+    },
+    options:{
+      responsive:true,maintainAspectRatio:false,
+      plugins:{legend:{display:false},tooltip:{callbacks:{label:function(c){return c.parsed.y+' views';}}}},
+      scales:{
+        x:{ticks:{color:'rgba(255,255,255,.4)',font:{size:11}},grid:{color:'rgba(255,255,255,.04)'}},
+        y:{ticks:{color:'rgba(255,255,255,.4)',font:{size:11}},grid:{color:'rgba(255,255,255,.06)'},beginAtZero:true}
+      }
+    }
+  });
+}
+
+function renderCountryChart(){
+  var countries = STATS.countries || {};
+  var sorted = Object.entries(countries).sort(function(a,b){return b[1]-a[1];}).slice(0,8);
+  if(!sorted.length) return;
+  var labels = sorted.map(function(e){return e[0]+' '+getFlag(e[0]);});
+  var data = sorted.map(function(e){return e[1];});
+  var ctx = document.getElementById('countryChart').getContext('2d');
+  if(countryChartInst) countryChartInst.destroy();
+  var colors = ['#E91E8C','#C9A84C','#3B82F6','#22C55E','#F59E0B','#8B5CF6','#EC4899','#14B8A6'];
+  countryChartInst = new Chart(ctx, {
+    type:'doughnut',
+    data:{labels:labels,datasets:[{data:data,backgroundColor:colors,borderWidth:2,borderColor:'rgba(13,18,64,.8)'}]},
+    options:{
+      responsive:true,maintainAspectRatio:false,
+      plugins:{legend:{position:'right',labels:{color:'rgba(255,255,255,.6)',font:{size:11},boxWidth:12,padding:8}}}
+    }
+  });
+}
+
+function renderMonthlyChart(){
+  var monthly = STATS.monthly || {};
+  var now = new Date();
+  var labels=[], data=[];
+  for(var i=11;i>=0;i--){
+    var d = new Date(now.getFullYear(),now.getMonth()-i,1);
+    var mk = d.toISOString().slice(0,7);
+    labels.push(d.toLocaleString('en',{month:'short'})+' '+String(d.getFullYear()).slice(2));
+    data.push(monthly[mk]||0);
+  }
+  var ctx = document.getElementById('monthlyChart').getContext('2d');
+  if(monthlyChartInst) monthlyChartInst.destroy();
+  monthlyChartInst = new Chart(ctx, {
+    type:'line',
+    data:{labels:labels,datasets:[{label:'Monthly Views',data:data,
+      borderColor:'#C9A84C',backgroundColor:'rgba(201,168,76,.1)',
+      pointBackgroundColor:'#C9A84C',tension:.3,fill:true,pointRadius:4}]},
+    options:{
+      responsive:true,maintainAspectRatio:false,
+      plugins:{legend:{display:false}},
+      scales:{
+        x:{ticks:{color:'rgba(255,255,255,.45)',font:{size:11}},grid:{color:'rgba(255,255,255,.04)'}},
+        y:{ticks:{color:'rgba(255,255,255,.45)',font:{size:11}},grid:{color:'rgba(255,255,255,.06)'},beginAtZero:true}
+      }
+    }
+  });
+}
+
+function renderPagesTable(){
+  var pages = STATS.pages || {};
+  var sorted = Object.entries(pages).sort(function(a,b){return b[1]-a[1];}).slice(0,15);
+  var total = Object.values(pages).reduce(function(a,b){return a+b;},0);
+  var tbody = document.getElementById('pagesTableBody');
+  tbody.innerHTML = sorted.map(function(e,i){
+    var pct = total>0?Math.round(e[1]/total*100):0;
+    var slug = e[0].replace(/^\/|\.html$/g,'') || 'home';
+    return '<tr><td style="color:rgba(255,255,255,.35)">'+(i+1)+'</td>'
+      +'<td><span style="color:rgba(255,255,255,.75);font-weight:500">'+slug+'</span></td>'
+      +'<td style="font-weight:600">'+fmt(e[1])+'</td>'
+      +'<td><div class="bar-cell"><div class="bar" style="width:'+Math.max(4,pct*1.5)+'px"></div>'
+      +'<span style="font-size:11px;color:rgba(255,255,255,.35)">'+pct+'%</span></div></td></tr>';
+  }).join('');
+}
+
+function renderRecentVisitors(){
+  var container = document.getElementById('recentVisitors');
+  if(!RECENT.length){
+    container.innerHTML='<div class="empty-state"><div class="e-icon">👥</div><p>No recent visitor data yet.</p></div>';
+    return;
+  }
+  container.innerHTML = RECENT.slice(0,20).map(function(v){
+    var ago = getTimeAgo(v.ts);
+    var page = (v.page||'unknown').replace(/^\/|\.html$/g,'') || 'home';
+    return '<div class="visitor-row">'
+      +'<div>'
+        +'<div class="visitor-page">'+page+'</div>'
+        +'<div class="visitor-meta">'+(v.ref?'From: '+v.ref:'Direct')+'</div>'
+      +'</div>'
+      +'<div style="text-align:right">'
+        +'<div class="visitor-country">'+getFlag(v.country||'ZZ')+' '+(v.country||'?')+(v.city?' · '+v.city:'')+'</div>'
+        +'<div class="visitor-time">'+ago+'</div>'
+      +'</div>'
+    +'</div>';
+  }).join('');
+}
+
+// ── HELPERS ──
+function fmt(n){ if(n>=1000000)return(n/1000000).toFixed(1)+'M'; if(n>=1000)return(n/1000).toFixed(1)+'K'; return String(n); }
+
+function getWeekKey(d){
+  var dt=new Date(d); dt.setHours(0,0,0,0);
+  dt.setDate(dt.getDate()+3-(dt.getDay()+6)%7);
+  var w=new Date(dt.getFullYear(),0,4);
+  return dt.getFullYear()+'-W'+String(1+Math.round(((dt-w)/86400000-3+(w.getDay()+6)%7)/7)).padStart(2,'0');
+}
+
+function getTimeAgo(ts){
+  var diff = (new Date()-new Date(ts))/1000;
+  if(diff<60) return Math.round(diff)+'s ago';
+  if(diff<3600) return Math.round(diff/60)+'m ago';
+  if(diff<86400) return Math.round(diff/3600)+'h ago';
+  return Math.round(diff/86400)+'d ago';
+}
+
+var FLAGS={TZ:'🇹🇿',US:'🇺🇸',GB:'🇬🇧',DE:'🇩🇪',FR:'🇫🇷',AE:'🇦🇪',SA:'🇸🇦',CN:'🇨🇳',IN:'🇮🇳',KE:'🇰🇪',ZA:'🇿🇦',NG:'🇳🇬',AU:'🇦🇺',CA:'🇨🇦',IT:'🇮🇹',NL:'🇳🇱',RW:'🇷🇼',UG:'🇺🇬',TR:'🇹🇷',QA:'🇶🇦',ZZ:'🌍'};
+function getFlag(cc){ return (FLAGS[cc]||FLAGS['ZZ'])+' '; }
+
+// ── INIT ──
+(function(){
+  var token = getStoredToken();
+  if(token){
+    TOKEN = token;
+    fetch(API+'/api/admin/verify',{headers:{'X-Admin-Token':token}})
+      .then(function(r){return r.json();})
+      .then(function(d){
+        if(d.valid){ document.getElementById('loginScreen').style.display='none'; loadDashboard(); }
+        else { document.getElementById('loadingState').style.display='none'; }
+      })
+      .catch(function(){ document.getElementById('loadingState').style.display='none'; });
+  } else {
+    document.getElementById('loadingState').style.display='none';
+  }
+  // Auto-refresh every 5 minutes
+  setInterval(function(){ if(TOKEN) loadDashboard(); }, 300000);
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="description" content="NEXT-GEN full real estate services — property sales, leasing, auctions, escrow, valuation, legal, property management, mortgage facilitation, investment advisory. Tanzania's one-stop property center.">
+<title>Our Services | NEXT-GEN Auctioneer + Realtor Tanzania</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--navy:#0D1240;--navy-dark:#080C2E;--magenta:#E91E8C;--gold:#C9A84C;--off:#F8F7FF;--gl:#E8E8F0;--td:#1A1A2E;--tm:#6B6B8A;--green:#22C55E;--blue:#3B82F6}
+body{font-family:'Inter',sans-serif;background:var(--off);color:var(--td)}
+a{text-decoration:none;color:inherit}
+nav{background:rgba(8,12,46,.97);backdrop-filter:blur(16px);position:sticky;top:0;z-index:200;border-bottom:1px solid rgba(233,30,140,.15)}
+.nav-in{display:flex;align-items:center;justify-content:space-between;height:64px;padding:0 5%;max-width:1400px;margin:0 auto}
+.nlogo .l1{font-family:'Playfair Display',serif;font-size:17px;font-weight:700;color:#fff}
+.nlogo .l2{font-size:8px;color:var(--magenta);letter-spacing:2px;text-transform:uppercase;display:block;margin-top:2px}
+.nlinks{display:flex;gap:2px}
+.nlinks a{color:rgba(255,255,255,.65);font-size:12.5px;font-weight:500;padding:7px 12px;border-radius:7px;transition:all .2s}
+.nlinks a:hover,.nlinks a.on{color:#fff;background:rgba(255,255,255,.08)}
+.nlinks a.on{background:rgba(233,30,140,.12);color:var(--magenta)}
+.nav-cta{background:var(--magenta);color:#fff;padding:9px 18px;border-radius:8px;font-size:12.5px;font-weight:600;display:inline-block;transition:background .2s}
+.nav-cta:hover{background:#C0176F}
+@media(max-width:800px){.nlinks{display:none}}
+/* HERO */
+.hero{background:linear-gradient(135deg,#080C2E 0%,#0D1240 60%,#1A0050 100%);padding:64px 5% 52px;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 20% 50%,rgba(233,30,140,.1),transparent 50%),radial-gradient(circle at 80% 30%,rgba(59,130,246,.08),transparent 40%)}
+.hero-in{max-width:1200px;margin:0 auto;position:relative;z-index:2;text-align:center}
+.ey{font-size:11px;font-weight:700;color:var(--magenta);letter-spacing:2.5px;text-transform:uppercase;margin-bottom:10px;display:block}
+.hero h1{font-family:'Playfair Display',serif;font-size:clamp(28px,4.5vw,52px);font-weight:700;color:#fff;line-height:1.1;margin-bottom:14px}
+.hero h1 em{font-style:italic;color:var(--gold)}
+.hero p{font-size:16px;color:rgba(255,255,255,.62);max-width:640px;margin:0 auto 32px;line-height:1.75}
+.hero-tags{display:flex;justify-content:center;gap:8px;flex-wrap:wrap}
+.htag{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);border-radius:20px;padding:5px 14px;font-size:12px;color:rgba(255,255,255,.75);font-weight:500}
+/* SERVICE CATEGORIES NAV */
+.cat-nav{background:#fff;border-bottom:1px solid var(--gl);position:sticky;top:64px;z-index:100;overflow-x:auto;white-space:nowrap}
+.cat-nav-in{max-width:1400px;margin:0 auto;padding:0 5%;display:flex;height:52px;align-items:center;gap:2px}
+.ctab{background:none;border:none;border-bottom:3px solid transparent;padding:0 16px;height:52px;font-size:13px;font-weight:600;color:var(--tm);cursor:pointer;font-family:'Inter',sans-serif;white-space:nowrap;transition:all .2s}
+.ctab:hover{color:var(--navy)}.ctab.on{color:var(--navy);border-bottom-color:var(--magenta)}
+/* MAIN */
+.wrap{max-width:1200px;margin:0 auto;padding:48px 5% 80px}
+/* SERVICE SECTIONS */
+.svc-section{margin-bottom:72px;scroll-margin-top:120px}
+.sec-hdr{display:flex;align-items:center;gap:16px;margin-bottom:28px;padding-bottom:18px;border-bottom:2px solid var(--gl)}
+.sec-icon{width:52px;height:52px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:24px;flex-shrink:0}
+.sec-hdr h2{font-family:'Playfair Display',serif;font-size:clamp(22px,3vw,32px);font-weight:700;color:var(--navy);line-height:1.15}
+.sec-hdr p{font-size:13.5px;color:var(--tm);margin-top:4px;max-width:600px;line-height:1.6}
+/* FEATURE GRID */
+.feat-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px;margin-bottom:20px}
+.feat-card{background:#fff;border:1px solid var(--gl);border-radius:14px;padding:22px;transition:all .25s}
+.feat-card:hover{border-color:var(--magenta);box-shadow:0 6px 24px rgba(13,18,64,.08);transform:translateY(-2px)}
+.fc-icon{font-size:28px;margin-bottom:10px}
+.fc-title{font-size:14px;font-weight:700;color:var(--navy);margin-bottom:5px}
+.fc-body{font-size:13px;color:var(--tm);line-height:1.65}
+.fc-link{display:inline-block;margin-top:10px;font-size:12.5px;font-weight:600;color:var(--magenta);transition:opacity .2s}
+.fc-link:hover{opacity:.75}
+/* PROCESS STEPS */
+.process{display:flex;flex-direction:column;gap:0;margin:24px 0}
+.ps-item{display:flex;gap:18px;padding-bottom:24px;position:relative}
+.ps-item::before{content:'';position:absolute;left:19px;top:40px;bottom:0;width:1.5px;background:var(--gl)}
+.ps-item:last-child::before{display:none}
+.ps-num{width:40px;height:40px;background:var(--navy);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700;color:#fff;flex-shrink:0;position:relative;z-index:2}
+.ps-title{font-size:14px;font-weight:700;color:var(--navy);margin-bottom:4px}
+.ps-body{font-size:13px;color:var(--tm);line-height:1.65}
+/* INFO BOXES */
+.info-box{border-radius:12px;padding:18px 20px;margin:16px 0;border-left:4px solid}
+.info-navy{background:rgba(13,18,64,.04);border-color:var(--navy)}
+.info-gold{background:rgba(201,168,76,.06);border-color:var(--gold)}
+.info-green{background:rgba(34,197,94,.06);border-color:var(--green)}
+.info-box strong{color:var(--navy);font-size:14px}
+.info-box p{font-size:13.5px;color:var(--tm);line-height:1.7;margin-top:5px}
+/* CTA BANNER */
+.cta-banner{background:linear-gradient(135deg,var(--navy),var(--navy-dark));border-radius:18px;padding:32px;text-align:center;margin-top:20px}
+.cta-banner h3{font-family:'Playfair Display',serif;font-size:22px;font-weight:700;color:#fff;margin-bottom:8px}
+.cta-banner p{font-size:14px;color:rgba(255,255,255,.6);margin-bottom:20px}
+.cta-btns{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+.btn-m{background:var(--magenta);color:#fff;padding:11px 24px;border-radius:9px;font-size:13.5px;font-weight:600;display:inline-block;transition:background .2s}
+.btn-m:hover{background:#C0176F}
+.btn-wa{background:#25D366;color:#fff;padding:11px 24px;border-radius:9px;font-size:13.5px;font-weight:600;display:inline-block;transition:background .2s}
+.btn-wa:hover{background:#1DAA5D}
+.btn-o{border:2px solid rgba(255,255,255,.3);color:#fff;padding:11px 24px;border-radius:9px;font-size:13.5px;font-weight:600;display:inline-block;transition:all .2s}
+.btn-o:hover{border-color:#fff}
+/* FEES TABLE */
+.fees-wrap{overflow-x:auto;margin:20px 0}
+table.fees{width:100%;border-collapse:collapse;font-size:13.5px}
+table.fees th{background:var(--navy);color:#fff;padding:12px 16px;text-align:left;font-weight:600}
+table.fees td{padding:12px 16px;border-bottom:1px solid var(--gl)}
+table.fees tr:nth-child(even) td{background:var(--off)}
+/* WHY US STRIP */
+.why-strip{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:12px;background:var(--navy);border-radius:16px;padding:24px;margin:32px 0}
+.ws-item{text-align:center;padding:8px}
+.ws-num{font-family:'Playfair Display',serif;font-size:30px;font-weight:700;color:var(--gold)}
+.ws-lbl{font-size:11px;color:rgba(255,255,255,.5);text-transform:uppercase;letter-spacing:.5px;margin-top:4px}
+/* FOOTER */
+footer{background:#080C2E;padding:32px 5%;text-align:center}
+footer .fl1{font-family:'Playfair Display',serif;font-size:17px;font-weight:700;color:#fff}
+footer .fl2{font-size:8px;color:var(--magenta);letter-spacing:2px;text-transform:uppercase;display:block;margin-top:2px}
+footer p{font-size:11.5px;color:rgba(255,255,255,.25);margin-top:12px}
+#waf{position:fixed;bottom:24px;left:24px;z-index:999;width:50px;height:50px;background:#25D366;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 6px 20px rgba(37,211,102,.4);transition:transform .3s}
+#waf:hover{transform:scale(1.1)}
+#waf svg{width:25px;height:25px;fill:#fff}
+
+/* Mobile nav */
+.mob-menu{display:none;position:absolute;top:64px;left:0;right:0;background:rgba(8,12,46,.98);z-index:199;padding:8px 5%;border-bottom:1px solid rgba(233,30,140,.15);flex-direction:column;gap:2px}
+.mob-menu.open{display:flex}
+.mob-menu a{color:rgba(255,255,255,.8);font-size:13.5px;font-weight:500;padding:10px 8px;border-bottom:1px solid rgba(255,255,255,.06);text-decoration:none}
+.mob-menu a:last-child{border-bottom:none}
+.menu-tog{display:none;background:none;border:none;cursor:pointer;flex-direction:column;gap:5px;padding:6px;margin-left:8px}
+.menu-tog span{display:block;width:22px;height:2px;background:#fff;border-radius:2px;transition:all .3s}
+@media(max-width:800px){.nlinks{display:none!important}.menu-tog{display:flex}}
+</style>
+<script>
+// Auto page tracker — fires silently on load
+(function(){
+  try{
+    var page = window.location.pathname.replace(/^\//, '') || 'index.html';
+    var ref  = document.referrer ? document.referrer.replace(/https?:\/\/[^\/]+/,'') : '';
+    var lang = (navigator.language || 'en').slice(0,5);
+    fetch('https://nextgen-ai-api.kitentyaluth.workers.dev/api/track',{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({page:page, ref:ref, lang:lang}),
+      keepalive:true
+    }).catch(function(){});
+  }catch(e){}
+})();
+</script>
+</head>
+<body>
+<nav>
+  <div class="nav-in">
+    <a href="index.html" class="nlogo"><div class="l1">NEXT-GEN</div><div class="l2">Auctioneer + Realtor</div></a>
+    <div class="nlinks">
+      <a href="listings.html">Properties</a>
+      <a href="services.html" class="on">Services</a>
+      <a href="invest.html">Invest</a>
+      <a href="commercial.html">Commercial</a>
+      <a href="blog.html">Blog</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+    </div>
+    <a href="contact.html" class="nav-cta">
+    <button class="menu-tog" onclick="document.getElementById('mobMenu').classList.toggle('open')" aria-label="Menu"><span></span><span></span><span></span></button>Enquire Now →</a>
+  </div>
+</nav>
+<div class="mob-menu" id="mobMenu">
+  <a href="index.html">🏠 Home</a>
+  <a href="listings.html">📋 Properties</a>
+  <a href="services.html">⚙️ Services</a>
+  <a href="auctions.html">🔨 Auctions</a>
+  <a href="leasing.html">🔑 Leasing</a>
+  <a href="commercial.html">🏢 Commercial</a>
+  <a href="invest.html">📈 Invest</a>
+  <a href="foreign-buyers.html">🌍 Foreign Buyers</a>
+  <a href="sell.html">💼 Sell</a>
+  <a href="blog.html">📰 Blog</a>
+  <a href="about.html">🏛️ About</a>
+  <a href="contact.html">📞 Contact</a>
+</div>
+
+<div class="hero">
+  <div class="hero-in">
+    <span class="ey">Complete Real Estate Services</span>
+    <h1>Tanzania's <em>One-Stop</em><br> Property Center</h1>
+    <p>From finding your first property to managing a portfolio — escrow accounts, legal transfer, valuation, property management, mortgage facilitation and more. Everything in one place.</p>
+    <div class="hero-tags">
+      <span class="htag">🔐 Escrow Services</span>
+      <span class="htag">⚖️ Legal & Title Transfer</span>
+      <span class="htag">📊 Property Valuation</span>
+      <span class="htag">🏘️ Property Management</span>
+      <span class="htag">🏦 Mortgage Facilitation</span>
+      <span class="htag">📈 Investment Advisory</span>
+    </div>
+  </div>
+</div>
+
+<!-- CATEGORY NAV -->
+<div class="cat-nav">
+  <div class="cat-nav-in">
+    <button class="ctab on" onclick="scrollSec('buy-sell')">🏠 Buy & Sell</button>
+    <button class="ctab" onclick="scrollSec('escrow')">🔐 Escrow</button>
+    <button class="ctab" onclick="scrollSec('valuation')">📊 Valuation</button>
+    <button class="ctab" onclick="scrollSec('legal')">⚖️ Legal</button>
+    <button class="ctab" onclick="scrollSec('property-mgmt')">🏘️ Property Management</button>
+    <button class="ctab" onclick="scrollSec('mortgage')">🏦 Mortgage</button>
+    <button class="ctab" onclick="scrollSec('auctions-svc')">🔨 Auctions</button>
+    <button class="ctab" onclick="scrollSec('investment')">📈 Investment</button>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <!-- WHY US -->
+  <div class="why-strip">
+    <div class="ws-item"><div class="ws-num">500+</div><div class="ws-lbl">Transactions Completed</div></div>
+    <div class="ws-item"><div class="ws-num">31</div><div class="ws-lbl">Regions Covered</div></div>
+    <div class="ws-item"><div class="ws-num">12+</div><div class="ws-lbl">Partner Banks</div></div>
+    <div class="ws-item"><div class="ws-num">5</div><div class="ws-lbl">Languages Served</div></div>
+    <div class="ws-item"><div class="ws-num">24/7</div><div class="ws-lbl">AI Property Advisor</div></div>
+  </div>
+
+  <!-- ═══ BUY & SELL ═══ -->
+  <div class="svc-section" id="buy-sell">
+    <div class="sec-hdr">
+      <div class="sec-icon" style="background:rgba(233,30,140,.1)">🏠</div>
+      <div>
+        <h2>Property Sales & Acquisitions</h2>
+        <p>Full-service buy and sell — from property search and due diligence to negotiation and title transfer.</p>
+      </div>
+    </div>
+    <div class="feat-grid">
+      <div class="feat-card"><div class="fc-icon">🔍</div><div class="fc-title">Property Search & Matching</div><div class="fc-body">We search our full portfolio plus off-market properties to find exactly what you need — residential, commercial, agricultural or hospitality.</div><a href="listings.html" class="fc-link">Browse Properties →</a></div>
+      <div class="feat-card"><div class="fc-icon">📋</div><div class="fc-title">Due Diligence & Verification</div><div class="fc-body">Full Ministry of Lands title search, survey verification, ownership history, rates clearance, and encumbrance check before any transaction proceeds.</div></div>
+      <div class="feat-card"><div class="fc-icon">🤝</div><div class="fc-title">Negotiation & Sale Agreement</div><div class="fc-body">Our experienced team represents your interests in price and terms negotiation. All agreements professionally drafted and reviewed.</div></div>
+      <div class="feat-card"><div class="fc-icon">📦</div><div class="fc-title">End-to-End Transaction Management</div><div class="fc-body">We coordinate all parties — buyer, seller, lawyers, surveyors, banks and Ministry of Lands — to ensure a smooth, timely completion.</div><a href="sell.html" class="fc-link">List Your Property →</a></div>
+    </div>
+    <div class="cta-banner">
+      <h3>Ready to Buy or Sell?</h3>
+      <p>Our team is available 7 days a week — call, WhatsApp or email us now.</p>
+      <div class="cta-btns">
+        <a href="listings.html" class="btn-m">Browse Properties</a>
+        <a href="sell.html" class="btn-o">Sell My Property</a>
+        <a href="https://wa.me/255659166440?text=Hello!%20I%20need%20help%20buying%20or%20selling%20a%20property." target="_blank" class="btn-wa">💬 WhatsApp</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ ESCROW ═══ -->
+  <div class="svc-section" id="escrow">
+    <div class="sec-hdr">
+      <div class="sec-icon" style="background:rgba(59,130,246,.1)">🔐</div>
+      <div>
+        <h2>Escrow Account Services</h2>
+        <p>Secure, neutral holding of transaction funds — protecting both buyer and seller until all conditions are met.</p>
+      </div>
+    </div>
+    <div class="info-box info-navy"><strong>What is an Escrow Account?</strong><p>An escrow account is a neutral third-party account where transaction funds are held until all agreed conditions (title verification, legal clearances, property handover) are fully satisfied. Neither buyer nor seller can access the funds until both parties' obligations are met — protecting everyone in the transaction.</p></div>
+    <div class="feat-grid">
+      <div class="feat-card"><div class="fc-icon">🏦</div><div class="fc-title">Property Purchase Escrow</div><div class="fc-body">Deposit and balance payments held securely. Funds released only upon verified title transfer and property handover. Prevents fraud and title disputes.</div></div>
+      <div class="feat-card"><div class="fc-icon">🔨</div><div class="fc-title">Auction Escrow</div><div class="fc-body">Bid deposits and auction proceeds held in escrow throughout the bidding and documentation process. Bank-compliant escrow for all auction transactions.</div></div>
+      <div class="feat-card"><div class="fc-icon">🌍</div><div class="fc-title">International Transfer Escrow</div><div class="fc-body">For foreign buyers sending funds from overseas — funds held in escrow while TIC/ZanInvest registration and title verification are completed.</div></div>
+      <div class="feat-card"><div class="fc-icon">🏗️</div><div class="fc-title">Developer / Off-Plan Escrow</div><div class="fc-body">Stage payments for off-plan developments held in escrow and released to developer only upon completion of agreed construction milestones.</div></div>
+    </div>
+    <h3 style="font-size:15px;font-weight:700;color:var(--navy);margin:20px 0 12px">How Escrow Works — Step by Step</h3>
+    <div class="process">
+      <div class="ps-item"><div class="ps-num">1</div><div><div class="ps-title">Open Escrow Account</div><div class="ps-body">Buyer and seller agree to use escrow. NEXT-GEN opens a dedicated escrow account at a partner bank. Terms of release are agreed and documented.</div></div></div>
+      <div class="ps-item"><div class="ps-num">2</div><div><div class="ps-title">Deposit Funds</div><div class="ps-body">Buyer deposits agreed amount (deposit or full purchase price). Funds are held — neither party can withdraw. Buyer receives acknowledgement of receipt.</div></div></div>
+      <div class="ps-item"><div class="ps-num">3</div><div><div class="ps-title">Conditions Verified</div><div class="ps-body">NEXT-GEN verifies all agreed conditions: title deed clean, property as described, all documentation signed and in order.</div></div></div>
+      <div class="ps-item"><div class="ps-num">4</div><div><div class="ps-title">Release of Funds</div><div class="ps-body">Upon verification of all conditions, funds are released to seller. Property keys and title deed handed to buyer simultaneously. Transaction complete.</div></div></div>
+    </div>
+    <div class="info-box info-green"><strong>✅ Why Use Escrow?</strong><p>Tanzania's property market carries real risks of fraud — fake title deeds, double-selling, and non-delivery after payment. Escrow eliminates these risks. We strongly recommend escrow for all transactions above TZS 50 million.</p></div>
+    <div class="cta-banner">
+      <h3>Set Up an Escrow Account</h3>
+      <p>Contact us to open an escrow account for your next property transaction. Same-day setup available.</p>
+      <div class="cta-btns">
+        <a href="contact.html" class="btn-m">Contact Us Now</a>
+        <a href="https://wa.me/255659166440?text=Hello%20NEXT-GEN!%20I%20need%20to%20open%20an%20Escrow%20Account%20for%20a%20property%20transaction." target="_blank" class="btn-wa">💬 WhatsApp: Open Escrow</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ VALUATION ═══ -->
+  <div class="svc-section" id="valuation">
+    <div class="sec-hdr">
+      <div class="sec-icon" style="background:rgba(201,168,76,.1)">📊</div>
+      <div>
+        <h2>Property Valuation</h2>
+        <p>Certified market valuations for sale, mortgage, insurance, legal, or investment purposes.</p>
+      </div>
+    </div>
+    <div class="feat-grid">
+      <div class="feat-card"><div class="fc-icon">🏡</div><div class="fc-title">Residential Valuation</div><div class="fc-body">Full valuation for houses, apartments, villas and plots. Includes comparable sales analysis, condition assessment, location factor, and written report.</div></div>
+      <div class="feat-card"><div class="fc-icon">🏢</div><div class="fc-title">Commercial Valuation</div><div class="fc-body">Office, retail, industrial and mixed-use property valuation for sale, lease, or investment analysis purposes.</div></div>
+      <div class="feat-card"><div class="fc-icon">🌾</div><div class="fc-title">Agricultural Land Valuation</div><div class="fc-body">Farm and agricultural land assessment including soil quality, water access, productivity potential, and regional market comparison.</div></div>
+      <div class="feat-card"><div class="fc-icon">🏦</div><div class="fc-title">Mortgage Valuation</div><div class="fc-body">Bank-compliant valuations accepted by all major Tanzanian banks including CRDB, NMB, Standard Chartered, Equity and NBC for mortgage applications.</div></div>
+      <div class="feat-card"><div class="fc-icon">⚖️</div><div class="fc-title">Legal / Probate Valuation</div><div class="fc-body">Court-accepted valuations for estate settlements, divorce proceedings, and legal disputes. Certified written report provided.</div></div>
+      <div class="feat-card"><div class="fc-icon">📈</div><div class="fc-title">Investment Valuation & ROI</div><div class="fc-body">Income approach valuation plus projected rental yield and capital appreciation analysis for investment decision-making.</div></div>
+    </div>
+    <div class="fees-wrap">
+      <table class="fees">
+        <thead><tr><th>Valuation Type</th><th>Turnaround</th><th>Fee (Indicative)</th><th>Report Format</th></tr></thead>
+        <tbody>
+          <tr><td>Residential (up to TZS 500M)</td><td>3–5 days</td><td>TZS 300,000–500,000</td><td>Written + photographs</td></tr>
+          <tr><td>Residential (above TZS 500M)</td><td>5–7 days</td><td>TZS 500,000–1,500,000</td><td>Full certified report</td></tr>
+          <tr><td>Commercial Property</td><td>5–10 days</td><td>TZS 1,000,000–3,000,000</td><td>Full certified report</td></tr>
+          <tr><td>Agricultural Land</td><td>7–14 days</td><td>TZS 800,000–2,000,000</td><td>Certified + site inspection</td></tr>
+          <tr><td>Mortgage Valuation</td><td>3–5 days</td><td>TZS 400,000–1,200,000</td><td>Bank-format report</td></tr>
+          <tr><td>AI Instant Estimate</td><td>Instant</td><td>Free</td><td>Online estimate only</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="cta-banner">
+      <h3>Request a Property Valuation</h3>
+      <p>Free AI estimate available instantly. Certified valuation booked within 24 hours.</p>
+      <div class="cta-btns">
+        <a href="sell.html" class="btn-m">Request Valuation</a>
+        <a href="https://wa.me/255659166440?text=Hello%20NEXT-GEN!%20I%20need%20a%20property%20valuation." target="_blank" class="btn-wa">💬 WhatsApp</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ LEGAL ═══ -->
+  <div class="svc-section" id="legal">
+    <div class="sec-hdr">
+      <div class="sec-icon" style="background:rgba(13,18,64,.08)">⚖️</div>
+      <div>
+        <h2>Legal & Documentation Services</h2>
+        <p>Full legal support for property transactions — title deed transfer, land clearance, TRA compliance, court processes.</p>
+      </div>
+    </div>
+    <div class="feat-grid">
+      <div class="feat-card"><div class="fc-icon">📜</div><div class="fc-title">Title Deed Transfer</div><div class="fc-body">Complete management of title deed or Right of Occupancy transfer at the Ministry of Lands. We handle all forms, fees, and follow-up.</div></div>
+      <div class="feat-card"><div class="fc-icon">🏛️</div><div class="fc-title">BRELA & TRA Compliance</div><div class="fc-body">Company searches, registration verification, TRA clearance, and all compliance documentation for buyers, sellers and investors.</div></div>
+      <div class="feat-card"><div class="fc-icon">📋</div><div class="fc-title">Sale & Purchase Agreements</div><div class="fc-body">Professional drafting of sale agreements, lease agreements, tenancy agreements, and option agreements in English and Swahili.</div></div>
+      <div class="feat-card"><div class="fc-icon">🔨</div><div class="fc-title">Court Auctioneering</div><div class="fc-body">Licensed court-ordered auctioneering services — debt recovery, estate administration, and court-mandated asset disposal.</div></div>
+      <div class="feat-card"><div class="fc-icon">💰</div><div class="fc-title">Debt Collection</div><div class="fc-body">Formal debt collection services including demand letters, legal proceedings, and asset recovery. Full compliance with Tanzanian debt collection law.</div></div>
+      <div class="feat-card"><div class="fc-icon">🌍</div><div class="fc-title">TIC / ZanInvest Registration</div><div class="fc-body">Tanzania Investment Centre and ZanInvest registration for foreign investors. We manage the full application, documentation and approval process.</div></div>
+    </div>
+    <div class="info-box info-gold"><strong>⚠️ Why Legal Due Diligence Matters:</strong><p>Tanzania's property market includes risks of fraudulent title deeds, contested ownership, and undisclosed encumbrances. NEXT-GEN conducts exhaustive legal checks on every transaction we facilitate — protecting buyers, sellers, and lenders from costly disputes.</p></div>
+  </div>
+
+  <!-- ═══ PROPERTY MANAGEMENT ═══ -->
+  <div class="svc-section" id="property-mgmt">
+    <div class="sec-hdr">
+      <div class="sec-icon" style="background:rgba(34,197,94,.1)">🏘️</div>
+      <div>
+        <h2>Property Management</h2>
+        <p>Full-service property management — tenant sourcing, rent collection, maintenance, and reporting. Ideal for absentee owners and investors.</p>
+      </div>
+    </div>
+    <div class="feat-grid">
+      <div class="feat-card"><div class="fc-icon">👤</div><div class="fc-title">Tenant Sourcing & Screening</div><div class="fc-body">We find, vet and screen quality tenants — employment verification, reference checks, credit history review, and KYC documentation.</div></div>
+      <div class="feat-card"><div class="fc-icon">💵</div><div class="fc-title">Rent Collection</div><div class="fc-body">Monthly rent collection with automatic reminders. Payments received and disbursed to owners. Full payment records and receipts maintained.</div></div>
+      <div class="feat-card"><div class="fc-icon">🔧</div><div class="fc-title">Maintenance & Repairs</div><div class="fc-body">24/7 maintenance request management. Network of vetted contractors for plumbing, electrical, painting, and general repairs at competitive rates.</div></div>
+      <div class="feat-card"><div class="fc-icon">📊</div><div class="fc-title">Owner Reporting</div><div class="fc-body">Monthly financial reports, occupancy reports, and maintenance logs. Accessible online or by WhatsApp. Ideal for overseas owners.</div></div>
+      <div class="feat-card"><div class="fc-icon">📋</div><div class="fc-title">Lease Management</div><div class="fc-body">Drafting, renewal, and termination of lease agreements. Disputes, deposits, and lease enforcement handled professionally.</div></div>
+      <div class="feat-card"><div class="fc-icon">📸</div><div class="fc-title">Property Marketing</div><div class="fc-body">When your property is vacant, we market it across nextgentanzania.com, our WhatsApp networks, and social media to minimise vacancy periods.</div></div>
+    </div>
+    <div class="fees-wrap">
+      <table class="fees">
+        <thead><tr><th>Management Package</th><th>Fee</th><th>What's Included</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Basic</strong></td><td>8% of monthly rent</td><td>Rent collection, basic reporting, lease management</td></tr>
+          <tr><td><strong>Standard</strong></td><td>10% of monthly rent</td><td>+ Maintenance coordination, tenant screening</td></tr>
+          <tr><td><strong>Full Service</strong></td><td>12% of monthly rent</td><td>+ 24/7 support, marketing, annual property inspection</td></tr>
+          <tr><td><strong>Tenant Finding Only</strong></td><td>One month's rent</td><td>Tenant sourcing, screening, agreement drafting</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="cta-banner">
+      <h3>Put Your Property to Work</h3>
+      <p>Whether you are in Tanzania or overseas — we manage your property so you don't have to.</p>
+      <div class="cta-btns">
+        <a href="contact.html" class="btn-m">Get a Management Quote</a>
+        <a href="https://wa.me/255659166440?text=Hello%20NEXT-GEN!%20I%20need%20property%20management%20services." target="_blank" class="btn-wa">💬 WhatsApp</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ MORTGAGE ═══ -->
+  <div class="svc-section" id="mortgage">
+    <div class="sec-hdr">
+      <div class="sec-icon" style="background:rgba(201,168,76,.1)">🏦</div>
+      <div>
+        <h2>Mortgage Facilitation</h2>
+        <p>We connect buyers with Tanzania's best mortgage products and guide them through the entire application process.</p>
+      </div>
+    </div>
+    <div class="feat-grid">
+      <div class="feat-card"><div class="fc-icon">🏦</div><div class="fc-title">Bank Introductions</div><div class="fc-body">We have working relationships with CRDB, NMB, Standard Chartered, Equity Bank, NBC and NCBA. We introduce you to the right lender for your needs.</div></div>
+      <div class="feat-card"><div class="fc-icon">📋</div><div class="fc-title">Application Support</div><div class="fc-body">Full assistance with mortgage application documentation — payslips, bank statements, valuation reports, title searches and all required paperwork.</div></div>
+      <div class="feat-card"><div class="fc-icon">💱</div><div class="fc-title">TZS & USD Mortgages</div><div class="fc-body">TZS mortgages at 14–18% per annum. USD mortgages at 6–9% for qualifying buyers including non-residents. We help you choose the right currency.</div></div>
+      <div class="feat-card"><div class="fc-icon">🧮</div><div class="fc-title">Mortgage Calculator</div><div class="fc-body">Instant calculation of monthly repayments, total cost of financing, and affordability assessment for any property in our portfolio.</div></div>
+    </div>
+    <!-- MORTGAGE CALCULATOR -->
+    <div style="background:#fff;border:1px solid var(--gl);border-radius:16px;padding:28px;margin:20px 0">
+      <h3 style="font-size:17px;font-weight:700;color:var(--navy);margin-bottom:20px">🧮 Mortgage Calculator</h3>
+      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:16px;margin-bottom:20px">
+        <div>
+          <label style="font-size:10.5px;font-weight:700;color:var(--tm);text-transform:uppercase;letter-spacing:.5px;display:block;margin-bottom:6px">Property Price</label>
+          <input type="number" id="mc-price" value="300000000" style="width:100%;border:1.5px solid var(--gl);border-radius:8px;padding:10px 12px;font-size:13.5px;font-family:'Inter',sans-serif;outline:none" oninput="calcMortgage()">
+          <div style="font-size:11px;color:var(--tm);margin-top:4px">TZS</div>
+        </div>
+        <div>
+          <label style="font-size:10.5px;font-weight:700;color:var(--tm);text-transform:uppercase;letter-spacing:.5px;display:block;margin-bottom:6px">Down Payment (%)</label>
+          <input type="range" id="mc-dp" min="10" max="50" value="20" style="width:100%;margin-top:8px" oninput="calcMortgage();document.getElementById('mc-dp-lbl').textContent=this.value+'%'">
+          <div id="mc-dp-lbl" style="font-size:13px;font-weight:600;color:var(--navy);margin-top:4px">20%</div>
+        </div>
+        <div>
+          <label style="font-size:10.5px;font-weight:700;color:var(--tm);text-transform:uppercase;letter-spacing:.5px;display:block;margin-bottom:6px">Interest Rate (% p.a.)</label>
+          <input type="number" id="mc-rate" value="15" step="0.5" min="5" max="25" style="width:100%;border:1.5px solid var(--gl);border-radius:8px;padding:10px 12px;font-size:13.5px;font-family:'Inter',sans-serif;outline:none" oninput="calcMortgage()">
+        </div>
+        <div>
+          <label style="font-size:10.5px;font-weight:700;color:var(--tm);text-transform:uppercase;letter-spacing:.5px;display:block;margin-bottom:6px">Loan Term (Years)</label>
+          <select id="mc-term" style="width:100%;border:1.5px solid var(--gl);border-radius:8px;padding:10px 12px;font-size:13.5px;font-family:'Inter',sans-serif;outline:none" onchange="calcMortgage()">
+            <option value="5">5 years</option><option value="10">10 years</option>
+            <option value="15" selected>15 years</option><option value="20">20 years</option>
+            <option value="25">25 years</option>
+          </select>
+        </div>
+      </div>
+      <div style="background:var(--off);border-radius:12px;padding:20px;display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:16px">
+        <div style="text-align:center"><div style="font-size:11px;font-weight:700;color:var(--tm);text-transform:uppercase;letter-spacing:.5px;margin-bottom:5px">Monthly Payment</div><div id="mc-monthly" style="font-family:'Playfair Display',serif;font-size:26px;font-weight:700;color:var(--magenta)">—</div></div>
+        <div style="text-align:center"><div style="font-size:11px;font-weight:700;color:var(--tm);text-transform:uppercase;letter-spacing:.5px;margin-bottom:5px">Loan Amount</div><div id="mc-loan" style="font-family:'Playfair Display',serif;font-size:26px;font-weight:700;color:var(--navy)">—</div></div>
+        <div style="text-align:center"><div style="font-size:11px;font-weight:700;color:var(--tm);text-transform:uppercase;letter-spacing:.5px;margin-bottom:5px">Total Interest</div><div id="mc-interest" style="font-family:'Playfair Display',serif;font-size:26px;font-weight:700;color:var(--navy)">—</div></div>
+        <div style="text-align:center"><div style="font-size:11px;font-weight:700;color:var(--tm);text-transform:uppercase;letter-spacing:.5px;margin-bottom:5px">Total Cost</div><div id="mc-total" style="font-family:'Playfair Display',serif;font-size:26px;font-weight:700;color:var(--navy)">—</div></div>
+      </div>
+      <p style="font-size:11.5px;color:var(--tm);margin-top:12px;text-align:center">Indicative only. Actual rates subject to bank assessment. Contact us for personalised mortgage advice.</p>
+    </div>
+    <div class="cta-banner">
+      <h3>Get Mortgage Pre-Approval</h3>
+      <p>We connect you with the right bank and guide you through every step of the application.</p>
+      <div class="cta-btns">
+        <a href="contact.html" class="btn-m">Start Mortgage Application</a>
+        <a href="https://wa.me/255659166440?text=Hello%20NEXT-GEN!%20I%20need%20help%20with%20a%20property%20mortgage." target="_blank" class="btn-wa">💬 WhatsApp</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ AUCTIONS ═══ -->
+  <div class="svc-section" id="auctions-svc">
+    <div class="sec-hdr">
+      <div class="sec-icon" style="background:rgba(201,168,76,.1)">🔨</div>
+      <div>
+        <h2>Auctioneering Services</h2>
+        <p>Licensed auctioneers for bank, court, government and private property auctions across Tanzania.</p>
+      </div>
+    </div>
+    <div class="feat-grid">
+      <div class="feat-card"><div class="fc-icon">🏦</div><div class="fc-title">Bank Auctions</div><div class="fc-body">Authorised agents for CRDB, NMB, NCBA, NBC and Stanbic property auctions. We manage the full process — advertising, bidder registration, conduct, and completion.</div><a href="auctions.html" class="fc-link">View Current Auctions →</a></div>
+      <div class="feat-card"><div class="fc-icon">⚖️</div><div class="fc-title">Court-Ordered Auctions</div><div class="fc-body">Execution of court orders for property sale — debt recovery, estate administration, and legally-mandated disposal. Full court documentation compliance.</div></div>
+      <div class="feat-card"><div class="fc-icon">🏛️</div><div class="fc-title">Government Asset Auctions</div><div class="fc-body">Authorised to conduct government and parastatal asset disposal auctions including surplus property, equipment, and institutional assets.</div></div>
+      <div class="feat-card"><div class="fc-icon">🏢</div><div class="fc-title">Private Property Auctions</div><div class="fc-body">For sellers wanting competitive bidding rather than private sale. Generates urgency and potentially higher prices through transparent competitive process.</div></div>
+    </div>
+    <a href="auctions.html" style="display:inline-block;background:var(--gold);color:var(--navy-dark);padding:12px 28px;border-radius:9px;font-size:14px;font-weight:700;transition:background .2s" onmouseover="this.style.background='#E4C068'" onmouseout="this.style.background='var(--gold)'">View All Current Auctions →</a>
+  </div>
+
+  <!-- ═══ INVESTMENT ADVISORY ═══ -->
+  <div class="svc-section" id="investment">
+    <div class="sec-hdr">
+      <div class="sec-icon" style="background:rgba(34,197,94,.1)">📈</div>
+      <div>
+        <h2>Investment Advisory</h2>
+        <p>Market intelligence, portfolio building, and strategic investment advisory for local and international property investors.</p>
+      </div>
+    </div>
+    <div class="feat-grid">
+      <div class="feat-card"><div class="fc-icon">🌍</div><div class="fc-title">Market Intelligence Reports</div><div class="fc-body">Quarterly Tanzania property market reports — price trends, hotspot analysis, yield data, and investment outlook. Available to registered investors.</div><a href="invest-guide.html" class="fc-link">Read Investment Guide →</a></div>
+      <div class="feat-card"><div class="fc-icon">💼</div><div class="fc-title">Portfolio Strategy</div><div class="fc-body">Personalised investment strategy — asset mix, risk profile, target yields, and market timing based on your budget, goals, and investment horizon.</div></div>
+      <div class="feat-card"><div class="fc-icon">🏝️</div><div class="fc-title">Zanzibar Specialist</div><div class="fc-body">Deep expertise in Zanzibar's booming hospitality and beachfront market. We identify opportunities before they reach public listing.</div><a href="zanzibar.html" class="fc-link">Zanzibar Properties →</a></div>
+      <div class="feat-card"><div class="fc-icon">🌐</div><div class="fc-title">Foreign Investor Support</div><div class="fc-body">End-to-end support for international investors — TIC/ZanInvest registration, company formation, currency guidance, repatriation setup.</div><a href="foreign-buyers.html" class="fc-link">Foreign Buyers Guide →</a></div>
+    </div>
+  </div>
+
+</div><!-- end wrap -->
+
+<footer>
+  <div style="font-family:'Playfair Display',serif;font-size:17px;font-weight:700;color:#fff">NEXT-GEN</div>
+  <span style="font-size:8px;color:var(--magenta,#E91E8C);letter-spacing:2px;text-transform:uppercase;display:block;margin-top:2px">Auctioneer + Realtor</span>
+  <div style="display:flex;justify-content:center;gap:14px;flex-wrap:wrap;margin:14px 0">
+    <a href="index.html" style="font-size:12.5px;color:rgba(255,255,255,.45);transition:color .2s" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,.45)'">Home</a>
+    <a href="listings.html" style="font-size:12.5px;color:rgba(255,255,255,.45);transition:color .2s" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,.45)'">Properties</a>
+    <a href="services.html" style="font-size:12.5px;color:rgba(255,255,255,.45);transition:color .2s" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,.45)'">Services</a>
+    <a href="commercial.html" style="font-size:12.5px;color:rgba(255,255,255,.45);transition:color .2s" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,.45)'">Commercial</a>
+    <a href="auctions.html" style="font-size:12.5px;color:rgba(255,255,255,.45);transition:color .2s" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,.45)'">Auctions</a>
+    <a href="invest-guide.html" style="font-size:12.5px;color:rgba(255,255,255,.45);transition:color .2s" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,.45)'">Invest</a>
+    <a href="foreign-buyers.html" style="font-size:12.5px;color:rgba(255,255,255,.45);transition:color .2s" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,.45)'">Foreign Buyers</a>
+    <a href="blog.html" style="font-size:12.5px;color:rgba(255,255,255,.45);transition:color .2s" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,.45)'">Blog</a>
+    <a href="about.html" style="font-size:12.5px;color:rgba(255,255,255,.45);transition:color .2s" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,.45)'">About</a>
+    <a href="sell.html" style="font-size:12.5px;color:rgba(255,255,255,.45);transition:color .2s" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,.45)'">Sell</a>
+    <a href="contact.html" style="font-size:12.5px;color:rgba(255,255,255,.45);transition:color .2s" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,.45)'">Contact</a>
+  </div>
+  <p style="font-size:11.5px;color:rgba(255,255,255,.25);margin-top:4px">© 2026 NEXT-GEN Auctioneer + Realtor (Next-Gen Holdings Company Limited) · BRELA Registered · Licensed Auctioneer<br>
+  📧 nextgentanzania@gmail.com · 📞 +255 659 166 440 · Haidary Plaza, 3rd Floor, Ali Hassan Mwinyi Rd, Kisutu, Dar es Salaam</p>
+
+    <a href="faq.html" class="fl">Faq</a>
+  
+    <a href="partners.html" class="fl">Partners</a>
+  
+    <a href="testimonials.html" class="fl">Testimonials</a>
+  
+    <a href="market-report.html" class="fl">Market Report</a>
+  
+    <a href="privacy-policy.html" class="fl">Privacy Policy</a>
+  
+    <a href="terms.html" class="fl">Terms</a>
+  
+    <a href="sitemap.html" class="fl">Sitemap</a>
+  </footer>
+
+<a id="waf" href="https://wa.me/255659166440?text=Hello%20NEXT-GEN!%20I%20need%20help%20with%20your%20services." target="_blank">
+  <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413z m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</a>
+
+<script>
+function scrollSec(id){
+  document.querySelectorAll('.ctab').forEach(function(t){t.classList.remove('on');});
+  event.target.classList.add('on');
+  var el=document.getElementById(id);
+  if(el) el.scrollIntoView({behavior:'smooth'});
+}
+
+function fmt(n){
+  if(n>=1000000000) return 'TZS '+(n/1000000000).toFixed(1)+'B';
+  if(n>=1000000) return 'TZS '+(n/1000000).toFixed(0)+'M';
+  return 'TZS '+Math.round(n).toLocaleString();
+}
+
+function calcMortgage(){
+  var price=parseFloat(document.getElementById('mc-price').value)||0;
+  var dp=parseFloat(document.getElementById('mc-dp').value)||20;
+  var rate=parseFloat(document.getElementById('mc-rate').value)||15;
+  var term=parseInt(document.getElementById('mc-term').value)||15;
+  var loan=price*(1-dp/100);
+  var monthly_rate=rate/100/12;
+  var n=term*12;
+  var monthly=monthly_rate===0?loan/n:loan*(monthly_rate*Math.pow(1+monthly_rate,n))/(Math.pow(1+monthly_rate,n)-1);
+  var total=monthly*n;
+  var interest=total-loan;
+  document.getElementById('mc-monthly').textContent=fmt(monthly)+'/mo';
+  document.getElementById('mc-loan').textContent=fmt(loan);
+  document.getElementById('mc-interest').textContent=fmt(interest);
+  document.getElementById('mc-total').textContent=fmt(total);
+}
+calcMortgage();
+</script>
+</body>
+</html>

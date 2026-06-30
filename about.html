@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="description" content="About NEXT-GEN Auctioneer + Realtor — Tanzania's premier real estate and auctioneering company. Our team, mission, and values.">
+<title>About Us | NEXT-GEN Auctioneer + Realtor Tanzania</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--navy:#0D1240;--navy-dark:#080C2E;--magenta:#E91E8C;--gold:#C9A84C;--gold-light:#E4C068;--off:#F8F7FF;--gl:#E8E8F0;--td:#1A1A2E;--tm:#6B6B8A;--green:#22C55E}
+body{font-family:'Inter',sans-serif;background:#fff;color:var(--td)}
+a{text-decoration:none;color:inherit}
+/* NAV */
+nav{background:rgba(8,12,46,.97);backdrop-filter:blur(16px);position:sticky;top:0;z-index:200;border-bottom:1px solid rgba(233,30,140,.15)}
+.nav-in{display:flex;align-items:center;justify-content:space-between;height:64px;padding:0 5%;max-width:1400px;margin:0 auto}
+.nlogo .l1{font-family:'Playfair Display',serif;font-size:17px;font-weight:700;color:#fff}
+.nlogo .l2{font-size:8px;color:var(--magenta);letter-spacing:2px;text-transform:uppercase;display:block;margin-top:2px}
+.nlinks{display:flex;gap:2px}.nlinks a{color:rgba(255,255,255,.65);font-size:12.5px;font-weight:500;padding:7px 12px;border-radius:7px;transition:all .2s}
+.nlinks a:hover,.nlinks a.on{color:#fff;background:rgba(255,255,255,.08)}
+.nlinks a.on{background:rgba(233,30,140,.12);color:var(--magenta)}
+.nav-cta{display:inline-flex;align-items:center;gap:7px;background:var(--magenta);color:#fff;padding:9px 18px;border-radius:8px;font-size:12.5px;font-weight:600;transition:background .2s}
+.nav-cta:hover{background:#C0176F}
+@media(max-width:800px){.nlinks{display:none}}
+/* HERO */
+.hero{background:linear-gradient(135deg,#080C2E 0%,#1A0A60 60%,#0D1240 100%);padding:80px 5% 70px;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 80% 30%,rgba(233,30,140,.12),transparent 50%),radial-gradient(circle at 10% 70%,rgba(201,168,76,.08),transparent 40%)}
+.hero-in{max-width:1000px;margin:0 auto;position:relative;z-index:2;text-align:center}
+.hero-ey{display:inline-flex;align-items:center;gap:8px;background:rgba(233,30,140,.14);border:1px solid rgba(233,30,140,.3);border-radius:20px;padding:5px 16px;font-size:11px;font-weight:700;color:var(--magenta);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:20px}
+.hero h1{font-family:'Playfair Display',serif;font-size:clamp(32px,5vw,58px);font-weight:700;color:#fff;line-height:1.1;margin-bottom:18px}
+.hero h1 em{font-style:italic;color:var(--gold)}
+.hero p{font-size:17px;color:rgba(255,255,255,.65);max-width:640px;margin:0 auto 36px;line-height:1.75}
+.hero-stats{display:flex;justify-content:center;gap:48px;flex-wrap:wrap}
+.hs{text-align:center}
+.hs-num{font-family:'Playfair Display',serif;font-size:38px;font-weight:700;color:#fff}
+.hs-num span{color:var(--magenta);font-size:26px}
+.hs-lbl{font-size:11px;color:rgba(255,255,255,.45);text-transform:uppercase;letter-spacing:.8px;margin-top:4px}
+/* SECTIONS */
+section{padding:80px 5%}
+.sec-in{max-width:1200px;margin:0 auto}
+.ey{font-size:11px;font-weight:700;color:var(--magenta);letter-spacing:2.5px;text-transform:uppercase;margin-bottom:10px}
+.sec-title{font-family:'Playfair Display',serif;font-size:clamp(26px,3vw,40px);font-weight:700;color:var(--navy);line-height:1.15;margin-bottom:14px}
+.sec-body{font-size:15.5px;color:var(--tm);line-height:1.85;max-width:700px}
+/* MISSION */
+.mission-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
+@media(max-width:800px){.mission-grid{grid-template-columns:1fr}}
+.mission-img{border-radius:20px;overflow:hidden;position:relative;height:420px}
+.mission-img img{width:100%;height:100%;object-fit:cover}
+.mission-img::after{content:'';position:absolute;inset:0;background:linear-gradient(to top,rgba(8,12,46,.5),transparent 50%)}
+.mission-badge{position:absolute;bottom:24px;left:24px;background:rgba(255,255,255,.95);border-radius:12px;padding:14px 18px;backdrop-filter:blur(8px)}
+.mb-num{font-family:'Playfair Display',serif;font-size:28px;font-weight:700;color:var(--navy)}
+.mb-lbl{font-size:11px;color:var(--tm);margin-top:2px}
+.values-list{display:flex;flex-direction:column;gap:20px;margin-top:28px}
+.val-item{display:flex;gap:14px;align-items:flex-start}
+.val-icon{width:40px;height:40px;background:rgba(233,30,140,.08);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0}
+.val-title{font-size:14px;font-weight:700;color:var(--navy);margin-bottom:3px}
+.val-body{font-size:13px;color:var(--tm);line-height:1.6}
+/* TEAM */
+.team-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:24px;margin-top:44px}
+.team-card{background:#fff;border:1px solid var(--gl);border-radius:18px;overflow:hidden;transition:all .25s}
+.team-card:hover{transform:translateY(-4px);box-shadow:0 16px 48px rgba(13,18,64,.1)}
+.tc-img{height:240px;position:relative;overflow:hidden}
+.tc-img-bg{width:100%;height:100%;object-fit:cover}
+.tc-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(8,12,46,.85) 0%,transparent 50%)}
+.tc-socials{position:absolute;top:14px;right:14px;display:flex;gap:6px}
+.tc-soc{width:30px;height:30px;background:rgba(255,255,255,.15);border-radius:50%;display:flex;align-items:center;justify-content:center;backdrop-filter:blur(4px);font-size:13px;transition:background .2s}
+.tc-soc:hover{background:rgba(233,30,140,.7)}
+.tc-role{position:absolute;bottom:14px;left:14px;font-size:10px;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:1px;background:rgba(8,12,46,.6);padding:3px 9px;border-radius:10px;backdrop-filter:blur(4px)}
+.tc-body{padding:20px}
+.tc-name{font-family:'Playfair Display',serif;font-size:18px;font-weight:700;color:var(--navy);margin-bottom:4px}
+.tc-title{font-size:12.5px;color:var(--tm);margin-bottom:10px}
+.tc-bio{font-size:12.5px;color:var(--tm);line-height:1.65}
+.tc-langs{display:flex;gap:5px;flex-wrap:wrap;margin-top:10px}
+.tc-lang{background:var(--off);border-radius:4px;padding:2px 8px;font-size:10.5px;color:var(--navy);font-weight:600}
+/* STORY */
+.story-bg{background:var(--navy);padding:80px 5%}
+.story-in{max-width:800px;margin:0 auto;text-align:center}
+.story-in .ey{color:var(--gold)}
+.story-in .sec-title{color:#fff}
+.story-body{font-size:16px;color:rgba(255,255,255,.65);line-height:1.9;margin-bottom:36px}
+.timeline{display:flex;flex-direction:column;gap:0;text-align:left;max-width:600px;margin:0 auto}
+.tl-item{display:flex;gap:20px;padding-bottom:32px;position:relative}
+.tl-item::before{content:'';position:absolute;left:19px;top:40px;bottom:0;width:2px;background:rgba(255,255,255,.1)}
+.tl-item:last-child::before{display:none}
+.tl-dot{width:40px;height:40px;border-radius:50%;background:rgba(233,30,140,.2);border:2px solid rgba(233,30,140,.4);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:14px}
+.tl-year{font-size:11px;font-weight:700;color:var(--gold);letter-spacing:1px;margin-bottom:4px}
+.tl-text{font-size:13.5px;color:rgba(255,255,255,.65);line-height:1.65}
+.tl-text strong{color:#fff}
+/* CERTIFICATIONS */
+.certs-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:16px;margin-top:36px}
+.cert-card{background:#fff;border:1px solid var(--gl);border-radius:14px;padding:24px;text-align:center;transition:all .25s}
+.cert-card:hover{border-color:var(--magenta);box-shadow:0 8px 24px rgba(13,18,64,.08)}
+.cert-icon{font-size:36px;margin-bottom:12px}
+.cert-name{font-size:14px;font-weight:700;color:var(--navy);margin-bottom:4px}
+.cert-body{font-size:12px;color:var(--tm);line-height:1.6}
+/* COVERAGE */
+.cov-bg{background:var(--off)}
+.regions-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:10px;margin-top:28px}
+.reg-chip{background:#fff;border:1px solid var(--gl);border-radius:8px;padding:10px 14px;font-size:12.5px;font-weight:500;color:var(--navy);display:flex;align-items:center;gap:7px;transition:border-color .2s}
+.reg-chip:hover{border-color:var(--magenta)}
+.reg-chip::before{content:'📍';font-size:13px}
+/* CTA */
+.cta-sec{background:linear-gradient(135deg,var(--navy-dark),#1A0A54);padding:80px 5%;text-align:center}
+.cta-sec h2{font-family:'Playfair Display',serif;font-size:clamp(26px,4vw,44px);font-weight:700;color:#fff;margin-bottom:14px}
+.cta-sec h2 em{font-style:italic;color:var(--gold)}
+.cta-sec p{font-size:16px;color:rgba(255,255,255,.6);margin-bottom:32px}
+.cta-btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+.btn-gold{background:var(--gold);color:var(--navy-dark);padding:14px 32px;border-radius:9px;font-size:14px;font-weight:700;transition:background .2s;display:inline-block}
+.btn-gold:hover{background:var(--gold-light)}
+.btn-outline{border:2px solid rgba(255,255,255,.3);color:#fff;padding:14px 32px;border-radius:9px;font-size:14px;font-weight:600;transition:all .2s;display:inline-block}
+.btn-outline:hover{border-color:#fff;background:rgba(255,255,255,.07)}
+/* FOOTER */
+footer{background:#080C2E;padding:36px 5%;text-align:center}
+footer .fl1{font-family:'Playfair Display',serif;font-size:17px;font-weight:700;color:#fff}
+footer .fl2{font-size:8px;color:var(--magenta);letter-spacing:2px;text-transform:uppercase;display:block;margin-top:2px}
+footer .flinks{display:flex;justify-content:center;gap:18px;flex-wrap:wrap;margin-top:14px}
+footer .flinks a{font-size:12.5px;color:rgba(255,255,255,.4);transition:color .2s}
+footer .flinks a:hover{color:#fff}
+footer p{font-size:11.5px;color:rgba(255,255,255,.25);margin-top:14px}
+/* WA */
+#waf{position:fixed;bottom:24px;left:24px;z-index:999;width:50px;height:50px;background:#25D366;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 6px 20px rgba(37,211,102,.4);transition:transform .3s}
+#waf:hover{transform:scale(1.1)}
+#waf svg{width:25px;height:25px;fill:#fff}
+
+/* Mobile nav */
+.mob-menu{display:none;position:absolute;top:64px;left:0;right:0;background:rgba(8,12,46,.98);z-index:199;padding:8px 5%;border-bottom:1px solid rgba(233,30,140,.15);flex-direction:column;gap:2px}
+.mob-menu.open{display:flex}
+.mob-menu a{color:rgba(255,255,255,.8);font-size:13.5px;font-weight:500;padding:10px 8px;border-bottom:1px solid rgba(255,255,255,.06);text-decoration:none}
+.mob-menu a:last-child{border-bottom:none}
+.menu-tog{display:none;background:none;border:none;cursor:pointer;flex-direction:column;gap:5px;padding:6px;margin-left:8px}
+.menu-tog span{display:block;width:22px;height:2px;background:#fff;border-radius:2px;transition:all .3s}
+@media(max-width:800px){.nlinks{display:none!important}.menu-tog{display:flex}}
+</style>
+<script>
+// Auto page tracker — fires silently on load
+(function(){
+  try{
+    var page = window.location.pathname.replace(/^\//, '') || 'index.html';
+    var ref  = document.referrer ? document.referrer.replace(/https?:\/\/[^\/]+/,'') : '';
+    var lang = (navigator.language || 'en').slice(0,5);
+    fetch('https://nextgen-ai-api.kitentyaluth.workers.dev/api/track',{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({page:page, ref:ref, lang:lang}),
+      keepalive:true
+    }).catch(function(){});
+  }catch(e){}
+})();
+</script>
+</head>
+<body>
+<nav>
+  <div class="nav-in">
+    <a href="index.html" class="nlogo"><div class="l1">NEXT-GEN</div><div class="l2">Auctioneer + Realtor</div></a>
+    <div class="nlinks">
+      <a href="listings.html">Properties</a>
+      <a href="services.html">Services</a>
+      <a href="invest.html">Invest</a>
+      <a href="commercial.html">Commercial</a>
+      <a href="blog.html">Blog</a>
+      <a href="about.html" class="on">About</a>
+      <a href="contact.html">Contact</a>
+    </div>
+    <a href="contact.html" class="nav-cta">
+    <button class="menu-tog" onclick="document.getElementById('mobMenu').classList.toggle('open')" aria-label="Menu"><span></span><span></span><span></span></button>Enquire Now →</a>
+  </div>
+</nav>
+<div class="mob-menu" id="mobMenu">
+  <a href="index.html">🏠 Home</a>
+  <a href="listings.html">📋 Properties</a>
+  <a href="services.html">⚙️ Services</a>
+  <a href="auctions.html">🔨 Auctions</a>
+  <a href="leasing.html">🔑 Leasing</a>
+  <a href="commercial.html">🏢 Commercial</a>
+  <a href="invest.html">📈 Invest</a>
+  <a href="foreign-buyers.html">🌍 Foreign Buyers</a>
+  <a href="sell.html">💼 Sell</a>
+  <a href="blog.html">📰 Blog</a>
+  <a href="about.html">🏛️ About</a>
+  <a href="contact.html">📞 Contact</a>
+</div>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-in">
+    <div class="hero-ey">Est. 2022 · Dar es Salaam, Tanzania</div>
+    <h1 class="hero h1">Tanzania's Most Trusted<br><em>Property Partner</em></h1>
+    <p>NEXT-GEN Auctioneer + Realtor is Tanzania's premier real estate and auctioneering platform — connecting buyers, sellers, investors and tenants across all 31 regions with professionalism, technology, and trust.</p>
+    <div class="hero-stats">
+      <div class="hs"><div class="hs-num">500<span>+</span></div><div class="hs-lbl">Properties Managed</div></div>
+      <div class="hs"><div class="hs-num">TZS 50<span>B+</span></div><div class="hs-lbl">Assets Transacted</div></div>
+      <div class="hs"><div class="hs-num">12<span>+</span></div><div class="hs-lbl">Partner Banks</div></div>
+      <div class="hs"><div class="hs-num">31</div><div class="hs-lbl">Regions Covered</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- MISSION & VALUES -->
+<section>
+  <div class="sec-in">
+    <div class="mission-grid">
+      <div class="mission-img">
+        <img src="9.jfif" alt="NEXT-GEN Office" onerror="this.style.background='linear-gradient(135deg,#0D1240,#1A2060)'">
+        <div class="mission-overlay"></div>
+        <div class="mission-badge">
+          <div class="mb-num">98%</div>
+          <div class="mb-lbl">Client Satisfaction</div>
+        </div>
+      </div>
+      <div>
+        <div class="ey">Our Mission</div>
+        <h2 class="sec-title">Making Tanzania's Property Market Accessible to the World</h2>
+        <p class="sec-body">We believe every transaction should be transparent, every client empowered, and every property opportunity accessible — whether you're a first-time buyer in Dar es Salaam or a global investor seeking Zanzibar's finest beachfront assets.</p>
+        <div class="values-list">
+          <div class="val-item"><div class="val-icon">🏆</div><div><div class="val-title">Excellence in Service</div><div class="val-body">Every client receives the same level of care, professionalism and expertise — from starter plots to landmark commercial assets.</div></div></div>
+          <div class="val-item"><div class="val-icon">🔍</div><div><div class="val-title">Radical Transparency</div><div class="val-body">Full disclosure on every listing — title deed status, ownership history, survey records, and market valuation.</div></div></div>
+          <div class="val-item"><div class="val-icon">🌍</div><div><div class="val-title">Global Reach, Local Expertise</div><div class="val-body">Deep knowledge of Tanzania's 31 regions combined with a growing international network of buyers from Europe, Asia, and the Middle East.</div></div></div>
+          <div class="val-item"><div class="val-icon">🤖</div><div><div class="val-title">Technology-Driven</div><div class="val-body">Pioneering AI property advisory in East Africa — matching buyers to properties, 24 hours a day, in 5 languages.</div></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TEAM -->
+<section style="background:var(--off);padding:80px 5%">
+  <div class="sec-in">
+    <div style="text-align:center;margin-bottom:8px"><div class="ey">The People Behind NEXT-GEN</div></div>
+    <h2 class="sec-title" style="text-align:center;margin:0 auto 8px">Our Leadership <em>Team</em></h2>
+    <p style="font-size:15px;color:var(--tm);text-align:center;max-width:560px;margin:0 auto">Experienced professionals combining deep local market knowledge with international business expertise.</p>
+    <div class="team-grid">
+      <div class="team-card">
+        <div class="tc-img" style="background:linear-gradient(135deg,#0D1240,#1A2060)">
+          <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:64px">👤</div>
+          <div class="tc-overlay"></div>
+          <div class="tc-role">Managing Director</div>
+        </div>
+        <div class="tc-body">
+          <div class="tc-name">Luth Msuya</div>
+          <div class="tc-title">Managing Director & Founder</div>
+          <div class="tc-bio">Entrepreneur and property specialist with expertise spanning real estate, auctioneering, agribusiness, technology, and investment facilitation across Tanzania and East Africa.</div>
+          <div class="tc-langs"><span class="tc-lang">EN</span><span class="tc-lang">SW</span></div>
+        </div>
+      </div>
+      <div class="team-card">
+        <div class="tc-img" style="background:linear-gradient(135deg,#0D1240,#7B2FF7)">
+          <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:64px">👤</div>
+          <div class="tc-overlay"></div>
+          <div class="tc-role">Property Sales</div>
+        </div>
+        <div class="tc-body">
+          <div class="tc-name">Property Team</div>
+          <div class="tc-title">Sales & Acquisitions</div>
+          <div class="tc-bio">Specialists in residential and commercial property transactions across Dar es Salaam, Zanzibar, and Tanzania's major investment corridors.</div>
+          <div class="tc-langs"><span class="tc-lang">EN</span><span class="tc-lang">SW</span><span class="tc-lang">AR</span></div>
+        </div>
+      </div>
+      <div class="team-card">
+        <div class="tc-img" style="background:linear-gradient(135deg,#0891B2,#0D1240)">
+          <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:64px">👤</div>
+          <div class="tc-overlay"></div>
+          <div class="tc-role">Legal & Compliance</div>
+        </div>
+        <div class="tc-body">
+          <div class="tc-name">Legal Team</div>
+          <div class="tc-title">Legal, Title & Documentation</div>
+          <div class="tc-bio">Handling all TRA, BRELA, Ministry of Lands documentation, court auctioneering, debt collection, and property transfer formalities.</div>
+          <div class="tc-langs"><span class="tc-lang">EN</span><span class="tc-lang">SW</span></div>
+        </div>
+      </div>
+      <div class="team-card">
+        <div class="tc-img" style="background:linear-gradient(135deg,#C9A84C,#0D1240)">
+          <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:64px">🤖</div>
+          <div class="tc-overlay"></div>
+          <div class="tc-role">AI Technology</div>
+        </div>
+        <div class="tc-body">
+          <div class="tc-name">NextGen AI</div>
+          <div class="tc-title">AI Property Advisor · 24/7</div>
+          <div class="tc-bio">Powered by Claude AI — our intelligent property advisor speaks 5 languages, knows every listing, and is available around the clock to assist buyers, sellers and investors globally.</div>
+          <div class="tc-langs"><span class="tc-lang">EN</span><span class="tc-lang">SW</span><span class="tc-lang">AR</span><span class="tc-lang">ZH</span><span class="tc-lang">FR</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- OUR STORY TIMELINE -->
+<div class="story-bg">
+  <div class="story-in">
+    <div class="ey">Our Journey</div>
+    <h2 class="sec-title" style="color:#fff">From Startup to <em>Tanzania's Premier Platform</em></h2>
+    <p class="story-body">What began as a bold vision to modernise Tanzania's property market has grown into the country's most technology-forward real estate and auctioneering company.</p>
+    <div class="timeline">
+      <div class="tl-item"><div class="tl-dot">🌱</div><div><div class="tl-year">2022</div><div class="tl-text"><strong>Founded</strong> — Kilimo Dili launched as a sole proprietorship in Dar es Salaam, initially focusing on agricultural land and rural property transactions.</div></div></div>
+      <div class="tl-item"><div class="tl-dot">🏢</div><div><div class="tl-year">2023</div><div class="tl-text"><strong>Expansion</strong> — Moved into urban real estate, bank auction facilitation, and debt collection services. First partnerships with CRDB and NMB Bank established.</div></div></div>
+      <div class="tl-item"><div class="tl-dot">🚀</div><div><div class="tl-year">2024</div><div class="tl-text"><strong>Technology Launch</strong> — Launched nextgentanzania.com, Tanzania's first AI-powered property platform. Expanded to Zanzibar and all 31 regions.</div></div></div>
+      <div class="tl-item"><div class="tl-dot">🏛️</div><div><div class="tl-year">2025</div><div class="tl-text"><strong>Incorporation</strong> — Formally incorporated as <strong>NEXT-GEN HOLDINGS COMPANY LIMITED</strong> under BRELA. Licensed auctioneer status confirmed.</div></div></div>
+      <div class="tl-item"><div class="tl-dot">🌍</div><div><div class="tl-year">2026</div><div class="tl-text"><strong>Going Global</strong> — International investor network expanded to Europe, Middle East, and Asia. NextGen AI launched in 5 languages. 500+ properties transacted.</div></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- CERTIFICATIONS & LICENSES -->
+<section>
+  <div class="sec-in">
+    <div class="ey">Regulatory Compliance</div>
+    <h2 class="sec-title">Licensed, Registered & <em>Regulated</em></h2>
+    <p class="sec-body">NEXT-GEN operates with full legal compliance under Tanzania's regulatory framework — giving clients complete confidence in every transaction.</p>
+    <div class="certs-grid">
+      <div class="cert-card"><div class="cert-icon">🏛️</div><div class="cert-name">BRELA Registered</div><div class="cert-body">Registered company under the Business Registrations and Licensing Agency of Tanzania.</div></div>
+      <div class="cert-card"><div class="cert-icon">⚖️</div><div class="cert-name">Licensed Auctioneer</div><div class="cert-body">Fully licensed to conduct auctioneering services including court, bank, government and estate auctions.</div></div>
+      <div class="cert-card"><div class="cert-icon">🏦</div><div class="cert-name">Bank Partner</div><div class="cert-body">Authorised agent for CRDB, NMB, NCBA, NBC, Stanbic, Equity Bank and DTB property auctions.</div></div>
+      <div class="cert-card"><div class="cert-icon">📋</div><div class="cert-name">TRA Compliant</div><div class="cert-body">Full compliance with Tanzania Revenue Authority — all transactions handled with proper documentation.</div></div>
+      <div class="cert-card"><div class="cert-icon">🌐</div><div class="cert-name">Ministry of Lands</div><div class="cert-body">Authorised to process title deeds, rights of occupancy, survey reports and land transfer documents.</div></div>
+      <div class="cert-card"><div class="cert-icon">⚡</div><div class="cert-name">AI-Powered Platform</div><div class="cert-body">Tanzania's first real estate platform powered by Claude AI — delivering 24/7 multilingual property advisory.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- REGIONAL COVERAGE -->
+<section class="cov-bg">
+  <div class="sec-in">
+    <div class="ey">National Coverage</div>
+    <h2 class="sec-title">Operating Across All <em>31 Regions</em> of Tanzania</h2>
+    <p class="sec-body">From the beaches of Zanzibar to the highlands of Iringa — we have experience and active listings in every region of Tanzania, plus growing presence in DRC and Zambia corridors.</p>
+    <div class="regions-grid">
+      <div class="reg-chip">Dar es Salaam</div><div class="reg-chip">Zanzibar — Unguja</div><div class="reg-chip">Zanzibar — Pemba</div>
+      <div class="reg-chip">Arusha</div><div class="reg-chip">Kilimanjaro</div><div class="reg-chip">Tanga</div>
+      <div class="reg-chip">Morogoro</div><div class="reg-chip">Pwani (Coast)</div><div class="reg-chip">Lindi</div>
+      <div class="reg-chip">Mtwara</div><div class="reg-chip">Ruvuma</div><div class="reg-chip">Iringa</div>
+      <div class="reg-chip">Mbeya</div><div class="reg-chip">Njombe</div><div class="reg-chip">Songwe</div>
+      <div class="reg-chip">Dodoma</div><div class="reg-chip">Singida</div><div class="reg-chip">Tabora</div>
+      <div class="reg-chip">Rukwa</div><div class="reg-chip">Katavi</div><div class="reg-chip">Kigoma</div>
+      <div class="reg-chip">Kagera</div><div class="reg-chip">Mwanza</div><div class="reg-chip">Mara</div>
+      <div class="reg-chip">Shinyanga</div><div class="reg-chip">Simiyu</div><div class="reg-chip">Geita</div>
+      <div class="reg-chip">Bagamoyo</div><div class="reg-chip">Mikumi</div><div class="reg-chip">Nungwi</div>
+      <div class="reg-chip" style="border-color:var(--gold);color:var(--gold)">+ DRC / Zambia Corridors</div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<div class="cta-sec">
+  <div style="max-width:660px;margin:0 auto">
+    <h2>Ready to Work with <em>Tanzania's Best?</em></h2>
+    <p>Whether you're buying your first property, managing a multi-million dollar portfolio, or seeking the perfect Zanzibar investment — our team is here.</p>
+    <div class="cta-btns">
+      <a href="listings.html" class="btn-gold">Browse Properties</a>
+      <a href="contact.html" class="btn-outline">Contact Our Team</a>
+      <a href="invest.html" class="btn-outline">Investment Guide</a>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div style="font-family:'Playfair Display',serif;font-size:17px;font-weight:700;color:#fff">NEXT-GEN</div>
+  <span style="font-size:8px;color:var(--magenta,#E91E8C);letter-spacing:2px;text-transform:uppercase;display:block;margin-top:2px">Auctioneer + Realtor</span>
+  <div style="display:flex;justify-content:center;gap:14px;flex-wrap:wrap;margin:14px 0">
+    <a href="index.html" style="font-size:12.5px;color:rgba(255,255,255,.45);transition:color .2s" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,.45)'">Home</a>
+    <a href="listings.html" style="font-size:12.5px;color:rgba(255,255,255,.45);transition:color .2s" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,.45)'">Properties</a>
+    <a href="services.html" style="font-size:12.5px;color:rgba(255,255,255,.45);transition:color .2s" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,.45)'">Services</a>
+    <a href="commercial.html" style="font-size:12.5px;color:rgba(255,255,255,.45);transition:color .2s" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,.45)'">Commercial</a>
+    <a href="auctions.html" style="font-size:12.5px;color:rgba(255,255,255,.45);transition:color .2s" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,.45)'">Auctions</a>
+    <a href="invest-guide.html" style="font-size:12.5px;color:rgba(255,255,255,.45);transition:color .2s" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,.45)'">Invest</a>
+    <a href="foreign-buyers.html" style="font-size:12.5px;color:rgba(255,255,255,.45);transition:color .2s" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,.45)'">Foreign Buyers</a>
+    <a href="blog.html" style="font-size:12.5px;color:rgba(255,255,255,.45);transition:color .2s" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,.45)'">Blog</a>
+    <a href="about.html" style="font-size:12.5px;color:rgba(255,255,255,.45);transition:color .2s" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,.45)'">About</a>
+    <a href="sell.html" style="font-size:12.5px;color:rgba(255,255,255,.45);transition:color .2s" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,.45)'">Sell</a>
+    <a href="contact.html" style="font-size:12.5px;color:rgba(255,255,255,.45);transition:color .2s" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,.45)'">Contact</a>
+  </div>
+  <p style="font-size:11.5px;color:rgba(255,255,255,.25);margin-top:4px">© 2026 NEXT-GEN Auctioneer + Realtor (Next-Gen Holdings Company Limited) · BRELA Registered · Licensed Auctioneer<br>
+  📧 nextgentanzania@gmail.com · 📞 +255 659 166 440 · Haidary Plaza, 3rd Floor, Ali Hassan Mwinyi Rd, Kisutu, Dar es Salaam</p>
+
+    <a href="faq.html" class="fl">Faq</a>
+  
+    <a href="partners.html" class="fl">Partners</a>
+  
+    <a href="testimonials.html" class="fl">Testimonials</a>
+  
+    <a href="market-report.html" class="fl">Market Report</a>
+  
+    <a href="privacy-policy.html" class="fl">Privacy Policy</a>
+  
+    <a href="terms.html" class="fl">Terms</a>
+  
+    <a href="sitemap.html" class="fl">Sitemap</a>
+  </footer>
+
+<a id="waf" href="https://wa.me/255659166440?text=Hello%20NEXT-GEN!%20I%20visited%20your%20About%20page%20and%20would%20like%20to%20connect." target="_blank">
+  <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413z m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</a>
+</body>
+</html>

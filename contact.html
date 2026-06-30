@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="description" content="Contact NEXT-GEN Auctioneer + Realtor — Tanzania's premier real estate platform. Email, WhatsApp, call or visit us in Dar es Salaam.">
+<title>Contact Us | NEXT-GEN Auctioneer + Realtor Tanzania</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--navy:#0D1240;--navy-dark:#080C2E;--magenta:#E91E8C;--gold:#C9A84C;--off:#F8F7FF;--gl:#E8E8F0;--td:#1A1A2E;--tm:#6B6B8A;--green:#22C55E}
+body{font-family:'Inter',sans-serif;background:var(--off);color:var(--td);overflow-x:hidden}
+a{text-decoration:none;color:inherit}
+nav{background:rgba(8,12,46,.97);backdrop-filter:blur(16px);position:sticky;top:0;z-index:200;border-bottom:1px solid rgba(233,30,140,.15)}
+.nav-inner{display:flex;align-items:center;justify-content:space-between;height:64px;padding:0 5%;max-width:1400px;margin:0 auto}
+.nlogo .l1{font-family:'Playfair Display',serif;font-size:17px;font-weight:700;color:#fff}
+.nlogo .l2{font-size:8px;color:var(--magenta);letter-spacing:2px;text-transform:uppercase;display:block;margin-top:2px}
+.nlinks{display:flex;gap:2px}
+.nlinks a{color:rgba(255,255,255,.65);font-size:12.5px;font-weight:500;padding:7px 12px;border-radius:7px;transition:all .2s}
+.nlinks a:hover,.nlinks a.on{color:#fff;background:rgba(255,255,255,.08)}
+.nlinks a.on{background:rgba(233,30,140,.15);color:var(--magenta)}
+.pg-hdr{background:linear-gradient(135deg,#080C2E,#1A0A60);padding:44px 5%;text-align:center}
+.pg-hdr h1{font-family:'Playfair Display',serif;font-size:clamp(26px,4vw,44px);font-weight:700;color:#fff;margin-bottom:10px}
+.pg-hdr h1 em{font-style:italic;color:var(--gold)}
+.pg-hdr p{font-size:15px;color:rgba(255,255,255,.62);max-width:520px;margin:0 auto;line-height:1.65}
+.main{max-width:1100px;margin:0 auto;padding:44px 5% 80px;display:grid;grid-template-columns:1fr 1fr;gap:32px;align-items:start}
+@media(max-width:760px){.main{grid-template-columns:1fr}.nlinks{display:none}}
+/* CONTACT METHODS */
+.c-method{background:#fff;border-radius:16px;border:1px solid var(--gl);overflow:hidden;margin-bottom:14px;transition:box-shadow .25s}
+.c-method:hover{box-shadow:0 8px 28px rgba(13,18,64,.1)}
+.cm-hdr{padding:18px 20px;display:flex;align-items:center;gap:14px}
+.cm-icon{width:48px;height:48px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0}
+.cm-title{font-size:14.5px;font-weight:700;color:var(--navy)}
+.cm-sub{font-size:12px;color:var(--tm);margin-top:2px}
+.cm-val{padding:0 20px 18px;font-size:15px;font-weight:600;color:var(--navy)}
+.cm-val a{color:var(--navy);transition:color .2s}
+.cm-val a:hover{color:var(--magenta)}
+.cm-btn{display:inline-flex;align-items:center;gap:6px;margin-top:8px;padding:9px 18px;border-radius:8px;font-size:13px;font-weight:600;transition:all .2s;text-decoration:none}
+.cm-btn.wa{background:#25D366;color:#fff}
+.cm-btn.wa:hover{background:#1DAA5D}
+.cm-btn.email{background:var(--navy);color:#fff}
+.cm-btn.email:hover{background:var(--magenta)}
+.cm-btn.tel{background:var(--magenta);color:#fff}
+.cm-btn.tel:hover{background:#C0176F}
+/* MAP */
+.map-card{background:#fff;border-radius:16px;border:1px solid var(--gl);overflow:hidden;margin-bottom:14px}
+.map-card iframe{width:100%;height:280px;border:none;display:block}
+.map-info{padding:16px 18px}
+.map-info h4{font-size:14px;font-weight:700;color:var(--navy);margin-bottom:8px}
+.map-info p{font-size:13px;color:var(--tm);line-height:1.65}
+/* ENQUIRY FORM */
+.form-card{background:#fff;border-radius:16px;border:1px solid var(--gl);padding:28px}
+.form-card h2{font-family:'Playfair Display',serif;font-size:22px;color:var(--navy);margin-bottom:6px}
+.form-card .sub{font-size:13px;color:var(--tm);margin-bottom:22px}
+.fg{margin-bottom:14px}
+.fg label{display:block;font-size:10px;font-weight:700;color:var(--tm);text-transform:uppercase;letter-spacing:.8px;margin-bottom:5px}
+.fg input,.fg select,.fg textarea{width:100%;border:1.5px solid var(--gl);border-radius:8px;padding:10px 12px;font-size:13.5px;font-family:'Inter',sans-serif;color:var(--td);outline:none;transition:border-color .2s;resize:vertical}
+.fg input:focus,.fg select:focus,.fg textarea:focus{border-color:var(--magenta)}
+.fg2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.sub-btn{width:100%;background:var(--navy);color:#fff;border:none;padding:13px;border-radius:9px;font-size:14px;font-weight:700;cursor:pointer;font-family:'Inter',sans-serif;transition:background .2s;margin-top:6px}
+.sub-btn:hover{background:var(--magenta)}
+.success-msg{text-align:center;padding:28px;display:none}
+.success-msg.show{display:block}
+footer{background:var(--navy-dark);padding:32px 5%;text-align:center}
+footer .fl1{font-family:'Playfair Display',serif;font-size:17px;font-weight:700;color:#fff}
+footer .fl2{font-size:8px;color:var(--magenta);letter-spacing:2px;text-transform:uppercase;display:block;margin-top:2px}
+footer p{font-size:12px;color:rgba(255,255,255,.35);margin-top:12px}
+#waf{position:fixed;bottom:24px;left:24px;z-index:999;width:50px;height:50px;background:#25D366;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 6px 20px rgba(37,211,102,.4)}
+#waf svg{width:25px;height:25px;fill:#fff}
+
+/* Mobile nav */
+.mob-menu{display:none;position:absolute;top:64px;left:0;right:0;background:rgba(8,12,46,.98);z-index:199;padding:8px 5%;border-bottom:1px solid rgba(233,30,140,.15);flex-direction:column;gap:2px}
+.mob-menu.open{display:flex}
+.mob-menu a{color:rgba(255,255,255,.8);font-size:13.5px;font-weight:500;padding:10px 8px;border-bottom:1px solid rgba(255,255,255,.06);text-decoration:none}
+.mob-menu a:last-child{border-bottom:none}
+.menu-tog{display:none;background:none;border:none;cursor:pointer;flex-direction:column;gap:5px;padding:6px;margin-left:8px}
+.menu-tog span{display:block;width:22px;height:2px;background:#fff;border-radius:2px;transition:all .3s}
+@media(max-width:800px){.nlinks{display:none!important}.menu-tog{display:flex}}
+</style>
+<script>
+// Auto page tracker — fires silently on load
+(function(){
+  try{
+    var page = window.location.pathname.replace(/^\//, '') || 'index.html';
+    var ref  = document.referrer ? document.referrer.replace(/https?:\/\/[^\/]+/,'') : '';
+    var lang = (navigator.language || 'en').slice(0,5);
+    fetch('https://nextgen-ai-api.kitentyaluth.workers.dev/api/track',{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({page:page, ref:ref, lang:lang}),
+      keepalive:true
+    }).catch(function(){});
+  }catch(e){}
+})();
+</script>
+</head>
+<body>
+<nav>
+  <div class="nav-in">
+    <a href="index.html" class="nlogo"><div class="l1">NEXT-GEN</div><div class="l2">Auctioneer + Realtor</div></a>
+    <div class="nlinks">
+      <a href="listings.html">Properties</a>
+      <a href="services.html">Services</a>
+      <a href="invest.html">Invest</a>
+      <a href="commercial.html">Commercial</a>
+      <a href="blog.html">Blog</a>
+      <a href="about.html">About</a>
+      <a href="contact.html" class="on">Contact</a>
+    </div>
+    <a href="contact.html" class="on" class="nav-cta">
+    <button class="menu-tog" onclick="document.getElementById('mobMenu').classList.toggle('open')" aria-label="Menu"><span></span><span></span><span></span></button>Enquire Now →</a>
+  </div>
+</nav>
+<div class="mob-menu" id="mobMenu">
+  <a href="index.html">🏠 Home</a>
+  <a href="listings.html">📋 Properties</a>
+  <a href="services.html">⚙️ Services</a>
+  <a href="auctions.html">🔨 Auctions</a>
+  <a href="leasing.html">🔑 Leasing</a>
+  <a href="commercial.html">🏢 Commercial</a>
+  <a href="invest.html">📈 Invest</a>
+  <a href="foreign-buyers.html">🌍 Foreign Buyers</a>
+  <a href="sell.html">💼 Sell</a>
+  <a href="blog.html">📰 Blog</a>
+  <a href="about.html">🏛️ About</a>
+  <a href="contact.html">📞 Contact</a>
+</div>
+
+<div class="pg-hdr">
+  <h1>Contact <em>Us</em></h1>
+  <p>Our team is available Monday to Saturday, 8am – 6pm EAT. We respond to all enquiries within 24 hours.</p>
+</div>
+
+<div class="main">
+  <!-- LEFT: CONTACT METHODS -->
+  <div>
+    <div class="c-method">
+      <div class="cm-hdr">
+        <div class="cm-icon" style="background:#E7F9EF">💬</div>
+        <div><div class="cm-title">WhatsApp</div><div class="cm-sub">Fastest response — reply within minutes</div></div>
+      </div>
+      <div class="cm-val">
+        +255 659 166 440
+        <br><a href="https://wa.me/255659166440?text=Hello%20NEXT-GEN!%20I%20need%20assistance%20with%20a%20property." target="_blank" class="cm-btn wa">💬 Open WhatsApp Chat</a>
+      </div>
+    </div>
+
+    <div class="c-method">
+      <div class="cm-hdr">
+        <div class="cm-icon" style="background:#EFF6FF">✉️</div>
+        <div><div class="cm-title">Email</div><div class="cm-sub">Full details and property packs within 24hrs</div></div>
+      </div>
+      <div class="cm-val">
+        <a href="mailto:nextgentanzania@gmail.com">nextgentanzania@gmail.com</a>
+        <br><a href="mailto:nextgentanzania@gmail.com?subject=Property%20Enquiry%20—%20NEXT-GEN" class="cm-btn email">✉️ Send Email</a>
+      </div>
+    </div>
+
+    <div class="c-method">
+      <div class="cm-hdr">
+        <div class="cm-icon" style="background:#FDF2F8">📞</div>
+        <div><div class="cm-title">Phone Call</div><div class="cm-sub">Mon–Sat, 8am–6pm EAT</div></div>
+      </div>
+      <div class="cm-val">
+        +255 659 166 440
+        <br><a href="tel:+255659166440" class="cm-btn tel">📞 Call Now</a>
+      </div>
+    </div>
+
+    <div class="map-card">
+      <iframe src="https://www.openstreetmap.org/export/embed.html?bbox=39.2850%2C-6.8200%2C39.2950%2C-6.8100&layer=mapnik&marker=-6.8162%2C39.2890" allowfullscreen loading="lazy"></iframe>
+      <div class="map-info">
+        <h4>📍 Head Office — Dar es Salaam</h4>
+        <p>Haidary Plaza, 3rd Floor<br> Ali Hassan Mwinyi Road, Kisutu<br> P.O. Box 77139, Dar es Salaam, Tanzania</p>
+      </div>
+    </div>
+
+    <div style="background:linear-gradient(135deg,var(--navy),var(--navy-dark));border-radius:14px;padding:20px 22px;color:rgba(255,255,255,.65);font-size:13px;line-height:1.8">
+      <div style="font-size:11px;font-weight:700;color:rgba(255,255,255,.4);text-transform:uppercase;letter-spacing:1px;margin-bottom:10px">Also Find Us On</div>
+      <div>📱 <strong style="color:#fff">WhatsApp Business:</strong> +255 659 166 440</div>
+      <div>🌐 <strong style="color:#fff">Website:</strong> nextgentanzania.com</div>
+      <div>📧 <strong style="color:#fff">Email:</strong> nextgentanzania@gmail.com</div>
+    </div>
+  </div>
+
+  <!-- RIGHT: ENQUIRY FORM -->
+  <div class="form-card">
+    <h2>Send Us a Message</h2>
+    <div class="sub">Fill in the form below — our team will respond within 24 hours with full information.</div>
+    <div id="cForm">
+      <div class="fg2">
+        <div class="fg"><label>Full Name *</label><input type="text" id="c-name" placeholder="Your full name"></div>
+        <div class="fg"><label>Phone / WhatsApp *</label><input type="tel" id="c-phone" placeholder="+255..."></div>
+      </div>
+      <div class="fg"><label>Email Address</label><input type="email" id="c-email" placeholder="your@email.com"></div>
+      <div class="fg"><label>Subject</label>
+        <select id="c-subject">
+          <option>Property Enquiry</option>
+          <option>Investment Opportunity</option>
+          <option>Lease / Rental Request</option>
+          <option>Auction Registration</option>
+          <option>Property Valuation</option>
+          <option>Sell / List My Property</option>
+          <option>General Question</option>
+        </select>
+      </div>
+      <div class="fg"><label>Your Message *</label><textarea id="c-msg" rows="5" placeholder="Tell us how we can help you — be as specific as possible about the property type, location, budget, and timeline..."></textarea></div>
+      <button class="sub-btn" onclick="submitContact()">Send Message →</button>
+    </div>
+    <div class="success-msg" id="cSuccess">
+      <div style="font-size:44px;margin-bottom:12px">✅</div>
+      <h3 style="font-family:'Playfair Display',serif;font-size:20px;color:var(--navy);margin-bottom:8px">Message Sent!</h3>
+      <p style="font-size:13.5px;color:var(--tm)">Our team will respond within 24 hours.<br><br>
+      📧 <strong>nextgentanzania@gmail.com</strong><br>
+      📞 <strong>+255 659 166 440</strong></p>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div style="font-family:'Playfair Display',serif;font-size:17px;font-weight:700;color:#fff">NEXT-GEN</div>
+  <span style="font-size:8px;color:var(--magenta,#E91E8C);letter-spacing:2px;text-transform:uppercase;display:block;margin-top:2px">Auctioneer + Realtor</span>
+  <div style="display:flex;justify-content:center;gap:14px;flex-wrap:wrap;margin:14px 0">
+    <a href="index.html" style="font-size:12.5px;color:rgba(255,255,255,.45);transition:color .2s" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,.45)'">Home</a>
+    <a href="listings.html" style="font-size:12.5px;color:rgba(255,255,255,.45);transition:color .2s" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,.45)'">Properties</a>
+    <a href="services.html" style="font-size:12.5px;color:rgba(255,255,255,.45);transition:color .2s" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,.45)'">Services</a>
+    <a href="commercial.html" style="font-size:12.5px;color:rgba(255,255,255,.45);transition:color .2s" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,.45)'">Commercial</a>
+    <a href="auctions.html" style="font-size:12.5px;color:rgba(255,255,255,.45);transition:color .2s" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,.45)'">Auctions</a>
+    <a href="invest-guide.html" style="font-size:12.5px;color:rgba(255,255,255,.45);transition:color .2s" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,.45)'">Invest</a>
+    <a href="foreign-buyers.html" style="font-size:12.5px;color:rgba(255,255,255,.45);transition:color .2s" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,.45)'">Foreign Buyers</a>
+    <a href="blog.html" style="font-size:12.5px;color:rgba(255,255,255,.45);transition:color .2s" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,.45)'">Blog</a>
+    <a href="about.html" style="font-size:12.5px;color:rgba(255,255,255,.45);transition:color .2s" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,.45)'">About</a>
+    <a href="sell.html" style="font-size:12.5px;color:rgba(255,255,255,.45);transition:color .2s" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,.45)'">Sell</a>
+    <a href="contact.html" style="font-size:12.5px;color:rgba(255,255,255,.45);transition:color .2s" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,.45)'">Contact</a>
+  </div>
+  <p style="font-size:11.5px;color:rgba(255,255,255,.25);margin-top:4px">© 2026 NEXT-GEN Auctioneer + Realtor (Next-Gen Holdings Company Limited) · BRELA Registered · Licensed Auctioneer<br>
+  📧 nextgentanzania@gmail.com · 📞 +255 659 166 440 · Haidary Plaza, 3rd Floor, Ali Hassan Mwinyi Rd, Kisutu, Dar es Salaam</p>
+
+    <a href="faq.html" class="fl">Faq</a>
+  
+    <a href="partners.html" class="fl">Partners</a>
+  
+    <a href="testimonials.html" class="fl">Testimonials</a>
+  
+    <a href="market-report.html" class="fl">Market Report</a>
+  
+    <a href="privacy-policy.html" class="fl">Privacy Policy</a>
+  
+    <a href="terms.html" class="fl">Terms</a>
+  
+    <a href="sitemap.html" class="fl">Sitemap</a>
+  </footer>
+
+<a id="waf" href="https://wa.me/255659166440" target="_blank">
+  <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413z m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</a>
+
+<script>
+const API='https://nextgen-ai-api.kitentyaluth.workers.dev';
+function gv(id){var el=document.getElementById(id);return el?el.value.trim():'';}
+async function submitContact(){
+  var name=gv('c-name'),phone=gv('c-phone'),msg=gv('c-msg');
+  if(!name||!phone){alert('Please fill in your name and phone number.');return;}
+  if(!msg){alert('Please write a message.');return;}
+  try{
+    await fetch(API+'/api/leads',{method:'POST',headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({name:name,phone:phone,email:gv('c-email'),
+        subject:gv('c-subject'),notes:msg,type:'buyer',source:'Contact Page',status:'new',lang:'en'})});
+  }catch(e){}
+  document.getElementById('cForm').style.display='none';
+  var s=document.getElementById('cSuccess');s.classList.add('show');
+  s.scrollIntoView({behavior:'smooth'});
+}
+</script>
+</body>
+</html>
