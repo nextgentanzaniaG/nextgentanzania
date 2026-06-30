@@ -4,6 +4,20 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
 <meta name="description" content="Book a free consultation with NEXT-GEN Auctioneer + Realtor — discuss buying, selling, investing or leasing property in Tanzania with our expert team.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://nextgentanzania.com/consultation.html">
+<meta property="og:title" content="Book a Free Consultation | NEXT-GEN Auctioneer + Realtor Tanzania">
+<meta property="og:description" content="Book a free consultation with NEXT-GEN Auctioneer + Realtor — discuss buying, selling, investing or leasing property in Tanzania with our expert team.">
+<meta property="og:image" content="https://nextgentanzania.com/og-image.jpg">
+<meta property="og:site_name" content="NEXT-GEN Auctioneer + Realtor Tanzania">
+<meta property="og:locale" content="en_TZ">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Book a Free Consultation | NEXT-GEN Auctioneer + Realtor Tanzania">
+<meta name="twitter:description" content="Book a free consultation with NEXT-GEN Auctioneer + Realtor — discuss buying, selling, investing or leasing property in Tanzania with our expert team.">
+<meta name="twitter:image" content="https://nextgentanzania.com/og-image.jpg">
+<link rel="canonical" href="https://nextgentanzania.com/consultation.html">
+<link rel="alternate" hreflang="en" href="https://nextgentanzania.com/consultation.html">
+<link rel="alternate" hreflang="x-default" href="https://nextgentanzania.com/consultation.html">
 <title>Book a Free Consultation | NEXT-GEN Auctioneer + Realtor Tanzania</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
@@ -130,7 +144,7 @@ footer{background:var(--navy-dark,#080C2E);padding:48px 5% 34px;text-align:cente
 
     <div class="fg2">
       <div class="fg"><label>Full Name *</label><input type="text" id="cs-name" placeholder="Your full name"></div>
-      <div class="fg"><label>Phone / WhatsApp *</label><input type="tel" id="cs-phone" placeholder="+255..."></div>
+      <div class="fg"><label>Phone / WhatsApp *</label><input type="tel" id="cs-phone" placeholder="e.g. +255 or +44, +971, +86..."></div>
     </div>
     <div class="fg"><label>Email</label><input type="email" id="cs-email" placeholder="your@email.com"></div>
 
@@ -199,6 +213,9 @@ footer{background:var(--navy-dark,#080C2E);padding:48px 5% 34px;text-align:cente
     <a href="about.html" class="fl">About</a>
     <a href="sell.html" class="fl">Sell</a>
     <a href="contact.html" class="fl">Contact</a>
+    <a href="faq.html" class="fl">FAQ</a>
+    <a href="privacy-policy.html" class="fl">Privacy Policy</a>
+    <a href="terms.html" class="fl">Terms</a>
   </div>
   <p style="font-size:11.5px;color:rgba(255,255,255,.25);margin-top:14px">© 2026 NEXT-GEN Auctioneer + Realtor (Next-Gen Holdings Company Limited) · BRELA Registered · Licensed Auctioneer<br>
   📧 nextgentanzania@gmail.com · 📞 +255 659 166 440 · Haidary Plaza, 3rd Floor, Ali Hassan Mwinyi Rd, Kisutu, Dar es Salaam</p>
@@ -349,7 +366,7 @@ async function submitConsultation(){
     var m=document.getElementById('novaMsgs2');
     var d=document.createElement('div');
     d.className='nmsg bot';
-    var html=(text||'').replace(/\\n/g,'<br>').replace(/\\[([^\\]]+)\\]\\(([^)]+)\\)/g,'<a href="$2" target="_blank">$1</a>');
+    var html=(text||'').replace(/\n/g,'<br>').replace(/\[([^\]]+)\]\(([^)]+)\)/g,'<a href="$2" target="_blank">$1</a>');
     d.innerHTML='<div class="nmsg-av">🏠</div><div class="nbubble">'+html+'</div>';
     m.appendChild(d); m.scrollTop=m.scrollHeight;
   }
@@ -386,25 +403,39 @@ async function submitConsultation(){
     novaLoading2=true;
     document.getElementById('novaSend2').disabled=true;
     addNovaTyping2();
+    var userLang=(navigator.language||'en').toLowerCase();
+    var detectedLang='en';
+    if(userLang.indexOf('sw')===0)detectedLang='sw';
+    else if(userLang.indexOf('zh')===0)detectedLang='zh';
+    else if(userLang.indexOf('ar')===0)detectedLang='ar';
+    else if(userLang.indexOf('fr')===0)detectedLang='fr';
+    var controller=(typeof AbortController!=='undefined')?new AbortController():null;
+    var timeoutId=controller?setTimeout(function(){controller.abort();},30000):null;
     fetch(CF_API2,{
       method:'POST',
       headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({message:text,history:novaHistory2.slice(-12),lang:'en'})
+      body:JSON.stringify({message:text,history:novaHistory2.slice(-12),lang:detectedLang}),
+      signal:controller?controller.signal:undefined
     }).then(function(resp){
+      if(timeoutId)clearTimeout(timeoutId);
       if(!resp.ok) throw new Error('API error: '+resp.status);
       return resp.json();
     }).then(function(data){
       var raw='';
       if(data.answer){ raw=data.answer; }
       else if(data.content){ raw=(data.content||[]).map(function(b){return b.text||'';}).join('').trim(); }
-      var clean=raw.replace(/RECOMMENDATIONS:\\{"ids":\\[[^\\]]*\\]\\}/,'').trim();
+      var clean=raw.replace(/RECOMMENDATIONS:\{"ids":\[[^\]]*\]\}/,'').trim();
       novaHistory2.push({role:'assistant',content:raw||clean});
       removeNovaTyping2();
-      addNovaBotMsg2(clean,[]);
+      addNovaBotMsg2(clean||"Sorry, I couldn't generate a response. Please try again or contact us directly.\n📧 nextgentanzania@gmail.com\n📞 +255 659 166 440",[]);
     }).catch(function(e){
+      if(timeoutId)clearTimeout(timeoutId);
       console.error('NextGen AI error:',e);
       removeNovaTyping2();
-      addNovaBotMsg2("Sorry, NextGen AI couldn't connect right now.\\n📧 nextgentanzania@gmail.com\\n📞 +255 659 166 440",[]);
+      var msg=(e&&e.name==='AbortError')
+        ? "The connection is taking longer than usual. Please check your internet connection and try again.\n📧 nextgentanzania@gmail.com\n📞 +255 659 166 440\n💬 wa.me/255659166440"
+        : "Sorry, NextGen AI couldn't connect right now. Please try again in a moment.\n📧 nextgentanzania@gmail.com\n📞 +255 659 166 440\n💬 wa.me/255659166440";
+      addNovaBotMsg2(msg,[]);
     }).finally(function(){
       novaLoading2=false;
       document.getElementById('novaSend2').disabled=false;

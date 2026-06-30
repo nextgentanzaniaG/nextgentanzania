@@ -2,8 +2,23 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<meta name="theme-color" content="#080C2E">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
-<meta name="description" content="NEXT-GEN full real estate services — property sales, leasing, auctions, escrow, valuation, legal, property management, mortgage facilitation, investment advisory. Tanzania's one-stop property center.">
+<meta name="description" content="Full property services in Tanzania — escrow accounts, valuations, legal conveyancing, property management and mortgage facilitation.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://nextgentanzania.com/services.html">
+<meta property="og:title" content="Our Services | NEXT-GEN Auctioneer + Realtor Tanzania">
+<meta property="og:description" content="NEXT-GEN full real estate services — property sales, leasing, auctions, escrow, valuation, legal, property management, mortgage facilitation, investment advisory. Tanzania's one-stop property center.">
+<meta property="og:image" content="https://nextgentanzania.com/og-image.jpg">
+<meta property="og:site_name" content="NEXT-GEN Auctioneer + Realtor Tanzania">
+<meta property="og:locale" content="en_TZ">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Our Services | NEXT-GEN Auctioneer + Realtor Tanzania">
+<meta name="twitter:description" content="NEXT-GEN full real estate services — property sales, leasing, auctions, escrow, valuation, legal, property management, mortgage facilitation, investment advisory. Tanzania's one-stop property center.">
+<meta name="twitter:image" content="https://nextgentanzania.com/og-image.jpg">
+<link rel="canonical" href="https://nextgentanzania.com/services.html">
+<link rel="alternate" hreflang="en" href="https://nextgentanzania.com/services.html">
+<link rel="alternate" hreflang="x-default" href="https://nextgentanzania.com/services.html">
 <title>Our Services | NEXT-GEN Auctioneer + Realtor Tanzania</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
@@ -12,14 +27,15 @@
 body{font-family:'Inter',sans-serif;background:var(--off);color:var(--td)}
 a{text-decoration:none;color:inherit}
 nav{background:rgba(8,12,46,.97);backdrop-filter:blur(16px);position:sticky;top:0;z-index:200;border-bottom:1px solid rgba(233,30,140,.15)}
-.nav-in{display:flex;align-items:center;justify-content:space-between;height:64px;padding:0 5%;max-width:1400px;margin:0 auto}
+.nav-in{display:flex;align-items:center;justify-content:space-between;height:64px;padding:0 5%;max-width:1400px;margin:0 auto;position:relative}
 .nlogo .l1{font-family:'Playfair Display',serif;font-size:17px;font-weight:700;color:#fff}
 .nlogo .l2{font-size:8px;color:var(--magenta);letter-spacing:2px;text-transform:uppercase;display:block;margin-top:2px}
-.nlinks{display:flex;gap:2px}
-.nlinks a{color:rgba(255,255,255,.65);font-size:12.5px;font-weight:500;padding:7px 12px;border-radius:7px;transition:all .2s}
+.nlinks{display:flex;gap:2px;position:absolute;left:50%;transform:translateX(-50%)}
+.nlinks a{color:rgba(255,255,255,.65);font-size:12.5px;font-weight:500;padding:7px 12px;border-radius:7px;transition:all .2s;white-space:nowrap}
 .nlinks a:hover,.nlinks a.on{color:#fff;background:rgba(255,255,255,.08)}
 .nlinks a.on{background:rgba(233,30,140,.12);color:var(--magenta)}
-.nav-cta{background:var(--magenta);color:#fff;padding:9px 18px;border-radius:8px;font-size:12.5px;font-weight:600;display:inline-block;transition:background .2s}
+.nav-right{display:flex;align-items:center;gap:10px;position:relative;z-index:2}
+.nav-cta{background:var(--magenta);color:#fff;padding:9px 18px;border-radius:8px;font-size:12.5px;font-weight:600;display:inline-block;transition:background .2s;white-space:nowrap;text-decoration:none}
 .nav-cta:hover{background:#C0176F}
 @media(max-width:800px){.nlinks{display:none}}
 /* HERO */
@@ -92,7 +108,9 @@ table.fees tr:nth-child(even) td{background:var(--off)}
 .ws-num{font-family:'Playfair Display',serif;font-size:30px;font-weight:700;color:var(--gold)}
 .ws-lbl{font-size:11px;color:rgba(255,255,255,.5);text-transform:uppercase;letter-spacing:.5px;margin-top:4px}
 /* FOOTER */
-footer{background:#080C2E;padding:32px 5%;text-align:center}
+footer{background:var(--navy-dark,#080C2E);padding:48px 5% 34px;text-align:center}
+.fl{font-size:12.5px;color:rgba(255,255,255,.45);transition:color .2s;text-decoration:none;display:inline-block;margin:3px 0}
+.fl:hover{color:#fff}
 footer .fl1{font-family:'Playfair Display',serif;font-size:17px;font-weight:700;color:#fff}
 footer .fl2{font-size:8px;color:var(--magenta);letter-spacing:2px;text-transform:uppercase;display:block;margin-top:2px}
 footer p{font-size:11.5px;color:rgba(255,255,255,.25);margin-top:12px}
@@ -107,7 +125,7 @@ footer p{font-size:11.5px;color:rgba(255,255,255,.25);margin-top:12px}
 .mob-menu a:last-child{border-bottom:none}
 .menu-tog{display:none;background:none;border:none;cursor:pointer;flex-direction:column;gap:5px;padding:6px;margin-left:8px}
 .menu-tog span{display:block;width:22px;height:2px;background:#fff;border-radius:2px;transition:all .3s}
-@media(max-width:800px){.nlinks{display:none!important}.menu-tog{display:flex}}
+@media(max-width:980px){.nlinks{display:none!important}.menu-tog{display:flex}}
 </style>
 <script>
 // Auto page tracker — fires silently on load
@@ -139,8 +157,7 @@ footer p{font-size:11.5px;color:rgba(255,255,255,.25);margin-top:12px}
       <a href="about.html">About</a>
       <a href="contact.html">Contact</a>
     </div>
-    <a href="contact.html" class="nav-cta">
-    <button class="menu-tog" onclick="document.getElementById('mobMenu').classList.toggle('open')" aria-label="Menu"><span></span><span></span><span></span></button>Enquire Now →</a>
+    <div class="nav-right"><a href="contact.html" class="nav-cta">Enquire Now →</a><button class="menu-tog" onclick="document.getElementById('mobMenu').classList.toggle('open')" aria-label="Menu"><span></span><span></span><span></span></button></div>
   </div>
 </nav>
 <div class="mob-menu" id="mobMenu">
@@ -470,22 +487,17 @@ footer p{font-size:11.5px;color:rgba(255,255,255,.25);margin-top:12px}
     <a href="sell.html" style="font-size:12.5px;color:rgba(255,255,255,.45);transition:color .2s" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,.45)'">Sell</a>
     <a href="contact.html" style="font-size:12.5px;color:rgba(255,255,255,.45);transition:color .2s" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,.45)'">Contact</a>
   </div>
-  <p style="font-size:11.5px;color:rgba(255,255,255,.25);margin-top:4px">© 2026 NEXT-GEN Auctioneer + Realtor (Next-Gen Holdings Company Limited) · BRELA Registered · Licensed Auctioneer<br>
-  📧 nextgentanzania@gmail.com · 📞 +255 659 166 440 · Haidary Plaza, 3rd Floor, Ali Hassan Mwinyi Rd, Kisutu, Dar es Salaam</p>
-
+    <div class="footer-links-row">
     <a href="faq.html" class="fl">Faq</a>
-  
     <a href="partners.html" class="fl">Partners</a>
-  
     <a href="testimonials.html" class="fl">Testimonials</a>
-  
     <a href="market-report.html" class="fl">Market Report</a>
-  
     <a href="privacy-policy.html" class="fl">Privacy Policy</a>
-  
     <a href="terms.html" class="fl">Terms</a>
-  
     <a href="sitemap.html" class="fl">Sitemap</a>
+  </div>
+  <p style="font-size:11.5px;color:rgba(255,255,255,.25);margin-top:14px">© 2026 NEXT-GEN Auctioneer + Realtor (Next-Gen Holdings Company Limited) · BRELA Registered · Licensed Auctioneer<br>
+  📧 nextgentanzania@gmail.com · 📞 +255 659 166 440 · Haidary Plaza, 3rd Floor, Ali Hassan Mwinyi Rd, Kisutu, Dar es Salaam</p>
   </footer>
 
 <a id="waf" href="https://wa.me/255659166440?text=Hello%20NEXT-GEN!%20I%20need%20help%20with%20your%20services." target="_blank">
@@ -524,5 +536,192 @@ function calcMortgage(){
 }
 calcMortgage();
 </script>
+<!-- ═══ NEXTGEN AI WIDGET (site-wide compact version) ═══ -->
+<style>
+#nova-fab{position:fixed;bottom:28px;right:28px;z-index:9999;display:flex;flex-direction:column;align-items:flex-end;gap:10px}
+#nova-bubble{background:#080C2E;color:#fff;border:1px solid rgba(255,255,255,.12);padding:9px 15px;border-radius:13px 13px 3px 13px;font-size:12.5px;font-weight:500;white-space:nowrap;box-shadow:0 6px 24px rgba(0,0,0,.3);cursor:pointer;display:none;font-family:'Inter',sans-serif}
+#nova-bubble strong{color:#E91E8C}
+#nova-btn{width:58px;height:58px;background:linear-gradient(135deg,#E91E8C,#7B2FF7);border:none;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 8px 32px rgba(233,30,140,.45);transition:all .3s;position:relative;font-size:24px}
+#nova-btn:hover{transform:scale(1.1);box-shadow:0 12px 40px rgba(233,30,140,.6)}
+#nova-btn .notif{position:absolute;top:-2px;right:-2px;width:16px;height:16px;background:#22C55E;border-radius:50%;border:2.5px solid #080C2E;animation:novaPulse 2s infinite}
+@keyframes novaPulse{0%,100%{opacity:1}50%{opacity:.5}}
+#nova-panel{position:fixed;bottom:98px;right:28px;width:380px;height:570px;background:#fff;border-radius:22px;box-shadow:0 28px 90px rgba(13,18,64,.22);border:1px solid #E8E8F0;z-index:9998;display:none;flex-direction:column;overflow:hidden;font-family:'Inter',sans-serif}
+#nova-panel.open{display:flex}
+.nova-hdr{background:linear-gradient(135deg,#0D1240,#080C2E);padding:16px 18px;display:flex;align-items:center;gap:10px;flex-shrink:0}
+.nova-av{width:36px;height:36px;background:linear-gradient(135deg,#E91E8C,#7B2FF7);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;position:relative}
+.nova-av .on{position:absolute;bottom:-1px;right:-1px;width:10px;height:10px;background:#22C55E;border-radius:50%;border:2px solid #0D1240}
+.nova-hdr-info{flex:1;min-width:0}
+.nova-hdr-info .hn{font-size:13.5px;font-weight:700;color:#fff}
+.nova-hdr-info .hs{font-size:10.5px;color:rgba(255,255,255,.55)}
+.nova-hdr-right{display:flex;align-items:center;gap:6px}
+.nova-close{background:rgba(255,255,255,.1);border:none;color:#fff;width:26px;height:26px;border-radius:50%;cursor:pointer;font-size:14px;display:flex;align-items:center;justify-content:center}
+.nova-msgs{flex:1;overflow-y:auto;padding:16px;display:flex;flex-direction:column;gap:12px;background:#F8F7FF}
+.nmsg{display:flex;gap:8px;align-items:flex-end;max-width:90%}
+.nmsg.user{flex-direction:row-reverse;align-self:flex-end}
+.nmsg.bot{align-self:flex-start}
+.nmsg-av{width:26px;height:26px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:12px}
+.nmsg.bot .nmsg-av{background:linear-gradient(135deg,#E91E8C,#7B2FF7)}
+.nmsg.user .nmsg-av{background:linear-gradient(135deg,#0D1240,#1A2060);color:#fff;font-size:9px;font-weight:700}
+.nbubble{padding:9px 12px;border-radius:13px;font-size:12.5px;line-height:1.65;max-width:100%;word-wrap:break-word}
+.nmsg.bot .nbubble{background:#fff;color:#1A1A2E;border-bottom-left-radius:3px;border:1px solid #E8E8F0}
+.nmsg.user .nbubble{background:#0D1240;color:#fff;border-bottom-right-radius:3px}
+.nbubble a{color:#E91E8C;font-weight:600}
+.nova-typing{display:flex;gap:4px;padding:10px 14px}
+.nova-typing span{width:6px;height:6px;background:#C0C0D8;border-radius:50%;animation:novaBounce 1.2s infinite}
+.nova-typing span:nth-child(2){animation-delay:.2s}
+.nova-typing span:nth-child(3){animation-delay:.4s}
+@keyframes novaBounce{0%,60%,100%{transform:translateY(0)}30%{transform:translateY(-6px)}}
+.nova-input-row{padding:12px 14px;border-top:1px solid #E8E8F0;display:flex;gap:8px;align-items:flex-end;flex-shrink:0;background:#fff}
+#novaTxt2{flex:1;border:1.5px solid #E8E8F0;border-radius:12px;padding:10px 13px;font-size:13px;font-family:'Inter',sans-serif;outline:none;resize:none;max-height:80px;line-height:1.4}
+#novaTxt2:focus{border-color:#E91E8C}
+#novaSend2{width:38px;height:38px;background:#E91E8C;border:none;border-radius:50%;color:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:15px;transition:background .2s}
+#novaSend2:hover{background:#C0176F}
+#novaSend2:disabled{opacity:.5;cursor:default}
+@media(max-width:480px){#nova-panel{width:calc(100vw - 32px);right:16px;bottom:90px}#nova-fab{bottom:16px;right:16px}}
+</style>
+
+<div id="nova-fab">
+  <div id="nova-bubble" onclick="toggleNova2()">🏡 <strong>NextGen AI</strong> — How can I help you?</div>
+  <button id="nova-btn" onclick="toggleNova2()">🤖<div class="notif"></div></button>
+</div>
+<div id="nova-panel">
+  <div class="nova-hdr">
+    <div class="nova-av">🏠<div class="on"></div></div>
+    <div class="nova-hdr-info"><div class="hn">NextGen AI</div><div class="hs">Online now · 5 languages</div></div>
+    <div class="nova-hdr-right">
+      <button class="nova-close" onclick="toggleNova2()">✕</button>
+    </div>
+  </div>
+  <div class="nova-msgs" id="novaMsgs2"></div>
+  <div class="nova-input-row">
+    <textarea id="novaTxt2" rows="1" placeholder="Ask about any property..." onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();novaSend2();}" oninput="novaResize2(this)"></textarea>
+    <button id="novaSend2" onclick="novaSend2()">➤</button>
+  </div>
+</div>
+
+<script>
+(function(){
+  var CF_API2='https://nextgen-ai-api.kitentyaluth.workers.dev/api/ai';
+  var novaHistory2=[], novaLoading2=false, novaWelcomed2=false, novaPanelOpen2=false;
+  window._novaAutoMsg = window._novaAutoMsg || null;
+
+  window.toggleNova2 = function(){
+    var p=document.getElementById('nova-panel');
+    novaPanelOpen2=!novaPanelOpen2;
+    p.classList.toggle('open',novaPanelOpen2);
+    document.getElementById('nova-bubble').style.display='none';
+    if(novaPanelOpen2 && !novaWelcomed2){ novaWelcome2(); novaWelcomed2=true; }
+    if(novaPanelOpen2){ setTimeout(function(){document.getElementById('novaTxt2').focus();},300); }
+  };
+
+  window.openNova2 = function(msg){
+    if(!novaPanelOpen2) toggleNova2();
+    if(msg) setTimeout(function(){ novaSendMsg2(msg); },500);
+  };
+  // Global alias so links written as openNova(...) on every page work identically
+  if(typeof window.openNova !== 'function'){ window.openNova = window.openNova2; }
+
+  function novaWelcome2(){
+    addNovaBotMsg2("👋 Hi! I'm NextGen AI — your Tanzania property advisor. Ask me about buying, renting, leasing, investing, or bank auctions anywhere in Tanzania & Zanzibar.",[]);
+  }
+
+  function addNovaUserMsg2(text){
+    var m=document.getElementById('novaMsgs2');
+    var d=document.createElement('div');
+    d.className='nmsg user';
+    d.innerHTML='<div class="nmsg-av">YOU</div><div class="nbubble"></div>';
+    d.querySelector('.nbubble').textContent=text;
+    m.appendChild(d); m.scrollTop=m.scrollHeight;
+  }
+
+  function addNovaBotMsg2(text, ids){
+    var m=document.getElementById('novaMsgs2');
+    var d=document.createElement('div');
+    d.className='nmsg bot';
+    var html=(text||'').replace(/\n/g,'<br>').replace(/\[([^\]]+)\]\(([^)]+)\)/g,'<a href="$2" target="_blank">$1</a>');
+    d.innerHTML='<div class="nmsg-av">🏠</div><div class="nbubble">'+html+'</div>';
+    m.appendChild(d); m.scrollTop=m.scrollHeight;
+  }
+
+  function addNovaTyping2(){
+    var m=document.getElementById('novaMsgs2');
+    var d=document.createElement('div');
+    d.className='nmsg bot'; d.id='novaTypingRow2';
+    d.innerHTML='<div class="nmsg-av">🏠</div><div class="nbubble nova-typing"><span></span><span></span><span></span></div>';
+    m.appendChild(d); m.scrollTop=m.scrollHeight;
+  }
+  function removeNovaTyping2(){
+    var t=document.getElementById('novaTypingRow2');
+    if(t) t.remove();
+  }
+
+  window.novaResize2 = function(el){
+    el.style.height='auto';
+    el.style.height=Math.min(el.scrollHeight,80)+'px';
+  };
+
+  window.novaSend2 = function(){
+    var t=document.getElementById('novaTxt2').value.trim();
+    if(!t||novaLoading2) return;
+    document.getElementById('novaTxt2').value='';
+    novaResize2(document.getElementById('novaTxt2'));
+    novaSendMsg2(t);
+  };
+
+  function novaSendMsg2(text){
+    if(novaLoading2) return;
+    addNovaUserMsg2(text);
+    novaHistory2.push({role:'user',content:text});
+    novaLoading2=true;
+    document.getElementById('novaSend2').disabled=true;
+    addNovaTyping2();
+    var userLang=(navigator.language||'en').toLowerCase();
+    var detectedLang='en';
+    if(userLang.indexOf('sw')===0)detectedLang='sw';
+    else if(userLang.indexOf('zh')===0)detectedLang='zh';
+    else if(userLang.indexOf('ar')===0)detectedLang='ar';
+    else if(userLang.indexOf('fr')===0)detectedLang='fr';
+    var controller=(typeof AbortController!=='undefined')?new AbortController():null;
+    var timeoutId=controller?setTimeout(function(){controller.abort();},30000):null;
+    fetch(CF_API2,{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({message:text,history:novaHistory2.slice(-12),lang:detectedLang}),
+      signal:controller?controller.signal:undefined
+    }).then(function(resp){
+      if(timeoutId)clearTimeout(timeoutId);
+      if(!resp.ok) throw new Error('API error: '+resp.status);
+      return resp.json();
+    }).then(function(data){
+      var raw='';
+      if(data.answer){ raw=data.answer; }
+      else if(data.content){ raw=(data.content||[]).map(function(b){return b.text||'';}).join('').trim(); }
+      var clean=raw.replace(/RECOMMENDATIONS:\{"ids":\[[^\]]*\]\}/,'').trim();
+      novaHistory2.push({role:'assistant',content:raw||clean});
+      removeNovaTyping2();
+      addNovaBotMsg2(clean||"Sorry, I couldn't generate a response. Please try again or contact us directly.\n📧 nextgentanzania@gmail.com\n📞 +255 659 166 440",[]);
+    }).catch(function(e){
+      if(timeoutId)clearTimeout(timeoutId);
+      console.error('NextGen AI error:',e);
+      removeNovaTyping2();
+      var msg=(e&&e.name==='AbortError')
+        ? "The connection is taking longer than usual. Please check your internet connection and try again.\n📧 nextgentanzania@gmail.com\n📞 +255 659 166 440\n💬 wa.me/255659166440"
+        : "Sorry, NextGen AI couldn't connect right now. Please try again in a moment.\n📧 nextgentanzania@gmail.com\n📞 +255 659 166 440\n💬 wa.me/255659166440";
+      addNovaBotMsg2(msg,[]);
+    }).finally(function(){
+      novaLoading2=false;
+      document.getElementById('novaSend2').disabled=false;
+    });
+  }
+  window.novaSendMsg2 = novaSendMsg2;
+
+  // Show the greeting bubble after a short delay, once per page load
+  setTimeout(function(){
+    if(!novaPanelOpen2){ document.getElementById('nova-bubble').style.display='block'; }
+  }, 4000);
+})();
+</script>
+<!-- ═══ END NEXTGEN AI WIDGET ═══ -->
+
 </body>
 </html>
