@@ -280,7 +280,9 @@ section{padding:92px 5%}
 .cta-inner p{font-size:16px;color:rgba(255,255,255,.6);margin-bottom:36px;line-height:1.7}
 .cta-btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
 /* FOOTER */
-footer{background:var(--navy-dark);padding:68px 5% 34px}
+footer{background:var(--navy-dark,#080C2E);padding:48px 5% 34px;text-align:center}
+.fl{font-size:12.5px;color:rgba(255,255,255,.45);transition:color .2s;text-decoration:none;display:inline-block;margin:3px 0}
+.fl:hover{color:#fff}
 .footer-inner{max-width:1400px;margin:0 auto}
 .footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1.2fr;gap:44px;margin-bottom:52px}
 .footer-logo-row{display:flex;align-items:center;gap:10px;margin-bottom:14px}
@@ -593,7 +595,7 @@ footer{background:var(--navy-dark);padding:68px 5% 34px}
     </div>
   </div>
 </div>
-<div class="strip"><p data-t="inv_strip" data-html="1">Have <strong>special requirements?</strong> Land clearing, bulk investment, demolition, or corporate leasing?</p><button class="strip-btn" onclick="openModal('special')" data-t="inv_btn">Submit Special Request</button></div>
+<div class="strip"><p data-t="inv_strip" data-html="1">Have <strong>special requirements?</strong> Land clearing, bulk investment, demolition, or corporate leasing?</p><a href="special-request.html" class="strip-btn" data-t="inv_btn" style="text-decoration:none;display:inline-block">Submit Special Request</a></div>
 
 <!-- FEATURED LISTINGS with Real Photos -->
 <section id="listings" style="background:#fff">
@@ -698,7 +700,7 @@ footer{background:var(--navy-dark);padding:68px 5% 34px}
 <!-- AUCTIONS with Real Photos -->
 <section class="auc-bg" id="auctions">
   <div class="section-inner">
-    <div class="sec-hdr split"><div><div class="eyebrow" data-t="auc_ey">Live Auctions</div><h2 class="sec-title" data-t="auc_title">Bank Repossessed Properties</h2><p class="sec-sub" data-t="auc_sub">Verified properties from partner banks. Register to bid and download official tender documents.</p></div><button class="btn-primary" onclick="openModal('auction-browse')">Register to Bid</button></div>
+    <div class="sec-hdr split"><a href="auctions.html" style="text-decoration:none;color:inherit;cursor:pointer" title="View all bank auctions"><div class="eyebrow" data-t="auc_ey">Live Auctions</div><h2 class="sec-title" data-t="auc_title">Bank Repossessed Properties</h2><p class="sec-sub" data-t="auc_sub">Verified properties from partner banks. Register to bid and download official tender documents.</p></a><button class="btn-primary" onclick="window.location.href='auctions.html'">View All Auctions →</button></div>
     <div class="auc-card"><div class="auc-img"><img src="18.jfif" alt="Factory" loading="lazy"></div><div class="auc-body"><div><span class="auc-bank">CRDB Bank</span><h4>Edible Oil Factory — Dodoma Industrial Zone</h4><div class="auc-sub">5.2 Acres · Fully Equipped · Ready to Operate</div></div><div><div class="timer-lbl" data-t="closes_in">Closes in</div><div class="timer-row"><div class="t-blk"><span class="tn" id="d1">--</span><span class="tu">Days</span></div><span class="t-sep">:</span><div class="t-blk"><span class="tn" id="h1">--</span><span class="tu">Hrs</span></div><span class="t-sep">:</span><div class="t-blk"><span class="tn" id="m1">--</span><span class="tu">Min</span></div></div></div><div class="auc-right-info"><div class="res-lbl">Reserve Price</div><div class="res-price">TZS 14B</div><button class="bid-btn" onclick="openAuctionRegister('Edible Oil Factory — Dodoma Industrial Zone','TZS 14B','CRDB Bank')">Register to Bid</button></div></div></div>
     <div class="auc-card"><div class="auc-img"><img src="2.jfif" alt="Resort" loading="lazy"></div><div class="auc-body"><div><span class="auc-bank">NMB Bank</span><h4>Beachfront Resort Complex — Dar es Salaam</h4><div class="auc-sub">0.8 Acres · 12 Units · Premium Location</div></div><div><div class="timer-lbl" data-t="closes_in">Closes in</div><div class="timer-row"><div class="t-blk"><span class="tn" id="d2">--</span><span class="tu">Days</span></div><span class="t-sep">:</span><div class="t-blk"><span class="tn" id="h2">--</span><span class="tu">Hrs</span></div><span class="t-sep">:</span><div class="t-blk"><span class="tn" id="m2">--</span><span class="tu">Min</span></div></div></div><div class="auc-right-info"><div class="res-lbl">Reserve Price</div><div class="res-price">TZS 3.2B</div><button class="bid-btn" onclick="openAuctionRegister('Beachfront Resort Complex — Dar es Salaam','TZS 3.2B','NMB Bank')">Register to Bid</button></div></div></div>
   </div>
@@ -729,8 +731,8 @@ footer{background:var(--navy-dark);padding:68px 5% 34px}
 <section class="hm-sec" id="invest">
   <div class="hm-grid">
     <div>
-      <div class="eyebrow" style="color:var(--gold)">Investment Intelligence</div>
-      <h2 class="sec-title" style="color:#fff" data-t="hm_title">Tanzania Hot Zones 2025–2026</h2>
+      <a href="invest-guide.html" style="text-decoration:none;color:inherit;cursor:pointer" title="View full Investment Guide"><div class="eyebrow" style="color:var(--gold)">Investment Intelligence</div>
+      <h2 class="sec-title" style="color:#fff" data-t="hm_title">Tanzania Hot Zones 2025–2026</h2></a>
       <p class="sec-sub" style="color:rgba(255,255,255,.6);margin-bottom:28px" data-t="hm_sub">AI-analyzed investment hotspots with highest ROI potential across Tanzania.</p>
       <div class="hm-zones">
         <div class="hm-zone" onclick="openNova('Tell me about investment opportunities in Kigamboni, what is the appreciation rate and what type of properties are available?')"><div class="hm-zone-name">Kigamboni, DSM</div><div class="hm-zone-stat">+42%</div><div class="hm-zone-lbl">Appreciation</div></div>
@@ -738,7 +740,7 @@ footer{background:var(--navy-dark);padding:68px 5% 34px}
         <div class="hm-zone" onclick="openNova('Tell me about Paje Zanzibar investment — what properties are available and what is the ROI?')"><div class="hm-zone-name">Paje, Zanzibar</div><div class="hm-zone-stat">+55%</div><div class="hm-zone-lbl">Appreciation</div></div>
         <div class="hm-zone" onclick="openNova('Tell me about Dodoma CBD investment opportunities as the capital city')"><div class="hm-zone-name">Dodoma CBD</div><div class="hm-zone-stat">+31%</div><div class="hm-zone-lbl">Appreciation</div></div>
       </div>
-      <div style="margin-top:24px"><button class="btn-gold" onclick="openNova('What are the best investment areas in Tanzania in 2025? Give me a full market analysis with ROI expectations')">Get Full Investment Report</button></div>
+      <div style="margin-top:24px"><a href="invest-guide.html" class="btn-gold" style="text-decoration:none;display:inline-block">Get Full Investment Report</a></div>
     </div>
     <div class="hm-visual">
       <div style="font-size:10.5px;color:rgba(255,255,255,.38);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:16px">Market Demand Index 2025</div>
@@ -859,7 +861,7 @@ footer{background:var(--navy-dark);padding:68px 5% 34px}
     </div>
     <div style="text-align:center;display:flex;gap:14px;justify-content:center;flex-wrap:wrap">
       <button class="btn-gold" onclick="window.location.href='sell.html'" style="font-size:15px;padding:15px 36px">List My Property Now →</button>
-      <button class="btn-outline" onclick="window.location.href='sell.html'" style="color:#fff;border-color:rgba(255,255,255,.35);font-size:15px;padding:15px 36px">📅 Book a Free Consultation</button>
+      <a href="consultation.html" class="btn-outline" style="color:#fff;border-color:rgba(255,255,255,.35);font-size:15px;padding:15px 36px;text-decoration:none;display:inline-block">📅 Book a Free Consultation</a>
     </div>
   </div>
 </section>
@@ -873,7 +875,7 @@ footer{background:var(--navy-dark);padding:68px 5% 34px}
         <h2 class="sec-title">Tanzania Real Estate Intelligence</h2>
         <p class="sec-sub">Expert guides for investors, buyers, and developers targeting Tanzania and Zanzibar.</p>
       </div>
-      <button class="btn-primary" onclick="openNova('What are the latest real estate trends and investment opportunities in Tanzania and Zanzibar in 2026?')">Ask NextGen AI for Insights</button>
+      <button class="btn-primary" onclick="openNova('What are the latest real estate trends and investment opportunities in Tanzania and Zanzibar in 2026?')" id="askAiInsightsBtn">🤖 Ask NextGen AI for Insights</button>
     </div>
     <div id="blogGrid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:24px">
       <!-- Static fallback posts — replaced by API data on load -->
@@ -925,22 +927,17 @@ footer{background:var(--navy-dark);padding:68px 5% 34px}
     <a href="sell.html" style="font-size:12.5px;color:rgba(255,255,255,.45);transition:color .2s" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,.45)'">Sell</a>
     <a href="contact.html" style="font-size:12.5px;color:rgba(255,255,255,.45);transition:color .2s" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,.45)'">Contact</a>
   </div>
-  <p style="font-size:11.5px;color:rgba(255,255,255,.25);margin-top:4px">© 2026 NEXT-GEN Auctioneer + Realtor (Next-Gen Holdings Company Limited) · BRELA Registered · Licensed Auctioneer<br>
-  📧 nextgentanzania@gmail.com · 📞 +255 659 166 440 · Haidary Plaza, 3rd Floor, Ali Hassan Mwinyi Rd, Kisutu, Dar es Salaam</p>
-
-    <a href="faq.html" class="fl">Faq</a>
-  
+  <div class="footer-links-row">
+    <a href="faq.html" class="fl">FAQ</a>
     <a href="partners.html" class="fl">Partners</a>
-  
     <a href="testimonials.html" class="fl">Testimonials</a>
-  
     <a href="market-report.html" class="fl">Market Report</a>
-  
     <a href="privacy-policy.html" class="fl">Privacy Policy</a>
-  
     <a href="terms.html" class="fl">Terms</a>
-  
     <a href="sitemap.html" class="fl">Sitemap</a>
+  </div>
+  <p style="font-size:11.5px;color:rgba(255,255,255,.25);margin-top:14px">© 2026 NEXT-GEN Auctioneer + Realtor (Next-Gen Holdings Company Limited) · BRELA Registered · Licensed Auctioneer<br>
+  📧 nextgentanzania@gmail.com · 📞 +255 659 166 440 · Haidary Plaza, 3rd Floor, Ali Hassan Mwinyi Rd, Kisutu, Dar es Salaam</p>
   </footer>
 
 <!-- NEXTGEN AI FLOATING BOT -->
