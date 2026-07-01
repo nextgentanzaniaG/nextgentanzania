@@ -371,7 +371,7 @@ async function loadR2(){
         price:(p.currency&&p.currency!=='TZS'?p.currency+' '+p.price:'TZS '+p.price)||'—',
         loc:(p.district?p.district+', ':'')+( p.region||'Tanzania'),
         type:p.type||'Property',
-        status:p.category==='Bank Auction'?'Bank Auction':p.category==='For Rent'?'For Rent':p.category==='For Lease'?'For Lease':'For Sale',
+        status:p.type==='Bank Auction'?'Bank Auction':p.type==='For Rent'?'For Rent':p.type==='For Lease'?'For Lease':p.type==='For Sale'?'For Sale':'For Sale',
         beds:p.beds?parseInt(p.beds):null,baths:p.baths?parseInt(p.baths):null,
         sqm:p.size?parseInt(p.size):null,units:p.units||null,
         tags:p.tags||[],img:p.img||(p.photos&&p.photos[0])||null,

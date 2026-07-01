@@ -1457,9 +1457,9 @@ async function loadR2Properties(){
         loc:      (p.district ? p.district + ', ' : '') + (p.region || 'Tanzania'),
         location: (p.district ? p.district + ', ' : '') + (p.region || 'Tanzania'),
         type:     p.type || 'Property',
-        status:   p.category === 'Bank Auction' ? 'Bank Auction' :
-                  p.category === 'For Rent' ? 'For Rent' :
-                  p.category === 'For Lease' ? 'For Lease' : 'For Sale',
+        status:   p.type === 'Bank Auction' ? 'Bank Auction' :
+                  p.type === 'For Rent' ? 'For Rent' :
+                  p.type === 'For Lease' ? 'For Lease' : 'For Sale',
         beds:     p.beds  ? parseInt(p.beds)  : null,
         baths:    p.baths ? parseInt(p.baths) : null,
         sqm:      p.size  ? parseInt(p.size)  : null,
