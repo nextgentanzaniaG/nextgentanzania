@@ -369,7 +369,7 @@ tr:hover td{background:rgba(248,247,255,.7)}
       <div class="form-card">
         <div class="form-section-title"><svg viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="8.5" cy="7" r="4"/></svg>Ownership & Agent</div>
         <div class="form-grid"><div><label class="fg-label">Owner Name</label><input type="text" class="fg-input" id="propOwner" placeholder="Full legal name"></div><div><label class="fg-label">Owner Phone</label><input type="tel" class="fg-input" id="propOwnerPhone" placeholder="+255..."></div></div>
-        <div class="form-grid"><div><label class="fg-label">Assigned Agent</label><select class="fg-select" id="propAgent"><option>Luth Kitentya (Managing Director)</option><option>Paschal Mwombeki</option><option>Agent 3</option></select></div><div><label class="fg-label">Commission (%)</label><input type="text" class="fg-input" id="propCommission" placeholder="3%"></div></div>
+        <div class="form-grid"><div><label class="fg-label">Assigned Agent</label><select class="fg-select" id="propAgent"><option>Luth (Managing Director)</option><option>Agent 2</option><option>Agent 3</option></select></div><div><label class="fg-label">Commission (%)</label><input type="text" class="fg-input" id="propCommission" placeholder="3%"></div></div>
         <div class="form-full"><label class="fg-label">Internal Notes</label><textarea class="fg-textarea" id="propNotes" rows="2" placeholder="Internal notes about this property..."></textarea></div>
       </div>
       <div style="display:flex;gap:10px;justify-content:flex-end;margin-bottom:24px">
@@ -1432,7 +1432,18 @@ function renderPropsGrid() {
   grid.innerHTML = DB.properties.map((p,i) => `
     <div class="admin-prop">
       <div class="ap-img">🏠
-        ${p.photos&&p.photos[0]?`<img src="${p.photos[0]}" alt="${p.title}" onerror="this.style.display='none'">`:'' }
+        ${p.photos&&p.photos[0]&&p.photos[0].startsWith('http')?
+          `<img src="${p.photos[0]}" alt="${p.title}" 
+            style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0"
+            onerror="this.style.display='none';this.parentElement.querySelector('.no-img').style.display='flex'">
+           <div class='no-img' style='display:none;position:absolute;inset:0;align-items:center;justify-content:center;flex-direction:column;gap:4px'>
+             <span style='font-size:32px'>🏠</span>
+             <span style='font-size:10px;color:rgba(255,255,255,.4)'>Photo unavailable</span>
+           </div>`
+          :`<div style='display:flex;flex-direction:column;align-items:center;gap:4px'>
+              <span style='font-size:32px'>🏠</span>
+              ${p.photos&&p.photos[0]?'<span style="font-size:9px;color:rgba(255,255,255,.35)">Re-upload photo</span>':'<span style="font-size:9px;color:rgba(255,255,255,.35)">No photo</span>'}
+            </div>`}
         <span class="ap-status ${sc[p.type]||'aps-sale'}">${p.type||'For Sale'}</span>
       </div>
       <div class="ap-body">
@@ -1454,10 +1465,19 @@ async function saveProp(mode) {
   if (!title) { showToast('Property title is required', 'error'); return; }
   var editId = titleEl.dataset.editId || null;
   var photos = [];
+  var hasUnuploaded = false;
   document.querySelectorAll('.preview-img').forEach(function(img){
-    // Prefer R2 URL if available, fallback to src
-    photos.push(img.dataset.r2url || img.src);
+    var url = img.dataset.r2url || img.src;
+    // Skip blob: and data: URLs - these are temporary and won't persist
+    if (url.startsWith('blob:') || url.startsWith('data:')) {
+      hasUnuploaded = true;
+    } else if (url.startsWith('http')) {
+      photos.push(url);
+    }
   });
+  if (hasUnuploaded) {
+    showToast('⚠️ Some photos failed to upload to R2. Check that ANTHROPIC_API_KEY and R2 bucket are configured in Worker settings. Only successfully uploaded photos will be saved.', 'error');
+  }
   var features = [];
   document.querySelectorAll('.feature-check input:checked').forEach(function(cb){ features.push(cb.value); });
   function gv(id) { var el = document.getElementById(id); return el ? el.value.trim() : ''; }
