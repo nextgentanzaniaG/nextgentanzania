@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<meta name="google-site-verification" content="TDI_7wZwTB8nTsT6hHJqGaRVVr7yA_J2q2XAZHvRfoA">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
 <meta name="robots" content="noindex,nofollow">
 <title>Website Analytics | NEXT-GEN</title>
@@ -148,38 +149,61 @@ a{text-decoration:none;color:inherit}
       <button class="ptab" onclick="setPeriod('all',this)">♾️ All Time</button>
     </div>
 
-    <!-- STAT CARDS -->
+    <!-- STAT CARDS — 6 periods -->
     <div class="stats-row">
-      <div class="stat-card">
-        <div class="stat-label">Page Views</div>
-        <div class="stat-value" id="statViews">—</div>
-        <div id="statViewsBadge"></div>
-        <div class="stat-sub" id="statViewsSub"></div>
+
+      <div class="stat-card" style="border:1px solid rgba(233,30,140,.3)">
+        <div class="stat-label" style="color:#E91E8C">📅 Today</div>
+        <div class="stat-value" id="statToday">—</div>
+        <div id="statTodayBadge"></div>
+        <div class="stat-sub" id="statTodayDate"></div>
       </div>
+
       <div class="stat-card">
-        <div class="stat-label">This Week</div>
+        <div class="stat-label">🌙 Yesterday</div>
+        <div class="stat-value" id="statYesterday">—</div>
+        <div class="stat-sub" id="statYestDate"></div>
+      </div>
+
+      <div class="stat-card">
+        <div class="stat-label">📆 This Week</div>
         <div class="stat-value" id="statWeek">—</div>
-        <div class="stat-sub">Current week total</div>
+        <div id="statWeekBadge"></div>
+        <div class="stat-sub" id="statWeekSub">Current week</div>
       </div>
+
       <div class="stat-card">
-        <div class="stat-label">This Month</div>
+        <div class="stat-label">🗓️ This Month</div>
         <div class="stat-value" id="statMonth">—</div>
-        <div class="stat-sub">Current month total</div>
+        <div id="statMonthBadge"></div>
+        <div class="stat-sub" id="statMonthSub">Current month</div>
       </div>
+
       <div class="stat-card">
-        <div class="stat-label">This Year</div>
+        <div class="stat-label">📊 This Year</div>
         <div class="stat-value" id="statYear">—</div>
-        <div class="stat-sub">Current year total</div>
+        <div class="stat-sub" id="statYearSub">Current year</div>
       </div>
-      <div class="stat-card">
-        <div class="stat-label">All Time</div>
+
+      <div class="stat-card" style="border:1px solid rgba(255,215,0,.25)">
+        <div class="stat-label" style="color:#C9A84C">♾️ All Time</div>
         <div class="stat-value" id="statTotal">—</div>
         <div class="stat-sub">Since launch</div>
       </div>
+
+    </div>
+
+    <!-- VISITOR ORIGIN ROW -->
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:20px">
       <div class="stat-card">
-        <div class="stat-label">Top Country</div>
-        <div class="stat-value" id="statTopCountry" style="font-size:22px">—</div>
+        <div class="stat-label">🌍 Top Country</div>
+        <div class="stat-value" id="statTopCountry" style="font-size:28px">—</div>
         <div class="stat-sub" id="statTopCountryName"></div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">📄 Top Page</div>
+        <div class="stat-value" id="statTopPage" style="font-size:14px;font-weight:600;word-break:break-all">—</div>
+        <div class="stat-sub" id="statTopPageViews"></div>
       </div>
     </div>
 
@@ -328,32 +352,72 @@ function renderDashboard(){
   var yearKey = String(now.getFullYear());
   var weekKey = getWeekKey(now);
 
-  // Today
+  // ── PERIODS ──
   var todayViews = (stats.daily||{})[todayKey]||0;
-  // Yesterday
   var yest = new Date(now-86400000).toISOString().slice(0,10);
   var yestViews = (stats.daily||{})[yest]||0;
-  
-  document.getElementById('statViews').textContent = fmt(todayViews);
-  document.getElementById('statWeek').textContent = fmt((stats.weekly||{})[weekKey]||0);
-  document.getElementById('statMonth').textContent = fmt((stats.monthly||{})[monthKey]||0);
-  document.getElementById('statYear').textContent = fmt((stats.yearly||{})[yearKey]||0);
-  document.getElementById('statTotal').textContent = fmt(stats.total||0);
-  
-  // Change badge
+  var lastWeekKey = getWeekKey(new Date(now-7*86400000));
+  var lastMonthKey = new Date(now.getFullYear(), now.getMonth()-1, 1).toISOString().slice(0,7);
+  var weekViews = (stats.weekly||{})[weekKey]||0;
+  var lastWeekViews = (stats.weekly||{})[lastWeekKey]||0;
+  var monthViews = (stats.monthly||{})[monthKey]||0;
+  var lastMonthViews = (stats.monthly||{})[lastMonthKey]||0;
+  var yearViews = (stats.yearly||{})[yearKey]||0;
+  var totalViews = stats.total||0;
+
+  // ── TODAY CARD ──
+  document.getElementById('statToday').textContent = fmt(todayViews);
+  document.getElementById('statTodayDate').textContent = todayKey;
   if(yestViews>0){
     var pct = Math.round(((todayViews-yestViews)/yestViews)*100);
-    var badge = document.getElementById('statViewsBadge');
-    badge.innerHTML='<div class="stat-badge '+(pct>=0?'badge-up':'badge-down')+'">'+(pct>=0?'▲':'▼')+' '+Math.abs(pct)+'% vs yesterday</div>';
+    document.getElementById('statTodayBadge').innerHTML = 
+      '<div class="stat-badge '+(pct>=0?'badge-up':'badge-down')+'">'+(pct>=0?'▲':'▼')+' '+Math.abs(pct)+'% vs yesterday</div>';
   }
-  document.getElementById('statViewsSub').textContent = todayKey;
 
-  // Top country
+  // ── YESTERDAY CARD ──
+  document.getElementById('statYesterday').textContent = fmt(yestViews);
+  document.getElementById('statYestDate').textContent = yest;
+
+  // ── WEEK CARD ──
+  document.getElementById('statWeek').textContent = fmt(weekViews);
+  document.getElementById('statWeekSub').textContent = 'Week '+weekKey;
+  if(lastWeekViews>0){
+    var wPct = Math.round(((weekViews-lastWeekViews)/lastWeekViews)*100);
+    document.getElementById('statWeekBadge').innerHTML =
+      '<div class="stat-badge '+(wPct>=0?'badge-up':'badge-down')+'">'+(wPct>=0?'▲':'▼')+' '+Math.abs(wPct)+'% vs last week</div>';
+  }
+
+  // ── MONTH CARD ──
+  document.getElementById('statMonth').textContent = fmt(monthViews);
+  document.getElementById('statMonthSub').textContent = monthKey;
+  if(lastMonthViews>0){
+    var mPct = Math.round(((monthViews-lastMonthViews)/lastMonthViews)*100);
+    document.getElementById('statMonthBadge').innerHTML =
+      '<div class="stat-badge '+(mPct>=0?'badge-up':'badge-down')+'">'+(mPct>=0?'▲':'▼')+' '+Math.abs(mPct)+'% vs last month</div>';
+  }
+
+  // ── YEAR CARD ──
+  document.getElementById('statYear').textContent = fmt(yearViews);
+  document.getElementById('statYearSub').textContent = String(now.getFullYear());
+
+  // ── ALL TIME CARD ──
+  document.getElementById('statTotal').textContent = fmt(totalViews);
+
+  // ── TOP COUNTRY ──
   var countries = stats.countries || {};
   var topCountry = Object.entries(countries).sort((a,b)=>b[1]-a[1])[0];
   if(topCountry){
     document.getElementById('statTopCountry').textContent = getFlag(topCountry[0]);
-    document.getElementById('statTopCountryName').textContent = topCountry[0]+' ('+fmt(topCountry[1])+' views)';
+    document.getElementById('statTopCountryName').textContent = topCountry[0]+' — '+fmt(topCountry[1])+' views';
+  }
+
+  // ── TOP PAGE ──
+  var pages = stats.pages || {};
+  var topPage = Object.entries(pages).sort((a,b)=>b[1]-a[1])[0];
+  if(topPage && document.getElementById('statTopPage')){
+    var pageName = topPage[0].replace('https://nextgentanzania.com','').replace('.html','') || '/home';
+    document.getElementById('statTopPage').textContent = pageName;
+    document.getElementById('statTopPageViews').textContent = fmt(topPage[1])+' views';
   }
 
   renderTrafficChart('today');
@@ -384,8 +448,9 @@ function setPeriod(period, btn){
     year:(stats.yearly||{})[yearKey]||0,
     all:stats.total||0
   };
-  document.getElementById('statViews').textContent = fmt(values[period]||0);
-  document.getElementById('statViewsSub').textContent = labels[period];
+  // Highlight the active tab's card by updating Today card label
+  document.getElementById('statToday').textContent = fmt(values[period]||0);
+  document.getElementById('statTodayDate').textContent = labels[period];
 }
 
 function renderTrafficChart(period){
