@@ -300,15 +300,66 @@ const API = 'https://nextgen-ai-api.kitentyaluth.workers.dev';
 
 // Static fallback posts
 var STATIC_POSTS = [
-  {id:'s1',title:'Best Areas to Invest in Zanzibar 2026',category:'Investment Guide',author:'NEXT-GEN Research',excerpt:'From Nungwi to Paje — which beachfront zones offer the highest capital appreciation and rental yield for international investors?',image:'1.jfif',date:'June 2026',readTime:'8 min'},
-  {id:'s2',title:'How Foreigners Buy Property in Tanzania',category:'Legal Guide',author:'NEXT-GEN Legal Team',excerpt:'Step-by-step guide to land rights for non-citizens, derivative right of occupancy, TIC registration, and ownership structures.',image:'10.jfif',date:'May 2026',readTime:'12 min'},
-  {id:'s3',title:'Hotel Investment Guide: East Africa 2026',category:'Investment Guide',author:'NEXT-GEN Investments',excerpt:"Why savvy investors are targeting Zanzibar and Dar es Salaam for hospitality assets — yields of 14–22% and growing tourism.",image:'14.jfif',date:'April 2026',readTime:'10 min'},
-  {id:'s4',title:'Bank Auction Properties: How to Register and Win',category:'Bank Auctions',author:'NEXT-GEN Auctioneers',excerpt:'Everything you need to know about participating in bank property auctions in Tanzania — from CRDB to NMB.',image:'18.jfif',date:'March 2026',readTime:'7 min'},
-  {id:'s5',title:'Kigamboni: Dar es Salaam\'s Best Investment Zone',category:'Market Insights',author:'NEXT-GEN Research',excerpt:'With the bridge completed and infrastructure booming, Kigamboni is delivering +42% appreciation. Here is why.',image:'3.jfif',date:'March 2026',readTime:'6 min'},
-  {id:'s6',title:'Tanzania Property Tax Guide for Investors',category:'Legal Guide',author:'NEXT-GEN Legal Team',excerpt:'Capital gains tax, rental income tax, stamp duty and withholding tax — a complete guide for local and foreign property investors.',image:'4.jfif',date:'February 2026',readTime:'9 min'},
-  {id:'s7',title:'Dar es Salaam Commercial Property Market 2026',category:'Market Insights',author:'NEXT-GEN Research',excerpt:'Office, retail and industrial markets — who is leasing, what rates are doing, and where the opportunities are.',image:'17.jfif',date:'February 2026',readTime:'11 min'},
-  {id:'s8',title:'First-Time Buyer Guide: Tanzania Property Market',category:'Buyer Guide',author:'NEXT-GEN Team',excerpt:'Everything a first-time buyer needs to know — from choosing a location to signing the title deed.',image:'7.jfif',date:'January 2026',readTime:'14 min'},
-  {id:'s9',title:'Zanzibar Tourism Boom: What It Means for Investors',category:'Zanzibar',author:'NEXT-GEN Investments',excerpt:'800,000+ tourists in 2025, direct flights from Europe and the Gulf — Zanzibar\'s hospitality market is booming.',image:'11.jfif',date:'January 2026',readTime:'8 min'},
+  {
+    id: 1751000001,
+    status: 'published',
+    title: "How to Buy Property in Tanzania as a Foreigner: Complete 2026 Guide",
+    slug: "how-to-buy-property-in-tanzania-as-foreigner-2026-guide",
+    excerpt: "A step-by-step guide for foreign investors buying property in Tanzania and Zanzibar \u2014 covering TIC registration, ZIPA approval, legal process, and key costs.",
+    category: "Legal Guides",
+    author: "NEXT-GEN Research",
+    createdAt: "2026-06-26T17:27:35.838822",
+    lang: 'en',
+    image: '',
+  },
+  {
+    id: 1751000002,
+    status: 'published',
+    title: "Bank Auction Properties Tanzania 2026: How to Buy CRDB, NMB & NCBA Repossessed Property",
+    slug: "bank-auction-properties-tanzania-2026-crdb-nmb-ncba",
+    excerpt: "Everything you need to know about buying bank auction properties in Tanzania \u2014 how auctions work, which banks hold them, bidding process, and how to find the best deals.",
+    category: "Bank Auctions",
+    author: "NEXT-GEN Research",
+    createdAt: "2026-06-21T17:27:35.838997",
+    lang: 'en',
+    image: '',
+  },
+  {
+    id: 1751000003,
+    status: 'published',
+    title: "Tanzania Real Estate Market Report 2026: Prices, Trends & Best Areas to Invest",
+    slug: "tanzania-real-estate-market-report-2026-prices-trends",
+    excerpt: "Tanzania's property market in 2026: price trends in Dar es Salaam and Zanzibar, best areas to invest, rental yields, and expert outlook from NEXT-GEN Realtor.",
+    category: "Market Insights",
+    author: "NEXT-GEN Research",
+    createdAt: "2026-06-16T17:27:35.839003",
+    lang: 'en',
+    image: '',
+  },
+  {
+    id: 1751000004,
+    status: 'published',
+    title: "Zanzibar Property Investment Guide 2026: Villas, Hotels & Beachfront Land",
+    slug: "zanzibar-property-investment-guide-2026",
+    excerpt: "Complete guide to investing in Zanzibar property in 2026 \u2014 best areas, legal process for foreigners, expected returns, and current listings from NEXT-GEN Realtor.",
+    category: "Investment",
+    author: "NEXT-GEN Research",
+    createdAt: "2026-06-11T17:27:35.839006",
+    lang: 'en',
+    image: '',
+  },
+  {
+    id: 1751000005,
+    status: 'published',
+    title: "Property for Sale in Dar es Salaam 2026: Best Areas, Prices & How to Buy",
+    slug: "property-for-sale-dar-es-salaam-2026-best-areas-prices",
+    excerpt: "Looking for property in Dar es Salaam? This guide covers the best neighborhoods, current prices, buying process, and how NEXT-GEN Realtor can help you find your ideal property.",
+    category: "Market Insights",
+    author: "NEXT-GEN Research",
+    createdAt: "2026-06-06T17:27:35.839008",
+    lang: 'en',
+    image: '',
+  },
 ];
 
 var R2_POSTS = [];
@@ -402,19 +453,50 @@ function renderPopular(){
   }).join('');
 }
 
+
+// Full article content for static posts
+var STATIC_CONTENT = {
+  1751000001: "<h2>Can Foreigners Buy Property in Tanzania?</h2>\n<p>Yes \u2014 foreigners can legally own property in Tanzania, but there are important rules to understand before you invest. Tanzania has a dual land system: <strong>mainland Tanzania</strong> governed by the Land Act (1999), and <strong>Zanzibar</strong> governed by the Zanzibar Land Tenure Act.</p>\n\n<h2>Buying on Mainland Tanzania (TIC Route)</h2>\n<p>Foreign individuals and companies cannot directly hold land on the mainland. However, you can invest through the <strong>Tanzania Investment Centre (TIC)</strong>, which grants a Derivative Right of Occupancy (DRO) for up to 99 years. Here is the process:</p>\n<ul>\n<li><strong>Step 1 \u2014 Register your investment with TIC.</strong> Minimum investment is USD 500,000 for foreign companies (USD 100,000 for joint ventures with Tanzanians).</li>\n<li><strong>Step 2 \u2014 Obtain a Certificate of Incentives</strong> from TIC, which includes your land allocation rights.</li>\n<li><strong>Step 3 \u2014 Identify your plot</strong> and conduct due diligence including title deed verification, survey plans, and valuation.</li>\n<li><strong>Step 4 \u2014 Enter a Sale Agreement</strong> drafted by a registered Tanzanian advocate.</li>\n<li><strong>Step 5 \u2014 Transfer and register</strong> at the Ministry of Lands.</li>\n</ul>\n\n<h2>Buying in Zanzibar (ZIPA / ZanInvest Route)</h2>\n<p>Zanzibar has a more open policy for foreign property buyers. The <strong>Zanzibar Investment Promotion Authority (ZIPA)</strong>, also known as <strong>ZanInvest</strong>, facilitates foreign investment including real estate purchases.</p>\n<ul>\n<li>Foreigners can own property through a <strong>99-year lease</strong> on government land.</li>\n<li>Minimum investment for foreigners: <strong>USD 500,000</strong> for tourism/hospitality projects.</li>\n<li>Residential purchases are available in designated zones.</li>\n<li>ZIPA registration takes approximately <strong>2\u20134 weeks</strong>.</li>\n</ul>\n\n<h2>Key Costs to Budget For</h2>\n<ul>\n<li><strong>Stamp Duty:</strong> 1% of property value</li>\n<li><strong>Registration Fees:</strong> 0.1%\u20131% depending on property value</li>\n<li><strong>Legal / Conveyancing:</strong> 1%\u20132% of property value</li>\n<li><strong>Agent Commission:</strong> 2%\u20135% (paid by seller typically)</li>\n<li><strong>Capital Gains Tax:</strong> 10% for non-residents on resale profit</li>\n</ul>\n\n<h2>How NEXT-GEN Can Help</h2>\n<p>NEXT-GEN Auctioneer + Realtor has extensive experience guiding foreign investors through the Tanzania and Zanzibar property buying process. We work with registered advocates, licensed valuers, and TIC/ZIPA specialists to ensure your investment is secure, legal, and well-documented.</p>\n<p>Contact us today for a free consultation: <strong>+255 659 166 440</strong> or visit <strong>nextgentanzania.com</strong></p>",
+  1751000002: "<h2>What Are Bank Auction Properties?</h2>\n<p>When a borrower defaults on a mortgage or loan secured against property, the bank has the right to repossess and sell the property to recover the outstanding debt. These are known as <strong>bank auction properties</strong> or <strong>repossessed properties</strong>, and they often sell <strong>20%\u201340% below market value</strong> \u2014 making them attractive investment opportunities.</p>\n\n<h2>Which Banks Conduct Property Auctions in Tanzania?</h2>\n<ul>\n<li><strong>CRDB Bank</strong> \u2014 Tanzania's largest commercial bank, conducts regular auctions of residential and commercial properties across all regions.</li>\n<li><strong>NMB Bank</strong> \u2014 National Microfinance Bank, frequently auctions residential homes, plots, and commercial premises.</li>\n<li><strong>NCBA Bank Tanzania</strong> \u2014 Conducts auctions primarily in Dar es Salaam and major towns.</li>\n<li><strong>NBC (National Bank of Commerce)</strong> \u2014 Auctions a wide range of properties including industrial assets.</li>\n<li><strong>Stanbic Bank</strong> \u2014 Conducts auctions of high-value commercial and residential properties.</li>\n</ul>\n\n<h2>How the Auction Process Works</h2>\n<ul>\n<li><strong>1. Notice Publication:</strong> Banks are legally required to publish auction notices in national newspapers (Daily News, The Citizen, Habari Leo) at least 14 days before the auction date.</li>\n<li><strong>2. Property Inspection:</strong> Serious buyers should inspect the property before the auction date. NEXT-GEN can arrange accompanied viewings.</li>\n<li><strong>3. Reserve Price:</strong> Each property has a reserve (minimum) price. If bidding does not reach this price, the property is not sold.</li>\n<li><strong>4. Bidding:</strong> Auctions are conducted by a licensed auctioneer. Highest bidder wins.</li>\n<li><strong>5. Deposit:</strong> Winning bidder typically pays 25%\u201330% deposit immediately, with balance due within 30\u201390 days.</li>\n<li><strong>6. Transfer:</strong> Legal transfer is completed after full payment.</li>\n</ul>\n\n<h2>Due Diligence Before Bidding</h2>\n<p>Before bidding on any auction property, it is essential to:</p>\n<ul>\n<li>Verify the title deed is clean (no additional encumbrances)</li>\n<li>Conduct a physical survey and valuation</li>\n<li>Check for sitting tenants or occupants</li>\n<li>Review the sale conditions carefully</li>\n<li>Have financing pre-arranged \u2014 most auctions require fast payment</li>\n</ul>\n\n<h2>How NEXT-GEN Helps Auction Buyers</h2>\n<p>As a <strong>licensed auctioneer and realtor</strong>, NEXT-GEN Auctioneer + Realtor tracks upcoming bank auctions across Tanzania and provides our clients with early notice, accompanied viewings, due diligence support, and bidding representation. We maintain relationships with CRDB, NMB, NCBA, NBC, and other lenders.</p>\n<p>Register your interest today: <strong>+255 659 166 440</strong> | <strong>nextgentanzania.com/auctions</strong></p>",
+  1751000003: "<h2>Tanzania Property Market Overview 2026</h2>\n<p>Tanzania's real estate market continues to show <strong>steady growth</strong> in 2026, driven by rapid urbanization, a growing middle class, and strong international investor interest \u2014 particularly from the UAE, UK, and China. GDP growth of approximately <strong>6% per year</strong> is supporting demand across residential, commercial, and hospitality sectors.</p>\n\n<h2>Dar es Salaam \u2014 Price Trends by Area</h2>\n<p>Dar es Salaam remains the primary property market, with significant variation between neighborhoods:</p>\n<ul>\n<li><strong>Masaki / Oyster Bay:</strong> Premium residential area. Luxury villas USD 800,000\u2013USD 3,000,000+. High demand from expats and senior executives.</li>\n<li><strong>Mikocheni / Mbezi Beach:</strong> Upper-middle residential. Houses USD 200,000\u2013USD 600,000. Strong rental market.</li>\n<li><strong>Kinondoni / Kijitonyama:</strong> Middle income. Houses TZS 200M\u2013TZS 500M. High local demand.</li>\n<li><strong>Kigamboni:</strong> Emerging beachfront area. Plots and villas at relatively lower prices. Strong appreciation expected.</li>\n<li><strong>CBD / Kariakoo:</strong> Commercial property focus. Office and retail space with strong rental yields.</li>\n</ul>\n\n<h2>Zanzibar \u2014 A Market on the Rise</h2>\n<p>Zanzibar's property market has seen <strong>significant price appreciation</strong> over the past 3 years, driven by tourism recovery and foreign investor interest:</p>\n<ul>\n<li><strong>Nungwi / Kendwa (North):</strong> Hottest area. Beachfront villas USD 500,000\u2013USD 5,000,000+.</li>\n<li><strong>Paje / Jambiani (East Coast):</strong> Popular with European buyers. Development plots from USD 100,000.</li>\n<li><strong>Stone Town (UNESCO Heritage):</strong> Boutique hotels and apartments. High rental yield potential.</li>\n<li><strong>Michamvi / Bwejuu:</strong> Quieter, emerging area. Good value for early investors.</li>\n</ul>\n\n<h2>Rental Yields in Tanzania 2026</h2>\n<ul>\n<li><strong>Residential (Dar es Salaam):</strong> 6%\u20139% gross annual yield</li>\n<li><strong>Commercial Office Space:</strong> 8%\u201312% gross annual yield</li>\n<li><strong>Short-Term Holiday Rentals (Zanzibar):</strong> 12%\u201320%+ depending on location and management</li>\n<li><strong>Student Housing (near universities):</strong> 10%\u201314% gross annual yield</li>\n</ul>\n\n<h2>2026 Market Outlook</h2>\n<p>The outlook for Tanzania property in 2026 is <strong>cautiously positive</strong>. Key drivers include infrastructure investment (Julius Nyerere International Airport expansion, Standard Gauge Railway), tourism growth, and continued urbanization. Prices are expected to grow <strong>5%\u20138% nominally</strong> in prime areas over the next 12 months.</p>\n\n<p>For a personalized investment consultation, contact <strong>NEXT-GEN Auctioneer + Realtor</strong>: <strong>+255 659 166 440</strong> | <strong>nextgentanzania.com/invest</strong></p>",
+  1751000004: "<h2>Why Invest in Zanzibar Property in 2026?</h2>\n<p>Zanzibar is one of Africa's fastest-growing real estate markets. With over <strong>600,000 tourist arrivals annually</strong>, a stable government, and growing infrastructure, the island offers exceptional opportunities for property investors seeking strong rental yields and capital appreciation.</p>\n\n<h2>Best Areas for Property Investment in Zanzibar</h2>\n\n<h3>\ud83c\udfd6\ufe0f Nungwi (North Coast)</h3>\n<p>The most developed tourist area. High-end resorts, beachfront villas, and luxury apartments. Best for <strong>holiday rental investment</strong>. Prices: USD 300,000\u2013USD 5,000,000+.</p>\n\n<h3>\ud83c\udf0a Paje & Jambiani (East Coast)</h3>\n<p>Known for crystal-clear lagoons and kite surfing. Popular with European buyers. <strong>Development plots</strong> from USD 80,000. Boutique hotels and eco-lodges perform well here.</p>\n\n<h3>\ud83c\udfdb\ufe0f Stone Town (UNESCO World Heritage)</h3>\n<p>Historic Arab-influenced architecture. Boutique hotel conversions and serviced apartments yield strong returns. Limited supply makes this a <strong>premium investment</strong>.</p>\n\n<h3>\ud83c\udf34 Michamvi & Bwejuu (South East)</h3>\n<p>Quieter, emerging area with <strong>best value for money</strong>. Early investors are seeing strong appreciation. Beachfront plots still available at competitive prices.</p>\n\n<h3>\ud83d\udc1f Kendwa & Matemwe (North East)</h3>\n<p>Less crowded than Nungwi but equally beautiful. Strong pipeline of boutique resort development. Good for <strong>medium-term capital growth</strong>.</p>\n\n<h2>Legal Process for Foreign Buyers in Zanzibar</h2>\n<ul>\n<li>Register with <strong>ZIPA (Zanzibar Investment Promotion Authority)</strong></li>\n<li>Obtain a <strong>Zanzibar Investment Certificate</strong></li>\n<li>Land allocated on <strong>99-year lease</strong> from government</li>\n<li>Minimum investment: USD 500,000 for tourism projects; lower for residential in designated zones</li>\n<li>Process typically takes <strong>4\u20138 weeks</strong> with proper documentation</li>\n</ul>\n\n<h2>Expected Returns</h2>\n<ul>\n<li><strong>Short-term holiday rentals:</strong> 12%\u201325% gross annual yield (with professional management)</li>\n<li><strong>Long-term residential rental:</strong> 7%\u201310% gross annual yield</li>\n<li><strong>Capital appreciation:</strong> 8%\u201315% per year in prime beachfront areas</li>\n<li><strong>Hotel / resort investment:</strong> 15%\u201330% ROI depending on scale and management</li>\n</ul>\n\n<h2>Current Zanzibar Listings from NEXT-GEN</h2>\n<p>NEXT-GEN Auctioneer + Realtor has exclusive listings of Zanzibar beachfront villas, hotels, and development plots. Our team provides end-to-end support from property search to ZIPA registration and legal transfer.</p>\n<p>Browse Zanzibar properties: <strong>nextgentanzania.com/zanzibar</strong> | Call: <strong>+255 659 166 440</strong></p>",
+  1751000005: "<h2>Property Market in Dar es Salaam 2026</h2>\n<p>Dar es Salaam, Tanzania's commercial capital and largest city, has a dynamic and growing property market. With a population of over <strong>7 million people</strong> and strong economic growth, demand for quality housing and commercial space continues to outpace supply \u2014 making it a strong market for buyers and investors alike.</p>\n\n<h2>Best Residential Areas in Dar es Salaam</h2>\n\n<h3>\ud83c\udf1f Masaki & Oyster Bay \u2014 Premium Addresses</h3>\n<p>The most prestigious residential areas in Dar es Salaam, home to diplomats, senior executives, and international organizations. Luxury villas and executive apartments dominate.</p>\n<ul>\n<li>4-bedroom villas: <strong>USD 600,000 \u2013 USD 2,500,000</strong></li>\n<li>Executive apartments: <strong>USD 200,000 \u2013 USD 600,000</strong></li>\n<li>Monthly rentals: <strong>USD 3,000 \u2013 USD 12,000</strong></li>\n</ul>\n\n<h3>\ud83c\udfe0 Mikocheni, Mbezi Beach & Regent Estate</h3>\n<p>Upper-middle class neighborhoods with excellent amenities, international schools, and shopping centers nearby. Popular with professionals and growing families.</p>\n<ul>\n<li>4-bedroom houses: <strong>TZS 500M \u2013 TZS 1.5B</strong></li>\n<li>Monthly rentals: <strong>TZS 2M \u2013 TZS 5M</strong></li>\n</ul>\n\n<h3>\ud83c\udf0a Kigamboni \u2014 The Emerging Beachfront</h3>\n<p>Connected to the city by the Kigamboni Bridge, this area offers beachfront living at more accessible prices. Strong appreciation expected with continued infrastructure development.</p>\n<ul>\n<li>Beachfront plots: <strong>TZS 300M \u2013 TZS 800M</strong></li>\n<li>Modern villas: <strong>TZS 400M \u2013 TZS 1.2B</strong></li>\n</ul>\n\n<h3>\ud83c\udfe2 CBD & Kariakoo \u2014 Commercial Hub</h3>\n<p>The heart of Dar es Salaam's commercial activity. Office buildings, retail shops, and warehouses. High demand from businesses and high street retail.</p>\n<ul>\n<li>Office space lease: <strong>USD 15 \u2013 USD 35 per sqm per month</strong></li>\n<li>Retail ground floor: <strong>USD 20 \u2013 USD 50 per sqm per month</strong></li>\n</ul>\n\n<h2>Step-by-Step: How to Buy Property in Dar es Salaam</h2>\n<ol>\n<li><strong>Define your budget and requirements</strong> \u2014 location, size, type of property</li>\n<li><strong>Engage a licensed realtor</strong> like NEXT-GEN to search and shortlist</li>\n<li><strong>Property inspection and valuation</strong> by a registered valuer</li>\n<li><strong>Title deed verification</strong> at the Ministry of Lands</li>\n<li><strong>Sign Sale Agreement</strong> through a registered advocate</li>\n<li><strong>Pay stamp duty and registration fees</strong></li>\n<li><strong>Transfer and take possession</strong></li>\n</ol>\n\n<h2>Why Choose NEXT-GEN as Your Dar es Salaam Property Agent</h2>\n<p>NEXT-GEN Auctioneer + Realtor is a <strong>BRELA-registered</strong> real estate agency based at Haidary Plaza, Dar es Salaam. We specialize in residential sales, commercial leasing, bank auctions, and investment properties across all major Dar es Salaam neighborhoods.</p>\n<ul>\n<li>\u2705 Licensed auctioneer \u2014 official bank auction agent</li>\n<li>\u2705 Escrow services \u2014 secure payment handling</li>\n<li>\u2705 Legal support \u2014 conveyancing through registered advocates</li>\n<li>\u2705 Bilingual team \u2014 English and Swahili</li>\n</ul>\n<p>Start your property search today: <strong>nextgentanzania.com/listings</strong> | <strong>+255 659 166 440</strong></p>",
+};
+
 function openPost(id){
-  // Find post and open full article
   var post = ALL_POSTS.find(function(p){ return p.id==id || p.id===id; });
   if(!post) return;
-  // Navigate to post page or open modal
-  // For R2 posts: /api/blog/:id
-  // For static: open invest-guide or foreign-buyers pages
   if(id==='s1') { window.location.href='invest-guide.html'; return; }
   if(id==='s2') { window.location.href='foreign-buyers.html'; return; }
-  if(post.id && typeof post.id === 'number') {
-    // R2 post — open a simple modal
-    alert(post.title + '\n\n' + (post.excerpt||'') + '\n\nFull article coming soon on nextgentanzania.com');
-  }
+
+  var content = STATIC_CONTENT[post.id] || ('<p>'+post.excerpt+'</p>');
+  var dateStr = post.createdAt ? new Date(post.createdAt).toLocaleDateString('en-GB',{day:'numeric',month:'long',year:'numeric'}) : '';
+
+  // Create full-screen article modal
+  var modal = document.createElement('div');
+  modal.id = 'blog-modal';
+  modal.style.cssText = 'position:fixed;inset:0;z-index:99999;background:#fff;overflow-y:auto;font-family:Inter,sans-serif';
+  modal.innerHTML =
+    '<div style="max-width:780px;margin:0 auto;padding:24px 20px 80px">'
+    + '<button onclick="document.getElementById(\'blog-modal\').remove()" style="margin-bottom:24px;background:#f3f4f6;border:none;border-radius:8px;padding:8px 16px;cursor:pointer;font-size:13px;font-weight:600">← Back to Blog</button>'
+    + '<div style="font-size:11px;font-weight:700;color:#E91E8C;text-transform:uppercase;letter-spacing:1px;margin-bottom:8px">' + (post.category||'') + '</div>'
+    + '<h1 style="font-family:Playfair Display,serif;font-size:clamp(22px,4vw,34px);font-weight:700;color:#0D1240;line-height:1.3;margin-bottom:12px">' + post.title + '</h1>'
+    + '<div style="font-size:12.5px;color:#888;margin-bottom:28px">' + (post.author||'NEXT-GEN Research') + ' &nbsp;·&nbsp; ' + dateStr + '</div>'
+    + '<div style="font-size:15.5px;line-height:1.9;color:#333" class="blog-body">' + content + '</div>'
+    + '<hr style="margin:40px 0;border:none;border-top:1px solid #eee">'
+    + '<div style="background:#f8f7ff;border-radius:14px;padding:20px;text-align:center">'
+    + '<div style="font-weight:700;font-size:15px;color:#0D1240;margin-bottom:6px">Ready to invest in Tanzania property?</div>'
+    + '<div style="font-size:13px;color:#666;margin-bottom:14px">Contact NEXT-GEN Auctioneer + Realtor today</div>'
+    + '<a href="https://wa.me/255659166440" target="_blank" style="background:#25D366;color:#fff;text-decoration:none;padding:10px 24px;border-radius:8px;font-weight:600;font-size:13px;display:inline-block">💬 WhatsApp Us</a>'
+    + '</div>'
+    + '</div>';
+
+  // Style h2, h3 in modal
+  var style = document.createElement('style');
+  style.textContent = '#blog-modal h2{font-family:Playfair Display,serif;font-size:1.4em;color:#0D1240;margin:28px 0 10px}#blog-modal h3{font-size:1.1em;color:#0D1240;margin:20px 0 8px}#blog-modal ul,#blog-modal ol{margin:10px 0 10px 20px;line-height:1.9}#blog-modal li{margin-bottom:4px}#blog-modal strong{font-weight:700;color:#0D1240}';
+  modal.appendChild(style);
+  document.body.appendChild(modal);
+  modal.scrollTop = 0;
 }
 
 function subscribeNL(){
