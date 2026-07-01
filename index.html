@@ -422,7 +422,7 @@ footer{background:var(--navy-dark,#080C2E);padding:48px 5% 34px;text-align:cente
   .nav-list-btn{padding:7px 10px;font-size:11px;white-space:nowrap}
 
   /* Bottom mobile nav bar — fixed at bottom */
-  #mobileNavBar{position:fixed;bottom:0;left:0;right:0;z-index:900;display:flex;align-items:center;overflow-x:auto;gap:2px;padding:4px 8px;background:rgba(8,12,46,.98);backdrop-filter:blur(20px);border-top:1px solid rgba(233,30,140,.2);padding-bottom:calc(4px + env(safe-area-inset-bottom));}
+  #mobileNavBar{position:fixed;top:64px;left:0;right:0;z-index:899;display:flex;align-items:center;overflow-x:auto;gap:2px;padding:4px 8px;background:rgba(8,12,46,.98);backdrop-filter:blur(20px);border-bottom:1px solid rgba(233,30,140,.2);}
 
   /* Search, footer, cats */
   .search-fields{grid-template-columns:1fr 1fr}
@@ -552,14 +552,14 @@ footer{background:var(--navy-dark,#080C2E);padding:48px 5% 34px;text-align:cente
 </div>
 <!-- Add bottom padding on mobile so content not hidden behind nav bar -->
 <style>
-.mob-nav-link{display:inline-flex;flex-direction:column;align-items:center;justify-content:center;padding:8px 12px;color:rgba(255,255,255,.7);text-decoration:none;font-family:'Inter',sans-serif;font-size:16px;gap:3px;border:none;background:transparent;cursor:pointer;white-space:nowrap;min-width:60px;flex-shrink:0;transition:color .2s}
+.mob-nav-link{display:inline-flex;flex-direction:column;align-items:center;justify-content:center;padding:6px 10px;color:rgba(255,255,255,.7);text-decoration:none;font-family:'Inter',sans-serif;font-size:15px;gap:2px;border:none;background:transparent;cursor:pointer;white-space:nowrap;min-width:52px;flex-shrink:0;transition:color .2s}
 .mob-nav-link span{font-size:9px;font-weight:600;letter-spacing:.3px}
 .mob-nav-link:hover,.mob-nav-link:active{color:#fff}
 #mobileNavBar::-webkit-scrollbar{display:none}
 @media(max-width:960px){
-  body{padding-bottom:60px}/* space for fixed bottom nav */
-  #wa-btn{bottom:74px}/* move WA button above nav bar */
-  #nova-fab{bottom:74px}
+  body{padding-top:112px}/* space for top nav (64px main + 48px mobile menu) */
+  #wa-btn{bottom:28px}
+  #nova-fab{bottom:28px}
 }
 </style>
 
@@ -1474,7 +1474,12 @@ async function loadR2Properties(){
       };
     });
     // Sort by priority (high first), then by date
-    R2_PROPS.sort(function(a,b){ return (b.priority||0) - (a.priority||0); });
+    R2_PROPS.sort(function(a,b){
+      // Priority first, then newest first (createdAt)
+      var pd = (b.priority||0) - (a.priority||0);
+      if(pd !== 0) return pd;
+      return (b.createdAt||0) - (a.createdAt||0);
+    });
 
     // Update all sections based on featured field
     renderRecentlyListed();
@@ -1536,7 +1541,9 @@ function renderRecentlyListed(){
 function injectFeaturedProperties(){
   // Featured listings section
   var featuredGrid = document.querySelector('#listings .listings-grid');
-  var featuredProps = R2_PROPS.filter(function(p){ return p.featured==='featured'; });
+  var featuredProps = R2_PROPS
+    .filter(function(p){ return p.featured==='featured'; })
+    .sort(function(a,b){ return (b.createdAt||0) - (a.createdAt||0); });
   if(featuredGrid && featuredProps.length){
     function badgeClass(p){ return p.status==='Bank Auction'?'auction':p.status==='For Lease'||p.status==='For Rent'?'lease':'sale'; }
     var newCards = featuredProps.map(function(p){
