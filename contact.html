@@ -2,9 +2,25 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<meta name="google-site-verification" content="TDI_7wZwTB8nTsT6hHJqGaRVVr7yA_J2q2XAZHvRfoA">
+<meta name="theme-color" content="#080C2E">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
-<meta name="description" content="Contact NEXT-GEN Auctioneer + Realtor — Tanzania's premier real estate platform. Email, WhatsApp, call or visit us in Dar es Salaam.">
-<title>Contact Us | NEXT-GEN Auctioneer + Realtor Tanzania</title>
+<meta name="description" content="Contact NEXT-GEN Auctioneer + Realtor in Dar es Salaam. Call +255 659 166 440. Haidary Plaza, Ali Hassan Mwinyi Road, Kisutu, Dar es Salaam.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://nextgentanzania.com/contact.html">
+<meta property="og:title" content="Contact NEXT-GEN Realtor | Tanzania Property Agents">
+<meta property="og:description" content="Contact NEXT-GEN Auctioneer + Realtor in Dar es Salaam. Call +255 659 166 440. Haidary Plaza, Ali Hassan Mwinyi Road, Kisutu, Dar es Salaam.">
+<meta property="og:image" content="https://nextgentanzania.com/og-image.jpg">
+<meta property="og:site_name" content="NEXT-GEN Auctioneer + Realtor Tanzania">
+<meta property="og:locale" content="en_TZ">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Contact NEXT-GEN Realtor | Tanzania Property Agents">
+<meta name="twitter:description" content="Contact NEXT-GEN Auctioneer + Realtor in Dar es Salaam. Call +255 659 166 440. Haidary Plaza, Ali Hassan Mwinyi Road, Kisutu, Dar es Salaam.">
+<meta name="twitter:image" content="https://nextgentanzania.com/og-image.jpg">
+<link rel="canonical" href="https://nextgentanzania.com/contact.html">
+<link rel="alternate" hreflang="en" href="https://nextgentanzania.com/contact.html">
+<link rel="alternate" hreflang="x-default" href="https://nextgentanzania.com/contact.html">
+<title>Contact NEXT-GEN Realtor | Tanzania Property Agents</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
@@ -194,7 +210,7 @@ footer p{font-size:12px;color:rgba(255,255,255,.35);margin-top:12px}
     <div id="cForm">
       <div class="fg2">
         <div class="fg"><label>Full Name *</label><input type="text" id="c-name" placeholder="Your full name"></div>
-        <div class="fg"><label>Phone / WhatsApp *</label><input type="tel" id="c-phone" placeholder="+255..."></div>
+        <div class="fg"><label>Phone / WhatsApp *</label><input type="tel" id="c-phone" placeholder="e.g. +255 or +44, +971, +86..."></div>
       </div>
       <div class="fg"><label>Email Address</label><input type="email" id="c-email" placeholder="your@email.com"></div>
       <div class="fg"><label>Subject</label>
@@ -373,7 +389,7 @@ async function submitContact(){
     var m=document.getElementById('novaMsgs2');
     var d=document.createElement('div');
     d.className='nmsg bot';
-    var html=(text||'').replace(/\\n/g,'<br>').replace(/\\[([^\\]]+)\\]\\(([^)]+)\\)/g,'<a href="$2" target="_blank">$1</a>');
+    var html=(text||'').replace(/\n/g,'<br>').replace(/\[([^\]]+)\]\(([^)]+)\)/g,'<a href="$2" target="_blank">$1</a>');
     d.innerHTML='<div class="nmsg-av">🏠</div><div class="nbubble">'+html+'</div>';
     m.appendChild(d); m.scrollTop=m.scrollHeight;
   }
@@ -410,25 +426,39 @@ async function submitContact(){
     novaLoading2=true;
     document.getElementById('novaSend2').disabled=true;
     addNovaTyping2();
+    var userLang=(navigator.language||'en').toLowerCase();
+    var detectedLang='en';
+    if(userLang.indexOf('sw')===0)detectedLang='sw';
+    else if(userLang.indexOf('zh')===0)detectedLang='zh';
+    else if(userLang.indexOf('ar')===0)detectedLang='ar';
+    else if(userLang.indexOf('fr')===0)detectedLang='fr';
+    var controller=(typeof AbortController!=='undefined')?new AbortController():null;
+    var timeoutId=controller?setTimeout(function(){controller.abort();},30000):null;
     fetch(CF_API2,{
       method:'POST',
       headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({message:text,history:novaHistory2.slice(-12),lang:'en'})
+      body:JSON.stringify({message:text,history:novaHistory2.slice(-12),lang:detectedLang}),
+      signal:controller?controller.signal:undefined
     }).then(function(resp){
+      if(timeoutId)clearTimeout(timeoutId);
       if(!resp.ok) throw new Error('API error: '+resp.status);
       return resp.json();
     }).then(function(data){
       var raw='';
       if(data.answer){ raw=data.answer; }
       else if(data.content){ raw=(data.content||[]).map(function(b){return b.text||'';}).join('').trim(); }
-      var clean=raw.replace(/RECOMMENDATIONS:\\{"ids":\\[[^\\]]*\\]\\}/,'').trim();
+      var clean=raw.replace(/RECOMMENDATIONS:\{"ids":\[[^\]]*\]\}/,'').trim();
       novaHistory2.push({role:'assistant',content:raw||clean});
       removeNovaTyping2();
-      addNovaBotMsg2(clean,[]);
+      addNovaBotMsg2(clean||"Sorry, I couldn't generate a response. Please try again or contact us directly.\n📧 nextgentanzania@gmail.com\n📞 +255 659 166 440",[]);
     }).catch(function(e){
+      if(timeoutId)clearTimeout(timeoutId);
       console.error('NextGen AI error:',e);
       removeNovaTyping2();
-      addNovaBotMsg2("Sorry, NextGen AI couldn't connect right now.\\n📧 nextgentanzania@gmail.com\\n📞 +255 659 166 440",[]);
+      var msg=(e&&e.name==='AbortError')
+        ? "The connection is taking longer than usual. Please check your internet connection and try again.\n📧 nextgentanzania@gmail.com\n📞 +255 659 166 440\n💬 wa.me/255659166440"
+        : "Sorry, NextGen AI couldn't connect right now. Please try again in a moment.\n📧 nextgentanzania@gmail.com\n📞 +255 659 166 440\n💬 wa.me/255659166440";
+      addNovaBotMsg2(msg,[]);
     }).finally(function(){
       novaLoading2=false;
       document.getElementById('novaSend2').disabled=false;

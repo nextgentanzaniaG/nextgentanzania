@@ -2,9 +2,25 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<meta name="google-site-verification" content="TDI_7wZwTB8nTsT6hHJqGaRVVr7yA_J2q2XAZHvRfoA">
+<meta name="theme-color" content="#080C2E">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
-<meta name="description" content="Tanzania Real Estate Insights — market analysis, investment guides, legal updates and property news from NEXT-GEN Auctioneer + Realtor.">
-<title>Blog & Market Insights | NEXT-GEN Auctioneer + Realtor Tanzania</title>
+<meta name="description" content="Tanzania property market insights — investment guides, legal updates, bank auction alerts & Zanzibar real estate news from NEXT-GEN Realtor.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://nextgentanzania.com/blog.html">
+<meta property="og:title" content="Tanzania Real Estate Blog | Market & Investment Guides">
+<meta property="og:description" content="Tanzania property market insights — investment guides, legal updates, bank auction alerts & Zanzibar real estate news from NEXT-GEN Realtor.">
+<meta property="og:image" content="https://nextgentanzania.com/og-image.jpg">
+<meta property="og:site_name" content="NEXT-GEN Auctioneer + Realtor Tanzania">
+<meta property="og:locale" content="en_TZ">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Tanzania Real Estate Blog | Market & Investment Guides">
+<meta name="twitter:description" content="Tanzania property market insights — investment guides, legal updates, bank auction alerts & Zanzibar real estate news from NEXT-GEN Realtor.">
+<meta name="twitter:image" content="https://nextgentanzania.com/og-image.jpg">
+<link rel="canonical" href="https://nextgentanzania.com/blog.html">
+<link rel="alternate" hreflang="en" href="https://nextgentanzania.com/blog.html">
+<link rel="alternate" hreflang="x-default" href="https://nextgentanzania.com/blog.html">
+<title>Tanzania Real Estate Blog | Market & Investment Guides</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
@@ -380,7 +396,7 @@ function renderPopular(){
   container.innerHTML = popular.map(function(p){
     var img = p.image||'1.jfif';
     return '<div class="sb-link" onclick="openPost(\''+p.id+'\')">'
-      +'<div class="sb-link-img"><img src="'+img+'" onerror="this.style.display=\'none\'" loading="lazy"></div>'
+      +'<div class="sb-link-img"><img src="'+img+'" alt="'+p.title+'" onerror="this.style.display=\'none\'" loading="lazy"></div>'
       +'<div><div class="sb-link-title">'+p.title+'</div><div class="sb-link-date">'+getCatEmoji(p.category)+'</div></div>'
     +'</div>';
   }).join('');
@@ -521,7 +537,7 @@ loadR2Posts();
     var m=document.getElementById('novaMsgs2');
     var d=document.createElement('div');
     d.className='nmsg bot';
-    var html=(text||'').replace(/\\n/g,'<br>').replace(/\\[([^\\]]+)\\]\\(([^)]+)\\)/g,'<a href="$2" target="_blank">$1</a>');
+    var html=(text||'').replace(/\n/g,'<br>').replace(/\[([^\]]+)\]\(([^)]+)\)/g,'<a href="$2" target="_blank">$1</a>');
     d.innerHTML='<div class="nmsg-av">🏠</div><div class="nbubble">'+html+'</div>';
     m.appendChild(d); m.scrollTop=m.scrollHeight;
   }
@@ -558,25 +574,39 @@ loadR2Posts();
     novaLoading2=true;
     document.getElementById('novaSend2').disabled=true;
     addNovaTyping2();
+    var userLang=(navigator.language||'en').toLowerCase();
+    var detectedLang='en';
+    if(userLang.indexOf('sw')===0)detectedLang='sw';
+    else if(userLang.indexOf('zh')===0)detectedLang='zh';
+    else if(userLang.indexOf('ar')===0)detectedLang='ar';
+    else if(userLang.indexOf('fr')===0)detectedLang='fr';
+    var controller=(typeof AbortController!=='undefined')?new AbortController():null;
+    var timeoutId=controller?setTimeout(function(){controller.abort();},30000):null;
     fetch(CF_API2,{
       method:'POST',
       headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({message:text,history:novaHistory2.slice(-12),lang:'en'})
+      body:JSON.stringify({message:text,history:novaHistory2.slice(-12),lang:detectedLang}),
+      signal:controller?controller.signal:undefined
     }).then(function(resp){
+      if(timeoutId)clearTimeout(timeoutId);
       if(!resp.ok) throw new Error('API error: '+resp.status);
       return resp.json();
     }).then(function(data){
       var raw='';
       if(data.answer){ raw=data.answer; }
       else if(data.content){ raw=(data.content||[]).map(function(b){return b.text||'';}).join('').trim(); }
-      var clean=raw.replace(/RECOMMENDATIONS:\\{"ids":\\[[^\\]]*\\]\\}/,'').trim();
+      var clean=raw.replace(/RECOMMENDATIONS:\{"ids":\[[^\]]*\]\}/,'').trim();
       novaHistory2.push({role:'assistant',content:raw||clean});
       removeNovaTyping2();
-      addNovaBotMsg2(clean,[]);
+      addNovaBotMsg2(clean||"Sorry, I couldn't generate a response. Please try again or contact us directly.\n📧 nextgentanzania@gmail.com\n📞 +255 659 166 440",[]);
     }).catch(function(e){
+      if(timeoutId)clearTimeout(timeoutId);
       console.error('NextGen AI error:',e);
       removeNovaTyping2();
-      addNovaBotMsg2("Sorry, NextGen AI couldn't connect right now.\\n📧 nextgentanzania@gmail.com\\n📞 +255 659 166 440",[]);
+      var msg=(e&&e.name==='AbortError')
+        ? "The connection is taking longer than usual. Please check your internet connection and try again.\n📧 nextgentanzania@gmail.com\n📞 +255 659 166 440\n💬 wa.me/255659166440"
+        : "Sorry, NextGen AI couldn't connect right now. Please try again in a moment.\n📧 nextgentanzania@gmail.com\n📞 +255 659 166 440\n💬 wa.me/255659166440";
+      addNovaBotMsg2(msg,[]);
     }).finally(function(){
       novaLoading2=false;
       document.getElementById('novaSend2').disabled=false;
