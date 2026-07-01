@@ -133,6 +133,8 @@ tr:hover td{background:rgba(248,247,255,.7)}
 .aps-sale{background:var(--magenta);color:#fff}
 .aps-auction{background:var(--gold);color:var(--navy)}
 .aps-lease{background:#0891B2;color:#fff}
+.aps-sold{background:#6B7280;color:#fff}
+.aps-off{background:#374151;color:#fff}
 .ap-body{padding:14px}
 .ap-price{font-family:'Playfair Display',serif;font-size:17px;font-weight:700;color:var(--navy);margin-bottom:2px}
 .ap-title{font-size:13.5px;font-weight:600;color:var(--td);margin-bottom:4px}
@@ -155,6 +157,19 @@ tr:hover td{background:rgba(248,247,255,.7)}
 .form-full{margin-bottom:14px}
 .fg-label{display:block;font-size:11px;font-weight:700;color:var(--tm);letter-spacing:.5px;text-transform:uppercase;margin-bottom:5px}
 .fg-input,.fg-select,.fg-textarea{width:100%;border:1.5px solid var(--gl);border-radius:9px;padding:10px 13px;font-size:13.5px;font-family:'Inter',sans-serif;color:var(--td);outline:none;transition:border-color .2s;background:#fff;resize:vertical}
+.rte-wrap{border:1.5px solid var(--gl);border-radius:9px;overflow:hidden;transition:border-color .2s}
+.rte-wrap:focus-within{border-color:var(--magenta)}
+.rte-toolbar{display:flex;gap:2px;padding:6px 8px;background:#f8f7ff;border-bottom:1px solid var(--gl);flex-wrap:wrap}
+.rte-btn{background:none;border:1px solid transparent;border-radius:5px;padding:4px 8px;font-size:13px;cursor:pointer;color:var(--td);font-family:'Inter',sans-serif;transition:all .15s}
+.rte-btn:hover{background:#fff;border-color:var(--gl)}
+.rte-btn.active{background:var(--navy);color:#fff;border-color:var(--navy)}
+.rte-sep{width:1px;background:var(--gl);margin:2px 4px;align-self:stretch}
+.rte-body{min-height:120px;padding:12px 14px;font-size:13.5px;font-family:'Inter',sans-serif;color:var(--td);outline:none;line-height:1.7}
+.rte-body p{margin:0 0 8px}
+.rte-body p:last-child{margin-bottom:0}
+.rte-body b,.rte-body strong{font-weight:700;color:var(--navy)}
+.rte-body ul,.rte-body ol{margin:8px 0 8px 20px}
+.rte-body li{margin-bottom:3px}
 .fg-input:focus,.fg-select:focus,.fg-textarea:focus{border-color:var(--magenta)}
 .upload-zone{border:2px dashed var(--gl);border-radius:12px;padding:32px;text-align:center;cursor:pointer;transition:all .2s;background:var(--off)}
 .upload-zone:hover{border-color:var(--magenta);background:rgba(233,30,140,.03)}
@@ -329,9 +344,31 @@ tr:hover td{background:rgba(248,247,255,.7)}
     <div class="page" id="page-add-property">
       <div class="form-card">
         <div class="form-section-title"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg>Basic Information</div>
-        <div class="form-grid"><div><label class="fg-label">Property Title *</label><input type="text" class="fg-input" id="propTitle" placeholder="e.g. Luxury Villa — Masaki"></div><div><label class="fg-label">Listing Type *</label><select class="fg-select" id="propType"><option value="">Select...</option><option>For Sale</option><option>For Rent</option><option>For Lease</option><option>Bank Auction</option></select></div></div>
+        <div class="form-grid"><div><label class="fg-label">Property Title *</label><input type="text" class="fg-input" id="propTitle" placeholder="e.g. Luxury Villa — Masaki"></div><div><label class="fg-label">Listing Type *</label><select class="fg-select" id="propType"><option value="">Select...</option><option>For Sale</option><option>For Rent</option><option>For Lease</option><option>Bank Auction</option><option>Sold</option><option>Leased</option><option>Off Market</option></select></div></div>
         <div class="form-grid-3"><div><label class="fg-label">Category *</label><select class="fg-select" id="propCat"><option value="">Select...</option><option>Villa / House</option><option>Apartment</option><option>Plot / Land</option><option>Commercial</option><option>Hotel / Resort</option><option>Factory</option><option>Farm</option><option>Office</option><option>Warehouse</option></select></div><div><label class="fg-label">Price / Rent *</label><input type="text" class="fg-input" id="propPrice" placeholder="e.g. 1,800,000,000"></div><div><label class="fg-label">Currency</label><select class="fg-select" id="propCurrency"><option>TZS</option><option>USD</option><option>EUR</option></select></div></div>
-        <div class="form-full"><label class="fg-label">Description *</label><textarea class="fg-textarea" id="propDesc" rows="4" placeholder="Describe the property in detail..."></textarea></div>
+        <div class="form-full">
+  <label class="fg-label">Description *</label>
+  <div class="rte-wrap">
+    <div class="rte-toolbar">
+      <button type="button" class="rte-btn" onclick="rteCmd('bold')" title="Bold (Ctrl+B)"><b>B</b></button>
+      <button type="button" class="rte-btn" onclick="rteCmd('italic')" title="Italic (Ctrl+I)"><i>I</i></button>
+      <button type="button" class="rte-btn" onclick="rteCmd('underline')" title="Underline"><u>U</u></button>
+      <div class="rte-sep"></div>
+      <button type="button" class="rte-btn" onclick="rteCmd('insertUnorderedList')" title="Bullet list">• List</button>
+      <button type="button" class="rte-btn" onclick="rteCmd('insertOrderedList')" title="Numbered list">1. List</button>
+      <div class="rte-sep"></div>
+      <button type="button" class="rte-btn" onclick="rteInsertParagraph()" title="New paragraph">¶ Para</button>
+      <div class="rte-sep"></div>
+      <button type="button" class="rte-btn" onclick="rteCmd('removeFormat')" title="Clear formatting" style="font-size:11px">✕ Clear</button>
+    </div>
+    <div class="rte-body" id="propDescRTE" contenteditable="true" 
+         data-placeholder="Describe the property in detail — location, features, investment potential..."
+         oninput="syncDescToHidden()"
+         onpaste="setTimeout(syncDescToHidden,10)"></div>
+  </div>
+  <input type="hidden" id="propDesc">
+  <div style="font-size:11px;color:var(--tm);margin-top:4px">Tip: Select text then click B for bold. Press Enter for new paragraph.</div>
+</div>
       </div>
       <div class="form-card">
         <div class="form-section-title"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>Location</div>
@@ -1428,7 +1465,7 @@ function renderPropsGrid() {
     grid.innerHTML = `<div class="empty-state" style="grid-column:1/-1"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg><h3>No Properties Yet</h3><p>Add your first property listing</p><button class="btn-save" onclick="showPage('add-property',null)">+ Add First Property</button></div>`;
     return;
   }
-  var sc = {'For Sale':'aps-sale','Bank Auction':'aps-auction','For Lease':'aps-lease','For Rent':'aps-lease'};
+  var sc = {'For Sale':'aps-sale','Bank Auction':'aps-auction','For Lease':'aps-lease','For Rent':'aps-lease','Sold':'aps-sold','Leased':'aps-sold','Off Market':'aps-off'};
   grid.innerHTML = DB.properties.map((p,i) => `
     <div class="admin-prop">
       <div class="ap-img">🏠
@@ -1447,6 +1484,7 @@ function renderPropsGrid() {
         <span class="ap-status ${sc[p.type]||'aps-sale'}">${p.type||'For Sale'}</span>
       </div>
       <div class="ap-body">
+        <div style="font-size:10px;font-weight:700;color:var(--magenta);letter-spacing:.5px;margin-bottom:3px;font-family:monospace">NG-${String(p.id).padStart(7,'0')}</div>
         <div class="ap-price">${p.currency||'TZS'} ${p.price||'—'}</div>
         <div class="ap-title">${p.title||'Untitled'}</div>
         <div class="ap-loc">📍 ${p.district?p.district+', ':''}${p.region||'Tanzania'}</div>
@@ -1458,6 +1496,58 @@ function renderPropsGrid() {
       </div>
     </div>`).join('');
 }
+
+
+// ── RICH TEXT EDITOR ──
+function rteCmd(cmd) {
+  document.getElementById('propDescRTE').focus();
+  document.execCommand(cmd, false, null);
+  syncDescToHidden();
+}
+
+function rteInsertParagraph() {
+  var rte = document.getElementById('propDescRTE');
+  rte.focus();
+  // Insert double line break to create paragraph
+  document.execCommand('insertParagraph', false, null);
+  document.execCommand('insertParagraph', false, null);
+  syncDescToHidden();
+}
+
+function syncDescToHidden() {
+  var rte = document.getElementById('propDescRTE');
+  var hidden = document.getElementById('propDesc');
+  if (rte && hidden) {
+    hidden.value = rte.innerHTML;
+  }
+}
+
+function loadDescToRTE(html) {
+  var rte = document.getElementById('propDescRTE');
+  if (rte) {
+    rte.innerHTML = html || '';
+    syncDescToHidden();
+  }
+}
+
+// Placeholder behavior for RTE
+document.addEventListener('DOMContentLoaded', function() {
+  var rte = document.getElementById('propDescRTE');
+  if (!rte) return;
+  var placeholder = rte.getAttribute('data-placeholder');
+  if (placeholder) {
+    if (!rte.innerHTML.trim()) {
+      rte.style.color = '#aaa';
+      rte.innerHTML = placeholder;
+      rte.addEventListener('focus', function() {
+        if (rte.innerHTML === placeholder) { rte.innerHTML = ''; rte.style.color = ''; }
+      });
+      rte.addEventListener('blur', function() {
+        if (!rte.innerHTML.trim()) { rte.innerHTML = placeholder; rte.style.color = '#aaa'; }
+      });
+    }
+  }
+});
 
 async function saveProp(mode) {
   var titleEl = document.getElementById('propTitle');
@@ -1550,7 +1640,11 @@ async function editProp(id) {
       if(prop.category) document.getElementById('propCat').value = prop.category;
       if(prop.price) document.getElementById('propPrice').value = prop.price;
       if(prop.currency) document.getElementById('propCurrency').value = prop.currency;
-      if(prop.description||prop.desc) document.getElementById('propDesc').value = prop.description || prop.desc || '';
+      if(prop.description||prop.desc) {
+        var descVal = prop.description || prop.desc || '';
+        document.getElementById('propDesc').value = descVal;
+        loadDescToRTE(descVal);
+      }
       var sv = function(id, val) { var el = document.getElementById(id); if(el && val) el.value = val; };
       sv('propStreet',  prop.street);
       sv('propGPS',     prop.gps);
