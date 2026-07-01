@@ -372,7 +372,14 @@ tr:hover td{background:rgba(248,247,255,.7)}
       </div>
       <div class="form-card">
         <div class="form-section-title"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>Location</div>
-        <div class="form-grid"><div><label class="fg-label">Featured Section</label><select class="fg-select" id="propFeatured"><option value="">Not Featured</option><option value="featured">⭐ Featured Listings (Top Section)</option><option value="recent">🆕 Recently Listed</option><option value="leasing">📋 Leasing Section</option></select></div><div><label class="fg-label">Display Priority</label><select class="fg-select" id="propPriority"><option value="0">Normal</option><option value="1">High — Show First</option><option value="2">Top Priority</option></select></div></div>
+        <div class="form-grid-3">
+  <div><label class="fg-label">Featured Section</label><select class="fg-select" id="propFeatured"><option value="">Not Featured</option><option value="featured">⭐ Featured Listings (Top Section)</option><option value="recent">🆕 Recently Listed</option><option value="leasing">📋 Leasing Section</option></select></div>
+  <div><label class="fg-label">Display Priority</label><select class="fg-select" id="propPriority"><option value="0">Normal</option><option value="1">High — Show First</option><option value="2">Top Priority</option></select></div>
+  <div><label class="fg-label">Assign Agent</label><select class="fg-select" id="propAgent">
+    <option value="luth">Luth Kitentya (+255 659 166 440)</option>
+    <option value="paschal">Paschal Mwombeki (+255 692 009 805)</option>
+  </select></div>
+</div>
         <div class="form-grid"><div><label class="fg-label">Region *</label><select class="fg-select" id="propRegion"><option value="">Select Region...</option><option>Dar es Salaam</option><option>Zanzibar — Unguja Kaskazini</option><option>Zanzibar — Unguja Kusini</option><option>Zanzibar — Mjini Magharibi</option><option>Zanzibar — Pemba Kaskazini</option><option>Zanzibar — Pemba Kusini</option><option>Arusha</option><option>Kilimanjaro</option><option>Tanga</option><option>Morogoro</option><option>Pwani (Coast)</option><option>Lindi</option><option>Mtwara</option><option>Ruvuma</option><option>Iringa</option><option>Mbeya</option><option>Njombe</option><option>Songwe</option><option>Dodoma</option><option>Singida</option><option>Tabora</option><option>Rukwa</option><option>Katavi</option><option>Kigoma</option><option>Kagera</option><option>Mwanza</option><option>Mara</option><option>Shinyanga</option><option>Simiyu</option><option>Geita</option></select></div><div><label class="fg-label">District / Area</label><input type="text" class="fg-input" id="propDistrict" placeholder="e.g. Masaki, Oyster Bay, Nungwi"></div></div>
         <div class="form-grid"><div><label class="fg-label">Street / Landmark</label><input type="text" class="fg-input" id="propStreet" placeholder="e.g. Near Slipway"></div><div><label class="fg-label">GPS (Optional)</label><input type="text" class="fg-input" id="propGPS" placeholder="-6.7924, 39.2083"></div></div>
       </div>
@@ -1576,6 +1583,7 @@ async function saveProp(mode) {
     type:        gv('propType'),
     featured:    gv('propFeatured'),
     priority:    gv('propPriority') || '0',
+    agent:       gv('propAgent') || 'luth',
     category:    gv('propCat'),
     price:       gv('propPrice'),
     currency:    gv('propCurrency'),
@@ -1654,6 +1662,7 @@ async function editProp(id) {
       sv('propNotes',   prop.notes);
       if(prop.region) document.getElementById('propRegion').value = prop.region;
       if(prop.featured && document.getElementById('propFeatured')) document.getElementById('propFeatured').value = prop.featured;
+      if(prop.agent && document.getElementById('propAgent')) document.getElementById('propAgent').value = prop.agent;
       if(prop.priority && document.getElementById('propPriority')) document.getElementById('propPriority').value = prop.priority;
       if(prop.district) document.getElementById('propDistrict').value = prop.district;
       if(prop.size || prop.sqm) document.getElementById('propSize').value = prop.size || prop.sqm || '';
